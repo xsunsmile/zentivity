@@ -6,3 +6,4 @@
 #import "UIImageView+AFNetworking.h"
 #import "JGProgressHUD.h"
 #import "NSDictionary+BDBOAuth1Manager.h"
+#import <Parse/Parse.h>

@@ -14,6 +14,7 @@
 		5425DEE31AA8C9E0001F5CD5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5425DEE11AA8C9E0001F5CD5 /* LaunchScreen.xib */; };
 		5425DEEF1AA8C9E0001F5CD5 /* zentivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5425DEEE1AA8C9E0001F5CD5 /* zentivityTests.swift */; };
 		5BB82504BA6A1DEBA5D0C541 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB1175D1CF9C92D24F4E80E /* libPods.a */; };
+		6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6894AA7C1AAA87F400401171 /* ParseClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		5425DEED1AA8C9E0001F5CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5425DEEE1AA8C9E0001F5CD5 /* zentivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zentivityTests.swift; sourceTree = "<group>"; };
 		5425DEFC1AA8CC3A001F5CD5 /* zentivity-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zentivity-Bridging-Header.h"; sourceTree = "<group>"; };
+		6894AA7C1AAA87F400401171 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		6CB1175D1CF9C92D24F4E80E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9CA5CE0D0774940F2AB24C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +136,7 @@
 		5425DEF91AA8CB02001F5CD5 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				6894AA7C1AAA87F400401171 /* ParseClient.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */,
 				5425DEDB1AA8C9E0001F5CD5 /* ViewController.swift in Sources */,
 				5425DED91AA8C9E0001F5CD5 /* AppDelegate.swift in Sources */,
 			);
