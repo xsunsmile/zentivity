@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ysu-xM-R0a" userLabel="Event Detail View" customClass="EventDetailView" customModule="zentivity" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BU6-b6-6DK">
+                    <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="pet-jT-tKK"/>
+                    </constraints>
+                    <items>
+                        <navigationItem title="Event Detail" id="3M1-Sj-Sfx">
+                            <barButtonItem key="leftBarButtonItem" title="Back" id="1S4-SI-C0x"/>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qer-vJ-Oqr">
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pO3-eG-E6o">
+                            <rect key="frame" x="19" y="13" width="104" height="20"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" red="0.21399542299999999" green="0.21399542299999999" blue="0.21399542299999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffA-K3-T71">
+                            <rect key="frame" x="19" y="33" width="104" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event phone number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-eq-v5n">
+                            <rect key="frame" x="19" y="53" width="152" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="caG-eM-ds2">
+                            <rect key="frame" x="280" y="55" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="8Sd-W5-wB2"/>
+                                <constraint firstAttribute="height" constant="20" id="wae-nI-KOb"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="phone">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onCall:" destination="ysu-xM-R0a" eventType="touchUpInside" id="aO2-DA-0kz"/>
+                            </connections>
+                        </button>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sxJ-3S-Xz6">
+                            <rect key="frame" x="0.0" y="83" width="320" height="130"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="130" id="0AD-Im-ssF"/>
+                            </constraints>
+                        </mapView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event attendees" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADp-9K-nhO">
+                            <rect key="frame" x="19" y="221" width="282" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="po2-a6-BBe" userLabel="Attendee Table">
+                            <rect key="frame" x="0.0" y="248" width="320" height="200"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="AgH-cl-qhg"/>
+                            </constraints>
+                        </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOA-Cn-Btr">
+                            <rect key="frame" x="50" y="461" width="220" height="30"/>
+                            <color key="backgroundColor" red="0.76075205180000005" green="0.76075205180000005" blue="0.76075205180000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="tsx-9R-0Le"/>
+                            </constraints>
+                            <state key="normal" title="I want to participate!">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="pO3-eG-E6o" firstAttribute="leading" secondItem="qer-vJ-Oqr" secondAttribute="leading" constant="19" id="1vn-EY-g66"/>
+                        <constraint firstAttribute="trailing" secondItem="GOA-Cn-Btr" secondAttribute="trailing" constant="50" id="38d-la-gSP"/>
+                        <constraint firstAttribute="trailing" secondItem="pO3-eG-E6o" secondAttribute="trailing" constant="197" id="DQ7-BM-TFY"/>
+                        <constraint firstItem="po2-a6-BBe" firstAttribute="top" secondItem="ADp-9K-nhO" secondAttribute="bottom" constant="8" id="F41-U0-GhY"/>
+                        <constraint firstItem="caG-eM-ds2" firstAttribute="top" secondItem="qer-vJ-Oqr" secondAttribute="top" constant="55" id="HJa-zS-Keh"/>
+                        <constraint firstAttribute="trailing" secondItem="ADp-9K-nhO" secondAttribute="trailing" constant="19" id="J2P-q4-Iym"/>
+                        <constraint firstItem="ADp-9K-nhO" firstAttribute="top" secondItem="sxJ-3S-Xz6" secondAttribute="bottom" constant="8" id="K0Z-6b-BYE"/>
+                        <constraint firstItem="3Gv-eq-v5n" firstAttribute="top" secondItem="ffA-K3-T71" secondAttribute="bottom" id="OfG-ez-EFK"/>
+                        <constraint firstItem="3Gv-eq-v5n" firstAttribute="leading" secondItem="qer-vJ-Oqr" secondAttribute="leading" constant="19" id="OnJ-Kh-LFp"/>
+                        <constraint firstItem="ffA-K3-T71" firstAttribute="leading" secondItem="qer-vJ-Oqr" secondAttribute="leading" constant="19" id="P5g-AU-yYA"/>
+                        <constraint firstAttribute="trailing" secondItem="caG-eM-ds2" secondAttribute="trailing" constant="19" id="Trb-Xo-Gd4"/>
+                        <constraint firstItem="GOA-Cn-Btr" firstAttribute="leading" secondItem="qer-vJ-Oqr" secondAttribute="leading" constant="50" id="Zxh-Ds-XJT"/>
+                        <constraint firstItem="sxJ-3S-Xz6" firstAttribute="top" secondItem="caG-eM-ds2" secondAttribute="bottom" constant="8" id="a6Y-JV-xBu"/>
+                        <constraint firstItem="GOA-Cn-Btr" firstAttribute="top" secondItem="po2-a6-BBe" secondAttribute="bottom" constant="13" id="bKI-AG-G6X"/>
+                        <constraint firstItem="sxJ-3S-Xz6" firstAttribute="leading" secondItem="qer-vJ-Oqr" secondAttribute="leading" id="bVl-SZ-AhM"/>
+                        <constraint firstItem="ADp-9K-nhO" firstAttribute="leading" secondItem="qer-vJ-Oqr" secondAttribute="leading" constant="19" id="eBq-KS-6I9"/>
+                        <constraint firstAttribute="trailing" secondItem="sxJ-3S-Xz6" secondAttribute="trailing" id="fEg-eG-a4h"/>
+                        <constraint firstItem="po2-a6-BBe" firstAttribute="leading" secondItem="qer-vJ-Oqr" secondAttribute="leading" id="lHz-eB-t2J"/>
+                        <constraint firstItem="ffA-K3-T71" firstAttribute="top" secondItem="pO3-eG-E6o" secondAttribute="bottom" constant="1" id="oqe-93-zJX"/>
+                        <constraint firstAttribute="trailing" secondItem="ffA-K3-T71" secondAttribute="trailing" constant="197" id="pH6-L3-dFE"/>
+                        <constraint firstAttribute="trailing" secondItem="po2-a6-BBe" secondAttribute="trailing" id="xHg-tY-f2i"/>
+                        <constraint firstItem="pO3-eG-E6o" firstAttribute="top" secondItem="qer-vJ-Oqr" secondAttribute="top" constant="13" id="ymv-W0-nvD"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="qer-vJ-Oqr" secondAttribute="bottom" id="2aW-qi-EkZ"/>
+                <constraint firstAttribute="trailing" secondItem="qer-vJ-Oqr" secondAttribute="trailing" id="6s2-l5-MCK"/>
+                <constraint firstItem="BU6-b6-6DK" firstAttribute="top" secondItem="ysu-xM-R0a" secondAttribute="top" constant="20" id="8TZ-g2-75T"/>
+                <constraint firstItem="qer-vJ-Oqr" firstAttribute="leading" secondItem="ysu-xM-R0a" secondAttribute="leading" id="GT6-MP-b8n"/>
+                <constraint firstAttribute="trailing" secondItem="BU6-b6-6DK" secondAttribute="trailing" id="cHY-1Y-jM4"/>
+                <constraint firstItem="BU6-b6-6DK" firstAttribute="leading" secondItem="ysu-xM-R0a" secondAttribute="leading" id="feS-nK-b0M"/>
+                <constraint firstItem="qer-vJ-Oqr" firstAttribute="top" secondItem="BU6-b6-6DK" secondAttribute="bottom" id="wTy-gN-CbB"/>
+            </constraints>
+            <connections>
+                <outlet property="callButton" destination="caG-eM-ds2" id="neQ-fL-9By"/>
+                <outlet property="detailsScrollView" destination="qer-vJ-Oqr" id="O4v-y0-s5m"/>
+                <outlet property="eventActionButton" destination="GOA-Cn-Btr" id="qlM-5s-xYF"/>
+                <outlet property="eventAddressLabel" destination="ffA-K3-T71" id="QlW-uN-3tZ"/>
+                <outlet property="eventAttendeesLabel" destination="ADp-9K-nhO" id="vgr-JV-UgQ"/>
+                <outlet property="eventAttendeesTable" destination="po2-a6-BBe" id="0WH-71-eNQ"/>
+                <outlet property="eventLocationMapView" destination="sxJ-3S-Xz6" id="uOx-kv-Bhq"/>
+                <outlet property="eventPhoneLabel" destination="3Gv-eq-v5n" id="Rpy-0N-Kgd"/>
+                <outlet property="eventTitleLabel" destination="pO3-eG-E6o" id="5zc-GG-TMv"/>
+                <outlet property="navBar" destination="BU6-b6-6DK" id="73V-mL-lZG"/>
+            </connections>
+            <point key="canvasLocation" x="246" y="424"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="phone" width="30" height="30"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -13,6 +13,20 @@
 		5425DEE01AA8C9E0001F5CD5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5425DEDF1AA8C9E0001F5CD5 /* Images.xcassets */; };
 		5425DEE31AA8C9E0001F5CD5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5425DEE11AA8C9E0001F5CD5 /* LaunchScreen.xib */; };
 		5425DEEF1AA8C9E0001F5CD5 /* zentivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5425DEEE1AA8C9E0001F5CD5 /* zentivityTests.swift */; };
+		549113A81AA96CAF00000861 /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549113A71AA96CAF00000861 /* EventsTableViewCell.xib */; };
+		549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549113A91AA98C9200000861 /* EventsTableViewCell.swift */; };
+		549113AD1AA98DD000000861 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549113AB1AA98DD000000861 /* MenuTableViewCell.swift */; };
+		549113AE1AA98DD000000861 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549113AC1AA98DD000000861 /* MenuTableViewCell.xib */; };
+		549113B41AA98FEF00000861 /* EventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549113B31AA98FEF00000861 /* EventsView.xib */; };
+		549113B61AA98FFE00000861 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549113B51AA98FFE00000861 /* EventsView.swift */; };
+		549113B81AA992A000000861 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549113B71AA992A000000861 /* MenuView.swift */; };
+		549113BA1AA992AE00000861 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549113B91AA992AE00000861 /* MenuView.xib */; };
+		54DA2FFE1AABFA00005702EC /* EventDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DA2FFD1AABFA00005702EC /* EventDetailView.xib */; };
+		54DA30001AAC067A005702EC /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA2FFF1AAC067A005702EC /* EventDetailView.swift */; };
+		54DA30021AAC398F005702EC /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA30011AAC398F005702EC /* UserProfileView.swift */; };
+		54DA30041AAC399D005702EC /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DA30031AAC399D005702EC /* UserProfileView.xib */; };
+		54DA30061AAC42A1005702EC /* NewEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DA30051AAC42A1005702EC /* NewEventView.xib */; };
+		54DA30081AAC42AD005702EC /* NewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA30071AAC42AD005702EC /* NewEventView.swift */; };
 		5BB82504BA6A1DEBA5D0C541 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB1175D1CF9C92D24F4E80E /* libPods.a */; };
 		6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6894AA7C1AAA87F400401171 /* ParseClient.swift */; };
 		93D311261AABA607009259E8 /* GoogleClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D311251AABA607009259E8 /* GoogleClient.swift */; };
@@ -58,6 +72,20 @@
 		5425DEED1AA8C9E0001F5CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5425DEEE1AA8C9E0001F5CD5 /* zentivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zentivityTests.swift; sourceTree = "<group>"; };
 		5425DEFC1AA8CC3A001F5CD5 /* zentivity-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zentivity-Bridging-Header.h"; sourceTree = "<group>"; };
+		549113A71AA96CAF00000861 /* EventsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
+		549113A91AA98C9200000861 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
+		549113AB1AA98DD000000861 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		549113AC1AA98DD000000861 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
+		549113B31AA98FEF00000861 /* EventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsView.xib; sourceTree = "<group>"; };
+		549113B51AA98FFE00000861 /* EventsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		549113B71AA992A000000861 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		549113B91AA992AE00000861 /* MenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuView.xib; sourceTree = "<group>"; };
+		54DA2FFD1AABFA00005702EC /* EventDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDetailView.xib; sourceTree = "<group>"; };
+		54DA2FFF1AAC067A005702EC /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		54DA30011AAC398F005702EC /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		54DA30031AAC399D005702EC /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
+		54DA30051AAC42A1005702EC /* NewEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewEventView.xib; sourceTree = "<group>"; };
+		54DA30071AAC42AD005702EC /* NewEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
 		6894AA7C1AAA87F400401171 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		6CB1175D1CF9C92D24F4E80E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9CA5CE0D0774940F2AB24C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -195,6 +223,20 @@
 		5425DEFA1AA8CB0A001F5CD5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				549113A71AA96CAF00000861 /* EventsTableViewCell.xib */,
+				549113A91AA98C9200000861 /* EventsTableViewCell.swift */,
+				549113AC1AA98DD000000861 /* MenuTableViewCell.xib */,
+				549113AB1AA98DD000000861 /* MenuTableViewCell.swift */,
+				549113B31AA98FEF00000861 /* EventsView.xib */,
+				549113B51AA98FFE00000861 /* EventsView.swift */,
+				549113B91AA992AE00000861 /* MenuView.xib */,
+				549113B71AA992A000000861 /* MenuView.swift */,
+				54DA2FFD1AABFA00005702EC /* EventDetailView.xib */,
+				54DA2FFF1AAC067A005702EC /* EventDetailView.swift */,
+				54DA30031AAC399D005702EC /* UserProfileView.xib */,
+				54DA30011AAC398F005702EC /* UserProfileView.swift */,
+				54DA30051AAC42A1005702EC /* NewEventView.xib */,
+				54DA30071AAC42AD005702EC /* NewEventView.swift */,
 				93EEA9311AABCD3000E04811 /* LoginView.swift */,
 				93EEA9331AABCD5800E04811 /* LoginView.xib */,
 			);
@@ -330,7 +372,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				549113A81AA96CAF00000861 /* EventsTableViewCell.xib in Resources */,
+				54DA30041AAC399D005702EC /* UserProfileView.xib in Resources */,
+				549113B41AA98FEF00000861 /* EventsView.xib in Resources */,
+				549113BA1AA992AE00000861 /* MenuView.xib in Resources */,
+				54DA30061AAC42A1005702EC /* NewEventView.xib in Resources */,
 				5425DEDE1AA8C9E0001F5CD5 /* Main.storyboard in Resources */,
+				54DA2FFE1AABFA00005702EC /* EventDetailView.xib in Resources */,
+				5425DEE31AA8C9E0001F5CD5 /* LaunchScreen.xib in Resources */,
+				549113AE1AA98DD000000861 /* MenuTableViewCell.xib in Resources */,
 				93FF5A491AAC04990077C216 /* GooglePlus.bundle in Resources */,
 				5425DEE31AA8C9E0001F5CD5 /* LaunchScreen.xib in Resources */,
 				93EEA9341AABCD5800E04811 /* LoginView.xib in Resources */,
@@ -389,8 +439,15 @@
 				6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */,
 				93D311261AABA607009259E8 /* GoogleClient.swift in Sources */,
 				5425DEDB1AA8C9E0001F5CD5 /* ViewController.swift in Sources */,
+				549113B81AA992A000000861 /* MenuView.swift in Sources */,
+				549113B61AA98FFE00000861 /* EventsView.swift in Sources */,
+				54DA30021AAC398F005702EC /* UserProfileView.swift in Sources */,
+				549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */,
+				549113AD1AA98DD000000861 /* MenuTableViewCell.swift in Sources */,
 				93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */,
 				5425DED91AA8C9E0001F5CD5 /* AppDelegate.swift in Sources */,
+				54DA30081AAC42AD005702EC /* NewEventView.swift in Sources */,
+				54DA30001AAC067A005702EC /* EventDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
