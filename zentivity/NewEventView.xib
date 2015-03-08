@@ -16,7 +16,7 @@
                         <navigationItem title="New Event" id="Ssb-Pq-atO"/>
                     </items>
                 </navigationBar>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Wn-0E-4c5">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Wn-0E-4c5">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="53c-XJ-PLO">
@@ -86,11 +86,12 @@
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
                         </collectionView>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTn-sW-wpr">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTn-sW-wpr">
                             <rect key="frame" x="46" y="460" width="228" height="30"/>
                             <color key="backgroundColor" red="0.76075205180000005" green="0.76075205180000005" blue="0.76075205180000005" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="228" id="jQ5-jR-Ltb"/>
+                                <constraint firstAttribute="height" constant="30" id="pgN-mX-98H"/>
                             </constraints>
                             <state key="normal" title="Create event">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -101,29 +102,25 @@
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="f1l-c8-mEY" secondAttribute="trailing" id="1Pd-EQ-QEO"/>
-                        <constraint firstItem="MqE-wP-35M" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" constant="18" id="1Rq-Sc-IC6"/>
-                        <constraint firstAttribute="bottom" secondItem="oTn-sW-wpr" secondAttribute="bottom" constant="14" id="2bI-OR-SWI"/>
                         <constraint firstItem="Yyv-gj-c9E" firstAttribute="top" secondItem="cpY-Rt-Nod" secondAttribute="bottom" constant="10" id="2dA-C4-lah"/>
-                        <constraint firstItem="Y69-E8-h91" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" constant="18" id="5h0-So-E7N"/>
-                        <constraint firstAttribute="trailing" secondItem="cpY-Rt-Nod" secondAttribute="trailing" constant="17" id="5hD-bc-JJV"/>
-                        <constraint firstItem="f1l-c8-mEY" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" id="Blc-pK-52E"/>
+                        <constraint firstAttribute="centerX" secondItem="MqE-wP-35M" secondAttribute="centerX" id="3Pb-nb-kvT"/>
+                        <constraint firstItem="C4Y-No-yvI" firstAttribute="leading" secondItem="Y69-E8-h91" secondAttribute="leading" id="4xZ-dW-ihf"/>
                         <constraint firstItem="cpY-Rt-Nod" firstAttribute="top" secondItem="53c-XJ-PLO" secondAttribute="bottom" constant="10" id="FMb-cM-NKo"/>
-                        <constraint firstItem="Yyv-gj-c9E" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" constant="18" id="FYL-fA-3nb"/>
-                        <constraint firstAttribute="trailing" secondItem="MqE-wP-35M" secondAttribute="trailing" constant="17" id="FeI-es-kC9"/>
-                        <constraint firstAttribute="trailing" secondItem="Yyv-gj-c9E" secondAttribute="trailing" constant="17" id="KZr-u0-N7I"/>
-                        <constraint firstItem="oTn-sW-wpr" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" constant="46" id="L26-WH-vho"/>
+                        <constraint firstAttribute="centerX" secondItem="oTn-sW-wpr" secondAttribute="centerX" id="Hf2-Yf-xeQ"/>
+                        <constraint firstItem="oTn-sW-wpr" firstAttribute="top" secondItem="f1l-c8-mEY" secondAttribute="bottom" constant="132" id="HfL-dM-IIU"/>
+                        <constraint firstAttribute="centerX" secondItem="cpY-Rt-Nod" secondAttribute="centerX" id="JKB-qf-ksO"/>
                         <constraint firstItem="Y69-E8-h91" firstAttribute="top" secondItem="MqE-wP-35M" secondAttribute="bottom" constant="10" id="Lh8-Xi-CvY"/>
-                        <constraint firstAttribute="trailing" secondItem="53c-XJ-PLO" secondAttribute="trailing" constant="17" id="V9F-9B-GW1"/>
+                        <constraint firstAttribute="centerX" secondItem="53c-XJ-PLO" secondAttribute="centerX" id="Mea-bU-LyG"/>
+                        <constraint firstAttribute="centerX" secondItem="Yyv-gj-c9E" secondAttribute="centerX" id="QW9-j2-Ows"/>
                         <constraint firstItem="53c-XJ-PLO" firstAttribute="top" secondItem="4Wn-0E-4c5" secondAttribute="top" constant="12" id="aEt-Ox-Mxt"/>
-                        <constraint firstAttribute="trailing" secondItem="oTn-sW-wpr" secondAttribute="trailing" constant="46" id="cZ9-y0-TwE"/>
-                        <constraint firstItem="cpY-Rt-Nod" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" constant="18" id="dDH-hR-Kto"/>
                         <constraint firstItem="C4Y-No-yvI" firstAttribute="top" secondItem="Y69-E8-h91" secondAttribute="bottom" constant="10" id="dw8-E7-9D5"/>
+                        <constraint firstAttribute="bottom" secondItem="oTn-sW-wpr" secondAttribute="bottom" constant="14" id="evb-gI-LwG"/>
+                        <constraint firstItem="f1l-c8-mEY" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" id="knh-p2-nGO"/>
+                        <constraint firstAttribute="trailing" secondItem="f1l-c8-mEY" secondAttribute="trailing" id="m2A-y9-tNM"/>
                         <constraint firstItem="MqE-wP-35M" firstAttribute="top" secondItem="Yyv-gj-c9E" secondAttribute="bottom" constant="10" id="meC-Pz-P58"/>
                         <constraint firstItem="f1l-c8-mEY" firstAttribute="top" secondItem="C4Y-No-yvI" secondAttribute="bottom" constant="10" id="nXg-qv-aeA"/>
-                        <constraint firstItem="53c-XJ-PLO" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" constant="18" id="sVH-ts-cyc"/>
-                        <constraint firstItem="C4Y-No-yvI" firstAttribute="leading" secondItem="4Wn-0E-4c5" secondAttribute="leading" constant="18" id="uEs-1L-cVd"/>
-                        <constraint firstAttribute="trailing" secondItem="Y69-E8-h91" secondAttribute="trailing" constant="17" id="yXE-EP-sLQ"/>
+                        <constraint firstAttribute="centerX" secondItem="Y69-E8-h91" secondAttribute="centerX" id="uIS-Lc-sbb"/>
+                        <constraint firstAttribute="trailing" secondItem="oTn-sW-wpr" secondAttribute="trailing" constant="46" id="zi9-6k-cmZ"/>
                     </constraints>
                 </scrollView>
             </subviews>
