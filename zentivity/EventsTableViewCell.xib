@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
+            <connections>
+                <outlet property="eventImage" destination="nfh-0A-fRG" id="Tep-Jg-CEZ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="BBo-ml-uhn" customClass="EventsTableViewCell" customModule="zentivity" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BBo-ml-uhn" id="zun-IF-icw">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-0A-fRG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    </imageView>
+                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-FZ-OvX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <color key="backgroundColor" red="0.21399542299999999" green="0.21399542299999999" blue="0.21399542299999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-48-zof">
+                        <rect key="frame" x="28" y="39" width="264" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYe-Ac-shm">
+                        <rect key="frame" x="28" y="62" width="264" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="PqU-FZ-OvX" firstAttribute="top" secondItem="zun-IF-icw" secondAttribute="top" id="4gf-Vk-cL2"/>
+                    <constraint firstAttribute="trailing" secondItem="PqU-FZ-OvX" secondAttribute="trailing" id="5pX-bL-tjJ"/>
+                    <constraint firstAttribute="trailing" secondItem="nfh-0A-fRG" secondAttribute="trailing" id="Gzm-61-ZE8"/>
+                    <constraint firstAttribute="bottom" secondItem="PqU-FZ-OvX" secondAttribute="bottom" id="QbY-U7-rlB"/>
+                    <constraint firstAttribute="bottom" secondItem="nfh-0A-fRG" secondAttribute="bottom" id="R1K-XY-idu"/>
+                    <constraint firstItem="nfh-0A-fRG" firstAttribute="leading" secondItem="zun-IF-icw" secondAttribute="leading" id="Xrm-Le-5S7"/>
+                    <constraint firstItem="PqU-FZ-OvX" firstAttribute="leading" secondItem="zun-IF-icw" secondAttribute="leading" id="dcd-OB-1XH"/>
+                    <constraint firstItem="nfh-0A-fRG" firstAttribute="top" secondItem="zun-IF-icw" secondAttribute="top" id="vYN-Pk-5GX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="backgroundImageView" destination="PqU-FZ-OvX" id="aY3-SF-aVi"/>
+                <outlet property="evenNameLabel" destination="Raq-48-zof" id="BrY-cw-Vbe"/>
+                <outlet property="eventDateLabel" destination="tYe-Ac-shm" id="N79-wN-N4d"/>
+            </connections>
+            <point key="canvasLocation" x="489" y="384"/>
+        </tableViewCell>
+    </objects>
+</document>
