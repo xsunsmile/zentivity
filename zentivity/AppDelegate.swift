@@ -15,7 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Parse setup
+        Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
+        
+        // Testing...
+        var event = Event()
+        event.title = "COFFEEEEE"
+        event.invitedUsernames = ["hsun", "awen", "clee"]
+        
+        event.saveWithCompletion({ (success, error) -> () in
+            if success != nil { println("SUCCEEDED!") }
+        })
+        
         return true
     }
 
