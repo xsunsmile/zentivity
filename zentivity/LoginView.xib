@@ -55,25 +55,6 @@
             </connections>
             <point key="canvasLocation" x="366.5" y="239.5"/>
         </view>
-        <view contentMode="scaleToFill" id="l5v-av-Tuc">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTu-Fa-cle">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </webView>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="ZTu-Fa-cle" secondAttribute="trailing" id="3J0-mj-OeN"/>
-                <constraint firstAttribute="bottom" secondItem="ZTu-Fa-cle" secondAttribute="bottom" id="Dng-sx-9XC"/>
-                <constraint firstItem="ZTu-Fa-cle" firstAttribute="top" secondItem="l5v-av-Tuc" secondAttribute="top" id="OSQ-Cc-OLX"/>
-                <constraint firstItem="ZTu-Fa-cle" firstAttribute="leading" secondItem="l5v-av-Tuc" secondAttribute="leading" id="pdg-Nw-YjQ"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="381" y="638"/>
-        </view>
         <tapGestureRecognizer id="sIv-6V-cqX">
             <connections>
                 <action selector="loginTapped:" destination="-1" id="9bx-U5-TTy"/>

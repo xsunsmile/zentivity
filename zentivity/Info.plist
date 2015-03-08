@@ -24,10 +24,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.zendesk.zenactivity</string>
+			<string>com.zendesk.zentivity</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>zenactivityGoogle://oauth</string>
+				<string>com.zendesk.zentivity</string>
 			</array>
 		</dict>
 	</array>

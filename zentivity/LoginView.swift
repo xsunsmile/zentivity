@@ -14,7 +14,7 @@ class LoginView: UIView {
     @IBOutlet weak var loginTypeLabel: UILabel!
     
     var loginBannerView: UIView!
-    var authWebView: UIView!
+    @IBOutlet weak var authWebView: UIWebView!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,15 +31,15 @@ class LoginView: UIView {
         let nib = UINib(nibName: "LoginView", bundle: nil)
         let objects = nib.instantiateWithOwner(self, options: nil)
         loginBannerView = objects[0] as UIView
-        authWebView = objects[1] as UIView
         
+        loginBannerView.frame = bounds
         addSubview(loginBannerView)
     }
     
     
     @IBAction func loginTapped(sender: UITapGestureRecognizer) {
         println("login is tapped")
-//        GoogleClient.sharedInstance.login()
+        GoogleClient.sharedInstance.login()
     }
     
     /*
