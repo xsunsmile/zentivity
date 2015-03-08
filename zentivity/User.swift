@@ -17,6 +17,7 @@ class User : PFUser, PFSubclassing {
     func eventsWithCompletion(type: String!, completion: (events: [Event], error: NSError!) -> ()) {
         let query = Event.query()
         query.whereKey(type, equalTo: self)
+        query.includeKey("photos")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             completion(events: objects as [Event], error: error)
         }

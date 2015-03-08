@@ -15,6 +15,7 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var invited: PFRelation
     @NSManaged var confirmed: PFRelation
     @NSManaged var declined: PFRelation
+    @NSManaged var comments: PFRelation
     @NSManaged var photos: PFRelation
     var invitedUsernames: [String]?
     
@@ -52,9 +53,25 @@ class Event : PFObject, PFSubclassing {
         photo.saveInBackgroundWithBlock { (success, error) -> Void in
             if success == true {
                 self.photos.addObject(photo)
-                self.saveWithCompletion { (success, error) -> () in
+                self.saveInBackgroundWithBlock({ (success, error) -> Void in
                     completion(success: success, error: error)
-                }
+                })
+            } else {
+                completion(success: success, error: error)
+            }
+        }
+    }
+    
+    func addCommentWithCompletion(text: String, completion: (success: Bool!, error: NSError!) -> ()) {
+        var comment = Comment()
+        comment.user = PFUser.currentUser()
+        comment.text = text
+        comment.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success == true {
+                self.comments.addObject(comment)
+                self.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    completion(success: success, error: error)
+                })
             } else {
                 completion(success: success, error: error)
             }
