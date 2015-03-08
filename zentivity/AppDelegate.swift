@@ -24,17 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let query = User.query()
         query.getObjectInBackgroundWithId("7KDcNzj3YP") { (currentUser: AnyObject!, error: NSError!) -> Void in
             let currentUser = currentUser as User
-            currentUser.hostedEventsWithCompletion { (events, error) -> Void in
+            currentUser.eventsWithCompletion("gg") { (events, error) -> Void in
                 if error == nil {
                     // code
                     println(events)
                 }
             }
-
         }
-        
-        
-        
         
         return true
     }
