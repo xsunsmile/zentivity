@@ -28,6 +28,25 @@
 		54DA30061AAC42A1005702EC /* NewEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DA30051AAC42A1005702EC /* NewEventView.xib */; };
 		54DA30081AAC42AD005702EC /* NewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA30071AAC42AD005702EC /* NewEventView.swift */; };
 		5BB82504BA6A1DEBA5D0C541 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB1175D1CF9C92D24F4E80E /* libPods.a */; };
+		6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6894AA7C1AAA87F400401171 /* ParseClient.swift */; };
+		93D311261AABA607009259E8 /* GoogleClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D311251AABA607009259E8 /* GoogleClient.swift */; };
+		93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEA9311AABCD3000E04811 /* LoginView.swift */; };
+		93EEA9341AABCD5800E04811 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EEA9331AABCD5800E04811 /* LoginView.xib */; };
+		93EEA9361AABE58200E04811 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEA9351AABE58200E04811 /* AppViewController.swift */; };
+		93FF5A2E1AABFF680077C216 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A2D1AABFF680077C216 /* AddressBook.framework */; };
+		93FF5A301AABFF750077C216 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A2F1AABFF750077C216 /* AssetsLibrary.framework */; };
+		93FF5A321AABFF820077C216 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A311AABFF820077C216 /* Foundation.framework */; };
+		93FF5A341AABFF8D0077C216 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A331AABFF8D0077C216 /* CoreLocation.framework */; };
+		93FF5A361AABFF970077C216 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A351AABFF970077C216 /* CoreMotion.framework */; };
+		93FF5A381AABFFA10077C216 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A371AABFFA10077C216 /* CoreGraphics.framework */; };
+		93FF5A3A1AABFFAC0077C216 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A391AABFFAC0077C216 /* CoreText.framework */; };
+		93FF5A3C1AABFFB60077C216 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A3B1AABFFB60077C216 /* MediaPlayer.framework */; };
+		93FF5A3E1AABFFC00077C216 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A3D1AABFFC00077C216 /* Security.framework */; };
+		93FF5A401AABFFCA0077C216 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A3F1AABFFCA0077C216 /* SystemConfiguration.framework */; };
+		93FF5A421AABFFD30077C216 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A411AABFFD30077C216 /* UIKit.framework */; };
+		93FF5A451AAC00D40077C216 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A431AAC00D40077C216 /* GoogleOpenSource.framework */; };
+		93FF5A461AAC00D40077C216 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A441AAC00D40077C216 /* GooglePlus.framework */; };
+		93FF5A491AAC04990077C216 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 93FF5A481AAC04990077C216 /* GooglePlus.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,8 +86,27 @@
 		54DA30031AAC399D005702EC /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
 		54DA30051AAC42A1005702EC /* NewEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewEventView.xib; sourceTree = "<group>"; };
 		54DA30071AAC42AD005702EC /* NewEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
+		6894AA7C1AAA87F400401171 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		6CB1175D1CF9C92D24F4E80E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9CA5CE0D0774940F2AB24C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		93D311251AABA607009259E8 /* GoogleClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleClient.swift; sourceTree = "<group>"; };
+		93EEA9311AABCD3000E04811 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		93EEA9331AABCD5800E04811 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		93EEA9351AABE58200E04811 /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		93FF5A2D1AABFF680077C216 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		93FF5A2F1AABFF750077C216 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		93FF5A311AABFF820077C216 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		93FF5A331AABFF8D0077C216 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		93FF5A351AABFF970077C216 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		93FF5A371AABFFA10077C216 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		93FF5A391AABFFAC0077C216 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		93FF5A3B1AABFFB60077C216 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		93FF5A3D1AABFFC00077C216 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		93FF5A3F1AABFFCA0077C216 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		93FF5A411AABFFD30077C216 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		93FF5A431AAC00D40077C216 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		93FF5A441AAC00D40077C216 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		93FF5A481AAC04990077C216 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +114,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93FF5A421AABFFD30077C216 /* UIKit.framework in Frameworks */,
+				93FF5A401AABFFCA0077C216 /* SystemConfiguration.framework in Frameworks */,
+				93FF5A451AAC00D40077C216 /* GoogleOpenSource.framework in Frameworks */,
+				93FF5A3E1AABFFC00077C216 /* Security.framework in Frameworks */,
+				93FF5A3C1AABFFB60077C216 /* MediaPlayer.framework in Frameworks */,
+				93FF5A3A1AABFFAC0077C216 /* CoreText.framework in Frameworks */,
+				93FF5A381AABFFA10077C216 /* CoreGraphics.framework in Frameworks */,
+				93FF5A361AABFF970077C216 /* CoreMotion.framework in Frameworks */,
+				93FF5A341AABFF8D0077C216 /* CoreLocation.framework in Frameworks */,
+				93FF5A461AAC00D40077C216 /* GooglePlus.framework in Frameworks */,
+				93FF5A321AABFF820077C216 /* Foundation.framework in Frameworks */,
+				93FF5A301AABFF750077C216 /* AssetsLibrary.framework in Frameworks */,
+				93FF5A2E1AABFF680077C216 /* AddressBook.framework in Frameworks */,
 				5BB82504BA6A1DEBA5D0C541 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +171,7 @@
 				5425DEF91AA8CB02001F5CD5 /* API */,
 				5425DEF81AA8CAFC001F5CD5 /* Models */,
 				5425DEDF1AA8C9E0001F5CD5 /* Images.xcassets */,
+				93FF5A471AAC046F0077C216 /* AssetsBundles */,
 				5425DEE11AA8C9E0001F5CD5 /* LaunchScreen.xib */,
 				5425DED61AA8C9E0001F5CD5 /* Supporting Files */,
 				5425DEFC1AA8CC3A001F5CD5 /* zentivity-Bridging-Header.h */,
@@ -162,6 +214,8 @@
 		5425DEF91AA8CB02001F5CD5 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				6894AA7C1AAA87F400401171 /* ParseClient.swift */,
+				93D311251AABA607009259E8 /* GoogleClient.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -183,6 +237,8 @@
 				54DA30011AAC398F005702EC /* UserProfileView.swift */,
 				54DA30051AAC42A1005702EC /* NewEventView.xib */,
 				54DA30071AAC42AD005702EC /* NewEventView.swift */,
+				93EEA9311AABCD3000E04811 /* LoginView.swift */,
+				93EEA9331AABCD5800E04811 /* LoginView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -191,8 +247,17 @@
 			isa = PBXGroup;
 			children = (
 				5425DEDA1AA8C9E0001F5CD5 /* ViewController.swift */,
+				93EEA9351AABE58200E04811 /* AppViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		93FF5A471AAC046F0077C216 /* AssetsBundles */ = {
+			isa = PBXGroup;
+			children = (
+				93FF5A481AAC04990077C216 /* GooglePlus.bundle */,
+			);
+			name = AssetsBundles;
 			sourceTree = "<group>";
 		};
 		ADBEFF1456DACDFDB8F093B0 /* Pods */ = {
@@ -207,6 +272,19 @@
 		F953FE1170D4C30F1E2BC84A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93FF5A431AAC00D40077C216 /* GoogleOpenSource.framework */,
+				93FF5A441AAC00D40077C216 /* GooglePlus.framework */,
+				93FF5A411AABFFD30077C216 /* UIKit.framework */,
+				93FF5A3F1AABFFCA0077C216 /* SystemConfiguration.framework */,
+				93FF5A3D1AABFFC00077C216 /* Security.framework */,
+				93FF5A3B1AABFFB60077C216 /* MediaPlayer.framework */,
+				93FF5A391AABFFAC0077C216 /* CoreText.framework */,
+				93FF5A371AABFFA10077C216 /* CoreGraphics.framework */,
+				93FF5A351AABFF970077C216 /* CoreMotion.framework */,
+				93FF5A331AABFF8D0077C216 /* CoreLocation.framework */,
+				93FF5A311AABFF820077C216 /* Foundation.framework */,
+				93FF5A2F1AABFF750077C216 /* AssetsLibrary.framework */,
+				93FF5A2D1AABFF680077C216 /* AddressBook.framework */,
 				6CB1175D1CF9C92D24F4E80E /* libPods.a */,
 			);
 			name = Frameworks;
@@ -303,6 +381,9 @@
 				54DA2FFE1AABFA00005702EC /* EventDetailView.xib in Resources */,
 				5425DEE31AA8C9E0001F5CD5 /* LaunchScreen.xib in Resources */,
 				549113AE1AA98DD000000861 /* MenuTableViewCell.xib in Resources */,
+				93FF5A491AAC04990077C216 /* GooglePlus.bundle in Resources */,
+				5425DEE31AA8C9E0001F5CD5 /* LaunchScreen.xib in Resources */,
+				93EEA9341AABCD5800E04811 /* LoginView.xib in Resources */,
 				5425DEE01AA8C9E0001F5CD5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,12 +435,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93EEA9361AABE58200E04811 /* AppViewController.swift in Sources */,
+				6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */,
+				93D311261AABA607009259E8 /* GoogleClient.swift in Sources */,
 				5425DEDB1AA8C9E0001F5CD5 /* ViewController.swift in Sources */,
 				549113B81AA992A000000861 /* MenuView.swift in Sources */,
 				549113B61AA98FFE00000861 /* EventsView.swift in Sources */,
 				54DA30021AAC398F005702EC /* UserProfileView.swift in Sources */,
 				549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */,
 				549113AD1AA98DD000000861 /* MenuTableViewCell.swift in Sources */,
+				93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */,
 				5425DED91AA8C9E0001F5CD5 /* AppDelegate.swift in Sources */,
 				54DA30081AAC42AD005702EC /* NewEventView.swift in Sources */,
 				54DA30001AAC067A005702EC /* EventDetailView.swift in Sources */,
@@ -487,6 +572,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = zentivity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -501,6 +590,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = zentivity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

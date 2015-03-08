@@ -20,19 +20,23 @@ PODS:
   - AFNetworking/UIKit (2.5.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BDBOAuth1Manager (1.5.0):
-    - AFNetworking/NSURLConnection (~> 2.5.0)
-    - AFNetworking/NSURLSession (~> 2.5.0)
+  - Bolts (1.1.4)
   - JGProgressHUD (1.2.3)
+  - Parse (1.6.4):
+    - Bolts (~> 1.1)
+  - pop (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking
-  - BDBOAuth1Manager
   - JGProgressHUD
+  - Parse
+  - pop (~> 1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  BDBOAuth1Manager: 274574557077abc873fc5688abe8b991e782749c
+  Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
   JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
+  Parse: c2610f7a12ad0defc974803b819c4efe7746e6db
+  pop: 2f14a1ea61339767af9e66741b418c831b3844df
 
 COCOAPODS: 0.35.0

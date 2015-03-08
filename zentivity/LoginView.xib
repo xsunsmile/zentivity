@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginView" customModule="zentivity" customModuleProvider="target">
+            <connections>
+                <outlet property="loginIconImageView" destination="84E-ck-tYE" id="nDN-D0-GKl"/>
+                <outlet property="loginTypeLabel" destination="5UI-ah-q56" id="5qj-k8-IZq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="571" height="99"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V4Z-FP-Vbc">
+                    <rect key="frame" x="166" y="12" width="239" height="76"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gPlusButtonWhite" translatesAutoresizingMaskIntoConstraints="NO" id="84E-ck-tYE">
+                            <rect key="frame" x="8" y="8" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="Kah-m6-8Yb"/>
+                                <constraint firstAttribute="width" constant="60" id="i4v-6j-cte"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with Google" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UI-ah-q56">
+                            <rect key="frame" x="88" y="28" width="143" height="20.5"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="84E-ck-tYE" firstAttribute="leading" secondItem="V4Z-FP-Vbc" secondAttribute="leading" constant="8" id="55G-pY-Za5"/>
+                        <constraint firstItem="84E-ck-tYE" firstAttribute="centerY" secondItem="5UI-ah-q56" secondAttribute="centerY" id="8mS-nA-hjW"/>
+                        <constraint firstItem="84E-ck-tYE" firstAttribute="top" secondItem="V4Z-FP-Vbc" secondAttribute="top" constant="8" id="DvH-Kl-jU2"/>
+                        <constraint firstAttribute="trailing" secondItem="5UI-ah-q56" secondAttribute="trailing" constant="8" id="HzM-LM-u1V"/>
+                        <constraint firstItem="5UI-ah-q56" firstAttribute="leading" secondItem="84E-ck-tYE" secondAttribute="trailing" constant="20" id="Ycf-F8-wRI"/>
+                        <constraint firstAttribute="bottom" secondItem="84E-ck-tYE" secondAttribute="bottom" constant="8" id="rOf-06-Vim"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.20480538609999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="V4Z-FP-Vbc" secondAttribute="centerY" id="dMk-ft-Imk"/>
+                <constraint firstAttribute="centerX" secondItem="V4Z-FP-Vbc" secondAttribute="centerX" id="k3i-Bh-fJh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="sIv-6V-cqX" appends="YES" id="Ons-6a-39o"/>
+            </connections>
+            <point key="canvasLocation" x="366.5" y="239.5"/>
+        </view>
+        <tapGestureRecognizer id="sIv-6V-cqX">
+            <connections>
+                <action selector="loginTapped:" destination="-1" id="9bx-U5-TTy"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="gPlusButtonWhite" width="46" height="48"/>
+    </resources>
+</document>
