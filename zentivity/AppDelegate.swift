@@ -18,15 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Parse setup
         Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
+
+        // Testing... Ignore this!
+
+        let query = User.query()
+        query.getObjectInBackgroundWithId("7KDcNzj3YP") { (currentUser: AnyObject!, error: NSError!) -> Void in
+            let currentUser = currentUser as User
+            currentUser.hostedEventsWithCompletion { (events, error) -> Void in
+                if error == nil {
+                    // code
+                    println(events)
+                }
+            }
+
+        }
         
-        // Testing...
-        var event = Event()
-        event.title = "COFFEEEEE"
-        event.invitedUsernames = ["hsun", "awen", "clee"]
         
-        event.saveWithCompletion({ (success, error) -> () in
-            if success != nil { println("SUCCEEDED!") }
-        })
+        
         
         return true
     }

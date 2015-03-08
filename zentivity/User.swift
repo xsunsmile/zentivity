@@ -13,4 +13,13 @@ class User : PFUser, PFSubclassing {
             self.registerSubclass()
         }
     }
+    
+    func hostedEventsWithCompletion(completion: (events: [Event], error: NSError!) -> ()) {
+        let query = Event.query()
+        query.whereKey("admin", equalTo: self)
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+            completion(events: objects as [Event], error: error)
+        }
+
+    }
 }
