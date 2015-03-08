@@ -15,6 +15,7 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var invited: PFRelation
     @NSManaged var confirmed: PFRelation
     @NSManaged var declined: PFRelation
+    @NSManaged var photos: PFRelation
     var invitedUsernames: [String]?
     
     override class func initialize() {
@@ -42,5 +43,21 @@ class Event : PFObject, PFSubclassing {
             }
         }
         
+    }
+    
+    func addPhotoWithCompletion(image: UIImage, completion: (success: Bool!, error: NSError!) -> ()) {
+        var photo = Photo()
+        photo.user = PFUser.currentUser()
+        photo.file = PFFile(name:"image.png", data: UIImagePNGRepresentation(image))
+        photo.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success == true {
+                self.photos.addObject(photo)
+                self.saveWithCompletion { (success, error) -> () in
+                    completion(success: success, error: error)
+                }
+            } else {
+                completion(success: success, error: error)
+            }
+        }
     }
 }

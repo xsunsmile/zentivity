@@ -24,12 +24,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let query = User.query()
         query.getObjectInBackgroundWithId("7KDcNzj3YP") { (currentUser: AnyObject!, error: NSError!) -> Void in
             let currentUser = currentUser as User
-            currentUser.eventsWithCompletion("gg") { (events, error) -> Void in
-                if error == nil {
-                    // code
-                    println(events)
-                }
-            }
+            
+            
+            let image = UIImage(named: "test.png")
+            
+            let q = Event.query()
+            q.getObjectInBackgroundWithId("0gOM0NqKXf", block: { (object, error) -> Void in
+                let event = object as Event
+                event.addPhotoWithCompletion(image!, { (success, error) -> Void in
+                    if success == true {
+                        println("HELLYEAH")
+                    } else {
+                        println("WTF")
+                    }
+                })
+            })
         }
         
         return true
