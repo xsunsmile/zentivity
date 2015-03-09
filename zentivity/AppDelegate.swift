@@ -18,29 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Parse setup
         Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
-
-        // Testing... Ignore this!
-
-        let query = User.query()
-        query.getObjectInBackgroundWithId("7KDcNzj3YP") { (currentUser: AnyObject!, error: NSError!) -> Void in
-            let currentUser = currentUser as User
-            
-            
-            let image = UIImage(named: "test.png")
-            
-            let q = Event.query()
-            q.getObjectInBackgroundWithId("0gOM0NqKXf", block: { (object, error) -> Void in
-                let event = object as Event
-//                event.addPhotoWithCompletion(image!, { (success, error) -> Void in
-//                    if success == true {
-//                        println("HELLYEAH")
-//                    } else {
-//                        println("WTF")
-//                    }
-//                })
-                println(event.photos.query())
-            })
-        }
+        Photo.registerSubclass()
+        Event.registerSubclass()
+        Comment.registerSubclass()
+        User.registerSubclass()
         
         if GoogleClient.sharedInstance.alreadyLogin() {
             let vc = storyboard.instantiateViewControllerWithIdentifier("eventsList") as UIViewController
