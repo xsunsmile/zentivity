@@ -12,7 +12,8 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var startTime: NSDate
     @NSManaged var endTime: NSDate
     @NSManaged var admin: PFUser
-    @NSManaged var invited: PFRelation
+//    @NSManaged var invited: PFRelation
+    @NSManaged var invitedUsers: NSMutableArray
     @NSManaged var confirmed: PFRelation
     @NSManaged var declined: PFRelation
     @NSManaged var comments: PFRelation
@@ -33,7 +34,7 @@ class Event : PFObject, PFSubclassing {
     func saveWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
         if let invitedUsernames = invitedUsernames {
             ParseClient.usersWithCompletion(invitedUsernames, completion: { (users, error) -> () in
-                for user in users { self.invited.addObject(user) }
+                for user in users { self.invitedUsers.addObject(user.objectId) }
                 self.saveInBackgroundWithBlock { (success, error) -> Void in
                     completion(success: success, error: error)
                 }
@@ -76,5 +77,23 @@ class Event : PFObject, PFSubclassing {
                 completion(success: success, error: error)
             }
         }
+    }
+    
+    func photosWithCompletion(completion: (photos: [Photo], error: NSError!) -> ()) {
+        let query = photos.query()
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+            completion(photos: objects as [Photo], error: error)
+        }
+    }
+    
+    func commentsWithCompletion(completion: (comments: [Comment], error: NSError!) -> ()) {
+        let query = comments.query()
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+            completion(comments: objects as [Comment], error: error)
+        }
+    }
+    
+    func confirmWithCompletion(eventcompletion: (success: Bool!, error: NSError!) -> ()) {
+        
     }
 }
