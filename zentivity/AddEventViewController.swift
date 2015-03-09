@@ -10,8 +10,12 @@ import UIKit
 
 class AddEventViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initSubviews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +26,14 @@ class AddEventViewController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
 
+    @IBAction func onTap(sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    func initSubviews() {
+        scrollView.contentSize = CGSizeMake(view.frame.width, view.frame.height)
+    }
+    
     /*
     // MARK: - Navigation
 

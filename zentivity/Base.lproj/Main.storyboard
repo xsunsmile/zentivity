@@ -97,8 +97,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j6r-us-sMm">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tr4-bT-TBV">
+                                <rect key="frame" x="46" y="518" width="228" height="30"/>
+                                <color key="backgroundColor" red="0.76075205180000005" green="0.76075205180000005" blue="0.76075205180000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="228" id="cey-mW-mHu"/>
+                                    <constraint firstAttribute="height" constant="30" id="fEf-Af-QFy"/>
+                                </constraints>
+                                <state key="normal" title="Create event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j6r-us-sMm">
+                                <rect key="frame" x="0.0" y="64" width="320" height="434"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-me-IvB">
                                         <rect key="frame" x="17" y="12" width="285" height="19"/>
@@ -152,59 +163,35 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qps-Ga-zXi">
-                                        <rect key="frame" x="0.0" y="278" width="320" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="sMN-uP-H5a"/>
-                                        </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0ho-bK-TYa">
-                                            <size key="itemSize" width="50" height="50"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                    </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tr4-bT-TBV">
-                                        <rect key="frame" x="46" y="460" width="228" height="30"/>
-                                        <color key="backgroundColor" red="0.76075205180000005" green="0.76075205180000005" blue="0.76075205180000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="228" id="cey-mW-mHu"/>
-                                            <constraint firstAttribute="height" constant="30" id="fEf-Af-QFy"/>
-                                        </constraints>
-                                        <state key="normal" title="Create event">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="6Ez-Nx-9Er" firstAttribute="top" secondItem="e3R-xe-cwh" secondAttribute="bottom" constant="10" id="0Py-3v-3vU"/>
                                     <constraint firstAttribute="centerX" secondItem="fTA-me-IvB" secondAttribute="centerX" id="1mG-MA-VEw"/>
                                     <constraint firstItem="zrF-3P-ACK" firstAttribute="top" secondItem="6Ez-Nx-9Er" secondAttribute="bottom" constant="10" id="35J-o2-WCl"/>
                                     <constraint firstAttribute="centerX" secondItem="FCu-yp-FH5" secondAttribute="centerX" id="6Ir-GB-rnK"/>
                                     <constraint firstItem="FCu-yp-FH5" firstAttribute="top" secondItem="fTA-me-IvB" secondAttribute="bottom" constant="10" id="880-Tg-dNa"/>
-                                    <constraint firstItem="tr4-bT-TBV" firstAttribute="top" secondItem="Qps-Ga-zXi" secondAttribute="bottom" constant="132" id="8RQ-j9-bzT"/>
                                     <constraint firstAttribute="centerX" secondItem="IOa-WE-bgp" secondAttribute="centerX" id="9f9-mT-cVY"/>
-                                    <constraint firstItem="Qps-Ga-zXi" firstAttribute="leading" secondItem="j6r-us-sMm" secondAttribute="leading" id="DSi-b2-ItF"/>
                                     <constraint firstItem="zrF-3P-ACK" firstAttribute="leading" secondItem="6Ez-Nx-9Er" secondAttribute="leading" id="DSl-Mo-ueI"/>
-                                    <constraint firstAttribute="trailing" secondItem="Qps-Ga-zXi" secondAttribute="trailing" id="Eaq-T8-5dd"/>
                                     <constraint firstAttribute="centerX" secondItem="6Ez-Nx-9Er" secondAttribute="centerX" id="I3W-g5-AbK"/>
-                                    <constraint firstItem="Qps-Ga-zXi" firstAttribute="top" secondItem="zrF-3P-ACK" secondAttribute="bottom" constant="10" id="Jb0-YO-d8M"/>
                                     <constraint firstItem="IOa-WE-bgp" firstAttribute="top" secondItem="FCu-yp-FH5" secondAttribute="bottom" constant="10" id="PNk-T0-3gW"/>
-                                    <constraint firstAttribute="bottom" secondItem="tr4-bT-TBV" secondAttribute="bottom" constant="14" id="T1s-4C-8SP"/>
                                     <constraint firstAttribute="centerX" secondItem="e3R-xe-cwh" secondAttribute="centerX" id="UXr-cT-I5Y"/>
-                                    <constraint firstAttribute="trailing" secondItem="tr4-bT-TBV" secondAttribute="trailing" constant="46" id="XeB-MO-5nt"/>
                                     <constraint firstItem="fTA-me-IvB" firstAttribute="top" secondItem="j6r-us-sMm" secondAttribute="top" constant="12" id="cjc-rd-fpg"/>
                                     <constraint firstItem="e3R-xe-cwh" firstAttribute="top" secondItem="IOa-WE-bgp" secondAttribute="bottom" constant="10" id="f2A-jg-CtG"/>
-                                    <constraint firstAttribute="centerX" secondItem="tr4-bT-TBV" secondAttribute="centerX" id="sYL-NN-Z7s"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="QtG-ae-vxE" appends="YES" id="pE2-GQ-JZd"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="j6r-us-sMm" secondAttribute="trailing" id="1th-cn-8Xq"/>
+                            <constraint firstItem="tr4-bT-TBV" firstAttribute="top" secondItem="j6r-us-sMm" secondAttribute="bottom" constant="20" id="FyI-6s-PfV"/>
                             <constraint firstItem="j6r-us-sMm" firstAttribute="top" secondItem="Vsk-RM-HB6" secondAttribute="bottom" id="RUX-b2-UDO"/>
-                            <constraint firstItem="4fg-rb-wne" firstAttribute="top" secondItem="j6r-us-sMm" secondAttribute="bottom" id="dah-4Z-UzW"/>
+                            <constraint firstItem="4fg-rb-wne" firstAttribute="top" secondItem="tr4-bT-TBV" secondAttribute="bottom" constant="20" id="UHk-0X-W48"/>
                             <constraint firstItem="j6r-us-sMm" firstAttribute="leading" secondItem="xo9-Rc-fMN" secondAttribute="leading" id="j3s-Is-sue"/>
+                            <constraint firstAttribute="centerX" secondItem="tr4-bT-TBV" secondAttribute="centerX" id="wp7-4e-bUg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Event" id="VWb-3Q-raQ">
@@ -215,8 +202,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="scrollView" destination="j6r-us-sMm" id="gaq-a4-hVI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWn-J9-t65" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QtG-ae-vxE">
+                    <connections>
+                        <action selector="onTap:" destination="POz-bg-1x5" id="9Yk-g4-eY7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1590" y="406"/>
         </scene>
