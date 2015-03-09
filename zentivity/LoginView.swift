@@ -12,13 +12,17 @@ class LoginView: UIView {
 
     @IBOutlet weak var loginIconImageView: UIImageView!
     @IBOutlet weak var loginTypeLabel: UILabel!
+    @IBOutlet weak var loginButtonView: UIView!
     
     var loginBannerView: UIView!
-    @IBOutlet weak var authWebView: UIWebView!
+    var buttonBackgroundColor: UIColor? {
+        didSet {
+            loginButtonView.backgroundColor = buttonBackgroundColor!
+        }
+    }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         initSubViews()
     }
     
@@ -32,14 +36,38 @@ class LoginView: UIView {
         let objects = nib.instantiateWithOwner(self, options: nil)
         loginBannerView = objects[0] as UIView
         
+        if GoogleClient.sharedInstance.alreadyLogin() {
+            loginTypeLabel.text = "Logout from Google"
+        }
         loginBannerView.frame = bounds
+        
+        loginButtonView.layer.masksToBounds = true
+        loginButtonView.layer.cornerRadius = 0.5
+        
         addSubview(loginBannerView)
     }
     
     
     @IBAction func loginTapped(sender: UITapGestureRecognizer) {
-        println("login is tapped")
-        GoogleClient.sharedInstance.login()
+        println("google auth button is tapped")
+        
+        if GoogleClient.sharedInstance.alreadyLogin() {
+            GoogleClient.sharedInstance.logoutWithCompletion({ (completed) -> Void in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    println("User did logout")
+                    self.loginTypeLabel.text = "Signin from Google"
+                })
+            })
+        } else {
+            GoogleClient.sharedInstance.loginWithCompletion({ (completed) -> Void in
+                if completed {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        println("User did login")
+                        self.loginTypeLabel.text = "Logout from Google"
+                    })
+                }
+            })
+        }
     }
     
     /*

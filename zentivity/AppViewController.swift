@@ -19,6 +19,9 @@ class AppViewController: UIViewController {
     }
     
     func initSubViews() {
+        view.backgroundColor = UIColor(rgba: "#78A300")
+        loginView.backgroundColor = UIColor(rgba: "#78A300")
+        loginView.buttonBackgroundColor = UIColor(rgba: "#dd4b39")
     }
     
     override func didReceiveMemoryWarning() {

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+let userDidLoginNotification = "userDidLoginNotification"
+let userLoginFailedNotification = "userLoginFailedNotification"
+let userDidLogoutNotification = "userDidLogoutNotification"
 
 class GoogleClient: NSObject,
                     GPPSignInDelegate
@@ -15,6 +18,7 @@ class GoogleClient: NSObject,
     let scopes =  ["https://www.googleapis.com/auth/plus.login"]
     let signIn = GPPSignIn.sharedInstance()
     let plusService = GTLServicePlus()
+    var loginCompletion: ((Bool) -> Void)?
     
     class var sharedInstance: GoogleClient {
         struct Singleton {
@@ -32,31 +36,57 @@ class GoogleClient: NSObject,
         plusService.retryEnabled = true
     }
     
-    func login() {
+    func alreadyLogin() -> Bool {
+        return signIn.authentication != nil || signIn.trySilentAuthentication()
+    }
+    
+    func loginWithCompletion(completion: (completed: Bool) -> Void) {
         signIn.delegate = self
+        loginCompletion = completion
+        
         if !signIn.trySilentAuthentication() {
             signIn.authenticate()
+        } else {
+            initGooglePlusService()
+            getCurrentUserProfile()
+            completion(completed: true)
         }
+    }
+    
+    func logoutWithCompletion(completion: (completed: Bool) -> Void) {
+        if alreadyLogin() {
+            signIn.signOut()
+            completion(completed: true)
+        }
+    }
+    
+    func initGooglePlusService() {
+        plusService.authorizer = signIn.authentication
     }
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if auth != nil {
-            plusService.authorizer = auth
-            getUserProfile()
+            initGooglePlusService()
+            getCurrentUserProfile()
         } else {
-            
+            NSNotificationCenter.defaultCenter().postNotificationName(userLoginFailedNotification, object: error)
+        }
+        
+        if (loginCompletion != nil) {
+            loginCompletion!(auth != nil)
         }
     }
     
-    func getUserProfile() {
+    func getCurrentUserProfile() {
         let query = GTLQueryPlus.queryForPeopleGetWithUserId("me") as GTLQueryPlus
         plusService.executeQuery(query, completionHandler: { (ticket, person, error) -> Void in
             if error != nil {
-                NSLog("%@", error)
+                NSLog("Can not get current user profile: %@", error)
             } else {
                 let user = person as GTLPlusPerson
                 NSLog("user %@", user)
                 NSLog("user name: %@, about: %@", user.displayName, user.name)
+                NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil)
             }
         })
     }

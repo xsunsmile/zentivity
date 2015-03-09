@@ -8,21 +8,27 @@
 
 import UIKit
 
-class EventsTableViewCell: UITableViewCell {
+class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var backgroundImageView: UIView!
-    @IBOutlet weak var evenNameLabel: UILabel!
+    @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
-
+    
+    var eventView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
+    
+    override func onDataSet(data: NSDictionary) {
+        println("onDataSet is called on child")
+        refresh()
+    }
+    
+    override func refresh() {
+        eventNameLabel.text = data!["title"] as NSString
+    }
 }

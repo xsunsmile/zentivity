@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -40,6 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                })
                 println(event.photos.query())
             })
+        }
+        
+        if GoogleClient.sharedInstance.alreadyLogin() {
+            let vc = storyboard.instantiateViewControllerWithIdentifier("eventsList") as UIViewController
+            window?.rootViewController = vc
         }
         
         return true
