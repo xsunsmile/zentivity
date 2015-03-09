@@ -13,8 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Maybe not needed anymore. This is for some weird Parse object insantiation
         Photo.registerSubclass()
         Event.registerSubclass()
         Comment.registerSubclass()
@@ -27,19 +27,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let query = User.query()
         
         query.getObjectInBackgroundWithId("7KDcNzj3YP") { (currentUser: AnyObject!, error: NSError!) -> Void in
+            println("Found current user")
             let currentUser = currentUser as User
             
-            currentUser.eventsWithCompletion("invited", completion: { (events, error) -> () in
+            
+//             Create
+//            var event = Event()
+//            event.invitedUsernames = ["ehuang", "clee", "mlee"]
+//            event.title = "zDASFJILASJDLKSAJDKLASJDLKJSADLKSAJKLg"
+//            event.descript = "zDASFJILASJDLKSAJDKLASJDLKJSADLKSAJKLg"
+//            event.createWithCompletion({ (success, error) -> () in
+//                if error == nil {
+//                    println("YAY")
+//                } else {
+//                    println(error)
+//                }
+//            })
+            
+            
+            currentUser.eventsWithCompletion("invitedUsers", completion: { (events, error) -> () in
                 let event = events[0]
-                
-                event.photosWithCompletion({ (photos, error) -> Void in
-                    if error == nil {
-                        println(photos)
-                    } else {
-                        println(error)
-                    }
+                currentUser.confirmEvent(event, completion: { (success, error) -> () in
                 })
             })
+            
+
         }
         
         return true

@@ -12,12 +12,11 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var startTime: NSDate
     @NSManaged var endTime: NSDate
     @NSManaged var admin: PFUser
-//    @NSManaged var invited: PFRelation
     @NSManaged var invitedUsers: NSMutableArray
-    @NSManaged var confirmed: PFRelation
-    @NSManaged var declined: PFRelation
-    @NSManaged var comments: PFRelation
-    @NSManaged var photos: PFRelation
+    @NSManaged var confirmedUsers: NSMutableArray
+    @NSManaged var declinedUsers: NSMutableArray
+    @NSManaged var comments: [Comment]?
+    @NSManaged var photos: [Photo]?
     var invitedUsernames: [String]?
     
     override class func initialize() {
@@ -31,69 +30,55 @@ class Event : PFObject, PFSubclassing {
         return "Event"
     }
     
-    func saveWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
+    func createWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
+        self.admin = PFUser.currentUser()
+        self.confirmedUsers = []
+        self.declinedUsers = []
+        
         if let invitedUsernames = invitedUsernames {
             ParseClient.usersWithCompletion(invitedUsernames, completion: { (users, error) -> () in
-                for user in users { self.invitedUsers.addObject(user.objectId) }
+                self.setObject(users, forKey: "invitedUsers")
                 self.saveInBackgroundWithBlock { (success, error) -> Void in
                     completion(success: success, error: error)
                 }
             })
         } else {
+            self.invitedUsers = []
             saveInBackgroundWithBlock { (success, error) -> Void in
                 completion(success: success, error: error)
             }
         }
-        
     }
     
     func addPhotoWithCompletion(image: UIImage, completion: (success: Bool!, error: NSError!) -> ()) {
         var photo = Photo()
         photo.user = PFUser.currentUser()
         photo.file = PFFile(name:"image.png", data: UIImagePNGRepresentation(image))
-        photo.saveInBackgroundWithBlock { (success, error) -> Void in
-            if success == true {
-                self.photos.addObject(photo)
-                self.saveInBackgroundWithBlock({ (success, error) -> Void in
-                    completion(success: success, error: error)
-                })
-            } else {
-                completion(success: success, error: error)
-            }
+        
+        var newPhotos: NSMutableArray = [photo]
+        if self.photos != nil {
+            newPhotos.addObjectsFromArray(self.photos!)
         }
+
+        self.setObject(newPhotos, forKey: "photos")
+        self.saveInBackgroundWithBlock({ (success, error) -> Void in
+            completion(success: success, error: error)
+        })
     }
     
     func addCommentWithCompletion(text: String, completion: (success: Bool!, error: NSError!) -> ()) {
         var comment = Comment()
         comment.user = PFUser.currentUser()
         comment.text = text
-        comment.saveInBackgroundWithBlock { (success, error) -> Void in
-            if success == true {
-                self.comments.addObject(comment)
-                self.saveInBackgroundWithBlock({ (success, error) -> Void in
-                    completion(success: success, error: error)
-                })
-            } else {
-                completion(success: success, error: error)
-            }
+
+        var newComments: NSMutableArray = [comment]
+        if self.comments != nil {
+            newComments.addObjectsFromArray(self.comments!)
         }
-    }
-    
-    func photosWithCompletion(completion: (photos: [Photo], error: NSError!) -> ()) {
-        let query = photos.query()
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(photos: objects as [Photo], error: error)
-        }
-    }
-    
-    func commentsWithCompletion(completion: (comments: [Comment], error: NSError!) -> ()) {
-        let query = comments.query()
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(comments: objects as [Comment], error: error)
-        }
-    }
-    
-    func confirmWithCompletion(eventcompletion: (success: Bool!, error: NSError!) -> ()) {
         
+        self.setObject(newComments, forKey: "comments")
+        self.saveInBackgroundWithBlock({ (success, error) -> Void in
+            completion(success: success, error: error)
+        })
     }
 }
