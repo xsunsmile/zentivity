@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventsTableViewCell" customModule="zentivity" customModuleProvider="target"/>
@@ -12,25 +13,40 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BBo-ml-uhn" id="zun-IF-icw">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-0A-fRG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-0A-fRG">
+                        <rect key="frame" x="0.0" y="2" width="320" height="98"/>
                     </imageView>
-                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-FZ-OvX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    <view alpha="0.75000000000000011" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-FZ-OvX">
+                        <rect key="frame" x="0.0" y="60" width="320" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Event name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-48-zof">
+                                <rect key="frame" x="8" y="10" width="93" height="20.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Event date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYe-Ac-shm">
+                                <rect key="frame" x="234" y="11" width="78" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="0.21399542299999999" green="0.21399542299999999" blue="0.21399542299999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Raq-48-zof" firstAttribute="leading" secondItem="PqU-FZ-OvX" secondAttribute="leading" constant="8" id="6fF-9i-ri2"/>
+                            <constraint firstAttribute="width" secondItem="PqU-FZ-OvX" secondAttribute="height" multiplier="16:2" id="Q7d-NN-JX2"/>
+                            <constraint firstAttribute="trailing" secondItem="tYe-Ac-shm" secondAttribute="trailing" constant="8" id="Zct-2V-bAA"/>
+                            <constraint firstAttribute="centerY" secondItem="Raq-48-zof" secondAttribute="centerY" id="aj9-a4-Xgz"/>
+                            <constraint firstAttribute="bottom" secondItem="Raq-48-zof" secondAttribute="bottom" constant="8" id="fVH-Sw-qCU"/>
+                            <constraint firstItem="Raq-48-zof" firstAttribute="centerY" secondItem="tYe-Ac-shm" secondAttribute="centerY" id="lKn-e7-h6a"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fVH-Sw-qCU"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-48-zof">
-                        <rect key="frame" x="28" y="39" width="264" height="21"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYe-Ac-shm">
-                        <rect key="frame" x="28" y="62" width="264" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="PqU-FZ-OvX" firstAttribute="top" secondItem="zun-IF-icw" secondAttribute="top" id="4gf-Vk-cL2"/>
@@ -40,11 +56,16 @@
                     <constraint firstAttribute="bottom" secondItem="nfh-0A-fRG" secondAttribute="bottom" id="R1K-XY-idu"/>
                     <constraint firstItem="nfh-0A-fRG" firstAttribute="leading" secondItem="zun-IF-icw" secondAttribute="leading" id="Xrm-Le-5S7"/>
                     <constraint firstItem="PqU-FZ-OvX" firstAttribute="leading" secondItem="zun-IF-icw" secondAttribute="leading" id="dcd-OB-1XH"/>
-                    <constraint firstItem="nfh-0A-fRG" firstAttribute="top" secondItem="zun-IF-icw" secondAttribute="top" id="vYN-Pk-5GX"/>
+                    <constraint firstItem="nfh-0A-fRG" firstAttribute="top" secondItem="zun-IF-icw" secondAttribute="top" constant="2" id="vYN-Pk-5GX"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="4gf-Vk-cL2"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="backgroundImageView" destination="PqU-FZ-OvX" id="aY3-SF-aVi"/>
+                <outlet property="eventBackgroundImageView" destination="nfh-0A-fRG" id="eFh-HF-67S"/>
                 <outlet property="eventDateLabel" destination="tYe-Ac-shm" id="N79-wN-N4d"/>
                 <outlet property="eventNameLabel" destination="Raq-48-zof" id="u1v-Fs-aGe"/>
             </connections>

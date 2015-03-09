@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.registerSubclass()
         
         if GoogleClient.sharedInstance.alreadyLogin() {
-            let vc = storyboard.instantiateViewControllerWithIdentifier("eventsList") as UIViewController
+            let vc = storyboard.instantiateViewControllerWithIdentifier("eventsViewNav") as UIViewController
             window?.rootViewController = vc
         }
         

@@ -22,8 +22,6 @@
 		54DA30001AAC067A005702EC /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA2FFF1AAC067A005702EC /* EventDetailView.swift */; };
 		54DA30021AAC398F005702EC /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA30011AAC398F005702EC /* UserProfileView.swift */; };
 		54DA30041AAC399D005702EC /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DA30031AAC399D005702EC /* UserProfileView.xib */; };
-		54DA30061AAC42A1005702EC /* NewEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54DA30051AAC42A1005702EC /* NewEventView.xib */; };
-		54DA30081AAC42AD005702EC /* NewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA30071AAC42AD005702EC /* NewEventView.swift */; };
 		5BB82504BA6A1DEBA5D0C541 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB1175D1CF9C92D24F4E80E /* libPods.a */; };
 		681A54421AAD027700C635D5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681A54411AAD027700C635D5 /* Photo.swift */; };
 		681A54441AAD0E1200C635D5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681A54431AAD0E1200C635D5 /* Comment.swift */; };
@@ -31,6 +29,7 @@
 		687D787F1AACE92500E5605C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687D787E1AACE92500E5605C /* User.swift */; };
 		687D78801AACE96100E5605C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5425DEE11AA8C9E0001F5CD5 /* LaunchScreen.xib */; };
 		6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6894AA7C1AAA87F400401171 /* ParseClient.swift */; };
+		9311BB6A1AAD5C2400B9CB75 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */; };
 		935B4BFD1AAD134D00D3425F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4BFC1AAD134D00D3425F /* UIColorExtension.swift */; };
 		935B4BFF1AAD1B3200D3425F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */; };
 		935B4C011AAD1EE600D3425F /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4C001AAD1EE600D3425F /* BaseTableView.swift */; };
@@ -88,8 +87,6 @@
 		54DA2FFF1AAC067A005702EC /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		54DA30011AAC398F005702EC /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		54DA30031AAC399D005702EC /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
-		54DA30051AAC42A1005702EC /* NewEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewEventView.xib; sourceTree = "<group>"; };
-		54DA30071AAC42AD005702EC /* NewEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
 		681A54411AAD027700C635D5 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		681A54431AAD0E1200C635D5 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		687D787C1AACE92000E5605C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -97,6 +94,7 @@
 		6894AA7C1AAA87F400401171 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		6CB1175D1CF9C92D24F4E80E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9CA5CE0D0774940F2AB24C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		935B4BFC1AAD134D00D3425F /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		935B4C001AAD1EE600D3425F /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
@@ -250,8 +248,6 @@
 				54DA2FFF1AAC067A005702EC /* EventDetailView.swift */,
 				54DA30031AAC399D005702EC /* UserProfileView.xib */,
 				54DA30011AAC398F005702EC /* UserProfileView.swift */,
-				54DA30051AAC42A1005702EC /* NewEventView.xib */,
-				54DA30071AAC42AD005702EC /* NewEventView.swift */,
 				93EEA9311AABCD3000E04811 /* LoginView.swift */,
 				93EEA9331AABCD5800E04811 /* LoginView.xib */,
 				935B4C001AAD1EE600D3425F /* BaseTableView.swift */,
@@ -266,6 +262,7 @@
 				5425DEDA1AA8C9E0001F5CD5 /* ViewController.swift */,
 				93EEA9351AABE58200E04811 /* AppViewController.swift */,
 				935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */,
+				9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -401,7 +398,6 @@
 				549113A81AA96CAF00000861 /* EventsTableViewCell.xib in Resources */,
 				54DA30041AAC399D005702EC /* UserProfileView.xib in Resources */,
 				549113BA1AA992AE00000861 /* MenuView.xib in Resources */,
-				54DA30061AAC42A1005702EC /* NewEventView.xib in Resources */,
 				5425DEDE1AA8C9E0001F5CD5 /* Main.storyboard in Resources */,
 				54DA2FFE1AABFA00005702EC /* EventDetailView.xib in Resources */,
 				687D78801AACE96100E5605C /* LaunchScreen.xib in Resources */,
@@ -463,6 +459,7 @@
 				93EEA9361AABE58200E04811 /* AppViewController.swift in Sources */,
 				6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */,
 				93D311261AABA607009259E8 /* GoogleClient.swift in Sources */,
+				9311BB6A1AAD5C2400B9CB75 /* AddEventViewController.swift in Sources */,
 				935B4C031AAD206500D3425F /* BaseTableViewCell.swift in Sources */,
 				5425DEDB1AA8C9E0001F5CD5 /* ViewController.swift in Sources */,
 				681A54441AAD0E1200C635D5 /* Comment.swift in Sources */,
@@ -476,7 +473,6 @@
 				93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */,
 				935B4BFD1AAD134D00D3425F /* UIColorExtension.swift in Sources */,
 				5425DED91AA8C9E0001F5CD5 /* AppDelegate.swift in Sources */,
-				54DA30081AAC42AD005702EC /* NewEventView.swift in Sources */,
 				687D787D1AACE92000E5605C /* Event.swift in Sources */,
 				54DA30001AAC067A005702EC /* EventDetailView.swift in Sources */,
 			);

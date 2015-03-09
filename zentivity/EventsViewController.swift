@@ -37,8 +37,9 @@ class EventsViewController: UIViewController {
     
     func refresh() {
         baseTable.datasource = [
-            ["title": "test1"],
-            ["title": "test2"]
+            ["title": "Clean tenderlion", "image": "activity1", "date": "2015-10-23"],
+            ["title": "Cass' Kitchen Volunteer", "image": "activity2", "date": "2015-02-09"],
+            ["title": "2014 Xmas Gifts Exchange", "image": "activity3", "date": "2014-12-23"]
         ]
         tableView.reloadData()
     }

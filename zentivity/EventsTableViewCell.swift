@@ -9,12 +9,10 @@
 import UIKit
 
 class EventsTableViewCell: BaseTableViewCell {
-    @IBOutlet weak var backgroundImageView: UIView!
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var eventBackgroundImageView: UIImageView!
     
-    var eventView: UIView!
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -30,5 +28,7 @@ class EventsTableViewCell: BaseTableViewCell {
     
     override func refresh() {
         eventNameLabel.text = data!["title"] as NSString
+        eventBackgroundImageView.image = UIImage(named: data!["image"] as NSString)
+        eventDateLabel.text = data!["date"] as NSString
     }
 }
