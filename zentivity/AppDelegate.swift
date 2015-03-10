@@ -23,10 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Comment.registerSubclass()
         User.registerSubclass()
         
-        if GoogleClient.sharedInstance.alreadyLogin() {
-            let vc = storyboard.instantiateViewControllerWithIdentifier("eventsViewNav") as UIViewController
-            window?.rootViewController = vc
+        User.logInWithUsernameInBackground("test@zendesk.com", password: "1") { (user, error) -> Void in
+            let vc = self.storyboard.instantiateViewControllerWithIdentifier("eventsViewNav") as UIViewController
+            self.window?.rootViewController = vc
         }
+        
+        //        if GoogleClient.sharedInstance.alreadyLogin() {
+        //            GoogleClient.sharedInstance.getCurrentUserProfileWithCompletion({ (user, success) -> Void in
+        //                println(user)
+        //            })
+        //        }
         
         return true
     }

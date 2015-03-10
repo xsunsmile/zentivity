@@ -48,8 +48,33 @@ class GoogleClient: NSObject,
             signIn.authenticate()
         } else {
             initGooglePlusService()
-            getCurrentUserProfile()
-            completion(completed: true)
+            getCurrentUserProfileWithCompletion({ (user, success) -> Void in
+                if success == true {
+                    user!.signUpInBackgroundWithBlock { (success, error) -> Void in
+                        if success {
+                            println("Successfully signed up with Parse")
+                            NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil)
+                            completion(completed: true)
+                        } else {
+                            User.logInWithUsernameInBackground(user!.username, password: user!.password, block: { (user, error) -> Void in
+                                if error == nil {
+                                    println("Logged in with Parse")
+                                    completion(completed: true)
+                                } else {
+                                    println("Failed to log in with Parse")
+                                    NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil)
+                                    completion(completed: false)
+                                }
+                            })
+                        }
+                    }
+                } else {
+                    completion(completed: false)
+                }
+                
+                completion(completed: true)
+            })
+            
         }
     }
     
@@ -67,7 +92,9 @@ class GoogleClient: NSObject,
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if auth != nil {
             initGooglePlusService()
-            getCurrentUserProfile()
+            getCurrentUserProfileWithCompletion({ (user, success) -> Void in
+                // Don't care here...
+            })
         } else {
             NSNotificationCenter.defaultCenter().postNotificationName(userLoginFailedNotification, object: error)
         }
@@ -77,16 +104,21 @@ class GoogleClient: NSObject,
         }
     }
     
-    func getCurrentUserProfile() {
+    func getCurrentUserProfileWithCompletion(completion: (user: User?, success: Bool) -> Void) {
         let query = GTLQueryPlus.queryForPeopleGetWithUserId("me") as GTLQueryPlus
         plusService.executeQuery(query, completionHandler: { (ticket, person, error) -> Void in
             if error != nil {
                 NSLog("Can not get current user profile: %@", error)
+                completion(user: nil, success:false)
             } else {
                 let user = person as GTLPlusPerson
                 NSLog("user %@", user)
                 NSLog("user name: %@, about: %@", user.displayName, user.name)
-                NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil)
+                
+                let email = user.emails[0] as GTLPlusPersonEmailsItem
+                var userResult = User()
+                userResult.username = email.value
+                completion(user: userResult, success:true)
             }
         })
     }

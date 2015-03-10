@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Zentivity": {
+            "applicationId": "LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", 
+            "masterKey": "Gcr9oCgNyR7rneCcFwaazo8HLjn0yEODc6FoX9Bn"
+        }, 
+        "_default": {
+            "link": "Zentivity"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.5"
+    }
+}
