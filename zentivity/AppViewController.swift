@@ -15,7 +15,7 @@ class AppViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showEventsList", name: userDidLoginNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showEventsList", name: userDidLoginNotification, object: nil)
         initSubViews()
     }
     

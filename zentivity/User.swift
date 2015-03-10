@@ -6,7 +6,11 @@
 ////  Copyright (c) 2015 Zendesk. All rights reserved.
 ////
 
+var _googleUser: User?
+let currentUserKey = "kGoogleUserKey"
+
 class User : PFUser, PFSubclassing {
+    
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;
         dispatch_once(&onceToken) {
@@ -72,5 +76,81 @@ class User : PFUser, PFSubclassing {
                 completion(success: false, error: NSError())
             }
         })
+    }
+    
+    // Auth stuff
+    
+    class var googleUser: User? {
+        get {
+            if _googleUser == nil {
+                var data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
+            if data != nil {
+                var dictionary = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as NSDictionary
+                _googleUser = User()
+                _googleUser!.username = dictionary["username"] as String
+                _googleUser!.password = "1"
+            }
+        }
+        return _googleUser
+        }
+        set(user) {
+            user!.password = "1"
+            _googleUser = user
+            
+            if _googleUser != nil {
+                let userDict = [
+                    "username": user!.username,
+                    "password": user!.password
+                ]
+                
+                println(userDict)
+                var data = NSJSONSerialization.dataWithJSONObject(userDict, options: nil, error: nil)
+                NSUserDefaults.standardUserDefaults().setObject(data, forKey: currentUserKey)
+            } else {
+                NSUserDefaults.standardUserDefaults().setObject(nil, forKey: currentUserKey)
+            }
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
+    class func isLoggedIn() -> Bool {
+        return (googleUser != nil && currentUser() != nil)
+    }
+    
+    class func authWithCompletion(completion: (error: NSError?) -> ()) {
+        println(googleUser)
+        if let gUser = googleUser {
+            gUser.signUpInBackgroundWithBlock { (success, error) -> Void in
+                if success {
+                    println("Successfully signed up with Parse")
+                    completion(error: nil)
+                } else {
+                    println("User already exists on Parse")
+                    User.logInWithUsernameInBackground(self.googleUser!.username, password: "1", block: { (user, error) -> Void in
+                        if error == nil {
+                            println("Logged in with Parse")
+                            completion(error: nil)
+                        } else {
+                            println("Failed to log in with Parse")
+                            completion(error: error)
+                        }
+                    })
+                }
+            }
+        } else {
+            completion(error: NSError())
+        }
+    }
+    
+    class func logoutWithCompletion(completion: (completed: Bool) -> Void) {
+        GoogleClient.sharedInstance.logoutWithCompletion { (completed) -> Void in
+            if completed == true {
+                self.googleUser = nil
+                User.logOut()
+                completion(completed: true)
+            } else {
+                completion(completed: false)
+            }
+        }
     }
 }
