@@ -107,12 +107,16 @@
                                 <state key="normal" title="Create event">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onCreate:" destination="POz-bg-1x5" eventType="touchUpInside" id="lCJ-0B-eEo"/>
+                                </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j6r-us-sMm">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j6r-us-sMm">
                                 <rect key="frame" x="0.0" y="64" width="320" height="434"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-me-IvB">
                                         <rect key="frame" x="17" y="12" width="285" height="19"/>
+                                        <color key="backgroundColor" red="0.94199810606060608" green="0.94199810606060608" blue="0.94199810606060608" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="285" id="0vR-pS-Otd"/>
                                         </constraints>
@@ -122,6 +126,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FCu-yp-FH5">
                                         <rect key="frame" x="17" y="41" width="285" height="19"/>
+                                        <color key="backgroundColor" red="0.94199810606060608" green="0.94199810606060608" blue="0.94199810606060608" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="285" id="DAR-g3-Ben"/>
                                         </constraints>
@@ -129,26 +134,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start time mm/dd/yy hh:mm:ss" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IOa-WE-bgp">
-                                        <rect key="frame" x="17" y="70" width="285" height="19"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="285" id="QCs-S8-3PP"/>
-                                        </constraints>
-                                        <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="End time mm/dd/yy hh:mm:ss" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="e3R-xe-cwh">
-                                        <rect key="frame" x="17" y="99" width="285" height="19"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="285" id="DEO-SW-LIM"/>
-                                        </constraints>
-                                        <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Ez-Nx-9Er">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Ez-Nx-9Er">
                                         <rect key="frame" x="17" y="128" width="285" height="100"/>
+                                        <color key="backgroundColor" red="0.94199810606060608" green="0.94199810606060608" blue="0.94199810606060608" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Gcv-aF-49f"/>
                                             <constraint firstAttribute="width" constant="285" id="RdB-Up-lXE"/>
@@ -156,28 +144,64 @@
                                         <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="onDescriptionEditBegan:" destination="POz-bg-1x5" eventType="editingDidBegin" id="0m4-2m-zJ9"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrF-3P-ACK">
-                                        <rect key="frame" x="17" y="238" width="62" height="30"/>
-                                        <state key="normal" title="+ Photos">
+                                        <rect key="frame" x="17" y="238" width="55" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="1k7-g5-5CC"/>
+                                        </constraints>
+                                        <state key="normal" title="+ Photo">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-SN-phA">
+                                        <rect key="frame" x="17" y="68" width="285" height="19"/>
+                                        <color key="backgroundColor" red="0.94199810606060608" green="0.94199810606060608" blue="0.94199810606060608" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="u4S-Pv-pZq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="waO-mi-TIc" appends="YES" id="gt6-jC-5eg"/>
+                                        </connections>
+                                    </label>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkU-TF-0Wm">
+                                        <rect key="frame" x="17" y="95" width="285" height="19"/>
+                                        <color key="backgroundColor" red="0.94199810610000001" green="0.94199810610000001" blue="0.94199810610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="p5m-Q8-DcQ" appends="YES" id="ivk-Vn-Ypn"/>
+                                        </connections>
+                                    </label>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="6Ez-Nx-9Er" firstAttribute="top" secondItem="e3R-xe-cwh" secondAttribute="bottom" constant="10" id="0Py-3v-3vU"/>
                                     <constraint firstAttribute="centerX" secondItem="fTA-me-IvB" secondAttribute="centerX" id="1mG-MA-VEw"/>
                                     <constraint firstItem="zrF-3P-ACK" firstAttribute="top" secondItem="6Ez-Nx-9Er" secondAttribute="bottom" constant="10" id="35J-o2-WCl"/>
                                     <constraint firstAttribute="centerX" secondItem="FCu-yp-FH5" secondAttribute="centerX" id="6Ir-GB-rnK"/>
                                     <constraint firstItem="FCu-yp-FH5" firstAttribute="top" secondItem="fTA-me-IvB" secondAttribute="bottom" constant="10" id="880-Tg-dNa"/>
-                                    <constraint firstAttribute="centerX" secondItem="IOa-WE-bgp" secondAttribute="centerX" id="9f9-mT-cVY"/>
                                     <constraint firstItem="zrF-3P-ACK" firstAttribute="leading" secondItem="6Ez-Nx-9Er" secondAttribute="leading" id="DSl-Mo-ueI"/>
+                                    <constraint firstItem="6Ez-Nx-9Er" firstAttribute="top" secondItem="AkU-TF-0Wm" secondAttribute="bottom" constant="14" id="FqH-QP-7tl"/>
+                                    <constraint firstAttribute="bottom" secondItem="lyd-SN-phA" secondAttribute="bottom" constant="347" id="Glz-0p-l5U"/>
                                     <constraint firstAttribute="centerX" secondItem="6Ez-Nx-9Er" secondAttribute="centerX" id="I3W-g5-AbK"/>
-                                    <constraint firstItem="IOa-WE-bgp" firstAttribute="top" secondItem="FCu-yp-FH5" secondAttribute="bottom" constant="10" id="PNk-T0-3gW"/>
-                                    <constraint firstAttribute="centerX" secondItem="e3R-xe-cwh" secondAttribute="centerX" id="UXr-cT-I5Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="zrF-3P-ACK" secondAttribute="bottom" constant="166" id="KkS-4Y-xpO"/>
+                                    <constraint firstItem="AkU-TF-0Wm" firstAttribute="top" secondItem="lyd-SN-phA" secondAttribute="bottom" constant="8" symbolic="YES" id="M79-eC-uRL"/>
+                                    <constraint firstItem="lyd-SN-phA" firstAttribute="leading" secondItem="AkU-TF-0Wm" secondAttribute="leading" id="OLE-5A-XFg"/>
+                                    <constraint firstAttribute="centerX" secondItem="AkU-TF-0Wm" secondAttribute="centerX" id="RUL-VG-geK"/>
+                                    <constraint firstItem="lyd-SN-phA" firstAttribute="top" secondItem="FCu-yp-FH5" secondAttribute="bottom" constant="8" symbolic="YES" id="Uug-NW-tzQ"/>
                                     <constraint firstItem="fTA-me-IvB" firstAttribute="top" secondItem="j6r-us-sMm" secondAttribute="top" constant="12" id="cjc-rd-fpg"/>
-                                    <constraint firstItem="e3R-xe-cwh" firstAttribute="top" secondItem="IOa-WE-bgp" secondAttribute="bottom" constant="10" id="f2A-jg-CtG"/>
+                                    <constraint firstAttribute="trailing" secondItem="lyd-SN-phA" secondAttribute="trailing" constant="18" id="e78-y8-j9e"/>
+                                    <constraint firstItem="lyd-SN-phA" firstAttribute="leading" secondItem="FCu-yp-FH5" secondAttribute="leading" id="ePo-G5-q7S"/>
+                                    <constraint firstAttribute="centerX" secondItem="lyd-SN-phA" secondAttribute="centerX" id="vIY-MA-Lw7"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="QtG-ae-vxE" appends="YES" id="pE2-GQ-JZd"/>
@@ -203,13 +227,30 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPhotoButton" destination="zrF-3P-ACK" id="8WA-h9-bT6"/>
+                        <outlet property="createButton" destination="tr4-bT-TBV" id="EhC-SC-YWm"/>
+                        <outlet property="descriptionField" destination="6Ez-Nx-9Er" id="qhb-Ti-vx9"/>
+                        <outlet property="endTimeLabel" destination="AkU-TF-0Wm" id="6i7-pi-JYf"/>
+                        <outlet property="locationFrield" destination="FCu-yp-FH5" id="uKI-Yp-xoN"/>
                         <outlet property="scrollView" destination="j6r-us-sMm" id="gaq-a4-hVI"/>
+                        <outlet property="startTimeLabel" destination="lyd-SN-phA" id="fZb-MR-e16"/>
+                        <outlet property="titleField" destination="fTA-me-IvB" id="OPp-FH-z89"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWn-J9-t65" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="QtG-ae-vxE">
                     <connections>
                         <action selector="onTap:" destination="POz-bg-1x5" id="9Yk-g4-eY7"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="waO-mi-TIc">
+                    <connections>
+                        <action selector="onStartDateTapped:" destination="POz-bg-1x5" id="AFK-UT-a8h"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="p5m-Q8-DcQ">
+                    <connections>
+                        <action selector="onEndDateTapped:" destination="POz-bg-1x5" id="cP8-lh-AT0"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
