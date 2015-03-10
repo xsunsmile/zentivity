@@ -41,6 +41,25 @@
             </objects>
             <point key="canvasLocation" x="361" y="406"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="qUa-cS-Yeg">
+            <objects>
+                <viewController id="TSa-KR-ocb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VNR-Bl-7GV"/>
+                        <viewControllerLayoutGuide type="bottom" id="rs8-d0-R4l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y2b-Vc-s0S">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fff-Uf-KZz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tdq-NW-gVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1166" y="-283"/>
+        </scene>
         <!--Events-->
         <scene sceneID="OAG-vB-g4h">
             <objects>
@@ -79,6 +98,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="lzK-tb-k7n" id="oCr-eP-aYT"/>
+                        <segue destination="TSa-KR-ocb" kind="push" identifier="viewEventDetail" id="Jnz-Sc-pRM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrS-tk-xnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
