@@ -15,8 +15,8 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var invitedUsers: NSMutableArray
     @NSManaged var confirmedUsers: NSMutableArray
     @NSManaged var declinedUsers: NSMutableArray
-    @NSManaged var comments: [Comment]?
-    @NSManaged var photos: [Photo]?
+    @NSManaged var comments: NSMutableArray?
+    @NSManaged var photos: NSMutableArray?
     var invitedUsernames: [String]?
     
     override class func initialize() {
@@ -47,6 +47,7 @@ class Event : PFObject, PFSubclassing {
         self.admin = PFUser.currentUser()
         self.confirmedUsers = []
         self.declinedUsers = []
+        if photos == nil { self.photos = [] }
         
         if let invitedUsernames = invitedUsernames {
             ParseClient.usersWithCompletion(invitedUsernames, completion: { (users, error) -> () in
@@ -67,13 +68,10 @@ class Event : PFObject, PFSubclassing {
         var photo = Photo()
         photo.user = PFUser.currentUser()
         photo.file = PFFile(name:"image.png", data: UIImagePNGRepresentation(image))
+
+        if self.photos == nil { self.photos = NSMutableArray() }
+        self.photos!.addObject(photo)
         
-        var newPhotos: NSMutableArray = [photo]
-        if self.photos != nil {
-            newPhotos.addObjectsFromArray(self.photos!)
-        }
-        
-        self.setObject(newPhotos, forKey: "photos")
         self.saveInBackgroundWithBlock({ (success, error) -> Void in
             completion(success: success, error: error)
         })
@@ -84,12 +82,9 @@ class Event : PFObject, PFSubclassing {
         comment.user = PFUser.currentUser()
         comment.text = text
         
-        var newComments: NSMutableArray = [comment]
-        if self.comments != nil {
-            newComments.addObjectsFromArray(self.comments!)
-        }
+        if self.comments == nil { self.comments = NSMutableArray() }
+        self.comments!.addObject(comment)
         
-        self.setObject(newComments, forKey: "comments")
         self.saveInBackgroundWithBlock({ (success, error) -> Void in
             completion(success: success, error: error)
         })

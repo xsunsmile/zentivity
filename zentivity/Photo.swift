@@ -20,4 +20,19 @@ class Photo : PFObject, PFSubclassing {
     class func parseClassName() -> String! {
         return "Photo"
     }
+    
+    // Use for creating only!!
+    // Sets each photo's user to to current user
+    class func photosFromImages(images: [UIImage]) -> [Photo] {
+        var photos = NSMutableArray()
+
+        for image in images {
+            var photo = Photo()
+            photo.file = PFFile(name:"image.png", data: UIImagePNGRepresentation(image))
+            photo.user = User.currentUser()
+            photos.addObject(photo as Photo)
+        }
+        
+        return photos as AnyObject as [Photo]
+    }
 }
