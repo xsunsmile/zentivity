@@ -12,7 +12,7 @@ class BaseTableView: NSObject,
                      UITableViewDataSource,
                      UITableViewDelegate
 {
-    var datasource: [NSDictionary]!
+    var datasource: [AnyObject]!
     var cellIdentifier: NSString!
     var cellHeight = CGFloat(100)
     

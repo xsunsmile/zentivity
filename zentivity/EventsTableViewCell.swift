@@ -12,6 +12,7 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventBackgroundImageView: UIImageView!
+    let dateFormatter = NSDateFormatter()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,14 +22,33 @@ class EventsTableViewCell: BaseTableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    override func onDataSet(data: NSDictionary) {
+    override func onDataSet(data: AnyObject!) {
         println("onDataSet is called on child")
         refresh()
     }
     
     override func refresh() {
-        eventNameLabel.text = data!["title"] as NSString
-        eventBackgroundImageView.image = UIImage(named: data!["image"] as NSString)
-        eventDateLabel.text = data!["date"] as NSString
+        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        let event = data as Event
+        
+        eventNameLabel.text = event.title
+        eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
+       
+        if event.photos?.count > 0 {
+            let photo = event.photos!.first!
+            photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
+                let p = photo as Photo
+                p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                    if imageData != nil {
+                        self.eventBackgroundImageView.image = UIImage(data:imageData)
+                    } else {
+                        println("Failed to download image data")
+                    }
+                })               
+            }
+        } else {
+            eventBackgroundImageView.image = UIImage(named: "activity1")
+        }
+        
     }
 }

@@ -19,8 +19,8 @@ class EventsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initSubviews()
         
+        initSubviews()
         refresh()
     }
     
@@ -36,12 +36,14 @@ class EventsViewController: UIViewController {
     }
     
     func refresh() {
-        baseTable.datasource = [
-            ["title": "Clean tenderlion", "image": "activity1", "date": "2015-10-23"],
-            ["title": "Cass' Kitchen Volunteer", "image": "activity2", "date": "2015-02-09"],
-            ["title": "2014 Xmas Gifts Exchange", "image": "activity3", "date": "2014-12-23"]
-        ]
-        tableView.reloadData()
+        Event.listWithCompletion { (events, error) -> () in
+            if events != nil {
+                self.baseTable.datasource = events!
+                self.tableView.reloadData()
+            } else {
+                println("failed to list events")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
