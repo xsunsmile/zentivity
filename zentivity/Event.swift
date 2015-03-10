@@ -30,6 +30,19 @@ class Event : PFObject, PFSubclassing {
         return "Event"
     }
     
+    class func listWithCompletion(completion: (events: [Event]?, error: NSError!) -> ()) {
+        var query = Event.query()
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                let events = objects as [Event]
+                completion(events: events, error: nil)
+            } else {
+                completion(events: nil, error: error)
+            }
+        }
+    }
+    
     func createWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
         self.admin = PFUser.currentUser()
         self.confirmedUsers = []

@@ -10,7 +10,7 @@ import UIKit
 
 class BaseTableViewCell: UITableViewCell {
     
-    var data: NSDictionary? {
+    var data: AnyObject? {
         didSet {
             onDataSet(data!)
         }
@@ -27,7 +27,7 @@ class BaseTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func onDataSet(data: NSDictionary) {
+    func onDataSet(data: AnyObject!) {
         println("You should implement this in subclass")
     }
     
