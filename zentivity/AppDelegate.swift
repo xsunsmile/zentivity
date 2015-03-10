@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "authWithParse", name: userDidLoginNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleGoogleLogin:", name: "userDidLoginNotification", object: nil)
         
         // Parse setup
         Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
@@ -24,26 +24,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Comment.registerSubclass()
         User.registerSubclass()
         
-        if (User.isLoggedIn()) {
-            showEventsVC()
-         }
+        // pseudocode
+        if GoogleClient.sharedInstance.alreadyLogin() {
+            // Get email address, could store this locally
+            let email = "erichuang310@gmail.com"
+            self.loginToParseWithEmail(email)
+        } else {
+            User.logOut()
+        }
         
         return true
     }
     
-    func authWithParse() {
-        println("Authing with parse")
-        if let user = User.googleUser {
-            User.authWithCompletion({ (error) -> () in
-                if (error == nil) {
-                    self.showEventsVC()
-                } else {
-                    println("Failed to auth with Parse")
-                }
-            })
-        } else {
-            println("Need to log in to Google")
+    func loginToParseWithEmail(email: String) {
+        PFCloud.callFunctionInBackground("getUserSessionToken", withParameters: ["username" : email]) { (sessionToken, error) -> Void in
+            if let sessionToken = sessionToken as? String {
+                println(sessionToken)
+                PFUser.becomeInBackground(sessionToken, block: { (user, error) -> Void in
+                    if error == nil {
+                        // Found user with sessionToken
+                        println("Logged in user with session token")
+                        self.showEventsVC()
+                    } else {
+                        // Could not find user with sessionToken
+                        // SUPER FAIL!
+                        println("SUPER FAIL!")
+                    }
+                    
+                })
+            } else {
+                // Could not find user email
+                var user = User()
+                user.username = email
+                user.password = "1"
+                
+                ParseClient.setUpUserWithCompletion(user, completion: { (user, error) -> () in
+                    if error == nil {
+                        // User signed up/logged in
+                        // Set up some views..
+                        self.showEventsVC()
+                    } else {
+                        // User failed to sign up and log in
+                        println("Failed to sign up and log in user")
+                        println(error)
+
+                    }
+                })
+            }
+            
         }
+    }
+    
+    func handleGoogleLogin(notification: NSNotification) {
+        let email = notification.userInfo?["email"] as String
+        loginToParseWithEmail(email)
     }
     
     func showEventsVC() {

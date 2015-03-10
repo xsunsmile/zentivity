@@ -88,11 +88,8 @@ class GoogleClient: NSObject,
                 NSLog("user name: %@, about: %@", user.displayName, user.name)
                 
                 let email = user.emails[0] as GTLPlusPersonEmailsItem
-                var googleUser = User()
-                googleUser.username = email.value
-                User.googleUser = googleUser
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil, userInfo: ["email": email.value])
             }
         })
     }
