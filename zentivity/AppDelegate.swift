@@ -24,12 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Comment.registerSubclass()
         User.registerSubclass()
         
-        // pseudocode
-        if GoogleClient.sharedInstance.alreadyLogin() {
-            // Get email address, could store this locally
+        var isLoggedInToGoogle = GoogleClient.sharedInstance.alreadyLogin()
+        if (isLoggedInToGoogle && User.currentUser() != nil) {
+            showEventsVC()
+        } else if isLoggedInToGoogle {
             let email = "erichuang310@gmail.com"
-            self.loginToParseWithEmail(email)
-        } else {
+            loginToParseWithEmail(email)
+        } else if (!isLoggedInToGoogle && User.currentUser() != nil) {
             User.logOut()
         }
         
@@ -71,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 })
             }
-            
         }
     }
     
