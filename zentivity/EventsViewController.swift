@@ -27,6 +27,7 @@ class EventsViewController: UIViewController {
     func initSubviews() {
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
+        baseTable.controller = self
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable

@@ -15,6 +15,7 @@ class BaseTableView: NSObject,
     var datasource: [AnyObject]!
     var cellIdentifier: NSString!
     var cellHeight = CGFloat(100)
+    weak var controller: UIViewController?
     
     init(datasource: [NSDictionary], cellIdentifier: NSString) {
         self.datasource = datasource
@@ -37,5 +38,9 @@ class BaseTableView: NSObject,
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return cellHeight
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        controller?.performSegueWithIdentifier("viewEventDetailSegue", sender: self)
     }
 }
