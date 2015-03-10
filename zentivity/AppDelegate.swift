@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "authWithParse", name: userDidLoginNotification, object: nil)
         
         // Parse setup
         Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
@@ -23,12 +24,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Comment.registerSubclass()
         User.registerSubclass()
         
-        if GoogleClient.sharedInstance.alreadyLogin() {
-            let vc = storyboard.instantiateViewControllerWithIdentifier("eventsViewNav") as UIViewController
-            window?.rootViewController = vc
-        }
+        if (User.isLoggedIn()) {
+            showEventsVC()
+         }
         
         return true
+    }
+    
+    func authWithParse() {
+        println("Authing with parse")
+        if let user = User.googleUser {
+            User.authWithCompletion({ (error) -> () in
+                if (error == nil) {
+                    self.showEventsVC()
+                } else {
+                    println("Failed to auth with Parse")
+                }
+            })
+        } else {
+            println("Need to log in to Google")
+        }
+    }
+    
+    func showEventsVC() {
+        let vc = storyboard.instantiateViewControllerWithIdentifier("eventsViewNav") as UIViewController
+        window?.rootViewController = vc
     }
 
     func applicationWillResignActive(application: UIApplication) {

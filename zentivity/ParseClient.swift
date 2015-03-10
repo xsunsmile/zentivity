@@ -26,4 +26,30 @@ class ParseClient: NSObject {
             }
         }
     }
+    
+    class func authWithCompletion(googleUser: GTLPlusPerson, completion: (user: User?, error: NSError?) -> ()) {
+        var user = User()
+        user.username = googleUser.displayName
+        user.email = googleUser.emails[0] as String
+        user.password = "1"
+        
+        user.signUpInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                println("Successfully signed up with Parse")
+                completion(user: user, error: nil)
+            } else {
+                println("Failed to sign up with Parse")
+                User.logInWithUsernameInBackground(googleUser.displayName, password: "1", block: { (user, error) -> Void in
+                    if error == nil {
+                        println("Logged in with Parse")
+                        completion(user: user as? User, error: nil)
+                    } else {
+                        println("Failed to log in with Parse")
+                        completion(user: nil, error: error)
+                    }
+                })
+            }
+        }
+        
+    }
 }
