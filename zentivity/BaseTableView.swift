@@ -17,7 +17,7 @@ class BaseTableView: NSObject,
     var cellHeight = CGFloat(100)
     weak var controller: UIViewController?
     
-    init(datasource: [NSDictionary], cellIdentifier: NSString) {
+    init(datasource: [AnyObject], cellIdentifier: NSString) {
         self.datasource = datasource
         self.cellIdentifier = cellIdentifier
     }

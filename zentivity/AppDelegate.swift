@@ -81,7 +81,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showEventsVC() {
-        let vc = storyboard.instantiateViewControllerWithIdentifier("eventsViewNav") as UIViewController
+        let scence = "eventsViewNav"
+        let vc = storyboard.instantiateViewControllerWithIdentifier(scence) as UIViewController
         window?.rootViewController = vc
     }
 

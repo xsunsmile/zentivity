@@ -23,7 +23,6 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     override func onDataSet(data: AnyObject!) {
-        println("onDataSet is called on child")
         refresh()
     }
     
@@ -35,7 +34,7 @@ class EventsTableViewCell: BaseTableViewCell {
         eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
        
         if event.photos?.count > 0 {
-            let photo = event.photos!.first!
+            let photo = event.photos![0] as Photo
             photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
                 let p = photo as Photo
                 p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
