@@ -51,14 +51,19 @@ class EventsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    /*
+
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        if segue.identifier == "viewEventDetailSegue" {
+            var vc = segue.destinationViewController as EventDetailViewController
+            var data = baseTable.datasource as [Event]
+            var index = tableView.indexPathForSelectedRow()?.row
+            
+            vc.event = data[index!]
+        }
     }
-    */
+
     
 }

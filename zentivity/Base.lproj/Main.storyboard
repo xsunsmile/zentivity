@@ -41,20 +41,145 @@
             </objects>
             <point key="canvasLocation" x="361" y="406"/>
         </scene>
-        <!--View Controller-->
+        <!--Event Detail View Controller-->
         <scene sceneID="qUa-cS-Yeg">
             <objects>
-                <viewController id="TSa-KR-ocb" sceneMemberID="viewController">
+                <viewController id="TSa-KR-ocb" customClass="EventDetailViewController" customModule="zentivity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VNR-Bl-7GV"/>
                         <viewControllerLayoutGuide type="bottom" id="rs8-d0-R4l"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Y2b-Vc-s0S">
+                    <view key="view" contentMode="scaleToFill" id="Si6-Ez-PMr" userLabel="Event Detail View">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="245" text="Event title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76D-to-mct">
+                                <rect key="frame" x="16" y="78" width="74" height="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="0.21399542299999999" green="0.21399542299999999" blue="0.21399542299999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1P-z3-bEa">
+                                <rect key="frame" x="16" y="104" width="104" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event phone number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKV-5q-Smd">
+                                <rect key="frame" x="16" y="131" width="152" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F25-Cr-mz7">
+                                <rect key="frame" x="284" y="131" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="EAs-Rg-O88"/>
+                                    <constraint firstAttribute="width" constant="20" id="fZK-7s-Dnd"/>
+                                </constraints>
+                                <state key="normal" title="PhoneButton" image="phone">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCall:" destination="Si6-Ez-PMr" eventType="touchUpInside" id="WBG-to-VwC"/>
+                                </connections>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="248" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cwn-wB-VV9">
+                                <rect key="frame" x="0.0" y="164" width="320" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="g8S-Jr-iyz"/>
+                                </constraints>
+                            </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nuF-XN-P25" userLabel="Attendee Table">
+                                <rect key="frame" x="0.0" y="368" width="320" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="attendeeCell" id="r5i-54-iHT" customClass="UserTableViewCell" customModule="zentivity" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r5i-54-iHT" id="szn-8O-zfp">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X4C-pv-uEe">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="5wN-Eg-o61"/>
+                                                        <constraint firstAttribute="width" constant="44" id="o4f-Ob-Mqd"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8O-5G-7Pg">
+                                                    <rect key="frame" x="62" y="13" width="240" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="X4C-pv-uEe" secondAttribute="bottom" id="3Ex-gf-McL"/>
+                                                <constraint firstAttribute="trailing" secondItem="L8O-5G-7Pg" secondAttribute="trailing" constant="18" id="Cul-Y3-2bC"/>
+                                                <constraint firstAttribute="centerY" secondItem="L8O-5G-7Pg" secondAttribute="centerY" id="OeO-0C-pMr"/>
+                                                <constraint firstItem="X4C-pv-uEe" firstAttribute="leading" secondItem="szn-8O-zfp" secondAttribute="leading" id="YJV-Zx-89v"/>
+                                                <constraint firstItem="L8O-5G-7Pg" firstAttribute="leading" secondItem="X4C-pv-uEe" secondAttribute="trailing" constant="18" id="iVz-O7-Ndm"/>
+                                                <constraint firstItem="X4C-pv-uEe" firstAttribute="top" secondItem="szn-8O-zfp" secondAttribute="top" id="pm5-Sc-lfa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="L8O-5G-7Pg" id="IjQ-gQ-MSW"/>
+                                            <outlet property="profileImage" destination="szn-8O-zfp" id="PnB-Gf-APP"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O4-jb-yDc">
+                                <rect key="frame" x="60" y="304" width="200" height="30"/>
+                                <color key="backgroundColor" red="0.76075205180000005" green="0.76075205180000005" blue="0.76075205180000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="I want to participate!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onJoin:" destination="TSa-KR-ocb" eventType="touchUpInside" id="onM-1j-tS4"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event attendees" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEZ-Nx-2Jr">
+                                <rect key="frame" x="16" y="344" width="118" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="76D-to-mct" firstAttribute="top" secondItem="VNR-Bl-7GV" secondAttribute="bottom" constant="14" id="6aA-9Y-XrT"/>
+                            <constraint firstItem="rs8-d0-R4l" firstAttribute="top" secondItem="nuF-XN-P25" secondAttribute="bottom" id="71c-GY-J2c"/>
+                            <constraint firstItem="z1P-z3-bEa" firstAttribute="leading" secondItem="Si6-Ez-PMr" secondAttribute="leading" constant="16" id="Fzu-jT-lkl"/>
+                            <constraint firstItem="qKV-5q-Smd" firstAttribute="leading" secondItem="Si6-Ez-PMr" secondAttribute="leading" constant="16" id="Hii-2P-hJj"/>
+                            <constraint firstItem="1O4-jb-yDc" firstAttribute="top" secondItem="Cwn-wB-VV9" secondAttribute="bottom" constant="10" id="MyB-jd-NGL"/>
+                            <constraint firstAttribute="trailing" secondItem="nuF-XN-P25" secondAttribute="trailing" id="QEd-b5-DZG"/>
+                            <constraint firstItem="F25-Cr-mz7" firstAttribute="top" secondItem="VNR-Bl-7GV" secondAttribute="bottom" constant="67" id="RJO-QT-wxm"/>
+                            <constraint firstAttribute="trailing" secondItem="1O4-jb-yDc" secondAttribute="trailing" constant="60" id="TGa-KQ-Aid"/>
+                            <constraint firstAttribute="trailing" secondItem="Cwn-wB-VV9" secondAttribute="trailing" id="Vma-YG-10h"/>
+                            <constraint firstItem="76D-to-mct" firstAttribute="leading" secondItem="Si6-Ez-PMr" secondAttribute="leading" constant="16" id="Xz1-yj-v1K"/>
+                            <constraint firstItem="aEZ-Nx-2Jr" firstAttribute="top" secondItem="1O4-jb-yDc" secondAttribute="bottom" constant="10" id="ZRH-oU-y7k"/>
+                            <constraint firstItem="1O4-jb-yDc" firstAttribute="leading" secondItem="Si6-Ez-PMr" secondAttribute="leading" constant="60" id="aRY-wH-jVT"/>
+                            <constraint firstItem="z1P-z3-bEa" firstAttribute="top" secondItem="76D-to-mct" secondAttribute="bottom" constant="7" id="ccA-p1-fmh"/>
+                            <constraint firstItem="nuF-XN-P25" firstAttribute="leading" secondItem="Si6-Ez-PMr" secondAttribute="leading" id="e3i-hf-zKC"/>
+                            <constraint firstItem="nuF-XN-P25" firstAttribute="top" secondItem="aEZ-Nx-2Jr" secondAttribute="bottom" constant="4.5" id="kpn-oJ-Rm4"/>
+                            <constraint firstItem="Cwn-wB-VV9" firstAttribute="leading" secondItem="Si6-Ez-PMr" secondAttribute="leading" id="lXb-mY-aFu"/>
+                            <constraint firstItem="qKV-5q-Smd" firstAttribute="top" secondItem="z1P-z3-bEa" secondAttribute="bottom" constant="7" id="sl8-if-VpY"/>
+                            <constraint firstAttribute="trailing" secondItem="F25-Cr-mz7" secondAttribute="trailing" constant="16" id="uPc-d9-aUL"/>
+                            <constraint firstItem="aEZ-Nx-2Jr" firstAttribute="leading" secondItem="Si6-Ez-PMr" secondAttribute="leading" constant="16" id="ynQ-7K-k5c"/>
+                            <constraint firstItem="Cwn-wB-VV9" firstAttribute="top" secondItem="F25-Cr-mz7" secondAttribute="bottom" constant="13" id="zqx-Qh-E2T"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Fff-Uf-KZz"/>
+                    <connections>
+                        <outlet property="addressLabel" destination="z1P-z3-bEa" id="sKG-vz-Tox"/>
+                        <outlet property="attendeesTable" destination="nuF-XN-P25" id="Jcc-Hn-ffi"/>
+                        <outlet property="joinButton" destination="1O4-jb-yDc" id="nsI-0I-NjV"/>
+                        <outlet property="mapView" destination="Cwn-wB-VV9" id="Lgj-qc-Ddd"/>
+                        <outlet property="phoneLabel" destination="qKV-5q-Smd" id="3Uh-tQ-JaJ"/>
+                        <outlet property="titleLabel" destination="76D-to-mct" id="Y2p-U5-smx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdq-NW-gVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -368,6 +493,7 @@
     </scenes>
     <resources>
         <image name="menu_icon" width="25" height="20"/>
+        <image name="phone" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

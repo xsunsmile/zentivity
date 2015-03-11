@@ -35,7 +35,7 @@ class EventsTableViewCell: BaseTableViewCell {
         eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
        
         if event.photos?.count > 0 {
-            let photo = event.photos!.first!
+            let photo = event.photos!.firstObject! as Photo
             photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
                 let p = photo as Photo
                 p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
