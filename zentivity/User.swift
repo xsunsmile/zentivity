@@ -35,7 +35,7 @@ class User : PFUser, PFSubclassing {
     
     func confirmEvent(event: Event, completion: (success: Bool!, error: NSError!) -> ()) {
         var eventsQuery = Event.query()
-        eventsQuery.whereKey("invitedUsers", equalTo: self)
+//        eventsQuery.whereKey("invitedUsers", equalTo: self)
         eventsQuery.whereKey("confirmedUsers", notEqualTo: self)
         eventsQuery.whereKey("objectId", equalTo: event.objectId)
         
@@ -58,7 +58,7 @@ class User : PFUser, PFSubclassing {
     
     func declineEvent(event: Event, completion: (success: Bool!, error: NSError!) -> ()) {
         var eventsQuery = Event.query()
-        eventsQuery.whereKey("invitedUsers", equalTo: self)
+//        eventsQuery.whereKey("invitedUsers", equalTo: self)
         eventsQuery.whereKey("declineUsers", notEqualTo: self)
         eventsQuery.whereKey("objectId", equalTo: event.objectId)
         

@@ -28,12 +28,11 @@ class EventsTableViewCell: BaseTableViewCell {
     
     @IBAction func onJoin(sender: AnyObject) {
         let event = data as Event
-        println("Join event \(event)")
-        User.currentUser().confirmEvent(event, { (success, error) -> Void in
+        User.currentUser().confirmEvent(event, completion: { (success, error) -> Void in
             if error == nil {
                 println("user joined event")
             } else {
-//                println("user can not join event \(error)")
+                println("user can not join event \(error)")
             }
         })
     }
