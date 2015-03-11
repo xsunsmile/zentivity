@@ -68,8 +68,18 @@ class EventDetailViewController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = attendeesTable.dequeueReusableCellWithIdentifier("attendeeCell") as UserTableViewCell
-        
-        cell.nameLabel.text = event.confirmedUsers[indexPath.row].name
+        let confirmedUser = event.confirmedUsers[indexPath.row] as User
+        confirmedUser.fetchIfNeededInBackgroundWithBlock { (user, error) -> Void in
+            if error == nil {
+                let u = user as User
+                println("got user: \(u)")
+                if u.name.length > 0 {
+                    cell.nameLabel.text = u.name
+                } else {
+                    cell.nameLabel.text = u.username
+                }
+            }
+        }
         
         return cell
     }

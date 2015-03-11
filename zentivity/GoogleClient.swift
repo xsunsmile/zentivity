@@ -87,9 +87,25 @@ class GoogleClient: NSObject,
                 NSLog("user %@", user)
                 NSLog("user name: %@, about: %@", user.displayName, user.name)
                 
+                let userInfo = NSMutableDictionary()
                 let email = user.emails[0] as GTLPlusPersonEmailsItem
-                
-                NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil, userInfo: ["email": email.value])
+                userInfo["email"] = email.value
+                if user.displayName != nil {
+                    userInfo["name"] = user.displayName
+                } else {
+                    userInfo["name"] = NSString(string: "")
+                }
+                if user.image != nil {
+                    userInfo["image"] = user.image.url
+                } else {
+                    userInfo["image"] = NSString(string: "")
+                }
+                if user.aboutMe != nil {
+                   userInfo["aboutMe"] = user.aboutMe
+                } else {
+                   userInfo["aboutMe"] = NSString(string: "")
+                }
+                NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil, userInfo: userInfo)
             }
         })
     }

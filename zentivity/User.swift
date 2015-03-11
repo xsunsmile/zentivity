@@ -6,10 +6,11 @@
 ////  Copyright (c) 2015 Zendesk. All rights reserved.
 ////
 
-var _googleUser: User?
-let currentUserKey = "kGoogleUserKey"
-
 class User : PFUser, PFSubclassing {
+    
+    @NSManaged var name: NSString
+    @NSManaged var aboutMe: NSString
+    @NSManaged var profileImage: NSString
     
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;

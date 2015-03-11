@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol BaseTableViewDelegate: class {
+    func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath)
+}
+
 class BaseTableView: NSObject,
                      UITableViewDataSource,
                      UITableViewDelegate
@@ -15,9 +19,9 @@ class BaseTableView: NSObject,
     var datasource: [AnyObject]!
     var cellIdentifier: NSString!
     var cellHeight = CGFloat(100)
-    weak var controller: UIViewController?
+    weak var delegate: BaseTableViewDelegate?
     
-    init(datasource: [NSDictionary], cellIdentifier: NSString) {
+    init(datasource: [AnyObject], cellIdentifier: NSString) {
         self.datasource = datasource
         self.cellIdentifier = cellIdentifier
     }
@@ -41,6 +45,6 @@ class BaseTableView: NSObject,
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        controller?.performSegueWithIdentifier("viewEventDetailSegue", sender: self)
+        delegate?.cellDidSelected(tableView, indexPath: indexPath)
     }
 }

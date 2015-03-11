@@ -39,7 +39,7 @@
                     <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="caG-eM-ds2">
+                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="caG-eM-ds2">
                     <rect key="frame" x="292" y="115" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="8Sd-W5-wB2"/>
@@ -52,7 +52,7 @@
                         <action selector="onCall:" destination="ysu-xM-R0a" eventType="touchUpInside" id="aO2-DA-0kz"/>
                     </connections>
                 </button>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sxJ-3S-Xz6">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sxJ-3S-Xz6">
                     <rect key="frame" x="8" y="163" width="304" height="130"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="130" id="0AD-Im-ssF"/>

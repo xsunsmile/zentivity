@@ -13,7 +13,7 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventBackgroundImageView: UIImageView!
     let dateFormatter = NSDateFormatter()
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -21,21 +21,32 @@ class EventsTableViewCell: BaseTableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     override func onDataSet(data: AnyObject!) {
-        println("onDataSet is called on child")
         refresh()
     }
-    
+
+    @IBAction func onJoin(sender: AnyObject) {
+        let event = data as Event
+        println("Join event \(event)")
+        User.currentUser().confirmEvent(event, { (success, error) -> Void in
+            if error == nil {
+                println("user joined event")
+            } else {
+//                println("user can not join event \(error)")
+            }
+        })
+    }
+
     override func refresh() {
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         let event = data as Event
-        
+
         eventNameLabel.text = event.title
         eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
-       
+
         if event.photos?.count > 0 {
-            let photo = event.photos!.firstObject! as Photo
+            let photo = event.photos![0] as Photo
             photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
                 let p = photo as Photo
                 p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
@@ -44,11 +55,11 @@ class EventsTableViewCell: BaseTableViewCell {
                     } else {
                         println("Failed to download image data")
                     }
-                })               
+                })
             }
         } else {
             eventBackgroundImageView.image = UIImage(named: "activity1")
         }
-        
+
     }
 }
