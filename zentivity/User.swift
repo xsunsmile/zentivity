@@ -34,49 +34,39 @@ class User : PFUser, PFSubclassing {
     }
     
     func confirmEvent(event: Event, completion: (success: Bool!, error: NSError!) -> ()) {
-        var eventsQuery = Event.query()
-//        eventsQuery.whereKey("invitedUsers", equalTo: self)
-        eventsQuery.whereKey("confirmedUsers", notEqualTo: self)
-        eventsQuery.whereKey("objectId", equalTo: event.objectId)
-        
-        eventsQuery.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil && objects.count == 1 {
+        var query = Event.query()
+        query.getObjectInBackgroundWithId(event.objectId) {
+            (gameScore: PFObject!, error: NSError!) -> Void in
+            if error == nil {
+                event.declinedUsers.removeObject(self)
+                event.confirmedUsers.removeObject(self)
                 event.confirmedUsers.addObject(self)
-                for declinedUser in event.declinedUsers {
-                    if declinedUser.objectId == self.objectId {
-                        event.declinedUsers.removeObject(declinedUser)
-                    }
-                }
                 event.saveInBackgroundWithBlock({ (success, error) -> Void in
                     completion(success: success, error: nil)
                 })
             } else {
+                println("Could not find the event")
                 completion(success: false, error: NSError())
             }
-        })
+        }
     }
     
     func declineEvent(event: Event, completion: (success: Bool!, error: NSError!) -> ()) {
-        var eventsQuery = Event.query()
-//        eventsQuery.whereKey("invitedUsers", equalTo: self)
-        eventsQuery.whereKey("declineUsers", notEqualTo: self)
-        eventsQuery.whereKey("objectId", equalTo: event.objectId)
-        
-        eventsQuery.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil && objects.count == 1 {
+        var query = Event.query()
+        query.getObjectInBackgroundWithId(event.objectId) {
+            (gameScore: PFObject!, error: NSError!) -> Void in
+            if error == nil {
+                event.declinedUsers.removeObject(self)
+                event.confirmedUsers.removeObject(self)
                 event.declinedUsers.addObject(self)
-                for confirmedUser in event.confirmedUsers {
-                    if confirmedUser.objectId == self.objectId {
-                        event.confirmedUsers.removeObject(confirmedUser)
-                    }
-                }
                 event.saveInBackgroundWithBlock({ (success, error) -> Void in
                     completion(success: success, error: nil)
                 })
             } else {
+                println("Could not find the event")
                 completion(success: false, error: NSError())
             }
-        })
+        }
     }
     
     // Auth stuff
