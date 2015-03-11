@@ -6,9 +6,6 @@
 ////  Copyright (c) 2015 Zendesk. All rights reserved.
 ////
 
-var _googleUser: User?
-let currentUserKey = "kGoogleUserKey"
-
 class User : PFUser, PFSubclassing {
     
     override class func initialize() {
@@ -27,6 +24,7 @@ class User : PFUser, PFSubclassing {
         query.includeKey("confirmedUsers")
         query.includeKey("declinedUsers")
         
+        println("HI")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             completion(events: objects as [Event], error: error)
         }

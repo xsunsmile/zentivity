@@ -29,13 +29,18 @@ class UserProfileViewController: UIViewController {
     func initSubviews() {
         let currentUser = User.currentUser()
         println(currentUser)
-        
-        currentUser.eventsWithCompletion("confirmedUsers") { (events, error) -> Void in
+        currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
             if error == nil {
-                let events = events as [Event]
-                self.initEventsTableView(events)
+                println("HI")
             }
-        }
+        })
+        
+//        currentUser.eventsWithCompletion("confirmedUsers") { (events, error) -> Void in
+//            if error == nil {
+//                let events = events as [Event]
+//                self.initEventsTableView(events)
+//            }
+//        }
     }
     
     func initEventsTableView(datasource: [AnyObject]) {
