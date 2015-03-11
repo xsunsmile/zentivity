@@ -8,7 +8,9 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController {
+class UserProfileViewController: UIViewController,
+                                 BaseTableViewDelegate
+{
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileName: UILabel!
@@ -36,7 +38,7 @@ class UserProfileViewController: UIViewController {
     func initSubviews() {
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
-        baseTable.controller = self
+        baseTable.delegate = self
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable
@@ -48,39 +50,34 @@ class UserProfileViewController: UIViewController {
     func refresh() {
         let currentUser = User.currentUser()
         println(currentUser)
-        //        currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
-        //            if error == nil && events.count > 0 {
-        //                let events = events as [Event]
-        //                self.initEventsTableView(events as [Event])
-        //                self.tableView.reloadData()
-        //            }
-        //        })
-        Event.listWithCompletion { (events, error) -> () in
-            if events != nil {
-                self.baseTable.datasource = events!
+        currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+            if error == nil && events.count > 0 {
+                self.baseTable.datasource = events
                 self.tableView.reloadData()
             } else {
-                println("failed to list events")
+                println("failed to list up events: \(error)")
             }
-        }
+        })
         
-        if currentUser.name.length > 0 {
-            profileName.text = currentUser.name
-        }
-        if currentUser.profileImage.length > 0 {
-            profileImageView.setImageWithURL(NSURL(string: currentUser.profileImage)!)
-        }
+        //        if currentUser.name.length > 0 {
+        //            profileName.text = currentUser.name
+        //        }
+        //        if currentUser.profileImage.length > 0 {
+        //            println("downloading profileimage: \(currentUser.profileImage)")
+        //            profileImageView.setImageWithURL(NSURL(string: currentUser.profileImage)!)
+        //        }
         profileContactInfo.text = currentUser.username
     }
     
-    /*
+    func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
+        performSegueWithIdentifier("viewEventDetailSegue", sender: self)
+    }
+    
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        if segue.identifier == "viewEventDetailSegue" {
+            let vc = segue.destinationViewController as UIViewController
+        }
     }
-    */
-    
 }

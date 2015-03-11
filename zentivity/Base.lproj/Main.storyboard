@@ -58,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdq-NW-gVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1166" y="-283"/>
+            <point key="canvasLocation" x="1652" y="247"/>
         </scene>
         <!--Events-->
         <scene sceneID="OAG-vB-g4h">
@@ -127,14 +127,14 @@
                                     <constraint firstAttribute="height" constant="75" id="f32-Zo-F4H"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organization" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IA6-lN-NN3">
-                                <rect key="frame" x="99" y="107" width="92" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Organization" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IA6-lN-NN3">
+                                <rect key="frame" x="99" y="107" width="92" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYx-Br-Jmo">
-                                <rect key="frame" x="99" y="134" width="89.5" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Contact info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYx-Br-Jmo">
+                                <rect key="frame" x="99" y="134" width="90" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iJ-fE-5iV">
-                                <rect key="frame" x="99" y="80" width="80.5" height="19.5"/>
+                                <rect key="frame" x="99" y="80" width="81" height="20"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" red="0.21399542299999999" green="0.21399542299999999" blue="0.21399542299999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -176,11 +176,12 @@
                         <outlet property="profileName" destination="0iJ-fE-5iV" id="IUI-rm-jwn"/>
                         <outlet property="profileOrganization" destination="IA6-lN-NN3" id="6E0-Gb-s6u"/>
                         <outlet property="tableView" destination="cQ1-Ch-BWf" id="zwa-Oj-gEQ"/>
+                        <segue destination="TSa-KR-ocb" kind="push" identifier="viewEventDetailSegue" id="lCA-e7-dBQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qGY-9v-JzC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754" y="1060"/>
+            <point key="canvasLocation" x="1652" y="-478"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="KCJ-tD-W9e">
@@ -369,7 +370,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1590" y="406"/>
+            <point key="canvasLocation" x="1652" y="962"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KTO-2W-89L">
@@ -398,4 +399,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="lCA-e7-dBQ"/>
+    </inferredMetricsTieBreakers>
 </document>

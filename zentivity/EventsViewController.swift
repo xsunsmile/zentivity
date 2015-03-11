@@ -8,12 +8,14 @@
 
 import UIKit
 
-class EventsViewController: UIViewController {
+class EventsViewController: UIViewController,
+                            BaseTableViewDelegate
+{
     
     @IBOutlet weak var tableView: UITableView!
     var baseTable: BaseTableView!
     
-    let datasource: [AnyObject] = []
+    var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let cellHeight = CGFloat(250)
 
@@ -27,7 +29,7 @@ class EventsViewController: UIViewController {
     func initSubviews() {
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
-        baseTable.controller = self
+        baseTable.delegate = self
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable
@@ -39,7 +41,8 @@ class EventsViewController: UIViewController {
     func refresh() {
         Event.listWithCompletion { (events, error) -> () in
             if events != nil {
-                self.baseTable.datasource = events!
+                self.datasource = events!
+                self.baseTable.datasource = self.datasource
                 self.tableView.reloadData()
             } else {
                 println("failed to list events")
@@ -51,14 +54,16 @@ class EventsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    /*
+    func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
+        println("cell is selected \(indexPath.row)")
+        performSegueWithIdentifier("viewEventDetailSegue", sender: self)
+    }
+    
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        if segue.identifier == "viewEventDetailSegue" {
+            let vc = segue.destinationViewController as UIViewController
+        }
     }
-    */
-    
 }

@@ -78,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // User failed to sign up and log in
                         println("Failed to sign up and log in user")
                         println(error)
-
                     }
                 })
             }

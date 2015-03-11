@@ -26,6 +26,18 @@ class EventsTableViewCell: BaseTableViewCell {
         refresh()
     }
     
+    @IBAction func onJoin(sender: AnyObject) {
+        let event = data as Event
+        println("Join event \(event)")
+        User.currentUser().confirmEvent(event, { (success, error) -> Void in
+            if error == nil {
+                println("user joined event")
+            } else {
+//                println("user can not join event \(error)")
+            }
+        })
+    }
+    
     override func refresh() {
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         let event = data as Event
