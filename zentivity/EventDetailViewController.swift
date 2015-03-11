@@ -51,6 +51,7 @@ class EventDetailViewController: UIViewController, UITableViewDataSource {
                     delegate: self,
                     cancelButtonTitle: "OK"
                     ).show()
+                self.attendeesTable.reloadData()
             } else {
                 UIAlertView(
                     title: "Error",
