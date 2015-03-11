@@ -10,7 +10,7 @@ class User : PFUser, PFSubclassing {
     
     @NSManaged var name: NSString
     @NSManaged var aboutMe: NSString
-    @NSManaged var profileImage: NSString
+    @NSManaged var imageUrl: NSString
     
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;

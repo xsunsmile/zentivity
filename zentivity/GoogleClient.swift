@@ -96,9 +96,9 @@ class GoogleClient: NSObject,
                     userInfo["name"] = NSString(string: "")
                 }
                 if user.image != nil {
-                    userInfo["image"] = user.image.url
+                    userInfo["imageUrl"] = user.image.url
                 } else {
-                    userInfo["image"] = NSString(string: "")
+                    userInfo["imageUrl"] = NSString(string: "")
                 }
                 if user.aboutMe != nil {
                    userInfo["aboutMe"] = user.aboutMe

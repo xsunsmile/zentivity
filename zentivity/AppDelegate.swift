@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loginToParseWithUserInfo(userInfo: NSDictionary) {
         let email = userInfo["email"] as NSString
         let name = userInfo["name"] as NSString
-        let image = userInfo["image"] as NSString
+        let image = userInfo["imageUrl"] as NSString
         let aboutMe = userInfo["aboutMe"] as NSString
         
         PFCloud.callFunctionInBackground("getUserSessionToken", withParameters: ["username" : email]) { (sessionToken, error) -> Void in
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 user.username = email
                 user.password = "1"
                 user.name = name
-                user.profileImage = image
+                user.imageUrl = image
                 user.aboutMe = aboutMe
                 
                 println(user)

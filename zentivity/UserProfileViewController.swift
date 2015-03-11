@@ -59,13 +59,16 @@ class UserProfileViewController: UIViewController,
             }
         })
         
-        //        if currentUser.name.length > 0 {
-        //            profileName.text = currentUser.name
-        //        }
-        //        if currentUser.profileImage.length > 0 {
-        //            println("downloading profileimage: \(currentUser.profileImage)")
-        //            profileImageView.setImageWithURL(NSURL(string: currentUser.profileImage)!)
-        //        }
+        if currentUser.name.length > 0 {
+            profileName.text = currentUser.name
+        }
+        if currentUser.imageUrl.length > 0 {
+            println("downloading profileimage: \(currentUser.imageUrl)")
+            profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
+        }
+        if currentUser.aboutMe.length > 0 {
+            profileOrganization.text = currentUser.aboutMe
+        }
         profileContactInfo.text = currentUser.username
     }
     
