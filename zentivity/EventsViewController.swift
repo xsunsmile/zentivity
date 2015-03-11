@@ -13,7 +13,7 @@ class EventsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var baseTable: BaseTableView!
     
-    let datasource: [NSDictionary] = []
+    let datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let cellHeight = CGFloat(250)
 

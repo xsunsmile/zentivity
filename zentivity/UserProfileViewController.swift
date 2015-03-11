@@ -16,10 +16,17 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var profileContactInfo: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    var baseTable: BaseTableView!
+    
+    let datasource: [AnyObject] = []
+    let cellId = "EventTableViewCell"
+    let cellHeight = CGFloat(100)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initSubviews()
+        refresh()
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,26 +34,8 @@ class UserProfileViewController: UIViewController {
     }
 
     func initSubviews() {
-        let currentUser = User.currentUser()
-        println(currentUser)
-        currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
-            if error == nil {
-                println("HI")
-            }
-        })
-        
-//        currentUser.eventsWithCompletion("confirmedUsers") { (events, error) -> Void in
-//            if error == nil {
-//                let events = events as [Event]
-//                self.initEventsTableView(events)
-//            }
-//        }
-    }
-    
-    func initEventsTableView(datasource: [AnyObject]) {
-        let cellId = "eventTableCell"
-        let baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
-        baseTable.cellHeight = CGFloat(100)
+        baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
+        baseTable.cellHeight = cellHeight
         baseTable.controller = self
         
         tableView.dataSource = baseTable
@@ -54,6 +43,25 @@ class UserProfileViewController: UIViewController {
         
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
         tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    func refresh() {
+        let currentUser = User.currentUser()
+        //        currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
+        //            if error == nil && events.count > 0 {
+        //                let events = events as [Event]
+        //                self.initEventsTableView(events as [Event])
+        //                self.tableView.reloadData()
+        //            }
+        //        })
+        Event.listWithCompletion { (events, error) -> () in
+            if events != nil {
+                self.baseTable.datasource = events!
+                self.tableView.reloadData()
+            } else {
+                println("failed to list events")
+            }
+        }
     }
     
     /*

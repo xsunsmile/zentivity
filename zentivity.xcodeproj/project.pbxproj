@@ -31,7 +31,7 @@
 		6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6894AA7C1AAA87F400401171 /* ParseClient.swift */; };
 		9311BB6A1AAD5C2400B9CB75 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */; };
 		934CB3941AB0013900722545 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934CB3931AB0013900722545 /* UserProfileViewController.swift */; };
-		934CB3961AB0066800722545 /* EventTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934CB3951AB0066800722545 /* EventTableCell.xib */; };
+		934CB3961AB0066800722545 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934CB3951AB0066800722545 /* EventTableViewCell.xib */; };
 		934CB3981AB007D300722545 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934CB3971AB007D300722545 /* EventTableViewCell.swift */; };
 		935B4BFD1AAD134D00D3425F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4BFC1AAD134D00D3425F /* UIColorExtension.swift */; };
 		935B4BFF1AAD1B3200D3425F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */; };
@@ -99,7 +99,7 @@
 		6F9CA5CE0D0774940F2AB24C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		934CB3931AB0013900722545 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
-		934CB3951AB0066800722545 /* EventTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableCell.xib; sourceTree = "<group>"; };
+		934CB3951AB0066800722545 /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		934CB3971AB007D300722545 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		935B4BFC1AAD134D00D3425F /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 				93EEA9331AABCD5800E04811 /* LoginView.xib */,
 				935B4C001AAD1EE600D3425F /* BaseTableView.swift */,
 				935B4C021AAD206500D3425F /* BaseTableViewCell.swift */,
-				934CB3951AB0066800722545 /* EventTableCell.xib */,
+				934CB3951AB0066800722545 /* EventTableViewCell.xib */,
 				934CB3971AB007D300722545 /* EventTableViewCell.swift */,
 			);
 			name = Views;
@@ -408,7 +408,7 @@
 				54DA30041AAC399D005702EC /* UserProfileView.xib in Resources */,
 				549113BA1AA992AE00000861 /* MenuView.xib in Resources */,
 				5425DEDE1AA8C9E0001F5CD5 /* Main.storyboard in Resources */,
-				934CB3961AB0066800722545 /* EventTableCell.xib in Resources */,
+				934CB3961AB0066800722545 /* EventTableViewCell.xib in Resources */,
 				54DA2FFE1AABFA00005702EC /* EventDetailView.xib in Resources */,
 				687D78801AACE96100E5605C /* LaunchScreen.xib in Resources */,
 				549113AE1AA98DD000000861 /* MenuTableViewCell.xib in Resources */,
