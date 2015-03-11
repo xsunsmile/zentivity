@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             showEventsVC()
         } else if isLoggedInToGoogle {
             let email = "erichuang310@gmail.com"
-            loginToParseWithEmail(email)
+//            loginToParseWithEmail(email)
         } else if (!isLoggedInToGoogle && User.currentUser() != nil) {
             User.logOut()
         }
@@ -37,7 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func loginToParseWithEmail(email: String) {
+    func loginToParseWithUserInfo(userInfo: NSDictionary) {
+        let email = userInfo["email"] as NSString
+        let name = userInfo["name"] as NSString
+        let image = userInfo["image"] as NSString
+        let aboutMe = userInfo["aboutMe"] as NSString
+        
         PFCloud.callFunctionInBackground("getUserSessionToken", withParameters: ["username" : email]) { (sessionToken, error) -> Void in
             if let sessionToken = sessionToken as? String {
                 println(sessionToken)
@@ -58,6 +63,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 var user = User()
                 user.username = email
                 user.password = "1"
+                user.name = name
+                user.profileImage = image
+                user.aboutMe = aboutMe
+                
+                println(user)
                 
                 ParseClient.setUpUserWithCompletion(user, completion: { (user, error) -> () in
                     if error == nil {
@@ -76,8 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func handleGoogleLogin(notification: NSNotification) {
-        let email = notification.userInfo?["email"] as String
-        loginToParseWithEmail(email)
+        loginToParseWithUserInfo(notification.userInfo!)
     }
     
     func showEventsVC() {

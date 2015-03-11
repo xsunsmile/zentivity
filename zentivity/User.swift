@@ -8,6 +8,10 @@
 
 class User : PFUser, PFSubclassing {
     
+    @NSManaged var name: NSString
+    @NSManaged var aboutMe: NSString
+    @NSManaged var profileImage: NSString
+    
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;
         dispatch_once(&onceToken) {
@@ -24,7 +28,6 @@ class User : PFUser, PFSubclassing {
         query.includeKey("confirmedUsers")
         query.includeKey("declinedUsers")
         
-        println("HI")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             completion(events: objects as [Event], error: error)
         }

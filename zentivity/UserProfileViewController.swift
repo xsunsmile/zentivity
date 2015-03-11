@@ -47,6 +47,7 @@ class UserProfileViewController: UIViewController {
     
     func refresh() {
         let currentUser = User.currentUser()
+        println(currentUser)
         //        currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
         //            if error == nil && events.count > 0 {
         //                let events = events as [Event]
@@ -62,6 +63,14 @@ class UserProfileViewController: UIViewController {
                 println("failed to list events")
             }
         }
+        
+        if currentUser.name.length > 0 {
+            profileName.text = currentUser.name
+        }
+        if currentUser.profileImage.length > 0 {
+            profileImageView.setImageWithURL(NSURL(string: currentUser.profileImage)!)
+        }
+        profileContactInfo.text = currentUser.username
     }
     
     /*
