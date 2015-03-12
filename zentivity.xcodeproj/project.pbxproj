@@ -39,7 +39,8 @@
 		935B4BFF1AAD1B3200D3425F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */; };
 		935B4C011AAD1EE600D3425F /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4C001AAD1EE600D3425F /* BaseTableView.swift */; };
 		935B4C031AAD206500D3425F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4C021AAD206500D3425F /* BaseTableViewCell.swift */; };
-		93A4577B1AB12F9E009F3A5C /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A4577A1AB12F9E009F3A5C /* ColorUtils.swift */; };
+		938B75E21AB166DB00D225EF /* UserIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B75E11AB166DB00D225EF /* UserIconCollectionViewCell.swift */; };
+		93A4577B1AB12F9E009F3A5C /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A4577A1AB12F9E009F3A5C /* ImageUtils.swift */; };
 		93D311261AABA607009259E8 /* GoogleClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D311251AABA607009259E8 /* GoogleClient.swift */; };
 		93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEA9311AABCD3000E04811 /* LoginView.swift */; };
 		93EEA9341AABCD5800E04811 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EEA9331AABCD5800E04811 /* LoginView.xib */; };
@@ -110,7 +111,8 @@
 		935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		935B4C001AAD1EE600D3425F /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
 		935B4C021AAD206500D3425F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		93A4577A1AB12F9E009F3A5C /* ColorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
+		938B75E11AB166DB00D225EF /* UserIconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserIconCollectionViewCell.swift; sourceTree = "<group>"; };
+		93A4577A1AB12F9E009F3A5C /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 		93D311251AABA607009259E8 /* GoogleClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleClient.swift; sourceTree = "<group>"; };
 		93EEA9311AABCD3000E04811 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		93EEA9331AABCD5800E04811 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				547148341AB0152000B1FABC /* UserTableViewCell.swift */,
 				934CB3951AB0066800722545 /* EventTableViewCell.xib */,
 				934CB3971AB007D300722545 /* EventTableViewCell.swift */,
+				938B75E11AB166DB00D225EF /* UserIconCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -296,7 +299,7 @@
 		93A457791AB12F6F009F3A5C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				93A4577A1AB12F9E009F3A5C /* ColorUtils.swift */,
+				93A4577A1AB12F9E009F3A5C /* ImageUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -492,8 +495,9 @@
 				5425DEDB1AA8C9E0001F5CD5 /* ViewController.swift in Sources */,
 				681A54441AAD0E1200C635D5 /* Comment.swift in Sources */,
 				935B4C011AAD1EE600D3425F /* BaseTableView.swift in Sources */,
+				938B75E21AB166DB00D225EF /* UserIconCollectionViewCell.swift in Sources */,
 				549113B81AA992A000000861 /* MenuView.swift in Sources */,
-				93A4577B1AB12F9E009F3A5C /* ColorUtils.swift in Sources */,
+				93A4577B1AB12F9E009F3A5C /* ImageUtils.swift in Sources */,
 				54DA30021AAC398F005702EC /* UserProfileView.swift in Sources */,
 				549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */,
 				54BA82411AB00323005BE9AA /* EventDetailViewController.swift in Sources */,

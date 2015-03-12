@@ -47,10 +47,7 @@ class UserProfileViewController: UIViewController,
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
-        profileImageView.clipsToBounds = true
-        profileImageView.layer.borderWidth = 3.0;
-        profileImageView.layer.borderColor = UIColor(rgba: "#3e3e3e").CGColor
+        ImageUtils.makeRoundImageWithBorder(profileImageView, borderColor: UIColor(rgba: "#3e3e3e").CGColor)
     }
     
     func refresh() {

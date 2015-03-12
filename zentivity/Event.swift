@@ -43,6 +43,10 @@ class Event : PFObject, PFSubclassing {
         }
     }
     
+    func userJoined(user: User) -> Bool {
+        return confirmedUsers.containsObject(user)
+    }
+    
     func createWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
         self.admin = PFUser.currentUser()
         self.confirmedUsers = []
