@@ -17,6 +17,7 @@ class BaseTableView: NSObject,
                      UITableViewDelegate
 {
     var datasource: [AnyObject]!
+    var titleSource: [NSString]!
     var cellIdentifier: NSString!
     var cellHeight = CGFloat(100)
     weak var delegate: BaseTableViewDelegate?
@@ -24,6 +25,7 @@ class BaseTableView: NSObject,
     init(datasource: [AnyObject], cellIdentifier: NSString) {
         self.datasource = datasource
         self.cellIdentifier = cellIdentifier
+        self.titleSource = []
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -46,5 +48,17 @@ class BaseTableView: NSObject,
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         delegate?.cellDidSelected(tableView, indexPath: indexPath)
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if titleSource.count == 0 {
+            return nil
+        }
+        return titleSource[section]
+    }
+    
+    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return titleSource.count
     }
 }

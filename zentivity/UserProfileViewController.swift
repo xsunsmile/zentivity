@@ -22,7 +22,7 @@ class UserProfileViewController: UIViewController,
     
     let datasource: [AnyObject] = []
     let cellId = "EventTableViewCell"
-    let cellHeight = CGFloat(100)
+    let cellHeight = CGFloat(40)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +39,18 @@ class UserProfileViewController: UIViewController,
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
         baseTable.delegate = self
+        baseTable.titleSource = ["Your Projects"]
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable
         
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.borderWidth = 3.0;
+        profileImageView.layer.borderColor = UIColor(rgba: "#3e3e3e").CGColor
     }
     
     func refresh() {
@@ -63,7 +69,6 @@ class UserProfileViewController: UIViewController,
             profileName.text = currentUser.name
         }
         if currentUser.imageUrl.length > 0 {
-            println("downloading profileimage: \(currentUser.imageUrl)")
             profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
         }
         if currentUser.aboutMe.length > 0 {
