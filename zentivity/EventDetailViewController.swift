@@ -16,6 +16,8 @@ class EventDetailViewController: UIViewController,
     
     var event: Event!
 
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
@@ -25,29 +27,47 @@ class EventDetailViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         setup()
     }
     
     func setup() {
-        joinButton.layer.cornerRadius = 4
-        joinButton.clipsToBounds = true
+        let leftConstraint = NSLayoutConstraint(
+            item: contentView,
+            attribute: .Leading,
+            relatedBy: .Equal,
+            toItem: view,
+            attribute: .Left,
+            multiplier: 1.0,
+            constant: 0)
+        
+        let rightConstraint = NSLayoutConstraint(
+            item: contentView,
+            attribute: .Trailing,
+            relatedBy: .Equal,
+            toItem: view,
+            attribute: .Right,
+            multiplier: 1.0,
+            constant: 0)
+        
+        view.addConstraint(leftConstraint)
+        view.addConstraint(rightConstraint)
+        
+        ImageUtils.makeRoundImageWithBorder(joinButton, borderColor: UIColor(rgba: "#EFEFF4").CGColor)
         
         titleLabel.text = event.title
+        
         usersGridView.delegate = self
         usersGridView.dataSource = self
         
         if event.userJoined(User.currentUser()) {
-            joinButton.setTitle("I will quit", forState: UIControlState.Normal)
+            joinButton.setTitle("Quit", forState: UIControlState.Normal)
         } else {
-            joinButton.setTitle("I want to participate!", forState: UIControlState.Normal)
+            joinButton.setTitle("Join", forState: UIControlState.Normal)
         }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func onJoin(sender: AnyObject) {
@@ -57,10 +77,10 @@ class EventDetailViewController: UIViewController,
     func toggleJoinEvent() {
         if event.userJoined(User.currentUser()) {
             quitEvent()
-            joinButton.setTitle("I want to participate!", forState: UIControlState.Normal)
+            joinButton.setTitle("Join", forState: UIControlState.Normal)
         } else {
             joinEvent()
-            joinButton.setTitle("I will quit", forState: UIControlState.Normal)
+            joinButton.setTitle("Quit", forState: UIControlState.Normal)
         }
     }
     
@@ -120,27 +140,9 @@ class EventDetailViewController: UIViewController,
         return cell
     }
     
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return event.confirmedUsers.count
-//    }
-//    
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        var cell = attendeesTable.dequeueReusableCellWithIdentifier("attendeeCell") as UserTableViewCell
-//        let confirmedUser = event.confirmedUsers[indexPath.row] as User
-//        confirmedUser.fetchIfNeededInBackgroundWithBlock { (user, error) -> Void in
-//            if error == nil {
-//                let u = user as User
-//                println("got user: \(u)")
-//                if u.name.length > 0 {
-//                    cell.nameLabel.text = u.name
-//                } else {
-//                    cell.nameLabel.text = u.username
-//                }
-//            }
-//        }
-//        
-//        return cell
-//    }
+    @IBAction func onQuit(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     /*
     // MARK: - Navigation
