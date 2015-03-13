@@ -15,4 +15,11 @@ class ImageUtils: NSObject {
         view.layer.borderWidth = 3.0;
         view.layer.borderColor = borderColor
     }
+    
+    class func makeRoundCornerWithBorder(view: UIView, borderColor: CGColor) {
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        view.layer.borderWidth = 1.0;
+        view.layer.borderColor = borderColor
+    }
 }

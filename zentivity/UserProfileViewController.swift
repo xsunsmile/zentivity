@@ -47,7 +47,7 @@ class UserProfileViewController: UIViewController,
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        ImageUtils.makeRoundImageWithBorder(profileImageView, borderColor: UIColor(rgba: "#3e3e3e").CGColor)
+        ImageUtils.makeRoundCornerWithBorder(profileImageView, borderColor: UIColor(rgba: "#3e3e3e").CGColor)
     }
     
     func refresh() {

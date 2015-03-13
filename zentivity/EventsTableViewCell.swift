@@ -60,7 +60,6 @@ class EventsTableViewCell: BaseTableViewCell {
         }
         
         let event = data as Event
-        println("refresh event: \(event.title)")
        
         eventNameLabel.text = event.title
         eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)

@@ -27,6 +27,7 @@ class EventDetailViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setup()
     }
     
@@ -64,8 +65,27 @@ class EventDetailViewController: UIViewController,
         } else {
             joinButton.setTitle("Join", forState: UIControlState.Normal)
         }
+        
+        setupBackgroundImageView()
     }
 
+    func setupBackgroundImageView() {
+        if event.photos?.count > 0 {
+            let photo = event.photos![0] as Photo
+            photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
+                let p = photo as Photo
+                p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                    println("fetch photo again!!!")
+                    if imageData != nil {
+                        self.backgroundImageView.image = UIImage(data:imageData)
+                    } else {
+                        println("Failed to download image data")
+                    }
+                })
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -138,6 +158,15 @@ class EventDetailViewController: UIViewController,
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserGridViewCell", forIndexPath: indexPath) as UserIconCollectionViewCell
         cell.user = event.confirmedUsers[indexPath.row] as? User
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        if(kind == UICollectionElementKindSectionHeader) {
+            let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "eventUserTypes", forIndexPath: indexPath) as LabelCollectionReusableView
+            return cell
+        } else {
+            return UICollectionReusableView()
+        }
     }
     
     @IBAction func onQuit(sender: UIButton) {

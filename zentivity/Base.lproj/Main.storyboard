@@ -60,10 +60,10 @@
                                 <rect key="frame" x="0.0" y="65" width="320" height="503"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqE-LX-z6F">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="885"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="875"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWu-PZ-u61">
-                                                <rect key="frame" x="0.0" y="430" width="320" height="78"/>
+                                                <rect key="frame" x="0.0" y="420" width="320" height="78"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="245" text="Event title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76D-to-mct">
                                                         <rect key="frame" x="10" y="8" width="74" height="19.5"/>
@@ -133,13 +133,13 @@
                                                 </constraints>
                                             </view>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="248" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cwn-wB-VV9">
-                                                <rect key="frame" x="0.0" y="508" width="320" height="130"/>
+                                                <rect key="frame" x="0.0" y="498" width="320" height="130"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="130" id="g8S-Jr-iyz"/>
                                                 </constraints>
                                             </mapView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wlg-BP-qdG">
-                                                <rect key="frame" x="0.0" y="638" width="320" height="247"/>
+                                                <rect key="frame" x="0.0" y="628" width="320" height="247"/>
                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="247" id="2Xv-pc-FbC"/>
@@ -161,9 +161,10 @@
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="FZ0-p2-meZ">
                                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUD-3X-XNV">
-                                                                    <rect key="frame" x="4" y="29" width="42" height="21"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUD-3X-XNV">
+                                                                    <rect key="frame" x="0.0" y="38" width="50" height="12"/>
+                                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -172,9 +173,12 @@
                                                         </view>
                                                         <constraints>
                                                             <constraint firstItem="FZ0-p2-meZ" firstAttribute="leading" secondItem="n2H-qq-CfS" secondAttribute="leadingMargin" constant="-8" id="MMf-8v-n47"/>
+                                                            <constraint firstItem="nUD-3X-XNV" firstAttribute="leading" secondItem="n2H-qq-CfS" secondAttribute="leading" id="SPU-F0-cNS"/>
                                                             <constraint firstItem="FZ0-p2-meZ" firstAttribute="top" secondItem="n2H-qq-CfS" secondAttribute="topMargin" constant="-8" id="UED-gE-qqT"/>
                                                             <constraint firstAttribute="bottomMargin" secondItem="FZ0-p2-meZ" secondAttribute="bottom" constant="-8" id="aNb-0i-WzW"/>
                                                             <constraint firstAttribute="trailingMargin" secondItem="FZ0-p2-meZ" secondAttribute="trailing" constant="-8" id="aiH-CG-NFn"/>
+                                                            <constraint firstAttribute="bottom" secondItem="nUD-3X-XNV" secondAttribute="bottom" id="efk-yL-han"/>
+                                                            <constraint firstAttribute="trailing" secondItem="nUD-3X-XNV" secondAttribute="trailing" id="vlt-Bm-H51"/>
                                                         </constraints>
                                                         <connections>
                                                             <outlet property="userImageView" destination="FZ0-p2-meZ" id="Jvc-C1-3v5"/>
@@ -182,14 +186,26 @@
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
-                                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventUserTypes" id="lsS-l8-aJy">
+                                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventUserTypes" id="lsS-l8-aJy" customClass="LabelCollectionReusableView" customModule="zentivity" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attendess" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIO-qN-gh6">
+                                                            <rect key="frame" x="127" y="1.5" width="66.5" height="17"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="centerY" secondItem="nIO-qN-gh6" secondAttribute="centerY" id="ZLP-Uh-IKj"/>
+                                                        <constraint firstAttribute="centerX" secondItem="nIO-qN-gh6" secondAttribute="centerX" id="shC-Se-Yx6"/>
+                                                    </constraints>
                                                 </collectionReusableView>
                                             </collectionView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="zWu-PZ-u61" firstAttribute="top" secondItem="VqE-LX-z6F" secondAttribute="top" constant="430" id="2LS-gT-tPA"/>
+                                            <constraint firstItem="zWu-PZ-u61" firstAttribute="top" secondItem="VqE-LX-z6F" secondAttribute="top" constant="420" id="2LS-gT-tPA"/>
                                             <constraint firstAttribute="trailing" secondItem="Wlg-BP-qdG" secondAttribute="trailing" id="JBn-dC-zMj"/>
                                             <constraint firstItem="Cwn-wB-VV9" firstAttribute="leading" secondItem="VqE-LX-z6F" secondAttribute="leading" id="RfV-e8-sQY"/>
                                             <constraint firstItem="Wlg-BP-qdG" firstAttribute="top" secondItem="Cwn-wB-VV9" secondAttribute="bottom" id="Vbb-iV-nrQ"/>
