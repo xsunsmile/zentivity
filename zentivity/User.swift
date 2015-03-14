@@ -38,9 +38,20 @@ class User : PFUser, PFSubclassing {
         query.getObjectInBackgroundWithId(event.objectId) {
             (gameScore: PFObject!, error: NSError!) -> Void in
             if error == nil {
-                event.declinedUsers.removeObject(self)
-                event.confirmedUsers.removeObject(self)
+                // Remove self from confirmed users
+                for confirmedUser in event.confirmedUsers {
+                    if confirmedUser.objectId == self.objectId {
+                        event.confirmedUsers.removeObject(confirmedUser)
+                    }
+                }
+                // Remove self from declined users
+                for declinedUser in event.declinedUsers {
+                    if declinedUser.objectId == self.objectId {
+                        event.declinedUsers.removeObject(declinedUser)
+                    }
+                }
                 event.confirmedUsers.addObject(self)
+                
                 event.saveInBackgroundWithBlock({ (success, error) -> Void in
                     completion(success: success, error: nil)
                 })
@@ -56,8 +67,18 @@ class User : PFUser, PFSubclassing {
         query.getObjectInBackgroundWithId(event.objectId) {
             (gameScore: PFObject!, error: NSError!) -> Void in
             if error == nil {
-                event.declinedUsers.removeObject(self)
-                event.confirmedUsers.removeObject(self)
+                // Remove self from confirmed users
+                for confirmedUser in event.confirmedUsers {
+                    if confirmedUser.objectId == self.objectId {
+                        event.confirmedUsers.removeObject(confirmedUser)
+                    }
+                }
+                // Remove self from declined users
+                for declinedUser in event.declinedUsers {
+                    if declinedUser.objectId == self.objectId {
+                        event.declinedUsers.removeObject(declinedUser)
+                    }
+                }
                 event.declinedUsers.addObject(self)
                 event.saveInBackgroundWithBlock({ (success, error) -> Void in
                     completion(success: success, error: nil)
@@ -69,8 +90,10 @@ class User : PFUser, PFSubclassing {
         }
     }
     
-    // Auth stuff
     
+    
+    // Auth stuff
+
     class func logoutWithCompletion(completion: (completed: Bool) -> Void) {
         GoogleClient.sharedInstance.logoutWithCompletion { (completed) -> Void in
             if completed == true {
