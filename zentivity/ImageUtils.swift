@@ -16,10 +16,16 @@ class ImageUtils: NSObject {
         view.layer.borderColor = borderColor
     }
     
-    class func makeRoundCornerWithBorder(view: UIView, borderColor: CGColor) {
+    class func makeRoundCornerWithBorder(view: UIView, borderColor: CGColor, borderWidth: CGFloat) {
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
-        view.layer.borderWidth = 1.0;
+        view.layer.borderWidth = borderWidth;
         view.layer.borderColor = borderColor
+    }
+    
+    class func addShadow(view: UIView, color: CGColor, size: CGSize, radius: CGFloat) {
+        view.layer.shadowColor = UIColor.blackColor().CGColor
+        view.layer.shadowOffset = CGSizeMake(5, 5)
+        view.layer.shadowRadius = 5
     }
 }

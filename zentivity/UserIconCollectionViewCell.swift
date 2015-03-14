@@ -30,13 +30,12 @@ class UserIconCollectionViewCell: UICollectionViewCell {
                     }
                 }
             })
-            
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        ImageUtils.makeRoundImageWithBorder(userImageView, borderColor: UIColor(rgba: "#3e3e3e").CGColor)
+        ImageUtils.makeRoundImageWithBorder(userImageView, borderColor: UIColor.whiteColor().CGColor)
     }
 }

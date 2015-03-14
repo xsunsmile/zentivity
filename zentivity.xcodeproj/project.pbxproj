@@ -28,6 +28,7 @@
 		687D78801AACE96100E5605C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5425DEE11AA8C9E0001F5CD5 /* LaunchScreen.xib */; };
 		6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6894AA7C1AAA87F400401171 /* ParseClient.swift */; };
 		9311BB6A1AAD5C2400B9CB75 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */; };
+		931567861AB4CA5000D279EF /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931567851AB4CA5000D279EF /* ShadowButton.swift */; };
 		934CB3941AB0013900722545 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934CB3931AB0013900722545 /* UserProfileViewController.swift */; };
 		934CB3961AB0066800722545 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934CB3951AB0066800722545 /* EventTableViewCell.xib */; };
 		934CB3981AB007D300722545 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934CB3971AB007D300722545 /* EventTableViewCell.swift */; };
@@ -98,6 +99,7 @@
 		6CB1175D1CF9C92D24F4E80E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9CA5CE0D0774940F2AB24C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
+		931567851AB4CA5000D279EF /* ShadowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowButton.swift; sourceTree = "<group>"; };
 		934CB3931AB0013900722545 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		934CB3951AB0066800722545 /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		934CB3971AB007D300722545 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
@@ -250,15 +252,16 @@
 			isa = PBXGroup;
 			children = (
 				549113A71AA96CAF00000861 /* EventsTableViewCell.xib */,
+				549113A91AA98C9200000861 /* EventsTableViewCell.swift */,
 				939540401AB2BD7700CF520A /* LabelCollectionReusableView.swift */,
 				939540411AB2BD7700CF520A /* LabelCollectionReusableView.xib */,
-				549113A91AA98C9200000861 /* EventsTableViewCell.swift */,
 				549113AC1AA98DD000000861 /* MenuTableViewCell.xib */,
 				549113AB1AA98DD000000861 /* MenuTableViewCell.swift */,
 				549113B91AA992AE00000861 /* MenuView.xib */,
 				549113B71AA992A000000861 /* MenuView.swift */,
 				93EEA9311AABCD3000E04811 /* LoginView.swift */,
 				93EEA9331AABCD5800E04811 /* LoginView.xib */,
+				931567851AB4CA5000D279EF /* ShadowButton.swift */,
 				935B4C001AAD1EE600D3425F /* BaseTableView.swift */,
 				935B4C021AAD206500D3425F /* BaseTableViewCell.swift */,
 				547148341AB0152000B1FABC /* UserTableViewCell.swift */,
@@ -493,6 +496,7 @@
 				93A4577B1AB12F9E009F3A5C /* ImageUtils.swift in Sources */,
 				549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */,
 				54BA82411AB00323005BE9AA /* EventDetailViewController.swift in Sources */,
+				931567861AB4CA5000D279EF /* ShadowButton.swift in Sources */,
 				934CB3981AB007D300722545 /* EventTableViewCell.swift in Sources */,
 				687D787F1AACE92500E5605C /* User.swift in Sources */,
 				549113AD1AA98DD000000861 /* MenuTableViewCell.swift in Sources */,

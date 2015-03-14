@@ -13,6 +13,8 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventBackgroundImageView: UIImageView!
     @IBOutlet weak var gradientView: UIView!
+    @IBOutlet weak var joinNowBackgroundView: UIView!
+    @IBOutlet weak var joinButton: UIButton!
     
     let dateFormatter = NSDateFormatter()
     var eventImage: UIImage?
@@ -20,6 +22,11 @@ class EventsTableViewCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        initSubviews()
+        refresh()
+    }
+    
+    func initSubviews() {
         let gradient = CAGradientLayer()
         let arrayColors = [
             UIColor.clearColor().CGColor,
@@ -31,8 +38,12 @@ class EventsTableViewCell: BaseTableViewCell {
         gradient.frame = gradientView.bounds
         gradient.colors = arrayColors
         gradientView.layer.insertSublayer(gradient, atIndex: 0)
- 
-        refresh()
+        
+        ImageUtils.makeRoundCornerWithBorder(joinNowBackgroundView, borderColor: UIColor.whiteColor().CGColor, borderWidth: 3.0)
+        
+        if User.currentUser() == nil {
+            
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -44,12 +55,31 @@ class EventsTableViewCell: BaseTableViewCell {
     }
 
     @IBAction func onJoin(sender: AnyObject) {
+        toggleJoin()
+    }
+    
+    func toggleJoin() {
         let event = data as Event
-        User.currentUser().confirmEvent(event, completion: { (success, error) -> Void in
-            if error == nil {
-                println("user joined event")
+        User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+            if state == kUserJoinEvent {
+                if success != nil {
+                    self.joinButton.setTitle("Cancel", forState: UIControlState.Normal)
+                    UIAlertView(
+                        title: "Great!",
+                        message: "See you at the event :)",
+                        delegate: self,
+                        cancelButtonTitle: "OK"
+                        ).show()
+                } else {
+                    UIAlertView(
+                        title: "Error",
+                        message: "Unable to join event.",
+                        delegate: self,
+                        cancelButtonTitle: "Well damn..."
+                        ).show()
+                }
             } else {
-                println("user can not join event \(error)")
+                self.joinButton.setTitle("Join Now", forState: UIControlState.Normal)
             }
         })
     }

@@ -15,7 +15,6 @@ class AppViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showEventsList", name: userDidLoginNotification, object: nil)
         initSubViews()
     }
     
@@ -29,8 +28,8 @@ class AppViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func showEventsList() {
-        performSegueWithIdentifier("eventsListSegue", sender: self)
+    @IBAction func onCancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*

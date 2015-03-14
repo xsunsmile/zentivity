@@ -27,6 +27,10 @@ class UserProfileViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if User.currentUser() == nil {
+            return
+        }
+ 
         initSubviews()
         refresh()
     }
@@ -47,12 +51,17 @@ class UserProfileViewController: UIViewController,
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        ImageUtils.makeRoundCornerWithBorder(profileImageView, borderColor: UIColor(rgba: "#3e3e3e").CGColor)
+        ImageUtils.makeRoundCornerWithBorder(
+            profileImageView,
+            borderColor: UIColor(rgba: "#3e3e3e").CGColor,
+            borderWidth: 1.0
+        )
     }
     
     func refresh() {
         let currentUser = User.currentUser()
         println(currentUser)
+        
         currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
             if error == nil && events.count > 0 {
                 self.baseTable.datasource = events

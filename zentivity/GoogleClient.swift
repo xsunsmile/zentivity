@@ -48,8 +48,11 @@ class GoogleClient: NSObject,
             signIn.authenticate()
         } else {
             initGooglePlusService()
-            getCurrentUserProfile()
-            completion(completed: true)
+            getCurrentUserProfileWithCompletion({ (userInfo, error) -> () in
+                if error == nil {
+                    completion(completed: true)
+                }
+            })
         }
     }
     
@@ -67,7 +70,11 @@ class GoogleClient: NSObject,
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if auth != nil {
             initGooglePlusService()
-            getCurrentUserProfile()
+            getCurrentUserProfileWithCompletion({ (userInfo, error) -> () in
+                if error == nil {
+                    NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil, userInfo: userInfo)
+                }
+            })
         } else {
             NSNotificationCenter.defaultCenter().postNotificationName(userLoginFailedNotification, object: error)
         }
@@ -77,17 +84,19 @@ class GoogleClient: NSObject,
         }
     }
     
-    func getCurrentUserProfile() {
+    func getCurrentUserProfileWithCompletion(completion: (userInfo: NSMutableDictionary?, error: NSError?) -> ()) {
+        let userInfo = NSMutableDictionary()
         let query = GTLQueryPlus.queryForPeopleGetWithUserId("me") as GTLQueryPlus
+        
         plusService.executeQuery(query, completionHandler: { (ticket, person, error) -> Void in
             if error != nil {
                 NSLog("Can not get current user profile: %@", error)
+                completion(userInfo: nil, error: error)
             } else {
                 let user = person as GTLPlusPerson
                 NSLog("user %@", user)
                 NSLog("user name: %@, about: %@", user.displayName, user.name)
                 
-                let userInfo = NSMutableDictionary()
                 let email = user.emails[0] as GTLPlusPersonEmailsItem
                 userInfo["email"] = email.value
                 if user.displayName != nil {
@@ -105,7 +114,7 @@ class GoogleClient: NSObject,
                 } else {
                    userInfo["aboutMe"] = NSString(string: "")
                 }
-                NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil, userInfo: userInfo)
+                completion(userInfo: userInfo, error: nil)
             }
         })
     }

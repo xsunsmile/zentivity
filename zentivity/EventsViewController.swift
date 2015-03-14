@@ -46,7 +46,20 @@ class EventsViewController: UIViewController,
                 self.tableView.reloadData()
             } else {
                 println("failed to list events")
+                self.showEmptyListView()
             }
+        }
+    }
+    
+    func showEmptyListView() {
+        tableView.hidden = true
+    }
+    
+    @IBAction func onMenuPress(sender: UIBarButtonItem) {
+        if User.currentUser() != nil {
+            performSegueWithIdentifier("showUserProfileSegue", sender: self)
+        } else {
+            performSegueWithIdentifier("userAuthSegue", sender: self)
         }
     }
     

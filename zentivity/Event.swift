@@ -17,7 +17,9 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var declinedUsers: NSMutableArray
     @NSManaged var comments: NSMutableArray?
     @NSManaged var photos: NSMutableArray?
+    
     var invitedUsernames: [String]?
+    var dateFormatter = NSDateFormatter()
     
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;
@@ -45,6 +47,15 @@ class Event : PFObject, PFSubclassing {
     
     func userJoined(user: User) -> Bool {
         return confirmedUsers.containsObject(user)
+    }
+    
+    func startTimeWithFormat(format: NSString?) -> NSString {
+        if format == nil {
+            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        } else {
+            dateFormatter.dateFormat = format
+        }
+        return dateFormatter.stringFromDate(startTime)
     }
     
     func createWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {

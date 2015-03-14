@@ -6,6 +6,9 @@
 ////  Copyright (c) 2015 Zendesk. All rights reserved.
 ////
 
+let kUserJoinEvent = "userJoinEvent"
+let kUserCancelEvent = "userCancelEvent"
+
 class User : PFUser, PFSubclassing {
     
     @NSManaged var name: NSString
@@ -17,6 +20,26 @@ class User : PFUser, PFSubclassing {
         dispatch_once(&onceToken) {
             self.registerSubclass()
         }
+    }
+    
+    func toggleJoinEventWithCompletion(event: Event, completion: (success: Bool!, error: NSError!, state: NSString) -> ()) {
+        if event.userJoined(self) {
+            quitEventWithCompletion(event, completion)
+        } else {
+            joinEventWithCompletion(event, completion)
+        }
+    }
+    
+    func joinEventWithCompletion(event: Event, completion: (success: Bool!, error: NSError!, state: NSString) -> ()) {
+        confirmEvent(event, completion: { (success, error) -> () in
+            completion(success: success, error: error, state: kUserJoinEvent)
+        })
+    }
+    
+    func quitEventWithCompletion(event: Event, completion: (success: Bool!, error: NSError!, state: NSString) -> ()) {
+        declineEvent(event, completion: { (success, error) -> () in
+            completion(success: success, error: error, state: kUserCancelEvent)
+        })
     }
     
     func eventsWithCompletion(type: String!, completion: (events: [Event], error: NSError!) -> ()) {

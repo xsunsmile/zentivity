@@ -17,21 +17,32 @@ class EventDetailViewController: UIViewController,
     var event: Event!
 
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var imageShadowView: UIView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var eventHeaderView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var usersGridView: UICollectionView!
+    @IBOutlet weak var eventDateLabel: UILabel!
+    
+    var contentViewOriginFrame: CGRect!
+    var detailHeaderViewOriginFrame: CGRect!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
+        initSubviews()
+        refresh()
     }
     
-    func setup() {
+    override func viewWillAppear(animated: Bool) {
+        animateHeaderViewDown()
+    }
+    
+    func initSubviews() {
         let leftConstraint = NSLayoutConstraint(
             item: contentView,
             attribute: .Leading,
@@ -53,22 +64,49 @@ class EventDetailViewController: UIViewController,
         view.addConstraint(leftConstraint)
         view.addConstraint(rightConstraint)
         
-        ImageUtils.makeRoundImageWithBorder(joinButton, borderColor: UIColor(rgba: "#EFEFF4").CGColor)
-        
-        titleLabel.text = event.title
-        
         usersGridView.delegate = self
         usersGridView.dataSource = self
         
-        if event.userJoined(User.currentUser()) {
-            joinButton.setTitle("Quit", forState: UIControlState.Normal)
+        contentViewOriginFrame = contentView.frame
+        detailHeaderViewOriginFrame = eventHeaderView.frame
+    }
+    
+    func refresh() {
+        if event == nil {
+            return
+        }
+        
+        titleLabel.text = event.title
+        var dateString = NSMutableAttributedString(
+            string: event.startTimeWithFormat("EEEE"),
+            attributes: NSDictionary(
+                object: UIFont.boldSystemFontOfSize(17.0),
+                forKey: NSFontAttributeName))
+        
+       dateString.appendAttributedString(NSAttributedString(
+            string: "\n" + event.startTimeWithFormat("MMM d, yyyy"),
+            attributes: NSDictionary(
+                object: UIFont(name: "Arial", size: 17.0)!,
+                forKey: NSFontAttributeName)))
+        
+        eventDateLabel.attributedText = dateString
+        
+        let currentUser = User.currentUser()
+        if currentUser != nil {
+            if event.userJoined(User.currentUser()) {
+                joinButton.setTitle("Cancel", forState: UIControlState.Normal)
+                joinButton.backgroundColor = UIColor(rgba: "#3366cc")
+            } else {
+                joinButton.setTitle("Join", forState: UIControlState.Normal)
+                joinButton.backgroundColor = UIColor(rgba: "#dd4b39")
+            }
         } else {
-            joinButton.setTitle("Join", forState: UIControlState.Normal)
+            joinButton.setTitle("SignIn", forState: .Normal)
         }
         
         setupBackgroundImageView()
     }
-
+    
     func setupBackgroundImageView() {
         if event.photos?.count > 0 {
             let photo = event.photos![0] as Photo
@@ -91,59 +129,35 @@ class EventDetailViewController: UIViewController,
     }
     
     @IBAction func onJoin(sender: AnyObject) {
-        toggleJoinEvent()
-    }
-    
-    func toggleJoinEvent() {
-        if event.userJoined(User.currentUser()) {
-            quitEvent()
-            joinButton.setTitle("Join", forState: UIControlState.Normal)
-        } else {
-            joinEvent()
-            joinButton.setTitle("Quit", forState: UIControlState.Normal)
+        if User.currentUser() == nil {
+            performSegueWithIdentifier("userAuthSegue", sender: self)
         }
-    }
-    
-    func joinEvent() {
-        User.currentUser().confirmEvent(event, completion: { (success, error) -> () in
-            if success == true {
-                UIAlertView(
-                    title: "Great!",
-                    message: "See you at the event :)",
-                    delegate: self,
-                    cancelButtonTitle: "OK"
-                    ).show()
-                self.reloadData()
+        
+        User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+            if state == kUserJoinEvent {
+                if success != nil {
+                    self.joinButton.setTitle("Cancel", forState: UIControlState.Normal)
+                    self.joinButton.backgroundColor = UIColor(rgba: "#3366cc")
+                    UIAlertView(
+                        title: "Great!",
+                        message: "See you at the event :)",
+                        delegate: self,
+                        cancelButtonTitle: "OK"
+                        ).show()
+                } else {
+                    UIAlertView(
+                        title: "Error",
+                        message: "Unable to join event.",
+                        delegate: self,
+                        cancelButtonTitle: "Well damn..."
+                        ).show()
+                }
             } else {
-                UIAlertView(
-                    title: "Error",
-                    message: "Unable to join event.",
-                    delegate: self,
-                    cancelButtonTitle: "Well damn..."
-                    ).show()
+                self.joinButton.setTitle("Join", forState: UIControlState.Normal)
+                self.joinButton.backgroundColor = UIColor(rgba: "#dd4b39")
             }
+            self.reloadData()
         })
-    }
-    
-    func quitEvent() {
-        UIAlertView(
-            title: "Confirm",
-            message: "Are you sure?",
-            delegate: self,
-            cancelButtonTitle: "OK"
-            ).show()
-        User.currentUser().declineEvent(event, completion: { (success, error) -> () in
-            if success == true {
-                self.reloadData()
-            } else {
-                UIAlertView(
-                    title: "Error",
-                    message: "Unable to join event.",
-                    delegate: self,
-                    cancelButtonTitle: "Well damn..."
-                    ).show()
-            }
-        })       
     }
     
     func reloadData() {
@@ -151,6 +165,9 @@ class EventDetailViewController: UIViewController,
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if event == nil {
+            return 0
+        }
         return event.confirmedUsers.count
     }
     
@@ -171,6 +188,39 @@ class EventDetailViewController: UIViewController,
     
     @IBAction func onQuit(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func onDetailViewDrag(sender: UIPanGestureRecognizer) {
+        println("detected drag")
+        let velocity = sender.velocityInView(view)
+        
+        if velocity.y < 0 {
+            animateHeaderViewUp()
+        } else {
+            animateHeaderViewDown()
+        }
+    }
+    
+    func animateHeaderViewDown() {
+        UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
+            let dy = self.view.frame.size.height - self.detailHeaderViewOriginFrame.size.height - self.contentViewOriginFrame.origin.y
+            self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
+        }) { (completed) -> Void in
+            if completed {
+                
+            }
+        }
+    }
+    
+    func animateHeaderViewUp() {
+        UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
+            let dy = self.contentView.frame.size.height - (self.view.frame.size.height - self.detailHeaderViewOriginFrame.origin.y)
+            self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
+            }) { (completed) -> Void in
+                if completed {
+                    
+                }
+        }
     }
     
     /*
