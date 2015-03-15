@@ -16,17 +16,19 @@ class UserIconCollectionViewCell: UICollectionViewCell {
         didSet {
             user?.fetchIfNeededInBackgroundWithBlock({ (user, error) -> Void in
                 if error == nil {
+                    self.userNameLabel.hidden = true
                     let user = user as User
                     if user.imageUrl.length > 0 {
                         let url = NSURL(string: user.imageUrl)
                         self.userImageView.setImageWithURL(url)
-                        self.userNameLabel.hidden = true
                     } else {
-                        if user.name.length > 0 {
-                            self.userNameLabel.text = user.name
-                        } else {
-                            self.userNameLabel.text = user.username
-                        }
+//                        if user.name.length > 0 {
+//                            self.userNameLabel.text = user.name
+//                        } else {
+//                            self.userNameLabel.text = user.username
+//                        }
+                        let initialsImage = user.initialsImageView(self.userImageView.frame.size)
+                        self.userImageView.image = initialsImage
                     }
                 }
             })

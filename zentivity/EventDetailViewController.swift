@@ -136,8 +136,6 @@ class EventDetailViewController: UIViewController,
                     })
                 }
             }
-            
-
         }
     }
     
@@ -289,7 +287,7 @@ class EventDetailViewController: UIViewController,
     
     func animateHeaderViewUp() {
         UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
-            let dy = self.contentView.frame.size.height - (self.view.frame.size.height - self.detailHeaderViewOriginFrame.origin.y)
+            let dy = self.contentView.frame.size.height - (self.view.frame.size.height - self.detailHeaderViewOriginFrame.origin.y) + 10
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
             if self.currentImageView != nil {
                 self.currentImageView?.transform = CGAffineTransformMakeTranslation(0, dy/2)
@@ -364,11 +362,13 @@ class EventDetailViewController: UIViewController,
     }
     
     func onImageTap(tap: UITapGestureRecognizer) {
-        println("taped image")
         if currentImageView != nil {
+            println("taped image")
             let descriptionView = UIView(frame: currentImageView!.frame)
             descriptionView.backgroundColor = UIColor.blackColor()
             currentImageView?.addSubview(descriptionView)
+        } else {
+            println("taped image current image is nil")
         }
     }
     

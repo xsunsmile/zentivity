@@ -29,6 +29,8 @@
 		6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6894AA7C1AAA87F400401171 /* ParseClient.swift */; };
 		9311BB6A1AAD5C2400B9CB75 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */; };
 		931567861AB4CA5000D279EF /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931567851AB4CA5000D279EF /* ShadowButton.swift */; };
+		9315678A1AB5E90500D279EF /* UserInitialsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 931567891AB5E90500D279EF /* UserInitialsView.m */; };
+		9315678E1AB5F5A400D279EF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9315678D1AB5F5A400D279EF /* UIViewExtension.swift */; };
 		934CB3941AB0013900722545 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934CB3931AB0013900722545 /* UserProfileViewController.swift */; };
 		934CB3961AB0066800722545 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934CB3951AB0066800722545 /* EventTableViewCell.xib */; };
 		934CB3981AB007D300722545 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934CB3971AB007D300722545 /* EventTableViewCell.swift */; };
@@ -100,6 +102,9 @@
 		6F9CA5CE0D0774940F2AB24C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		931567851AB4CA5000D279EF /* ShadowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowButton.swift; sourceTree = "<group>"; };
+		931567881AB5E90500D279EF /* UserInitialsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInitialsView.h; sourceTree = "<group>"; };
+		931567891AB5E90500D279EF /* UserInitialsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInitialsView.m; sourceTree = "<group>"; };
+		9315678D1AB5F5A400D279EF /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		934CB3931AB0013900722545 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		934CB3951AB0066800722545 /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		934CB3971AB007D300722545 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
@@ -251,6 +256,7 @@
 		5425DEFA1AA8CB0A001F5CD5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				931567871AB5E90500D279EF /* UserInitialsView */,
 				549113A71AA96CAF00000861 /* EventsTableViewCell.xib */,
 				549113A91AA98C9200000861 /* EventsTableViewCell.swift */,
 				939540401AB2BD7700CF520A /* LabelCollectionReusableView.swift */,
@@ -285,10 +291,20 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		931567871AB5E90500D279EF /* UserInitialsView */ = {
+			isa = PBXGroup;
+			children = (
+				931567881AB5E90500D279EF /* UserInitialsView.h */,
+				931567891AB5E90500D279EF /* UserInitialsView.m */,
+			);
+			path = UserInitialsView;
+			sourceTree = "<group>";
+		};
 		935B4BFB1AAD132D00D3425F /* CoreExtensions */ = {
 			isa = PBXGroup;
 			children = (
 				935B4BFC1AAD134D00D3425F /* UIColorExtension.swift */,
+				9315678D1AB5F5A400D279EF /* UIViewExtension.swift */,
 			);
 			name = CoreExtensions;
 			sourceTree = "<group>";
@@ -495,9 +511,11 @@
 				549113B81AA992A000000861 /* MenuView.swift in Sources */,
 				93A4577B1AB12F9E009F3A5C /* ImageUtils.swift in Sources */,
 				549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */,
+				9315678A1AB5E90500D279EF /* UserInitialsView.m in Sources */,
 				54BA82411AB00323005BE9AA /* EventDetailViewController.swift in Sources */,
 				931567861AB4CA5000D279EF /* ShadowButton.swift in Sources */,
 				934CB3981AB007D300722545 /* EventTableViewCell.swift in Sources */,
+				9315678E1AB5F5A400D279EF /* UIViewExtension.swift in Sources */,
 				687D787F1AACE92500E5605C /* User.swift in Sources */,
 				549113AD1AA98DD000000861 /* MenuTableViewCell.swift in Sources */,
 				935B4BFF1AAD1B3200D3425F /* EventsViewController.swift in Sources */,
