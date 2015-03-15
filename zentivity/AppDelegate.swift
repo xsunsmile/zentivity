@@ -24,16 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Comment.registerSubclass()
         User.registerSubclass()
         
-        var isLoggedInToGoogle = GoogleClient.sharedInstance.alreadyLogin()
-        if (isLoggedInToGoogle && User.currentUser() != nil) {
-            showEventsVC()
-        } else if isLoggedInToGoogle {
-            let email = "erichuang310@gmail.com"
-//            loginToParseWithEmail(email)
-        } else if (!isLoggedInToGoogle && User.currentUser() != nil) {
-            User.logOut()
-        }
-        
         return true
     }
     
@@ -45,11 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFCloud.callFunctionInBackground("getUserSessionToken", withParameters: ["username" : email]) { (sessionToken, error) -> Void in
             if let sessionToken = sessionToken as? String {
-                println(sessionToken)
                 PFUser.becomeInBackground(sessionToken, block: { (user, error) -> Void in
                     if error == nil {
                         // Found user with sessionToken
                         println("Logged in user with session token")
+                        User.currentUser().name = name
+                        User.currentUser().imageUrl = image
+                        User.currentUser().aboutMe = aboutMe
+                        User.currentUser().saveInBackgroundWithBlock({ (success, error) -> Void in
+                            // Nothing now
+                        })
                         self.showEventsVC()
                     } else {
                         // Could not find user with sessionToken
@@ -66,8 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 user.name = name
                 user.imageUrl = image
                 user.aboutMe = aboutMe
-                
-                println(user)
                 
                 ParseClient.setUpUserWithCompletion(user, completion: { (user, error) -> () in
                     if error == nil {
