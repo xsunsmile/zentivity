@@ -17,6 +17,9 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var declinedUsers: NSMutableArray
     @NSManaged var comments: NSMutableArray?
     @NSManaged var photos: NSMutableArray?
+    @NSManaged var locationString: String?
+    @NSManaged var contactNumber: String?
+    @NSManaged var locationGeoPoint: PFGeoPoint?
     
     var invitedUsernames: [String]?
     var dateFormatter = NSDateFormatter()
