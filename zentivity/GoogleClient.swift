@@ -99,21 +99,11 @@ class GoogleClient: NSObject,
                 
                 let email = user.emails[0] as GTLPlusPersonEmailsItem
                 userInfo["email"] = email.value
-                if user.displayName != nil {
-                    userInfo["name"] = user.displayName
-                } else {
-                    userInfo["name"] = NSString(string: "")
-                }
-                if user.image != nil {
-                    userInfo["imageUrl"] = user.image.url
-                } else {
-                    userInfo["imageUrl"] = NSString(string: "")
-                }
-                if user.aboutMe != nil {
-                   userInfo["aboutMe"] = user.aboutMe
-                } else {
-                   userInfo["aboutMe"] = NSString(string: "")
-                }
+
+                userInfo["email"] = email.value
+                userInfo["name"] = (user.displayName != nil ? user.displayName : "")
+                userInfo["imageUrl"] = (user.image != nil ? user.image.url : "")
+                userInfo["aboutMe"] = (user.aboutMe != nil ? user.aboutMe : "")
                 completion(userInfo: userInfo, error: nil)
             }
         })
