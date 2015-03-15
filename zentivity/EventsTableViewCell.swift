@@ -13,8 +13,6 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventBackgroundImageView: UIImageView!
     @IBOutlet weak var gradientView: UIView!
-    @IBOutlet weak var joinNowBackgroundView: UIView!
-    @IBOutlet weak var joinButton: UIButton!
     
     let dateFormatter = NSDateFormatter()
     var eventImage: UIImage?
@@ -39,7 +37,7 @@ class EventsTableViewCell: BaseTableViewCell {
         gradient.colors = arrayColors
         gradientView.layer.insertSublayer(gradient, atIndex: 0)
         
-        ImageUtils.makeRoundCornerWithBorder(joinNowBackgroundView, borderColor: UIColor.whiteColor().CGColor, borderWidth: 3.0)
+        accessoryView?.backgroundColor = UIColor.clearColor()
         
         if User.currentUser() == nil {
             
@@ -54,35 +52,35 @@ class EventsTableViewCell: BaseTableViewCell {
         refresh()
     }
 
-    @IBAction func onJoin(sender: AnyObject) {
-        toggleJoin()
-    }
-    
-    func toggleJoin() {
-        let event = data as Event
-        User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
-            if state == kUserJoinEvent {
-                if success != nil {
-                    self.joinButton.setTitle("Cancel", forState: UIControlState.Normal)
-                    UIAlertView(
-                        title: "Great!",
-                        message: "See you at the event :)",
-                        delegate: self,
-                        cancelButtonTitle: "OK"
-                        ).show()
-                } else {
-                    UIAlertView(
-                        title: "Error",
-                        message: "Unable to join event.",
-                        delegate: self,
-                        cancelButtonTitle: "Well damn..."
-                        ).show()
-                }
-            } else {
-                self.joinButton.setTitle("Join Now", forState: UIControlState.Normal)
-            }
-        })
-    }
+//    @IBAction func onJoin(sender: AnyObject) {
+//        toggleJoin()
+//    }
+//    
+//    func toggleJoin() {
+//        let event = data as Event
+//        User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+//            if state == kUserJoinEvent {
+//                if success != nil {
+//                    self.joinButton.setTitle("Cancel", forState: UIControlState.Normal)
+//                    UIAlertView(
+//                        title: "Great!",
+//                        message: "See you at the event :)",
+//                        delegate: self,
+//                        cancelButtonTitle: "OK"
+//                        ).show()
+//                } else {
+//                    UIAlertView(
+//                        title: "Error",
+//                        message: "Unable to join event.",
+//                        delegate: self,
+//                        cancelButtonTitle: "Well damn..."
+//                        ).show()
+//                }
+//            } else {
+//                self.joinButton.setTitle("Join Now", forState: UIControlState.Normal)
+//            }
+//        })
+//    }
 
     override func refresh() {
         if data == nil {

@@ -80,6 +80,7 @@ class EventDetailViewController: UIViewController,
         
         imageShadowView.backgroundColor = UIColor.clearColor()
         gradient.frame = imageShadowView.bounds
+        gradient.frame.size.width = view.frame.width
         gradient.colors = arrayColors
         imageShadowView.layer.insertSublayer(gradient, atIndex: 0)
     }
@@ -250,6 +251,8 @@ class EventDetailViewController: UIViewController,
         } else if sender.state == .Changed {
             contentView.transform = CGAffineTransformTranslate(contentView.transform, 0,
                 (point.y - dragStartingPoint.y)/100)
+            backgroundImageView.transform = CGAffineTransformTranslate(backgroundImageView.transform, 0,
+                (point.y - dragStartingPoint.y)/50)
         } else if sender.state == .Ended {
             if direction == "up" {
                 animateHeaderViewUp()
@@ -263,6 +266,7 @@ class EventDetailViewController: UIViewController,
         UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
             let dy = self.view.frame.size.height - self.detailHeaderViewOriginFrame.size.height - self.contentViewOriginFrame.origin.y
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
+            self.backgroundImageView.transform = CGAffineTransformIdentity
             }) { (completed) -> Void in
                 if completed {
                 }
@@ -273,6 +277,7 @@ class EventDetailViewController: UIViewController,
         UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
             let dy = self.contentView.frame.size.height - (self.view.frame.size.height - self.detailHeaderViewOriginFrame.origin.y)
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
+            self.backgroundImageView.transform = CGAffineTransformMakeTranslation(0, dy/2)
             }) { (completed) -> Void in
                 if completed {
                 }
@@ -300,7 +305,7 @@ class EventDetailViewController: UIViewController,
         
         self.titleLabel.textColor = UIColor.blackColor()
         self.addressLabel.textColor = UIColor(rgba: "#7f7f7f")
-        self.phoneLabel.textColor = UIColor(rgba: "#7f7f7f")       
+        self.phoneLabel.textColor = UIColor(rgba: "#7f7f7f")
     }
     
     func setHeaderNewColor(color: UIColor!) {
