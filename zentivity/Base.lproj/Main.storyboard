@@ -68,8 +68,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="558"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-EE-lRe">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="AeM-6r-Oqh"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqE-LX-z6F">
                                 <rect key="frame" x="0.0" y="420" width="320" height="456"/>
@@ -245,12 +248,13 @@
                             </view>
                             <button opaque="NO" alpha="0.89999999999999991" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WG-FS-dAN">
                                 <rect key="frame" x="274" y="28" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.13356733630000001" green="0.72200966420000001" blue="0.97389914769999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="TwO-5e-DIw"/>
                                     <constraint firstAttribute="height" constant="30" id="ofG-vT-o7v"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="quit">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <state key="normal" title="x">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -261,7 +265,7 @@
                                 <rect key="frame" x="80" y="60" width="160" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LU-Lt-GOG">
-                                        <rect key="frame" x="60.5" y="15" width="38.5" height="20.5"/>
+                                        <rect key="frame" x="60" y="15" width="38.5" height="20.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Date">
                                                 <attributes>
@@ -293,7 +297,6 @@
                             <constraint firstItem="bLf-EE-lRe" firstAttribute="leading" secondItem="Si6-Ez-PMr" secondAttribute="leading" id="Ghx-WV-Mgr"/>
                             <constraint firstItem="9WG-FS-dAN" firstAttribute="top" secondItem="VNR-Bl-7GV" secondAttribute="bottom" constant="8" id="HHB-wH-MRP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hLU-JF-QGO" secondAttribute="trailing" constant="-16" id="KX8-UV-QnC"/>
-                            <constraint firstItem="rs8-d0-R4l" firstAttribute="top" secondItem="bLf-EE-lRe" secondAttribute="bottom" id="Kih-sd-71A"/>
                             <constraint firstItem="j39-fJ-UVM" firstAttribute="top" secondItem="Si6-Ez-PMr" secondAttribute="topMargin" constant="60" id="NtU-lI-iXW"/>
                             <constraint firstAttribute="trailing" secondItem="VqE-LX-z6F" secondAttribute="trailing" id="StS-RL-zzD"/>
                             <constraint firstAttribute="centerX" secondItem="j39-fJ-UVM" secondAttribute="centerX" id="UX7-Ye-c6u"/>
@@ -646,7 +649,6 @@
         <image name="menu_icon" width="25" height="20"/>
         <image name="noPhoto" width="120" height="120"/>
         <image name="phone" width="30" height="30"/>
-        <image name="quit" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

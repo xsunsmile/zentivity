@@ -30,6 +30,8 @@ class EventDetailViewController: UIViewController,
     
     var contentViewOriginFrame: CGRect!
     var detailHeaderViewOriginFrame: CGRect!
+    var dragStartingPoint: CGPoint!
+    var detailsIsOpen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +71,17 @@ class EventDetailViewController: UIViewController,
         
         contentViewOriginFrame = contentView.frame
         detailHeaderViewOriginFrame = eventHeaderView.frame
+        
+        let gradient = CAGradientLayer()
+        let arrayColors = [
+            UIColor(rgba: "#211F20").CGColor,
+            UIColor.clearColor().CGColor
+        ]
+        
+        imageShadowView.backgroundColor = UIColor.clearColor()
+        gradient.frame = imageShadowView.bounds
+        gradient.colors = arrayColors
+        imageShadowView.layer.insertSublayer(gradient, atIndex: 0)
     }
     
     func refresh() {
@@ -93,13 +106,8 @@ class EventDetailViewController: UIViewController,
         
         let currentUser = User.currentUser()
         if currentUser != nil {
-            if event.userJoined(User.currentUser()) {
-                joinButton.setTitle("Cancel", forState: UIControlState.Normal)
-                joinButton.backgroundColor = UIColor(rgba: "#3366cc")
-            } else {
-                joinButton.setTitle("Join", forState: UIControlState.Normal)
-                joinButton.backgroundColor = UIColor(rgba: "#dd4b39")
-            }
+            joinButton.backgroundColor = joinButtonColor()
+            joinButton.setTitle(joinButtonText(), forState: .Normal)
         } else {
             joinButton.setTitle("SignIn", forState: .Normal)
         }
@@ -134,10 +142,15 @@ class EventDetailViewController: UIViewController,
         }
         
         User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+            self.joinButton.backgroundColor = self.joinButtonColor()
+            self.joinButton.setTitle(self.joinButtonText(), forState: .Normal)
+            self.joinButton.setTitleColor(self.joinButtonTextColor(), forState: .Normal)
+            if self.detailsIsOpen {
+                self.setHeaderNewColor(self.joinButtonTextColor())
+            }
+            
             if state == kUserJoinEvent {
                 if success != nil {
-                    self.joinButton.setTitle("Cancel", forState: UIControlState.Normal)
-                    self.joinButton.backgroundColor = UIColor(rgba: "#3366cc")
                     UIAlertView(
                         title: "Great!",
                         message: "See you at the event :)",
@@ -153,11 +166,41 @@ class EventDetailViewController: UIViewController,
                         ).show()
                 }
             } else {
-                self.joinButton.setTitle("Join", forState: UIControlState.Normal)
-                self.joinButton.backgroundColor = UIColor(rgba: "#dd4b39")
             }
             self.reloadData()
         })
+    }
+    
+    func joinButtonText() -> NSString {
+        if event.userJoined(User.currentUser()) {
+            return "Cancel"
+        } else {
+            return "Join"
+        }
+    }
+    
+    func joinButtonColor() -> UIColor {
+        if detailsIsOpen {
+            return UIColor.whiteColor()
+        } else {
+            if event.userJoined(User.currentUser()) {
+                return UIColor(rgba: "#3366cc")
+            } else {
+                return UIColor(rgba: "#dd4b39")
+            }
+        }
+    }
+    
+    func joinButtonTextColor() -> UIColor {
+        if !detailsIsOpen {
+            return UIColor.whiteColor()
+        } else {
+            if event.userJoined(User.currentUser()) {
+                return UIColor(rgba: "#3366cc")
+            } else {
+                return UIColor(rgba: "#dd4b39")
+            }
+        }
     }
     
     func reloadData() {
@@ -191,13 +234,28 @@ class EventDetailViewController: UIViewController,
     }
     
     @IBAction func onDetailViewDrag(sender: UIPanGestureRecognizer) {
-        println("detected drag")
         let velocity = sender.velocityInView(view)
+        let point = sender.translationInView(view)
         
-        if velocity.y < 0 {
-            animateHeaderViewUp()
-        } else {
-            animateHeaderViewDown()
+        var direction = "up"
+        detailsIsOpen = true
+        if velocity.y > 0 {
+            direction = "down"
+            detailsIsOpen = false
+        }
+        
+        if sender.state == .Began {
+            animateHeaderColorChanges(direction)
+            dragStartingPoint = CGPoint(x: point.x, y: point.y)
+        } else if sender.state == .Changed {
+            contentView.transform = CGAffineTransformTranslate(contentView.transform, 0,
+                (point.y - dragStartingPoint.y)/100)
+        } else if sender.state == .Ended {
+            if direction == "up" {
+                animateHeaderViewUp()
+            } else {
+                animateHeaderViewDown()
+            }
         }
     }
     
@@ -205,10 +263,9 @@ class EventDetailViewController: UIViewController,
         UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
             let dy = self.view.frame.size.height - self.detailHeaderViewOriginFrame.size.height - self.contentViewOriginFrame.origin.y
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
-        }) { (completed) -> Void in
-            if completed {
-                
-            }
+            }) { (completed) -> Void in
+                if completed {
+                }
         }
     }
     
@@ -218,9 +275,40 @@ class EventDetailViewController: UIViewController,
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
             }) { (completed) -> Void in
                 if completed {
-                    
                 }
         }
+    }
+    
+    func animateHeaderColorChanges(direction: NSString) {
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            if direction == "up" {
+                self.joinButton.backgroundColor = UIColor.whiteColor()
+                self.joinButton.setTitleColor(self.joinButtonTextColor(), forState: .Normal)
+
+                self.setHeaderNewColor(self.joinButtonTextColor())
+            } else {
+                self.joinButton.backgroundColor = self.joinButtonColor()
+                self.joinButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+
+                self.setHeaderOriginColor()
+            }
+        })
+    }
+    
+    func setHeaderOriginColor() {
+        self.eventHeaderView.backgroundColor = UIColor.whiteColor()
+        
+        self.titleLabel.textColor = UIColor.blackColor()
+        self.addressLabel.textColor = UIColor(rgba: "#7f7f7f")
+        self.phoneLabel.textColor = UIColor(rgba: "#7f7f7f")       
+    }
+    
+    func setHeaderNewColor(color: UIColor!) {
+        self.eventHeaderView.backgroundColor = color
+        
+        self.titleLabel.textColor = UIColor.whiteColor()
+        self.addressLabel.textColor = UIColor.whiteColor()
+        self.phoneLabel.textColor = UIColor.whiteColor()
     }
     
     /*
