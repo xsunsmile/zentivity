@@ -12,7 +12,8 @@ import MapKit
 class EventDetailViewController: UIViewController,
                                  UICollectionViewDataSource,
                                  UICollectionViewDelegate,
-                                 UIScrollViewDelegate
+                                 UIScrollViewDelegate,
+                                 UIGestureRecognizerDelegate
 {
     
     var event: Event!
@@ -348,12 +349,26 @@ class EventDetailViewController: UIViewController,
         imageView.image = image
         imageView.clipsToBounds = true
         imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.userInteractionEnabled = true
+        
+        let tapGR = UITapGestureRecognizer(target: self, action: "onImageTap:")
+        tapGR.numberOfTapsRequired = 1
+        imageView.addGestureRecognizer(tapGR)
         
         imageScrollView.addSubview(imageView)
         imageScrollView.contentSize = CGSizeMake(imageWidth * CGFloat(numImages), imageHeight)
         
         if currentImageView == nil {
             currentImageView = imageView
+        }
+    }
+    
+    func onImageTap(tap: UITapGestureRecognizer) {
+        println("taped image")
+        if currentImageView != nil {
+            let descriptionView = UIView(frame: currentImageView!.frame)
+            descriptionView.backgroundColor = UIColor.blackColor()
+            currentImageView?.addSubview(descriptionView)
         }
     }
     
