@@ -45,8 +45,12 @@ class Event : PFObject, PFSubclassing {
         }
     }
     
-    func userJoined(user: User) -> Bool {
-        return confirmedUsers.containsObject(user)
+    func userJoined(user: User?) -> Bool {
+        if let user = user {
+            return confirmedUsers.containsObject(user)
+        } else {
+            return false
+        }
     }
     
     func startTimeWithFormat(format: NSString?) -> NSString {
