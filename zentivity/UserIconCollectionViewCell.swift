@@ -22,11 +22,6 @@ class UserIconCollectionViewCell: UICollectionViewCell {
                         let url = NSURL(string: user.imageUrl)
                         self.userImageView.setImageWithURL(url)
                     } else {
-//                        if user.name.length > 0 {
-//                            self.userNameLabel.text = user.name
-//                        } else {
-//                            self.userNameLabel.text = user.username
-//                        }
                         let initialsImage = user.initialsImageView(self.userImageView.frame.size)
                         self.userImageView.image = initialsImage
                     }

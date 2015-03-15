@@ -76,6 +76,8 @@ class EventDetailViewController: UIViewController,
         
         imagePageControl.hidden = true
         imagePageControl.currentPage = 0
+        
+        initMapView()
     }
     
     func refresh() {
@@ -137,6 +139,39 @@ class EventDetailViewController: UIViewController,
                 }
             }
         }
+    }
+    
+    func initMapView() {
+        let location = CLLocation(latitude: 37.782193, longitude: -122.410254)
+        // LocationUtils.sharedInstance.getPlacemarkFromLocationWithCompletion(location, completion: { (places, error) -> () in
+        //     if error == nil {
+        //         let pm = places as [CLPlacemark]
+        //         if pm.count > 0 {
+        //             println("got list of places: \(pm)")
+        //         }
+        //     } else {
+        //         println("Failed to get places: \(error)")
+        //     }
+        // })
+        
+        LocationUtils.sharedInstance.getGeocodeFromAddress("1019 Market Street, San Francisco, CA", completion: { (places, error) -> () in
+            if error == nil {
+                let places = places as [CLPlacemark]
+                let target = places.last
+                let span = MKCoordinateSpanMake(0.00725, 0.00725)
+                let center = CLLocationCoordinate2D(latitude: target!.location.coordinate.latitude, longitude: target!.location.coordinate.longitude)
+                var region = MKCoordinateRegion(center: center, span: span)
+                self.mapView.setRegion(region, animated: true)
+                
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = center
+                annotation.title = self.event.title
+                self.mapView.addAnnotation(annotation)
+                self.mapView.selectAnnotation(annotation, animated: true)
+            } else {
+                println("Failed to get places for address \(error)")
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {

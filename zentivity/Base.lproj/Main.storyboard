@@ -126,7 +126,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqE-LX-z6F">
-                                <rect key="frame" x="0.0" y="420" width="320" height="452"/>
+                                <rect key="frame" x="0.0" y="420" width="320" height="522"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWu-PZ-u61">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
@@ -206,20 +206,20 @@
                                         </constraints>
                                     </view>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="248" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cwn-wB-VV9">
-                                        <rect key="frame" x="0.0" y="75" width="320" height="130"/>
+                                        <rect key="frame" x="0.0" y="75" width="320" height="200"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="130" id="g8S-Jr-iyz"/>
+                                            <constraint firstAttribute="height" constant="200" id="g8S-Jr-iyz"/>
                                         </constraints>
                                     </mapView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wlg-BP-qdG">
-                                        <rect key="frame" x="0.0" y="205" width="320" height="247"/>
+                                        <rect key="frame" x="0.0" y="275" width="320" height="247"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="247" id="2Xv-pc-FbC"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wvq-YS-NhE">
                                             <size key="itemSize" width="50" height="50"/>
-                                            <size key="headerReferenceSize" width="50" height="21"/>
+                                            <size key="headerReferenceSize" width="50" height="40"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                         </collectionViewFlowLayout>
@@ -264,15 +264,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attendess" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIO-qN-gh6">
-                                                    <rect key="frame" x="127" y="2" width="66.5" height="17"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <rect key="frame" x="10" y="11" width="65" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="nIO-qN-gh6" firstAttribute="leading" secondItem="lsS-l8-aJy" secondAttribute="leadingMargin" constant="2" id="8b8-YX-UJu"/>
                                                 <constraint firstAttribute="centerY" secondItem="nIO-qN-gh6" secondAttribute="centerY" id="ZLP-Uh-IKj"/>
-                                                <constraint firstAttribute="centerX" secondItem="nIO-qN-gh6" secondAttribute="centerX" id="shC-Se-Yx6"/>
                                             </constraints>
                                         </collectionReusableView>
                                     </collectionView>

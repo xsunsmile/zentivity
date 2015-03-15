@@ -114,8 +114,19 @@ class User : PFUser, PFSubclassing {
     }
     
     func initialsImageView(imageSize: CGSize!) -> UIImage {
-        println("user name is \(name)")
-        let initials = UserInitialsView.initialsForFirstName("Vijay", lastName: "Mani")
+        let names = name.componentsSeparatedByString(" ")
+        
+        var firstName: NSString?
+        var lastName: NSString?
+        if names.count >= 2 {
+            firstName = names.first as? NSString
+            lastName = names.last as? NSString
+        } else {
+            firstName = name
+            lastName = name
+        }
+        
+        let initials = UserInitialsView.initialsForFirstName(firstName, lastName: lastName)
         let frame = CGRectMake(0, 0, imageSize.width, imageSize.height)
         let initView = UserInitialsView(frame: frame, initials: initials, fontSize: 12, drawOffsetFromCenter: CGPointZero)
         return initView.convertToImage()

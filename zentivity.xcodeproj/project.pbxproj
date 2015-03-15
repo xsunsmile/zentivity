@@ -31,6 +31,7 @@
 		931567861AB4CA5000D279EF /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931567851AB4CA5000D279EF /* ShadowButton.swift */; };
 		9315678A1AB5E90500D279EF /* UserInitialsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 931567891AB5E90500D279EF /* UserInitialsView.m */; };
 		9315678E1AB5F5A400D279EF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9315678D1AB5F5A400D279EF /* UIViewExtension.swift */; };
+		931567901AB6313100D279EF /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9315678F1AB6313100D279EF /* LocationUtils.swift */; };
 		934CB3941AB0013900722545 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934CB3931AB0013900722545 /* UserProfileViewController.swift */; };
 		934CB3961AB0066800722545 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934CB3951AB0066800722545 /* EventTableViewCell.xib */; };
 		934CB3981AB007D300722545 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934CB3971AB007D300722545 /* EventTableViewCell.swift */; };
@@ -105,6 +106,7 @@
 		931567881AB5E90500D279EF /* UserInitialsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInitialsView.h; sourceTree = "<group>"; };
 		931567891AB5E90500D279EF /* UserInitialsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInitialsView.m; sourceTree = "<group>"; };
 		9315678D1AB5F5A400D279EF /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		9315678F1AB6313100D279EF /* LocationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
 		934CB3931AB0013900722545 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		934CB3951AB0066800722545 /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		934CB3971AB007D300722545 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				93A4577A1AB12F9E009F3A5C /* ImageUtils.swift */,
+				9315678F1AB6313100D279EF /* LocationUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				9315678E1AB5F5A400D279EF /* UIViewExtension.swift in Sources */,
 				687D787F1AACE92500E5605C /* User.swift in Sources */,
 				549113AD1AA98DD000000861 /* MenuTableViewCell.swift in Sources */,
+				931567901AB6313100D279EF /* LocationUtils.swift in Sources */,
 				935B4BFF1AAD1B3200D3425F /* EventsViewController.swift in Sources */,
 				93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */,
 				934CB3941AB0013900722545 /* UserProfileViewController.swift in Sources */,
