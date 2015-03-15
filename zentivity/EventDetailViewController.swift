@@ -11,12 +11,12 @@ import MapKit
 
 class EventDetailViewController: UIViewController,
                                  UICollectionViewDataSource,
-                                 UICollectionViewDelegate
+                                 UICollectionViewDelegate,
+                                 UIScrollViewDelegate
 {
     
     var event: Event!
 
-    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var imageShadowView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var eventHeaderView: UIView!
@@ -27,11 +27,15 @@ class EventDetailViewController: UIViewController,
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var usersGridView: UICollectionView!
     @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var imageScrollView: UIScrollView!
+    @IBOutlet weak var imagePageControl: UIPageControl!
     
     var contentViewOriginFrame: CGRect!
     var detailHeaderViewOriginFrame: CGRect!
     var dragStartingPoint: CGPoint!
     var detailsIsOpen = false
+    var currentImageView: UIImageView?
+    var eventImages: [UIImage]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +49,10 @@ class EventDetailViewController: UIViewController,
     }
     
     func initSubviews() {
+        eventImages = []
+        
         let leftConstraint = NSLayoutConstraint(
-            item: contentView,
+            item: imageScrollView,
             attribute: .Leading,
             relatedBy: .Equal,
             toItem: view,
@@ -55,7 +61,7 @@ class EventDetailViewController: UIViewController,
             constant: 0)
         
         let rightConstraint = NSLayoutConstraint(
-            item: contentView,
+            item: imageScrollView,
             attribute: .Trailing,
             relatedBy: .Equal,
             toItem: view,
@@ -83,6 +89,9 @@ class EventDetailViewController: UIViewController,
         gradient.frame.size.width = view.frame.width
         gradient.colors = arrayColors
         imageShadowView.layer.insertSublayer(gradient, atIndex: 0)
+        
+        imageScrollView.delegate = self
+        imagePageControl.hidden = true
     }
     
     func refresh() {
@@ -117,19 +126,33 @@ class EventDetailViewController: UIViewController,
     }
     
     func setupBackgroundImageView() {
+        if eventImages?.count == event.photos?.count {
+            return
+        }
+        eventImages?.removeAll(keepCapacity: true)
+        println("add event photos: \(event.photos?.count)")
+        
         if event.photos?.count > 0 {
-            let photo = event.photos![0] as Photo
-            photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
-                let p = photo as Photo
-                p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
-                    println("fetch photo again!!!")
-                    if imageData != nil {
-                        self.backgroundImageView.image = UIImage(data:imageData)
-                    } else {
-                        println("Failed to download image data")
-                    }
-                })
+            for photo in event.photos! {
+                let photo = photo as Photo
+                photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
+                    let p = photo as Photo
+                    p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                        if imageData != nil {
+                            println("Got a new photo")
+                            let image = UIImage(data:imageData)
+                            self.eventImages?.append(image!)
+                            self.addBackgroundImage(image!)
+                        } else {
+                            println("Failed to download image data")
+                        }
+                    })
+                }
             }
+            
+            imagePageControl.hidden = false
+            imagePageControl.numberOfPages = eventImages!.count
+            imagePageControl.currentPage = 0
         }
     }
     
@@ -251,8 +274,10 @@ class EventDetailViewController: UIViewController,
         } else if sender.state == .Changed {
             contentView.transform = CGAffineTransformTranslate(contentView.transform, 0,
                 (point.y - dragStartingPoint.y)/100)
-            backgroundImageView.transform = CGAffineTransformTranslate(backgroundImageView.transform, 0,
-                (point.y - dragStartingPoint.y)/50)
+            if currentImageView != nil {
+                currentImageView?.transform = CGAffineTransformTranslate(currentImageView!.transform, 0,
+                    (point.y - dragStartingPoint.y)/50)
+            }
         } else if sender.state == .Ended {
             if direction == "up" {
                 animateHeaderViewUp()
@@ -266,7 +291,9 @@ class EventDetailViewController: UIViewController,
         UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
             let dy = self.view.frame.size.height - self.detailHeaderViewOriginFrame.size.height - self.contentViewOriginFrame.origin.y
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
-            self.backgroundImageView.transform = CGAffineTransformIdentity
+            if self.currentImageView != nil {
+                self.currentImageView?.transform = CGAffineTransformIdentity
+            }
             }) { (completed) -> Void in
                 if completed {
                 }
@@ -277,7 +304,9 @@ class EventDetailViewController: UIViewController,
         UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
             let dy = self.contentView.frame.size.height - (self.view.frame.size.height - self.detailHeaderViewOriginFrame.origin.y)
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
-            self.backgroundImageView.transform = CGAffineTransformMakeTranslation(0, dy/2)
+            if self.currentImageView != nil {
+                self.currentImageView?.transform = CGAffineTransformMakeTranslation(0, dy/2)
+            }
             }) { (completed) -> Void in
                 if completed {
                 }
@@ -289,12 +318,12 @@ class EventDetailViewController: UIViewController,
             if direction == "up" {
                 self.joinButton.backgroundColor = UIColor.whiteColor()
                 self.joinButton.setTitleColor(self.joinButtonTextColor(), forState: .Normal)
-
+                
                 self.setHeaderNewColor(self.joinButtonTextColor())
             } else {
                 self.joinButton.backgroundColor = self.joinButtonColor()
                 self.joinButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-
+                
                 self.setHeaderOriginColor()
             }
         })
@@ -314,6 +343,40 @@ class EventDetailViewController: UIViewController,
         self.titleLabel.textColor = UIColor.whiteColor()
         self.addressLabel.textColor = UIColor.whiteColor()
         self.phoneLabel.textColor = UIColor.whiteColor()
+    }
+    
+    func addBackgroundImage(image: UIImage!) {
+        let imageSize = view.frame.size.width
+        let xPosition = imageSize * CGFloat(eventImages!.count)
+        let mainFrame = CGRectMake(xPosition, view.frame.size.height, imageSize, view.frame.size.height)
+        
+        let imageView = UIImageView(frame: mainFrame)
+        imageView.image = image
+        imageView.clipsToBounds = true
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        println("add background image: \(mainFrame)")
+        
+        imageScrollView.addSubview(imageView)
+        imageScrollView.contentSize = mainFrame.size
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let pageSize: Float = Float(view.bounds.size.width)
+        var page: Float = floorf((Float(scrollView.contentOffset.x) - pageSize / 2.0) / pageSize) + 1
+        let numPages = eventImages?.count
+        
+        if (page >= Float(numPages!)) {
+            page = Float(numPages!) - 1
+        } else if (page < 0) {
+            page = 0
+        }
+        
+        imagePageControl.currentPage = Int(page)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent;
     }
     
     /*

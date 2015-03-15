@@ -101,7 +101,6 @@ class EventsTableViewCell: BaseTableViewCell {
             photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
                 let p = photo as Photo
                 p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
-                    println("fetch photo again!!!")
                     if imageData != nil {
                         self.eventBackgroundImageView.image = UIImage(data:imageData)
                         self.eventImage = self.eventBackgroundImageView.image
