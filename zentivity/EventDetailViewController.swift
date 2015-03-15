@@ -50,27 +50,8 @@ class EventDetailViewController: UIViewController,
     
     func initSubviews() {
         eventImages = []
-        
-        let leftConstraint = NSLayoutConstraint(
-            item: imageScrollView,
-            attribute: .Leading,
-            relatedBy: .Equal,
-            toItem: view,
-            attribute: .Left,
-            multiplier: 1.0,
-            constant: 0)
-        
-        let rightConstraint = NSLayoutConstraint(
-            item: imageScrollView,
-            attribute: .Trailing,
-            relatedBy: .Equal,
-            toItem: view,
-            attribute: .Right,
-            multiplier: 1.0,
-            constant: 0)
-        
-        view.addConstraint(leftConstraint)
-        view.addConstraint(rightConstraint)
+        imageScrollView.contentSize = CGSizeMake(view.frame.size.width*3, view.frame.size.height)
+        imageScrollView.scrollsToTop = false
         
         usersGridView.delegate = self
         usersGridView.dataSource = self
@@ -91,7 +72,9 @@ class EventDetailViewController: UIViewController,
         imageShadowView.layer.insertSublayer(gradient, atIndex: 0)
         
         imageScrollView.delegate = self
+        
         imagePageControl.hidden = true
+        imagePageControl.currentPage = 0
     }
     
     func refresh() {
@@ -129,10 +112,13 @@ class EventDetailViewController: UIViewController,
         if eventImages?.count == event.photos?.count {
             return
         }
+       
         eventImages?.removeAll(keepCapacity: true)
-        println("add event photos: \(event.photos?.count)")
-        
         if event.photos?.count > 0 {
+            for subview in imageScrollView.subviews {
+                subview.removeFromSuperview()
+            }
+ 
             for photo in event.photos! {
                 let photo = photo as Photo
                 photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
@@ -150,9 +136,7 @@ class EventDetailViewController: UIViewController,
                 }
             }
             
-            imagePageControl.hidden = false
-            imagePageControl.numberOfPages = eventImages!.count
-            imagePageControl.currentPage = 0
+
         }
     }
     
@@ -277,6 +261,8 @@ class EventDetailViewController: UIViewController,
             if currentImageView != nil {
                 currentImageView?.transform = CGAffineTransformTranslate(currentImageView!.transform, 0,
                     (point.y - dragStartingPoint.y)/50)
+            } else {
+                println("current image view is empty during dragging")
             }
         } else if sender.state == .Ended {
             if direction == "up" {
@@ -306,6 +292,8 @@ class EventDetailViewController: UIViewController,
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
             if self.currentImageView != nil {
                 self.currentImageView?.transform = CGAffineTransformMakeTranslation(0, dy/2)
+            } else {
+                println("current image view is empty")
             }
             }) { (completed) -> Void in
                 if completed {
@@ -346,19 +334,27 @@ class EventDetailViewController: UIViewController,
     }
     
     func addBackgroundImage(image: UIImage!) {
-        let imageSize = view.frame.size.width
-        let xPosition = imageSize * CGFloat(eventImages!.count)
-        let mainFrame = CGRectMake(xPosition, view.frame.size.height, imageSize, view.frame.size.height)
+        let numImages = eventImages!.count
+        imagePageControl.hidden = false
+        imagePageControl.numberOfPages = numImages
+        
+        let imageWidth = view.frame.size.width
+        let imageHeight = view.frame.size.height
+        
+        let xPosition = imageWidth * CGFloat(numImages - 1)
+        let mainFrame = CGRectMake(xPosition, 0, imageWidth, imageHeight)
         
         let imageView = UIImageView(frame: mainFrame)
         imageView.image = image
         imageView.clipsToBounds = true
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        
-        println("add background image: \(mainFrame)")
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
         
         imageScrollView.addSubview(imageView)
-        imageScrollView.contentSize = mainFrame.size
+        imageScrollView.contentSize = CGSizeMake(imageWidth * CGFloat(numImages), imageHeight)
+        
+        if currentImageView == nil {
+            currentImageView = imageView
+        }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -373,6 +369,9 @@ class EventDetailViewController: UIViewController,
         }
         
         imagePageControl.currentPage = Int(page)
+        if Int(page) > 0 && imageScrollView.subviews.count > Int(page) {
+            currentImageView = imageScrollView.subviews[Int(page)] as? UIImageView
+        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
