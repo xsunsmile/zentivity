@@ -418,6 +418,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="gFa-tz-hAQ">
                                 <rect key="frame" x="16" y="80" width="75" height="75"/>
+                                <color key="tintColor" red="0.13333333333333333" green="0.72156862745098038" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="8Yn-cP-3uN"/>
                                     <constraint firstAttribute="height" constant="75" id="f32-Zo-F4H"/>

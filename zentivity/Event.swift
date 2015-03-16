@@ -20,6 +20,7 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var locationString: String?
     @NSManaged var contactNumber: String?
     @NSManaged var locationGeoPoint: PFGeoPoint?
+    @NSManaged var categories: NSMutableArray
     
     var invitedUsernames: [String]?
     var dateFormatter = NSDateFormatter()

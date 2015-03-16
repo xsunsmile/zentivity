@@ -13,35 +13,62 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventBackgroundImageView: UIImageView!
     @IBOutlet weak var gradientView: UIView!
+    @IBOutlet weak var shadowView: UIView!
+    @IBOutlet weak var joinView: UIView!
+    @IBOutlet weak var categoryView: UIView!
+    @IBOutlet weak var joinLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     let dateFormatter = NSDateFormatter()
     var eventImage: UIImage?
+    var colors = ["#31b639", "#ffcf00", "#c61800", "1851ce"]
+    var appliedGradient = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         
         initSubviews()
         refresh()
     }
     
     func initSubviews() {
-        let gradient = CAGradientLayer()
-        let arrayColors = [
-            UIColor.clearColor().CGColor,
-            UIColor(rgba: "#211F20").CGColor
-        ]
- 
-        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        gradientView.backgroundColor = UIColor.clearColor()
-        gradient.frame = gradientView.bounds
-        gradient.colors = arrayColors
-        gradientView.layer.insertSublayer(gradient, atIndex: 0)
+        var color = colors[Int(arc4random_uniform(UInt32(colors.count)))]
+        shadowView.layer.shadowColor = UIColor.blackColor().CGColor
+        shadowView.layer.shadowOpacity = 0.7
+        shadowView.layer.shadowOffset = CGSizeMake(-1, 1)
+        shadowView.layer.shadowRadius = 1
         
-        accessoryView?.backgroundColor = UIColor.clearColor()
+        let borderWidth = CGFloat(1.0)
+        let borderColor = UIColor(rgba: "#efefef").CGColor
         
-        if User.currentUser() == nil {
-            
-        }
+        var rightBorder = CALayer()
+        rightBorder.borderColor = borderColor
+        rightBorder.frame = CGRect(x: joinView.frame.size.width - borderWidth, y: 0, width: borderWidth, height: joinView.frame.size.height)
+        rightBorder.borderWidth = borderWidth
+        
+        var topBorder = CALayer()
+        topBorder.borderColor = borderColor
+        topBorder.frame = CGRect(x: 0, y: borderWidth, width: joinView.frame.size.width, height: borderWidth)
+        topBorder.borderWidth = borderWidth
+        
+        joinView.layer.addSublayer(topBorder)
+        joinView.layer.addSublayer(rightBorder)
+        
+        joinView.layer.masksToBounds = true
+        
+        topBorder = CALayer()
+        topBorder.borderColor = borderColor
+        topBorder.frame = CGRect(x: 0, y: borderWidth, width: categoryView.frame.size.width, height: borderWidth)
+        topBorder.borderWidth = borderWidth
+        
+        categoryView.layer.addSublayer(topBorder)
+        
+        categoryView.layer.masksToBounds = true
+        
+        let tapGR = UITapGestureRecognizer(target: self, action: "onJoinTap:")
+        tapGR.numberOfTapsRequired = 1
+        joinView.addGestureRecognizer(tapGR)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -51,36 +78,37 @@ class EventsTableViewCell: BaseTableViewCell {
     override func onDataSet(data: AnyObject!) {
         refresh()
     }
+    
+    func onJoinTap(tapGR: UITapGestureRecognizer) {
+        println("Join is tapped")
+        toggleJoin()
+    }
 
-//    @IBAction func onJoin(sender: AnyObject) {
-//        toggleJoin()
-//    }
-//    
-//    func toggleJoin() {
-//        let event = data as Event
-//        User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
-//            if state == kUserJoinEvent {
-//                if success != nil {
-//                    self.joinButton.setTitle("Cancel", forState: UIControlState.Normal)
-//                    UIAlertView(
-//                        title: "Great!",
-//                        message: "See you at the event :)",
-//                        delegate: self,
-//                        cancelButtonTitle: "OK"
-//                        ).show()
-//                } else {
-//                    UIAlertView(
-//                        title: "Error",
-//                        message: "Unable to join event.",
-//                        delegate: self,
-//                        cancelButtonTitle: "Well damn..."
-//                        ).show()
-//                }
-//            } else {
-//                self.joinButton.setTitle("Join Now", forState: UIControlState.Normal)
-//            }
-//        })
-//    }
+    func toggleJoin() {
+        let event = data as Event
+        User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+            if state == kUserJoinEvent {
+                if success != nil {
+                    self.joinLabel.text = "Cancel"
+                    UIAlertView(
+                        title: "Great!",
+                        message: "See you at the event :)",
+                        delegate: self,
+                        cancelButtonTitle: "OK"
+                        ).show()
+                } else {
+                    UIAlertView(
+                        title: "Error",
+                        message: "Unable to join event.",
+                        delegate: self,
+                        cancelButtonTitle: "Well damn..."
+                        ).show()
+                }
+            } else {
+                self.joinLabel.text = "Join"
+            }
+        })
+    }
 
     override func refresh() {
         if data == nil {
@@ -111,6 +139,31 @@ class EventsTableViewCell: BaseTableViewCell {
             }
         } else {
             eventBackgroundImageView.image = UIImage(named: "activity1")
+        }
+        
+        if event.categories.count > 0 {
+            categoryLabel.text = event.categories[0] as NSString
+        }
+    }
+    
+    func applyGradient() {
+        let gradient = CAGradientLayer()
+        let arrayColors = [
+            UIColor.clearColor().CGColor,
+            UIColor(rgba: "#211F20").CGColor
+        ]
+        
+        gradientView.backgroundColor = UIColor.clearColor()
+        gradient.frame = gradientView.bounds
+        gradient.colors = arrayColors
+        gradientView.layer.insertSublayer(gradient, atIndex: 0)
+    }
+    
+    override func layoutSubviews() {
+//        refresh()
+        if !appliedGradient {
+//            applyGradient()
+            appliedGradient = true
         }
     }
 }

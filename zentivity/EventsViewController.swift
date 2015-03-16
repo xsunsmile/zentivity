@@ -17,7 +17,7 @@ class EventsViewController: UIViewController,
     
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
-    let cellHeight = CGFloat(250)
+    let cellHeight = CGFloat(150)
 
     override func viewDidLoad() {
         super.viewDidLoad()
