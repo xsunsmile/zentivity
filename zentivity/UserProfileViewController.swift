@@ -87,6 +87,13 @@ class UserProfileViewController: UIViewController,
         performSegueWithIdentifier("viewEventDetailSegue", sender: self)
     }
     
+    @IBAction func onSignOut(sender: UIBarButtonItem) {
+        User.logOut()
+        User.logoutWithCompletion { (completed) -> Void in
+            println("logout user: \(completed)")
+        }
+    }
+    
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -465,7 +465,13 @@
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="IA6-lN-NN3" secondAttribute="trailing" constant="8" id="yp2-Rn-ZrQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="VgU-y0-xNM"/>
+                    <navigationItem key="navigationItem" id="VgU-y0-xNM">
+                        <barButtonItem key="leftBarButtonItem" title="SignOut" id="KRy-Ga-8T8">
+                            <connections>
+                                <action selector="onSignOut:" destination="wlY-GJ-AqW" id="viD-FL-Zoy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="profileContactInfo" destination="wYx-Br-Jmo" id="de6-Ij-Hhe"/>
                         <outlet property="profileImageView" destination="gFa-tz-hAQ" id="Y16-d0-M1S"/>
