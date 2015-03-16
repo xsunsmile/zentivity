@@ -13,6 +13,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     var isEditingStartDate = false
     var isEditingEndDate = false
     
+    @IBOutlet var eventTable: UITableView!
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
     @IBOutlet weak var startTimeLabel: UILabel!
@@ -45,12 +46,15 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         dateFormatter.dateFormat = "MMM d, yyyy @ hh:mm a"
         dateFormatter.timeZone = NSTimeZone.localTimeZone()
         
-        startTimePickerCell.clipsToBounds = true
-        endTimePickerCell.clipsToBounds = true
+//        eventTable.rowHeight = UITableViewAutomaticDimension
+//        
+//        startTimePickerCell.clipsToBounds = true
+//        endTimePickerCell.clipsToBounds = true
         
-        startTimePickerCell.bounds = CGRect(x: startTimePickerCell.center.x, y:
-            startTimePickerCell.center.y, width: startTimePickerCell.bounds.width, height: 0)
-        endTimePickerCell.bounds = CGRect(x: endTimePickerCell.center.x, y: endTimePickerCell.center.y, width: endTimePickerCell.bounds.width, height: 0)
+//        startTimePickerCell.bounds = CGRect(x: startTimePickerCell.center.x, y:
+//            startTimePickerCell.center.y, width: startTimePickerCell.bounds.width, height: 0)
+//        endTimePickerCell.bounds = CGRect(x: endTimePickerCell.center.x, y: endTimePickerCell.center.y, width: endTimePickerCell.bounds.width, height: 0)
+        
         
         photosCollection.delegate = self
         photosCollection.dataSource = self
@@ -58,9 +62,9 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
     }
     
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 //        var cell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
-//        
+        
 //        if cell.tag == 4 {
 //            return isEditingStartDate == true ? 162 : 0
 //        } else if cell.tag == 6 {
@@ -68,7 +72,20 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
 //        } else {
 //            return 44
 //        }
-//    }
+        var height = super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        
+        if indexPath.section == 0 {
+            if indexPath.row == 3 {
+                return isEditingStartDate == true ? 162 : 0
+            } else if indexPath.row == 5 {
+                return isEditingEndDate == true ? 162 : 0
+            } else {
+                return height
+            }
+        } else {
+            return height
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -92,11 +109,29 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     }
     
     @IBAction func startDateCellTapped(sender: UITapGestureRecognizer) {
+        var state = true
+        
+        if isEditingStartDate { state = false }
+        
         view.endEditing(true)
+        isEditingStartDate = state
+        isEditingEndDate = false
+        eventTable.beginUpdates()
+        eventTable.reloadData()
+        eventTable.endUpdates()
     }
     
     @IBAction func endDateCellTapped(sender: UITapGestureRecognizer) {
+        var state = true
+        
+        if isEditingEndDate { state = false }
+        
         view.endEditing(true)
+        isEditingStartDate = false
+        isEditingEndDate = state
+        eventTable.beginUpdates()
+        eventTable.reloadData()
+        eventTable.endUpdates()
     }
     
     @IBAction func onStartDateChanged(sender: UIDatePicker) {
@@ -163,12 +198,12 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
             var imageView = UIImageView(image: photos[indexPath.row])
             imageView.frame.size = CGSize(width: 45, height: 45)
             cell.addSubview(imageView)
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.lightGrayColor().CGColor
         } else {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("addActionCell", forIndexPath: indexPath) as UICollectionViewCell
         }
         
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
         cell.layer.cornerRadius = 3
         cell.clipsToBounds = true
         
