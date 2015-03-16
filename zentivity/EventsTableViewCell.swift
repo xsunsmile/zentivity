@@ -20,7 +20,6 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var categoryLabel: UILabel!
     
     let dateFormatter = NSDateFormatter()
-    var eventImage: UIImage?
     var colors = ["#31b639", "#ffcf00", "#c61800", "1851ce"]
     var appliedGradient = false
 
@@ -120,10 +119,6 @@ class EventsTableViewCell: BaseTableViewCell {
         eventNameLabel.text = event.getTitle()
         eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
 
-        if eventImage != nil {
-            return
-        }
-        
         if event.photos?.count > 0 {
             let photo = event.photos![0] as Photo
             photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
@@ -131,14 +126,13 @@ class EventsTableViewCell: BaseTableViewCell {
                 p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                     if imageData != nil {
                         self.eventBackgroundImageView.image = UIImage(data:imageData)
-                        self.eventImage = self.eventBackgroundImageView.image
                     } else {
                         println("Failed to download image data")
                     }
                 })
             }
         } else {
-            eventBackgroundImageView.image = UIImage(named: "activity1")
+            eventBackgroundImageView.image = UIImage(named: "noPhoto")
         }
         
         var cati = ""
@@ -161,11 +155,7 @@ class EventsTableViewCell: BaseTableViewCell {
         gradientView.layer.insertSublayer(gradient, atIndex: 0)
     }
     
-    override func layoutSubviews() {
-//        refresh()
-        if !appliedGradient {
-//            applyGradient()
-            appliedGradient = true
-        }
+    override func prepareForReuse() {
+        eventBackgroundImageView.image = nil
     }
 }
