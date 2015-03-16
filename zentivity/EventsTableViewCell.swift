@@ -132,7 +132,7 @@ class EventsTableViewCell: BaseTableViewCell {
                 })
             }
         } else {
-            eventBackgroundImageView.image = UIImage(named: "noPhoto")
+            eventBackgroundImageView.image = UIImage(named: "noActivity")
         }
         
         var cati = ""
