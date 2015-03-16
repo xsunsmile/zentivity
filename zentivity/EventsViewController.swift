@@ -39,8 +39,10 @@ class EventsViewController: UIViewController,
         
         var searchBarHeight = navigationController?.navigationBar.frame.height
         var searchBar = UISearchBar(frame: CGRectMake(0, 0, view.frame.size.width * 0.8, searchBarHeight! * 0.6))
+        
+//        searchBar.translucent = true
+//        searchBar.backgroundColor = UIColor.clearColor()
 //        searchBar.delegate = self
-//        searchBar.backgroundColor = UIColor.greenColor()
         
 //        var searchField = searchBar.valueForKey("_searchField") as UITextField
 //        searchField.backgroundColor = UIColor.grayColor()
@@ -91,6 +93,10 @@ class EventsViewController: UIViewController,
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
         println("cell is selected \(indexPath.row)")
         performSegueWithIdentifier("viewEventDetailSegue", sender: self)
+    }
+    
+    @IBAction func onAddEventPress(sender: ShadowButton) {
+        performSegueWithIdentifier("newEventSegue", sender: self)
     }
     
     // MARK: - Navigation

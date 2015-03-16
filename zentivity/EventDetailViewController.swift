@@ -31,6 +31,8 @@ class EventDetailViewController: UIViewController,
     @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var imagePageControl: UIPageControl!
     
+    @IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+    
     var contentViewOriginFrame: CGRect!
     var detailHeaderViewOriginFrame: CGRect!
     var dragStartingPoint: CGPoint!
@@ -38,6 +40,7 @@ class EventDetailViewController: UIViewController,
     var currentImageView: UIImageView?
     var eventImages: [UIImage]?
     var addressPlaceHolder = "1019 Market Street, San Francisco, CA"
+    var didInitialAnimation = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +49,15 @@ class EventDetailViewController: UIViewController,
         refresh()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        animateHeaderViewDown()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+ 
+        if !didInitialAnimation {
+            contentViewOriginFrame = contentView.frame
+            detailHeaderViewOriginFrame = eventHeaderView.frame
+            animateHeaderViewDown()
+            didInitialAnimation = true
+        }
     }
     
     func initSubviews() {
@@ -57,10 +67,7 @@ class EventDetailViewController: UIViewController,
         
         usersGridView.delegate = self
         usersGridView.dataSource = self
-        
-        contentViewOriginFrame = contentView.frame
-        detailHeaderViewOriginFrame = eventHeaderView.frame
-        
+       
         let gradient = CAGradientLayer()
         let arrayColors = [
             UIColor(rgba: "#211F20").CGColor,
@@ -180,11 +187,11 @@ class EventDetailViewController: UIViewController,
                 var region = MKCoordinateRegion(center: center, span: span)
                 self.mapView.setRegion(region, animated: true)
                 
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = center
-                annotation.title = self.event.title
-                self.mapView.addAnnotation(annotation)
-                self.mapView.selectAnnotation(annotation, animated: true)
+//                let annotation = MKPointAnnotation()
+//                annotation.coordinate = center
+//                annotation.title = self.event.title
+//                self.mapView.addAnnotation(annotation)
+//                self.mapView.selectAnnotation(annotation, animated: true)
             } else {
                 println("Failed to get places for address \(error)")
             }
