@@ -897,10 +897,83 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Photos" id="2eX-LJ-nGI" userLabel="Photos">
                                 <cells>
-                                    <tableViewCell tag="7" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="ZSR-5g-J15" userLabel="Photos">
+                                    <tableViewCell tag="7" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="110" id="ZSR-5g-J15" userLabel="Photos">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZSR-5g-J15" id="9ge-l8-CKl">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KZP-8p-E3b">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="110" id="4Bm-RO-Ksf"/>
+                                                    </constraints>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="jFe-ig-wxv">
+                                                        <size key="itemSize" width="45" height="45"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="5" minY="3" maxX="5" maxY="3"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="44t-te-LSl" customClass="PhotoCollectionViewCell" customModule="zentivity" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lCI-Uf-SyJ">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                                    </imageView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </view>
+                                                            <constraints>
+                                                                <constraint firstItem="lCI-Uf-SyJ" firstAttribute="leading" secondItem="44t-te-LSl" secondAttribute="leading" id="0cd-gy-0hy"/>
+                                                                <constraint firstItem="lCI-Uf-SyJ" firstAttribute="top" secondItem="44t-te-LSl" secondAttribute="top" id="5sW-6x-ttP"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="lCI-Uf-SyJ" secondAttribute="trailing" constant="-8" id="YG1-9g-GeY"/>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="lCI-Uf-SyJ" secondAttribute="bottom" constant="-8" id="vOj-a8-KVb"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="photoImage" destination="lCI-Uf-SyJ" id="mAr-T3-Ec7"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="addActionCell" id="UBA-Cg-Z8q">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1q-ws-b5Z">
+                                                                        <rect key="frame" x="14" y="2" width="18" height="36"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                                        <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </view>
+                                                            <gestureRecognizers/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="centerY" secondItem="g1q-ws-b5Z" secondAttribute="centerY" constant="2" id="M1S-tf-ReJ"/>
+                                                                <constraint firstAttribute="centerX" secondItem="g1q-ws-b5Z" secondAttribute="centerX" id="PAx-fD-wxb"/>
+                                                                <constraint firstAttribute="centerX" secondItem="g1q-ws-b5Z" secondAttribute="centerX" id="Ryd-Z8-RBt"/>
+                                                                <constraint firstAttribute="centerX" secondItem="g1q-ws-b5Z" secondAttribute="centerX" id="sj5-jX-BX3"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outletCollection property="gestureRecognizers" destination="08J-zH-0Dl" appends="YES" id="Y0s-8U-5G5"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                </collectionView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KZP-8p-E3b" firstAttribute="leading" secondItem="9ge-l8-CKl" secondAttribute="leading" id="YWH-6N-CoH"/>
+                                                <constraint firstAttribute="trailing" secondItem="KZP-8p-E3b" secondAttribute="trailing" id="iwY-GR-nqi"/>
+                                                <constraint firstAttribute="bottom" secondItem="KZP-8p-E3b" secondAttribute="bottom" id="wSc-nx-TiT"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -926,6 +999,7 @@
                         <outlet property="endTimeLabel" destination="2k8-m9-6xq" id="VN2-1g-Y0H"/>
                         <outlet property="endTimePicker" destination="TLc-r7-kiA" id="01J-Zi-uow"/>
                         <outlet property="endTimePickerCell" destination="FiG-tI-r0Y" id="oEo-PU-pdR"/>
+                        <outlet property="photosCollection" destination="KZP-8p-E3b" id="Iz2-1o-q1x"/>
                         <outlet property="startTimeLabel" destination="Cdz-I1-9uT" id="PxK-y6-S9D"/>
                         <outlet property="startTimePicker" destination="vcg-is-fCu" id="xJ5-KM-dNG"/>
                         <outlet property="startTimePickerCell" destination="DR7-yw-MRV" id="bPl-m8-9PA"/>
@@ -951,6 +1025,11 @@
                 <tapGestureRecognizer id="iTr-zH-D5x">
                     <connections>
                         <action selector="onTableTapped:" destination="IUe-Fa-oYf" id="QjL-gM-9ut"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="08J-zH-0Dl">
+                    <connections>
+                        <action selector="onAddPhotoCellTapped:" destination="IUe-Fa-oYf" id="1XP-0Q-6Fa"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewEventViewController: UITableViewController {
+class NewEventViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var dateFormatter = NSDateFormatter()
     var isEditingStartDate = false
     var isEditingEndDate = false
@@ -26,6 +26,10 @@ class NewEventViewController: UITableViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionField: UITextView!
 
+    var photos: [UIImage] = []
+    var imagePicker = UIImagePickerController()
+    @IBOutlet weak var photosCollection: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,6 +52,10 @@ class NewEventViewController: UITableViewController {
             startTimePickerCell.center.y, width: startTimePickerCell.bounds.width, height: 0)
         endTimePickerCell.bounds = CGRect(x: endTimePickerCell.center.x, y: endTimePickerCell.center.y, width: endTimePickerCell.bounds.width, height: 0)
         
+        photosCollection.delegate = self
+        photosCollection.dataSource = self
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
     }
     
 //    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -120,6 +128,7 @@ class NewEventViewController: UITableViewController {
         event.admin = PFUser.currentUser()
         event.startTime = startTimePicker.date
         event.endTime = endTimePicker.date
+//        event.photos = Photo.photosFromImages(photos)
         
         // Set invitedUsernames to set invited relationship!
 //        event.invitedUsernames = ["awen", "ehuang", "hsun"]
@@ -139,7 +148,43 @@ class NewEventViewController: UITableViewController {
 
     }
     
+    
+    /*  PHOTO COLLECTION */
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count + 1
+    }
+    
+    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var cell: UICollectionViewCell
+        
+        if indexPath.row < photos.count {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as UICollectionViewCell
+            var imageView = UIImageView(image: photos[indexPath.row])
+            imageView.frame.size = CGSize(width: 45, height: 45)
+            cell.addSubview(imageView)
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("addActionCell", forIndexPath: indexPath) as UICollectionViewCell
+        }
+        
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+        cell.layer.cornerRadius = 3
+        cell.clipsToBounds = true
+        
+        return cell
+    }
+    
+    @IBAction func onAddPhotoCellTapped(sender: UITapGestureRecognizer) {
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
 
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        self.photos.append(image)
+        self.photosCollection.reloadData()
+        self.imagePicker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
