@@ -87,7 +87,7 @@ class EventDetailViewController: UIViewController,
         }
         
         setupBackgroundImageView()
-        titleLabel.text = event.title
+        titleLabel.text = event.getTitle()
         
         if event.locationString != nil {
             addressLabel.text = event.locationString

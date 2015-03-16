@@ -117,7 +117,7 @@ class EventsTableViewCell: BaseTableViewCell {
         
         let event = data as Event
        
-        eventNameLabel.text = event.title
+        eventNameLabel.text = event.getTitle()
         eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
 
         if eventImage != nil {

@@ -112,4 +112,8 @@ class Event : PFObject, PFSubclassing {
             completion(success: success, error: error)
         })
     }
+    
+    func getTitle() -> NSString {
+        return title.stringByReplacingOccurrencesOfString("\n", withString: "", options: nil, range: nil)
+    }
 }
