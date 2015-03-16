@@ -467,9 +467,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VgU-y0-xNM">
-                        <barButtonItem key="leftBarButtonItem" title="SignOut" id="KRy-Ga-8T8">
+                        <barButtonItem key="rightBarButtonItem" title="SignOut" id="YqA-8k-msX">
                             <connections>
-                                <action selector="onSignOut:" destination="wlY-GJ-AqW" id="viD-FL-Zoy"/>
+                                <action selector="onSignOut:" destination="wlY-GJ-AqW" id="ya7-wW-kxH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
