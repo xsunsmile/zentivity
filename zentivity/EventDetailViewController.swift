@@ -37,6 +37,7 @@ class EventDetailViewController: UIViewController,
     var detailsIsOpen = false
     var currentImageView: UIImageView?
     var eventImages: [UIImage]?
+    var addressPlaceHolder = "1019 Market Street, San Francisco, CA"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +86,19 @@ class EventDetailViewController: UIViewController,
             return
         }
         
+        setupBackgroundImageView()
         titleLabel.text = event.title
+        
+        if event.locationString != nil {
+            addressLabel.text = event.locationString
+        } else {
+            addressLabel.text = addressPlaceHolder
+        }
+        
+        if event.contactNumber != nil {
+            phoneLabel.text = event.contactNumber
+        }
+        
         var dateString = NSMutableAttributedString(
             string: event.startTimeWithFormat("EEEE"),
             attributes: NSDictionary(
@@ -108,7 +121,6 @@ class EventDetailViewController: UIViewController,
             joinButton.setTitle("SignIn", forState: .Normal)
         }
         
-        setupBackgroundImageView()
     }
     
     func setupBackgroundImageView() {
@@ -153,8 +165,13 @@ class EventDetailViewController: UIViewController,
         //         println("Failed to get places: \(error)")
         //     }
         // })
+        var address = addressPlaceHolder
+        if event.locationString != nil {
+            address = event.locationString!
+        }
         
-        LocationUtils.sharedInstance.getGeocodeFromAddress("1019 Market Street, San Francisco, CA", completion: { (places, error) -> () in
+        println("event location is \(address)")
+        LocationUtils.sharedInstance.getGeocodeFromAddress(address, completion: { (places, error) -> () in
             if error == nil {
                 let places = places as [CLPlacemark]
                 let target = places.last
@@ -426,6 +443,20 @@ class EventDetailViewController: UIViewController,
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent;
+    }
+    
+    @IBAction func onCall(sender: UIButton) {
+        let contactNumber = event.contactNumber
+        if contactNumber == nil {
+            println("There is no number to call")
+            return
+        }
+        
+        let regex = NSRegularExpression(pattern: "\\(|\\)|-", options: nil, error: nil)
+        let number = regex?.stringByReplacingMatchesInString(contactNumber!, options: nil, range: NSMakeRange(0, countElements(contactNumber!)), withTemplate: "$1")
+        println("calling number \(number)")
+        let phoneNumber = "tel://".stringByAppendingString(number!)
+        UIApplication.sharedApplication().openURL(NSURL(string: phoneNumber)!)
     }
     
     /*
