@@ -141,9 +141,11 @@ class EventsTableViewCell: BaseTableViewCell {
             eventBackgroundImageView.image = UIImage(named: "activity1")
         }
         
-        if event.categories.count > 0 {
-            categoryLabel.text = event.categories[0] as NSString
+        var cati = ""
+        for c in event.categories {
+            cati += (c as NSString) + " "
         }
+        if !cati.isEmpty { categoryLabel.text = cati }
     }
     
     func applyGradient() {
