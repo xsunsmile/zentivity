@@ -9,28 +9,27 @@
 import UIKit
 
 class ContainerViewController: UIViewController {
-    
-    
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var mainView: UIView!
     var mainViewLeftPos: CGFloat!
     var mainViewRightPos: CGFloat!
     var mainViewCurrentPos: CGFloat!
     var mainViewXTranslation: CGFloat!
-    
-//    var containerNVC: UINavigationController!
-//    var menuNVC: UIViewController!
     var eventsVC: EventsViewController!
     var menuVC: UserProfileViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainViewLeftPos = mainView.center.x
-        mainViewRightPos = mainView.center.x + view.bounds.width - 60.0;
+        mainViewLeftPos = view.center.x
+        mainViewRightPos = view.center.x + view.bounds.width - 60.0;
+        println(view.frame.width)
+        println(mainView.frame.width)
+        println(menuView.frame.width)
         
         menuVC = storyboard?.instantiateViewControllerWithIdentifier("UserProfileViewController") as UserProfileViewController
         eventsVC = storyboard?.instantiateViewControllerWithIdentifier("EventsViewController") as EventsViewController
+        
         initMenuView()
         initMainView()
     }
@@ -45,6 +44,7 @@ class ContainerViewController: UIViewController {
         menuNVC.navigationBar.topItem?.title = "Timeline"
         menuNVC.edgesForExtendedLayout = UIRectEdge.None
         self.addChildViewController(menuNVC)
+        menuNVC.view.frame = menuView.frame
         self.menuView.addSubview(menuNVC.view)
         menuNVC.didMoveToParentViewController(self)
     }
@@ -53,13 +53,14 @@ class ContainerViewController: UIViewController {
         var hamburgerImage = UIImage(named: "menu_icon")
         var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
         eventsVC.navigationItem.leftBarButtonItem = menuButton
-        eventsVC.navigationItem.titleView = UISearchBar()
+//        eventsVC.navigationItem.titleView = UISearchBar()
         
         var mainNVC = UINavigationController(rootViewController: eventsVC)
         mainNVC.navigationBar.topItem?.title = "Events"
         mainNVC.edgesForExtendedLayout = UIRectEdge.None
         self.addChildViewController(mainNVC)
         self.mainView.addSubview(mainNVC.view)
+        mainNVC.view.frame = mainView.frame
         mainNVC.didMoveToParentViewController(self)
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 
 class EventsViewController: UIViewController,
-                            BaseTableViewDelegate
+BaseTableViewDelegate
 {
     
     @IBOutlet weak var tableView: UITableView!
@@ -21,8 +21,8 @@ class EventsViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        var searchBar = UISearchBar()
-//        navigationItem.titleView = searchBar
+        var searchBar = UISearchBar()
+        navigationItem.titleView = searchBar
         initSubviews()
         refresh()
     }
