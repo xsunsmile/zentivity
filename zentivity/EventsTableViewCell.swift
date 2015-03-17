@@ -39,32 +39,32 @@ class EventsTableViewCell: BaseTableViewCell {
         shadowView.layer.shadowOffset = CGSizeMake(-1, 1)
         shadowView.layer.shadowRadius = 1
         
-        let borderWidth = CGFloat(1.0)
-        let borderColor = UIColor(rgba: "#efefef").CGColor
-        
-        var rightBorder = CALayer()
-        rightBorder.borderColor = borderColor
-        rightBorder.frame = CGRect(x: joinView.frame.size.width - borderWidth, y: 0, width: borderWidth, height: joinView.frame.size.height)
-        rightBorder.borderWidth = borderWidth
-        
-        var topBorder = CALayer()
-        topBorder.borderColor = borderColor
-        topBorder.frame = CGRect(x: 0, y: borderWidth, width: joinView.frame.size.width, height: borderWidth)
-        topBorder.borderWidth = borderWidth
-        
-        joinView.layer.addSublayer(topBorder)
-        joinView.layer.addSublayer(rightBorder)
-        
-        joinView.layer.masksToBounds = true
-        
-        topBorder = CALayer()
-        topBorder.borderColor = borderColor
-        topBorder.frame = CGRect(x: 0, y: borderWidth, width: dateView.frame.size.width, height: borderWidth)
-        topBorder.borderWidth = borderWidth
-        
-        dateView.layer.addSublayer(topBorder)
-        
-        dateView.layer.masksToBounds = true
+//        let borderWidth = CGFloat(1.0)
+//        let borderColor = UIColor(rgba: "#efefef").CGColor
+//        
+//        var rightBorder = CALayer()
+//        rightBorder.borderColor = borderColor
+//        rightBorder.frame = CGRect(x: joinView.frame.size.width - borderWidth, y: 0, width: borderWidth, height: joinView.frame.size.height)
+//        rightBorder.borderWidth = borderWidth
+//        
+//        var topBorder = CALayer()
+//        topBorder.borderColor = borderColor
+//        topBorder.frame = CGRect(x: 0, y: borderWidth, width: joinView.frame.size.width, height: borderWidth)
+//        topBorder.borderWidth = borderWidth
+//        
+//        joinView.layer.addSublayer(topBorder)
+//        joinView.layer.addSublayer(rightBorder)
+//        
+//        joinView.layer.masksToBounds = true
+//        
+//        topBorder = CALayer()
+//        topBorder.borderColor = borderColor
+//        topBorder.frame = CGRect(x: 0, y: borderWidth, width: dateView.frame.size.width, height: borderWidth)
+//        topBorder.borderWidth = borderWidth
+//        
+//        dateView.layer.addSublayer(topBorder)
+//        
+//        dateView.layer.masksToBounds = true
         
         let tapGR = UITapGestureRecognizer(target: self, action: "onJoinTap:")
         tapGR.numberOfTapsRequired = 1

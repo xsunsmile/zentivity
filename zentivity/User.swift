@@ -52,7 +52,11 @@ class User : PFUser, PFSubclassing {
         query.includeKey("declinedUsers")
         
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(events: objects as [Event], error: error)
+            if error == nil {
+                completion(events: objects as [Event], error: nil)
+            } else {
+                completion(events: [], error: error)
+            }
         }
     }
     

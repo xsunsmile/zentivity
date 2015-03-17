@@ -18,10 +18,14 @@ BaseTableViewDelegate
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
-    let cellHeight = CGFloat(180)
+    let cellHeight = CGFloat(200)
+    var hud: JGProgressHUD?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
+        
         var searchBar = UISearchBar()
         navigationItem.titleView = searchBar
         initSubviews()
@@ -44,13 +48,17 @@ BaseTableViewDelegate
     }
     
     func refresh() {
+        hud?.textLabel.text = "Loading events..."
+        hud?.showInView(self.view, animated: true)
         Event.listWithCompletion { (events, error) -> () in
             if events != nil {
                 self.datasource = events!
                 self.baseTable.datasource = self.datasource
                 self.tableView.reloadData()
+                self.hud?.dismiss()
             } else {
                 println("failed to list events")
+                self.hud?.dismiss()
                 self.showEmptyListView()
             }
         }
@@ -58,6 +66,10 @@ BaseTableViewDelegate
     
     func showEmptyListView() {
         tableView.hidden = true
+        let errorView = UIView()
+        errorView.backgroundColor = UIColor.grayColor()
+        self.view.addSubview(errorView)
+        self.view.backgroundColor = UIColor.grayColor()
     }
     
     @IBAction func onMenuPress(sender: UIBarButtonItem) {

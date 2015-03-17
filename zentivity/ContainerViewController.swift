@@ -47,6 +47,11 @@ class ContainerViewController: UIViewController {
     }
     
     func initMainView() {
+        mainView.layer.shadowColor = UIColor.blackColor().CGColor
+        mainView.layer.shadowOffset = CGSizeMake(-2, 2)
+        mainView.layer.shadowOpacity = 0.7
+        mainView.layer.shadowRadius = 1
+        
         var hamburgerImage = UIImage(named: "menu_icon")
         var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
         eventsVC.navigationItem.leftBarButtonItem = menuButton
@@ -58,6 +63,8 @@ class ContainerViewController: UIViewController {
         self.mainView.addSubview(mainNVC.view)
         mainNVC.view.frame = mainView.bounds
         mainNVC.didMoveToParentViewController(self)
+        
+
     }
     
     @IBAction func onMainViewPan(sender: UIPanGestureRecognizer) {
@@ -77,7 +84,7 @@ class ContainerViewController: UIViewController {
         } else if sender.state == .Ended {
 
         var velocity = sender.velocityInView(view)
-            velocity.x > 0 ? hideMenu() : showMenu()
+            velocity.x < 0 ? hideMenu() : showMenu()
         }
     }
     
