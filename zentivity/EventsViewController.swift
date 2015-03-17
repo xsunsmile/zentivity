@@ -17,7 +17,8 @@ BaseTableViewDelegate
     
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
-    let cellHeight = CGFloat(150)
+    let titleId = "EventHeaderTableViewCell"
+    let cellHeight = CGFloat(180)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +31,15 @@ BaseTableViewDelegate
     func initSubviews() {
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
+        baseTable.titleIdentifier = titleId
         baseTable.delegate = self
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable
         
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
+        tableView.registerNib(UINib(nibName: titleId, bundle: nil), forHeaderFooterViewReuseIdentifier: titleId)
+        
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     

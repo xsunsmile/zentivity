@@ -19,6 +19,7 @@ class BaseTableView: NSObject,
     var datasource: [AnyObject]!
     var titleSource: [NSString]!
     var cellIdentifier: NSString!
+    var titleIdentifier: NSString?
     var cellHeight = CGFloat(100)
     weak var delegate: BaseTableViewDelegate?
     
@@ -61,4 +62,22 @@ class BaseTableView: NSObject,
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return titleSource.count
     }
+    
+//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if titleIdentifier == nil {
+//            return BaseTableViewCell()
+//        }
+//        
+//        var cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier(titleIdentifier!) as EventHeaderTableViewCell
+//        cell.frame.size.width = tableView.frame.width
+//        return cell
+//    }
+//    
+//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        return 1
+//    }
+//    
+//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 34
+//    }
 }

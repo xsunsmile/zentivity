@@ -10,14 +10,15 @@ import UIKit
 
 class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventNameLabel: UILabel!
-    @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventBackgroundImageView: UIImageView!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var joinView: UIView!
-    @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var joinLabel: UILabel!
-    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var dateView: UIView!
+//    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     let dateFormatter = NSDateFormatter()
     var colors = ["#31b639", "#ffcf00", "#c61800", "1851ce"]
@@ -58,12 +59,12 @@ class EventsTableViewCell: BaseTableViewCell {
         
         topBorder = CALayer()
         topBorder.borderColor = borderColor
-        topBorder.frame = CGRect(x: 0, y: borderWidth, width: categoryView.frame.size.width, height: borderWidth)
+        topBorder.frame = CGRect(x: 0, y: borderWidth, width: dateView.frame.size.width, height: borderWidth)
         topBorder.borderWidth = borderWidth
         
-        categoryView.layer.addSublayer(topBorder)
+        dateView.layer.addSublayer(topBorder)
         
-        categoryView.layer.masksToBounds = true
+        dateView.layer.masksToBounds = true
         
         let tapGR = UITapGestureRecognizer(target: self, action: "onJoinTap:")
         tapGR.numberOfTapsRequired = 1
@@ -139,7 +140,11 @@ class EventsTableViewCell: BaseTableViewCell {
         for c in event.categories {
             cati += (c as NSString) + " "
         }
-        if !cati.isEmpty { categoryLabel.text = cati }
+//        if !cati.isEmpty { categoryLabel.text = cati }
+        
+        if !event.descript.isEmpty {
+            descriptionLabel.text = event.descript
+        }
     }
     
     func applyGradient() {

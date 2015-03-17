@@ -40,7 +40,7 @@ class EventDetailViewController: UIViewController,
     var currentImageView: UIImageView?
     var eventImages: [UIImage]?
     var addressPlaceHolder = "1019 Market Street, San Francisco, CA"
-    var didInitialAnimation = false
+    var doingInitialAnimation = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,11 +52,10 @@ class EventDetailViewController: UIViewController,
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
  
-        if !didInitialAnimation {
+        if !doingInitialAnimation {
             contentViewOriginFrame = contentView.frame
             detailHeaderViewOriginFrame = eventHeaderView.frame
             animateHeaderViewDown()
-            didInitialAnimation = true
         }
     }
     
@@ -332,19 +331,25 @@ class EventDetailViewController: UIViewController,
     }
     
     func animateHeaderViewDown() {
+        self.doingInitialAnimation = true
         UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
-            let dy = self.view.frame.size.height - self.detailHeaderViewOriginFrame.size.height - self.contentViewOriginFrame.origin.y
-            self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
+//            let dy = self.view.frame.size.height - self.detailHeaderViewOriginFrame.size.height - self.contentViewOriginFrame.origin.y
+            let totalDown = self.view.frame.size.height - self.contentView.frame.origin.y
+            let dy = totalDown - self.eventHeaderView.frame.size.height
+            println("scroll view down by \(dy), headerHeight: \(self.eventHeaderView.frame.size.height), content.y: \(self.contentView.frame.origin.y), total: \(totalDown)")
+            self.contentView.transform = CGAffineTransformTranslate(self.contentView.transform, 0, dy)
             if self.currentImageView != nil {
                 self.currentImageView?.transform = CGAffineTransformIdentity
             }
             }) { (completed) -> Void in
                 if completed {
+                    self.doingInitialAnimation = false
                 }
         }
     }
     
     func animateHeaderViewUp() {
+        self.doingInitialAnimation = true
         UIView.animateWithDuration(0.7, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
             let dy = self.contentView.frame.size.height - (self.view.frame.size.height - self.detailHeaderViewOriginFrame.origin.y) + 10
             self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
@@ -355,6 +360,7 @@ class EventDetailViewController: UIViewController,
             }
             }) { (completed) -> Void in
                 if completed {
+                    self.doingInitialAnimation = false
                 }
         }
     }
