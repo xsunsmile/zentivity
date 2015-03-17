@@ -10,19 +10,18 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleGoogleLogin:", name: "userDidLoginNotification", object: nil)
-        
         // Parse setup
         Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
         Photo.registerSubclass()
         Event.registerSubclass()
         Comment.registerSubclass()
         User.registerSubclass()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleGoogleLogin:", name: "userDidLoginNotification", object: nil)
         
         return true
     }
