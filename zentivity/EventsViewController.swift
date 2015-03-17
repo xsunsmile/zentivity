@@ -21,7 +21,8 @@ class EventsViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        var searchBar = UISearchBar()
+//        navigationItem.titleView = searchBar
         initSubviews()
         refresh()
     }
@@ -36,29 +37,6 @@ class EventsViewController: UIViewController,
         
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
         tableView.rowHeight = UITableViewAutomaticDimension
-        
-        var searchBarHeight = navigationController?.navigationBar.frame.height
-        var searchBar = UISearchBar(frame: CGRectMake(0, 0, view.frame.size.width * 0.8, searchBarHeight! * 0.6))
-        
-//        searchBar.translucent = true
-//        searchBar.backgroundColor = UIColor.clearColor()
-//        searchBar.delegate = self
-        
-//        var searchField = searchBar.valueForKey("_searchField") as UITextField
-//        searchField.backgroundColor = UIColor.grayColor()
-        
-//        for subView in searchBar.subviews {
-//            for field in subView.subviews {
-//                if field.isKindOfClass(UITextField) {
-//                    let textField = field as UITextField
-//                    textField.backgroundColor = UIColor.grayColor()
-//                }
-//            }
-//        }
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController?.navigationBar.barTintColor = UIColor(rgba: "#fafafa")
-        
-        navigationItem.titleView = searchBar
     }
     
     func refresh() {
@@ -96,7 +74,10 @@ class EventsViewController: UIViewController,
     }
     
     @IBAction func onAddEventPress(sender: ShadowButton) {
-        performSegueWithIdentifier("newEventSegue", sender: self)
+        var addEventVC = storyboard?.instantiateViewControllerWithIdentifier("AddEventViewController") as AddEventViewController
+        var navVC = UINavigationController(rootViewController: addEventVC)
+        navVC.navigationBar.topItem?.title = "New Event"
+        self.presentViewController(navVC, animated: true, completion: nil)
     }
     
     // MARK: - Navigation
