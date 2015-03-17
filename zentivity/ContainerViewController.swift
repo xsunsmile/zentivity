@@ -41,7 +41,7 @@ class ContainerViewController: UIViewController {
     
     func initMenuView() {
         var menuNVC = UINavigationController(rootViewController: menuVC)
-        menuNVC.navigationBar.topItem?.title = "Timeline"
+        menuNVC.navigationBar.topItem?.title = "Menu"
         menuNVC.edgesForExtendedLayout = UIRectEdge.None
         self.addChildViewController(menuNVC)
         menuNVC.view.frame = menuView.frame
@@ -53,7 +53,6 @@ class ContainerViewController: UIViewController {
         var hamburgerImage = UIImage(named: "menu_icon")
         var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
         eventsVC.navigationItem.leftBarButtonItem = menuButton
-//        eventsVC.navigationItem.titleView = UISearchBar()
         
         var mainNVC = UINavigationController(rootViewController: eventsVC)
         mainNVC.navigationBar.topItem?.title = "Events"
