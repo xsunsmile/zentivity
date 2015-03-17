@@ -19,7 +19,6 @@ class UserProfileViewController: UIViewController,
     @IBOutlet weak var tableView: UITableView!
     
     var baseTable: BaseTableView!
-    
     let datasource: [AnyObject] = []
     let cellId = "EventTableViewCell"
     let cellHeight = CGFloat(40)
@@ -64,7 +63,6 @@ class UserProfileViewController: UIViewController,
             println(events)
             println(error)
             if error == nil && events.count > 0 {
-                
                 if currentUser.name != "" {
                     self.profileName.text = currentUser.name
                 }
@@ -89,9 +87,8 @@ class UserProfileViewController: UIViewController,
     }
     
     @IBAction func onSignOut(sender: UIBarButtonItem) {
-        User.logOut()
         User.logoutWithCompletion { (completed) -> Void in
-            println("logout user: \(completed)")
+            println("User logout: \(completed)")
         }
     }
     
