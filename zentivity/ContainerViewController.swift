@@ -44,7 +44,7 @@ class ContainerViewController: UIViewController {
         menuNVC.navigationBar.topItem?.title = "Menu"
         menuNVC.edgesForExtendedLayout = UIRectEdge.None
         self.addChildViewController(menuNVC)
-        menuNVC.view.frame = menuView.frame
+        menuNVC.view.frame = menuView.bounds
         self.menuView.addSubview(menuNVC.view)
         menuNVC.didMoveToParentViewController(self)
     }
@@ -59,7 +59,7 @@ class ContainerViewController: UIViewController {
         mainNVC.edgesForExtendedLayout = UIRectEdge.None
         self.addChildViewController(mainNVC)
         self.mainView.addSubview(mainNVC.view)
-        mainNVC.view.frame = mainView.frame
+        mainNVC.view.frame = mainView.bounds
         mainNVC.didMoveToParentViewController(self)
     }
     
