@@ -23,9 +23,6 @@ class ContainerViewController: UIViewController {
         
         mainViewLeftPos = view.center.x
         mainViewRightPos = view.center.x + view.bounds.width - 60.0;
-        println(view.frame.width)
-        println(mainView.frame.width)
-        println(menuView.frame.width)
         
         menuVC = storyboard?.instantiateViewControllerWithIdentifier("UserProfileViewController") as UserProfileViewController
         eventsVC = storyboard?.instantiateViewControllerWithIdentifier("EventsViewController") as EventsViewController
@@ -64,31 +61,23 @@ class ContainerViewController: UIViewController {
     }
     
     @IBAction func onMainViewPan(sender: UIPanGestureRecognizer) {
-        var point = sender.locationInView(view)
-        var translation = sender.translationInView(view)
-        var velocity = sender.velocityInView(view)
-        
         if sender.state == .Began {
             mainViewCurrentPos = mainView.center.x
         } else if sender.state == .Changed {
+            var translation = sender.translationInView(view)
             var x = mainViewCurrentPos + translation.x
+
             if x < mainViewLeftPos {
                 x = mainViewLeftPos
             } else if x > mainViewRightPos {
                 x = mainViewRightPos
             }
+
             mainView.center.x = x
         } else if sender.state == .Ended {
-            if velocity.x > 0 {
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.mainView.center.x = self.mainViewRightPos
-                })
-            }
-            else if velocity.x < 0 {
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.mainView.center.x = self.mainViewLeftPos
-                })
-            }
+
+        var velocity = sender.velocityInView(view)
+            velocity.x > 0 ? hideMenu() : showMenu()
         }
     }
     
