@@ -59,28 +59,29 @@ class UserProfileViewController: UIViewController,
     }
     
     func refresh() {
-        let currentUser = User.currentUser()
-        println(currentUser)
-        
+        var currentUser = User.currentUser() as User
         currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+            println(events)
+            println(error)
             if error == nil && events.count > 0 {
+                
+                if currentUser.name != "" {
+                    self.profileName.text = currentUser.name
+                }
+                if currentUser.imageUrl != "" {
+                    self.profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
+                }
+                if User.currentUser().name != "" {
+                    self.profileOrganization.text = currentUser.aboutMe
+                }
+                self.profileContactInfo.text = currentUser.username
+                
                 self.baseTable.datasource = events
                 self.tableView.reloadData()
             } else {
                 println("failed to list up events: \(error)")
             }
         })
-        
-        if currentUser.name.length > 0 {
-            profileName.text = currentUser.name
-        }
-        if currentUser.imageUrl.length > 0 {
-            profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
-        }
-        if currentUser.aboutMe.length > 0 {
-            profileOrganization.text = currentUser.aboutMe
-        }
-        profileContactInfo.text = currentUser.username
     }
     
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {

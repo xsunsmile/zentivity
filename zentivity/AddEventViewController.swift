@@ -72,7 +72,7 @@ class AddEventViewController: UIViewController {
     }
     
     @IBAction func onDismiss(sender: UIBarButtonItem) {
-        navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func onTap(sender: UITapGestureRecognizer) {
@@ -124,15 +124,4 @@ class AddEventViewController: UIViewController {
     func initSubviews() {
         scrollView.contentSize = CGSizeMake(view.frame.width, view.frame.height)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
