@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol NewEventDelegate: class {
+    func didCreateNewEvent(event: Event)
+}
+
 class NewEventViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var dateFormatter = NSDateFormatter()
     var isEditingStartDate = false
     var isEditingEndDate = false
+    
+    weak var delegate: NewEventDelegate?
     
     @IBOutlet var eventTable: UITableView!
     @IBOutlet weak var startTimePicker: UIDatePicker!
@@ -172,6 +178,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         
         event.createWithCompletion { (success, error) -> () in
             if success == true {
+                self.delegate?.didCreateNewEvent(event)
                 self.navigationController?.popViewControllerAnimated(true)
             } else {
                 UIAlertView(
@@ -184,7 +191,6 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         }
 
     }
-    
     
     /*  PHOTO COLLECTION */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -9,7 +9,7 @@
 import UIKit
 
 class EventsViewController: UIViewController,
-BaseTableViewDelegate
+BaseTableViewDelegate, NewEventDelegate
 {
     
     @IBOutlet weak var tableView: UITableView!
@@ -20,6 +20,7 @@ BaseTableViewDelegate
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(180)
     var hud: JGProgressHUD?
+    var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,9 @@ BaseTableViewDelegate
         
         var searchBar = UISearchBar()
         navigationItem.titleView = searchBar
+        createRefreshControl()
         initSubviews()
-        refresh()
+        refresh(true)
     }
     
     func initSubviews() {
@@ -47,9 +49,23 @@ BaseTableViewDelegate
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    func refresh() {
-        hud?.textLabel.text = "Loading events..."
-        hud?.showInView(self.view, animated: true)
+    func createRefreshControl() {
+        refreshControl = UIRefreshControl()
+        
+        refreshControl.addTarget(
+            self,
+            action: "refresh:",
+            forControlEvents: UIControlEvents.ValueChanged)
+        
+        tableView.insertSubview(refreshControl, atIndex: 0)
+    }
+    
+    func refresh(useHud: Bool) {
+        if useHud {
+            hud?.textLabel.text = "Loading events..."
+            hud?.showInView(self.view, animated: true)
+        }
+        
         Event.listWithCompletion { (events, error) -> () in
             if events != nil {
                 self.datasource = events!
@@ -61,6 +77,8 @@ BaseTableViewDelegate
                 self.hud?.dismiss()
                 self.showEmptyListView()
             }
+            
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -89,6 +107,11 @@ BaseTableViewDelegate
         performSegueWithIdentifier("viewEventDetailSegue", sender: self)
     }
     
+    func didCreateNewEvent(event: Event) {
+        self.baseTable.datasource.insert(event, atIndex: 0)
+        self.tableView.reloadData()
+    }
+    
     @IBAction func onAddEventPress(sender: ShadowButton) {
 //        var addEventVC = storyboard?.instantiateViewControllerWithIdentifier("NewEventViewController") as NewEventViewController
 //        var navVC = UINavigationController(rootViewController: addEventVC)
@@ -107,6 +130,9 @@ BaseTableViewDelegate
             var index = tableView.indexPathForSelectedRow()?.row
             
             vc.event = data[index!]
+        } else if segue.identifier == "createEvent" {
+            var vc = segue.destinationViewController as NewEventViewController
+            vc.delegate = self
         }
     }
 
