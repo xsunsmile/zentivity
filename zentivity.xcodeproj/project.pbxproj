@@ -12,6 +12,8 @@
 		5425DEDE1AA8C9E0001F5CD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5425DEDC1AA8C9E0001F5CD5 /* Main.storyboard */; };
 		5425DEE01AA8C9E0001F5CD5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5425DEDF1AA8C9E0001F5CD5 /* Images.xcassets */; };
 		5425DEEF1AA8C9E0001F5CD5 /* zentivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5425DEEE1AA8C9E0001F5CD5 /* zentivityTests.swift */; };
+		545763C01AB51D910027F56E /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545763BF1AB51D910027F56E /* NewEventViewController.swift */; };
+		545887F21AB6B5FD0027D31A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545887F11AB6B5FD0027D31A /* PhotoCollectionViewCell.swift */; };
 		547148351AB0152000B1FABC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547148341AB0152000B1FABC /* UserTableViewCell.swift */; };
 		549113A81AA96CAF00000861 /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549113A71AA96CAF00000861 /* EventsTableViewCell.xib */; };
 		549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549113A91AA98C9200000861 /* EventsTableViewCell.swift */; };
@@ -89,6 +91,8 @@
 		5425DEED1AA8C9E0001F5CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5425DEEE1AA8C9E0001F5CD5 /* zentivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zentivityTests.swift; sourceTree = "<group>"; };
 		5425DEFC1AA8CC3A001F5CD5 /* zentivity-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zentivity-Bridging-Header.h"; sourceTree = "<group>"; };
+		545763BF1AB51D910027F56E /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
+		545887F11AB6B5FD0027D31A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		547148341AB0152000B1FABC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		549113A71AA96CAF00000861 /* EventsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
 		549113A91AA98C9200000861 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
@@ -284,6 +288,7 @@
 				938B75E11AB166DB00D225EF /* UserIconCollectionViewCell.swift */,
 				937210D11AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift */,
 				937210D21AB7F3EF009FCD9F /* EventHeaderTableViewCell.xib */,
+				545887F11AB6B5FD0027D31A /* PhotoCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */,
 				54BA82401AB00323005BE9AA /* EventDetailViewController.swift */,
 				934CB3931AB0013900722545 /* UserProfileViewController.swift */,
+				545763BF1AB51D910027F56E /* NewEventViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -522,9 +528,11 @@
 				5425DEDB1AA8C9E0001F5CD5 /* ViewController.swift in Sources */,
 				681A54441AAD0E1200C635D5 /* Comment.swift in Sources */,
 				935B4C011AAD1EE600D3425F /* BaseTableView.swift in Sources */,
+				545763C01AB51D910027F56E /* NewEventViewController.swift in Sources */,
 				938B75E21AB166DB00D225EF /* UserIconCollectionViewCell.swift in Sources */,
 				549113B81AA992A000000861 /* MenuView.swift in Sources */,
 				93A4577B1AB12F9E009F3A5C /* ImageUtils.swift in Sources */,
+				545887F21AB6B5FD0027D31A /* PhotoCollectionViewCell.swift in Sources */,
 				549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */,
 				9315678A1AB5E90500D279EF /* UserInitialsView.m in Sources */,
 				54BA82411AB00323005BE9AA /* EventDetailViewController.swift in Sources */,
