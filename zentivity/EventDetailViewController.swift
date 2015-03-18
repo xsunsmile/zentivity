@@ -42,6 +42,7 @@ class EventDetailViewController: UIViewController,
     var addressPlaceHolder = "1019 Market Street, San Francisco, CA"
     var didInitialAnimation = false
     var initialDragOffset = CGFloat(0)
+    var initialImageDragOffset = CGFloat(0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -309,11 +310,15 @@ class EventDetailViewController: UIViewController,
             animateHeaderColorChanges(direction)
             dragStartingPoint = CGPoint(x: loc.x, y: loc.y)
             initialDragOffset = contentView.frame.origin.y
+            if currentImageView != nil {
+                initialImageDragOffset = currentImageView!.frame.origin.y
+                println("set image y: \(initialImageDragOffset)")
+            }
         } else if sender.state == .Changed {
             let dy = loc.y - dragStartingPoint.y
             contentView.frame.origin.y = initialDragOffset + dy
             if currentImageView != nil {
-                currentImageView?.transform = CGAffineTransformTranslate(currentImageView!.transform, 0, dy/50)
+                currentImageView?.frame.origin.y = initialImageDragOffset + dy/2
             } else {
                 println("current image view is empty during dragging")
             }
@@ -336,7 +341,7 @@ class EventDetailViewController: UIViewController,
             self.view.layoutIfNeeded()
             
             if self.currentImageView != nil {
-                self.currentImageView?.transform = CGAffineTransformIdentity
+                self.currentImageView?.frame.origin.y = 0
             }
             }) { (completed) -> Void in
                 if completed {
@@ -437,7 +442,7 @@ class EventDetailViewController: UIViewController,
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let pageSize: Float = Float(view.bounds.size.width)
         var page: Float = floorf((Float(scrollView.contentOffset.x) - pageSize / 2.0) / pageSize) + 1
         let numPages = eventImages?.count
@@ -449,8 +454,10 @@ class EventDetailViewController: UIViewController,
         }
         
         imagePageControl.currentPage = Int(page)
-        if Int(page) > 0 && imageScrollView.subviews.count > Int(page) {
+        println("current page is: \(Int(page))")
+        if Int(page) >= 0 && imageScrollView.subviews.count > Int(page) {
             currentImageView = imageScrollView.subviews[Int(page)] as? UIImageView
+            println("current image view: \(currentImageView)")
         }
     }
     
