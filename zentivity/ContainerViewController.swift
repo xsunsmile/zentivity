@@ -37,20 +37,20 @@ class ContainerViewController: UIViewController {
     }
     
     func initMenuView() {
-        var menuNVC = UINavigationController(rootViewController: menuVC)
-        menuNVC.navigationBar.topItem?.title = "Menu"
-        menuNVC.edgesForExtendedLayout = UIRectEdge.None
-        self.addChildViewController(menuNVC)
-        menuNVC.view.frame = menuView.bounds
-        self.menuView.addSubview(menuNVC.view)
-        menuNVC.didMoveToParentViewController(self)
+//        var menuNVC = UINavigationController(rootViewController: menuVC)
+//        menuNVC.navigationBar.topItem?.title = "Menu"
+//        menuNVC.edgesForExtendedLayout = UIRectEdge.None
+        self.addChildViewController(menuVC)
+        menuVC.view.frame = menuView.bounds
+        self.menuView.addSubview(menuVC.view)
+        menuVC.didMoveToParentViewController(self)
     }
     
     func initMainView() {
         mainView.layer.shadowColor = UIColor.blackColor().CGColor
-        mainView.layer.shadowOffset = CGSizeMake(-2, 2)
+        mainView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
         mainView.layer.shadowOpacity = 0.7
-        mainView.layer.shadowRadius = 1
+        mainView.layer.shadowRadius = 0.5
         
         var hamburgerImage = UIImage(named: "menu_icon")
         var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")

@@ -165,7 +165,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         event.admin = PFUser.currentUser()
         event.startTime = startTimePicker.date
         event.endTime = endTimePicker.date
-//        event.photos = Photo.photosFromImages(photos)
+        event.photos = Photo.photosFromImages(photos)
         
         // Set invitedUsernames to set invited relationship!
 //        event.invitedUsernames = ["awen", "ehuang", "hsun"]

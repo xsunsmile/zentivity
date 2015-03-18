@@ -15,13 +15,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ist-Bc-bWv" userLabel="ContainerView">
-                        <rect key="frame" x="10" y="5" width="418" height="193.5"/>
+                        <rect key="frame" x="10" y="5" width="418" height="194"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-0A-fRG">
-                                <rect key="frame" x="0.0" y="0.0" width="235.5" height="193.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="236" height="194"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-FZ-OvX" userLabel="EventView">
-                                <rect key="frame" x="236" y="0.0" width="181.5" height="193.5"/>
+                                <rect key="frame" x="236" y="0.0" width="182" height="194"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Event name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-48-zof">
                                         <rect key="frame" x="8" y="8" width="72" height="16"/>
@@ -38,7 +38,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXh-Gj-TdO">
-                                        <rect key="frame" x="28" y="29" width="25" height="14.5"/>
+                                        <rect key="frame" x="28" y="29" width="25" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -51,10 +51,10 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rq-8v-yVw" userLabel="Join">
-                                        <rect key="frame" x="0.0" y="164" width="181.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="164" width="182" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqM-vb-MxR">
-                                                <rect key="frame" x="76.5" y="6" width="28" height="17"/>
+                                                <rect key="frame" x="77" y="6" width="28" height="17"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spD-7X-N54" userLabel="location">
-                                        <rect key="frame" x="28" y="49" width="44.5" height="14.5"/>
+                                        <rect key="frame" x="28" y="49" width="45" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

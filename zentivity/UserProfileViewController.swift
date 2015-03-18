@@ -14,7 +14,7 @@ class UserProfileViewController: UIViewController,
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileName: UILabel!
-    @IBOutlet weak var profileOrganization: UILabel!
+//    @IBOutlet weak var profileOrganization: UILabel!
     @IBOutlet weak var profileContactInfo: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -50,11 +50,10 @@ class UserProfileViewController: UIViewController,
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        ImageUtils.makeRoundCornerWithBorder(
-            profileImageView,
-            borderColor: UIColor(rgba: "#3e3e3e").CGColor,
-            borderWidth: 1.0
-        )
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.borderWidth = 0.5;
+        profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
     func refresh() {
@@ -69,9 +68,9 @@ class UserProfileViewController: UIViewController,
                 if currentUser.imageUrl.length > 0 {
                     self.profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
                 }
-                if User.currentUser().aboutMe.length > 0 {
-                    self.profileOrganization.text = currentUser.aboutMe
-                }
+//                if User.currentUser().aboutMe.length > 0 {
+//                    self.profileOrganization.text = currentUser.aboutMe
+//                }
                 self.profileContactInfo.text = currentUser.username
                 
                 self.baseTable.datasource = events

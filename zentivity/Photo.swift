@@ -23,7 +23,7 @@ class Photo : PFObject, PFSubclassing {
     
     // Use for creating only!!
     // Sets each photo's user to to current user
-    class func photosFromImages(images: [UIImage]) -> [Photo] {
+    class func photosFromImages(images: [UIImage]) -> NSMutableArray {
         var photos = NSMutableArray()
 
         for image in images {
@@ -33,6 +33,6 @@ class Photo : PFObject, PFSubclassing {
             photos.addObject(photo as Photo)
         }
         
-        return photos as AnyObject as [Photo]
+        return photos
     }
 }

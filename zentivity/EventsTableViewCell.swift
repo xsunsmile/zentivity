@@ -46,6 +46,7 @@ class EventsTableViewCell: BaseTableViewCell {
         contentView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
         contentView.layer.shadowOpacity = 0.7
         contentView.layer.shadowRadius = 0.5
+//        contentView.layer.sh
 //        contentView.layer.masksToBounds = true
 //        contentView.clipsToBounds = false
         
@@ -70,8 +71,8 @@ class EventsTableViewCell: BaseTableViewCell {
         joinView.layer.addSublayer(topBorder)
 //        joinView.layer.addSublayer(rightBorder)
 //        
-//        joinView.layer.masksToBounds = true
-//        
+        joinView.layer.masksToBounds = true
+//
 //        topBorder = CALayer()
 //        topBorder.borderColor = borderColor
 //        topBorder.frame = CGRect(x: 0, y: borderWidth, width: dateView.frame.size.width, height: borderWidth)
@@ -134,9 +135,6 @@ class EventsTableViewCell: BaseTableViewCell {
        
         eventNameLabel.text = event.getTitle()
         eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
-
-        eventBackgroundImageView.layer.borderWidth = 3
-        eventBackgroundImageView.layer.borderColor = UIColor.whiteColor().CGColor
         
         if event.photos?.count > 0 {
             let photo = event.photos![0] as Photo
