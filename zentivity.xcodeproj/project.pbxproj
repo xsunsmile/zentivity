@@ -25,6 +25,8 @@
 		5BB82504BA6A1DEBA5D0C541 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB1175D1CF9C92D24F4E80E /* libPods.a */; };
 		681A54421AAD027700C635D5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681A54411AAD027700C635D5 /* Photo.swift */; };
 		681A54441AAD0E1200C635D5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681A54431AAD0E1200C635D5 /* Comment.swift */; };
+		6820A6C91AB919380053E240 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6820A6C81AB919380053E240 /* FilterViewController.swift */; };
+		6820A6CB1AB91A270053E240 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6820A6CA1AB91A270053E240 /* TextFieldCell.swift */; };
 		6820E1741AB7E5670021E773 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6820E1731AB7E5670021E773 /* ContainerViewController.swift */; };
 		687D787D1AACE92000E5605C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687D787C1AACE92000E5605C /* Event.swift */; };
 		687D787F1AACE92500E5605C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687D787E1AACE92500E5605C /* User.swift */; };
@@ -103,6 +105,8 @@
 		54BA82401AB00323005BE9AA /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		681A54411AAD027700C635D5 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		681A54431AAD0E1200C635D5 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		6820A6C81AB919380053E240 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterViewController.swift; path = ../FilterViewController.swift; sourceTree = "<group>"; };
+		6820A6CA1AB91A270053E240 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		6820E1731AB7E5670021E773 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		687D787C1AACE92000E5605C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		687D787E1AACE92500E5605C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -297,10 +301,12 @@
 			isa = PBXGroup;
 			children = (
 				5425DEDA1AA8C9E0001F5CD5 /* ViewController.swift */,
+				6820A6C81AB919380053E240 /* FilterViewController.swift */,
 				93EEA9351AABE58200E04811 /* AppViewController.swift */,
 				935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */,
 				6820E1731AB7E5670021E773 /* ContainerViewController.swift */,
 				9311BB691AAD5C2400B9CB75 /* AddEventViewController.swift */,
+				6820A6CA1AB91A270053E240 /* TextFieldCell.swift */,
 				54BA82401AB00323005BE9AA /* EventDetailViewController.swift */,
 				934CB3931AB0013900722545 /* UserProfileViewController.swift */,
 				545763BF1AB51D910027F56E /* NewEventViewController.swift */,
@@ -518,6 +524,7 @@
 			files = (
 				681A54421AAD027700C635D5 /* Photo.swift in Sources */,
 				6820E1741AB7E5670021E773 /* ContainerViewController.swift in Sources */,
+				6820A6CB1AB91A270053E240 /* TextFieldCell.swift in Sources */,
 				93EEA9361AABE58200E04811 /* AppViewController.swift in Sources */,
 				547148351AB0152000B1FABC /* UserTableViewCell.swift in Sources */,
 				6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */,
@@ -544,6 +551,7 @@
 				931567901AB6313100D279EF /* LocationUtils.swift in Sources */,
 				935B4BFF1AAD1B3200D3425F /* EventsViewController.swift in Sources */,
 				93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */,
+				6820A6C91AB919380053E240 /* FilterViewController.swift in Sources */,
 				934CB3941AB0013900722545 /* UserProfileViewController.swift in Sources */,
 				935B4BFD1AAD134D00D3425F /* UIColorExtension.swift in Sources */,
 				5425DED91AA8C9E0001F5CD5 /* AppDelegate.swift in Sources */,

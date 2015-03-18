@@ -8,28 +8,36 @@
 
 import UIKit
 
+<<<<<<< HEAD
 class EventsViewController: UIViewController,
 BaseTableViewDelegate, NewEventDelegate
 {
     
+=======
+class EventsViewController: UIViewController, BaseTableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate {
+>>>>>>> Dynamic filters table
     @IBOutlet weak var tableView: UITableView!
     var baseTable: BaseTableView!
-    
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(180)
     var hud: JGProgressHUD?
     var refreshControl: UIRefreshControl!
+    var searchBar: UISearchBar?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
         
-        var searchBar = UISearchBar()
-        navigationItem.titleView = searchBar
         createRefreshControl()
+
+        searchBar = UISearchBar()
+        navigationItem.title = "Events"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: "presentEventsFilterModal")
+        searchBar!.delegate = self
+        
         initSubviews()
         refresh(true)
     }
@@ -135,5 +143,34 @@ BaseTableViewDelegate, NewEventDelegate
             vc.delegate = self
         }
     }
+    
+    @IBAction func onTap(sender: UITapGestureRecognizer) {
+        resignSearchBarFirstResponder()
+    }
 
+    func resignSearchBarFirstResponder() {
+        if searchBar!.isFirstResponder() {
+            searchBar!.resignFirstResponder()
+        }
+    }
+    
+    func presentEventsFilterModal() {
+        // Present
+//        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
+//        let navBarHeight = navigationController!.navigationBar.frame.size.height
+//        var yOrigin = statusBarHeight + navBarHeight + modalMargin
+//        
+//        var filterViewFrame = CGRectMake(modalMargin, yOrigin , self.view.frame.width - 2 * modalMargin, self.view.frame.height - statusBarHeight - navBarHeight - 2 * modalMargin)
+//        var filterView = UIView(frame: filterViewFrame)
+//        
+        let filterViewController = storyboard?.instantiateViewControllerWithIdentifier("FilterNavViewController") as UINavigationController
+        
+        self.presentViewController(filterViewController, animated: true, completion: nil)
+//
+//        self.addChildViewController(filterViewController)
+//        filterViewController.view.frame = filterView.bounds
+//        filterView.addSubview(filterViewController.view)
+//        filterViewController.didMoveToParentViewController(self)
+//        self.view.addSubview(filterView)
+    }
 }

@@ -1,3 +1,4 @@
+
 //
 //  UserProfileViewController.swift
 //  zentivity
@@ -84,7 +85,7 @@ class UserProfileViewController: UIViewController,
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
         performSegueWithIdentifier("viewEventDetailSegue", sender: self)
     }
-    
+        
     @IBAction func onSignOut(sender: UIBarButtonItem) {
         User.logoutWithCompletion { (completed) -> Void in
             println("User logout: \(completed)")
