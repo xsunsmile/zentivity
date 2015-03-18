@@ -19,9 +19,9 @@ class AppViewController: UIViewController {
     }
     
     func initSubViews() {
-        view.backgroundColor = UIColor(rgba: "#78A300")
-        loginView.backgroundColor = UIColor(rgba: "#78A300")
+        loginView.backgroundColor = UIColor.clearColor()
         loginView.buttonBackgroundColor = UIColor(rgba: "#dd4b39")
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,6 +30,10 @@ class AppViewController: UIViewController {
     
     @IBAction func onCancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     /*

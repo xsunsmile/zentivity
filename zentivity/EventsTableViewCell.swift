@@ -120,6 +120,9 @@ class EventsTableViewCell: BaseTableViewCell {
         eventNameLabel.text = event.getTitle()
         eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
 
+        eventBackgroundImageView.layer.borderWidth = 10
+        eventBackgroundImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        
         if event.photos?.count > 0 {
             let photo = event.photos![0] as Photo
             photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in

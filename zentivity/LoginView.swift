@@ -42,7 +42,9 @@ class LoginView: UIView {
         loginBannerView.frame = bounds
         
         loginButtonView.layer.masksToBounds = true
-        loginButtonView.layer.cornerRadius = 0.5
+        loginButtonView.layer.cornerRadius = 4
+        loginButtonView.layer.borderWidth = 1
+        loginButtonView.layer.borderColor = UIColor.whiteColor().CGColor
         
         addSubview(loginBannerView)
     }

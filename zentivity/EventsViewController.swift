@@ -18,7 +18,7 @@ BaseTableViewDelegate
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
-    let cellHeight = CGFloat(200)
+    let cellHeight = CGFloat(180)
     var hud: JGProgressHUD?
 
     override func viewDidLoad() {

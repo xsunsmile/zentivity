@@ -50,9 +50,8 @@ class EventDetailViewController: UIViewController,
         refresh()
     }
     
-    
     override func viewWillAppear(animated: Bool) {
-        animateHeaderViewDown()
+        animateHeaderViewDown(0.2)
     }
     
     func initSubviews() {
@@ -81,7 +80,6 @@ class EventDetailViewController: UIViewController,
         imagePageControl.currentPage = 0
         
         initMapView()
-//        animateHeaderViewDown()
     }
     
     func refresh() {
@@ -312,13 +310,10 @@ class EventDetailViewController: UIViewController,
             dragStartingPoint = CGPoint(x: loc.x, y: loc.y)
             initialDragOffset = contentView.frame.origin.y
         } else if sender.state == .Changed {
-//            contentView.transform = CGAffineTransformTranslate(contentView.transform, 0,
-//                (point.y - dragStartingPoint.y)/100)
             let dy = loc.y - dragStartingPoint.y
-            println("new.p: \(loc), i: \(dragStartingPoint), diff: \(loc.y - dragStartingPoint.y)")
             contentView.frame.origin.y = initialDragOffset + dy
             if currentImageView != nil {
-//                currentImageView?.transform = CGAffineTransformTranslate(currentImageView!.transform, 0, dy)
+                currentImageView?.transform = CGAffineTransformTranslate(currentImageView!.transform, 0, dy/50)
             } else {
                 println("current image view is empty during dragging")
             }
@@ -326,38 +321,47 @@ class EventDetailViewController: UIViewController,
             if direction == "up" {
                 animateHeaderViewUp()
             } else {
-                animateHeaderViewDown()
+                animateHeaderViewDown(0)
             }
         }
     }
     
-    func animateHeaderViewDown() {
-        UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
-            let dy = self.view.frame.height - self.eventHeaderView.frame.height
-            println("scroll down header to y = \(dy)")
-            self.contentView.frame.origin.y = dy
+    func animateHeaderViewDown(delay: Double!) {
+        view.layoutIfNeeded()
+        let dy = self.view.frame.height - self.eventHeaderView.frame.height
+        contentTopConstraint.constant = dy
+        eventHeaderView.setNeedsUpdateConstraints()
+        
+        UIView.animateWithDuration(1.0, delay: delay, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            
             if self.currentImageView != nil {
                 self.currentImageView?.transform = CGAffineTransformIdentity
             }
             }) { (completed) -> Void in
                 if completed {
+                    self.detailsIsOpen = false
                 }
         }
     }
     
     func animateHeaderViewUp() {
+        view.layoutIfNeeded()
+        let dy = self.view.frame.height - self.contentView.frame.height
+        contentTopConstraint.constant = dy
+        eventHeaderView.setNeedsUpdateConstraints()
+        
         UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
-//            let dy = self.contentView.frame.size.height - (self.view.frame.size.height - self.detailHeaderViewOriginFrame.origin.y) + 10
-//            self.contentView.transform = CGAffineTransformMakeTranslation(0, dy)
-            self.contentView.frame.origin.y = self.view.frame.height - self.contentView.frame.height
+            self.view.layoutIfNeeded()
+            
             if self.currentImageView != nil {
-//                self.currentImageView?.transform = CGAffineTransformMakeTranslation(0, dy/2)
+                self.currentImageView?.transform = CGAffineTransformMakeTranslation(0, -self.view.frame.height/3)
             } else {
                 println("current image view is empty")
             }
             }) { (completed) -> Void in
                 if completed {
-//                    self.doingInitialAnimation = false
+                    self.detailsIsOpen = true
                 }
         }
     }
@@ -428,7 +432,6 @@ class EventDetailViewController: UIViewController,
             println("taped image")
             let descriptionView = UIView(frame: currentImageView!.frame)
             descriptionView.backgroundColor = UIColor.blackColor()
-//            currentImageView?.addSubview(descriptionView)
         } else {
             println("taped image current image is nil")
         }
@@ -449,6 +452,20 @@ class EventDetailViewController: UIViewController,
         if Int(page) > 0 && imageScrollView.subviews.count > Int(page) {
             currentImageView = imageScrollView.subviews[Int(page)] as? UIImageView
         }
+    }
+    
+    @IBAction func onHeaderTap(sender: UITapGestureRecognizer) {
+        let direction = detailsIsOpen ? "down" : "up"
+        if detailsIsOpen {
+            detailsIsOpen = false
+            animateHeaderColorChanges(direction)
+            animateHeaderViewDown(0)
+        } else {
+            detailsIsOpen = true
+            animateHeaderColorChanges(direction)
+            animateHeaderViewUp()
+        }
+        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
