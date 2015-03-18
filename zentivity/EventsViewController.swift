@@ -90,10 +90,12 @@ BaseTableViewDelegate
     }
     
     @IBAction func onAddEventPress(sender: ShadowButton) {
-        var addEventVC = storyboard?.instantiateViewControllerWithIdentifier("AddEventViewController") as AddEventViewController
-        var navVC = UINavigationController(rootViewController: addEventVC)
-        navVC.navigationBar.topItem?.title = "New Event"
-        self.presentViewController(navVC, animated: true, completion: nil)
+//        var addEventVC = storyboard?.instantiateViewControllerWithIdentifier("NewEventViewController") as NewEventViewController
+//        var navVC = UINavigationController(rootViewController: addEventVC)
+//        navVC.navigationBar.topItem?.title = "New Event"
+//        self.presentViewController(navVC, animated: true, completion: nil)
+        performSegueWithIdentifier("createEvent", sender: self)
+        
     }
     
     // MARK: - Navigation

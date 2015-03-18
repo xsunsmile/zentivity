@@ -444,6 +444,7 @@
                         <outlet property="tableView" destination="lzK-tb-k7n" id="oCr-eP-aYT"/>
                         <segue destination="TSa-KR-ocb" kind="modal" identifier="viewEventDetailSegue" id="Jnz-Sc-pRM"/>
                         <segue destination="vXZ-lx-hvc" kind="modal" identifier="userAuthSegue" id="sIC-k8-4tK"/>
+                        <segue destination="IUe-Fa-oYf" kind="push" identifier="createEvent" id="0lZ-BH-0ko"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrS-tk-xnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -700,7 +701,7 @@
         <!--New Event-->
         <scene sceneID="TMn-r0-je2">
             <objects>
-                <tableViewController id="IUe-Fa-oYf" customClass="NewEventViewController" customModule="zentivity" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewEventViewController" id="IUe-Fa-oYf" customClass="NewEventViewController" customModule="zentivity" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="NPl-QT-hfF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -752,8 +753,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nr7-Q0-vZE" id="FzN-9v-L8V">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/01/1970 @ 00:00 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-I1-9uT">
-                                                    <rect key="frame" x="140" y="13" width="165" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-I1-9uT">
+                                                    <rect key="frame" x="293" y="13" width="12" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.21399542299999999" green="0.21399542299999999" blue="0.21399542299999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -805,8 +806,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vRi-8o-BlL" id="asu-5W-Vqx">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/01/1970 @ 00:00 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k8-m9-6xq">
-                                                    <rect key="frame" x="140" y="13" width="165" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k8-m9-6xq">
+                                                    <rect key="frame" x="293" y="13" width="12" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.21399542299999999" green="0.21399542299999999" blue="0.21399542299999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
