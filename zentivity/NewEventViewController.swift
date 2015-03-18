@@ -159,6 +159,8 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     @IBAction func onCreate(sender: UIBarButtonItem) {
         var event = Event()
         event.title = titleField.text
+        event.locationString = addressField.text
+//        event.contactNumber = PFUser.currentUser().contactNumber
         event.descript = descriptionField.text
         event.admin = PFUser.currentUser()
         event.startTime = startTimePicker.date
