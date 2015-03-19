@@ -51,6 +51,8 @@ class Event : PFObject, PFSubclassing {
     
     func userJoined(user: User?) -> Bool {
         if let user = user {
+            println(confirmedUsers)
+            println(user)
             return confirmedUsers.containsObject(user)
         } else {
             return false

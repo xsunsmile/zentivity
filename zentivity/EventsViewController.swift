@@ -14,15 +14,20 @@ class EventsViewController: UIViewController,
                             UIScrollViewDelegate,
                             UISearchBarDelegate
 {
+    
+    @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var baseTable: BaseTableView!
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(180)
+    let menuTitles = ["New", "Owned", "Going"]
+    
     var hud: JGProgressHUD?
     var refreshControl: UIRefreshControl!
     var searchBar: UISearchBar?
+    var segmentedMenu: HMSegmentedControl?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +45,27 @@ class EventsViewController: UIViewController,
         refresh(true)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        segmentedMenu?.frame = menuView.bounds
+    }
+    
     func initSubviews() {
+        segmentedMenu = HMSegmentedControl(sectionTitles: menuTitles)
+        
+        segmentedMenu?.frame = CGRectMake(0, 0, view.frame.width, menuView.frame.height)
+        segmentedMenu?.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+        
+        segmentedMenu?.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
+        segmentedMenu?.font = UIFont.boldSystemFontOfSize(14)
+        segmentedMenu?.backgroundColor = UIColor(rgba: "#fafafa")
+        segmentedMenu?.selectedTextColor = UIColor(rgba: "#34b5e5")
+        segmentedMenu?.textColor = UIColor(rgba: "#33373b")
+        
+        segmentedMenu?.addTarget(self, action: "onMenuSwitch:", forControlEvents: UIControlEvents.ValueChanged)
+        menuView.addSubview(segmentedMenu!)
+        
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
         baseTable.titleIdentifier = titleId
@@ -125,6 +150,41 @@ class EventsViewController: UIViewController,
 //        self.presentViewController(navVC, animated: true, completion: nil)
         performSegueWithIdentifier("createEvent", sender: self)
         
+    }
+    
+    func onMenuSwitch(control: HMSegmentedControl) {
+        let title = menuTitles[control.selectedSegmentIndex]
+        println("selected \(title)")
+        let currentUser = User.currentUser() as User
+        
+        switch(control.selectedSegmentIndex) {
+        case 1:
+            hud?.showInView(self.view, animated: true)
+            currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+                if error == nil {
+                    self.hud?.dismiss()
+                    self.baseTable.datasource = events
+                    self.tableView.reloadData()
+                } else {
+                    println("failed to list up admin events: \(error)")
+                }
+            })
+            break
+        case 2:
+            hud?.showInView(self.view, animated: true)
+            currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
+                if error == nil {
+                    self.hud?.dismiss()
+                    self.baseTable.datasource = events
+                    self.tableView.reloadData()
+                } else {
+                    println("failed to list up confirmedUsers events: \(error)")
+                }
+            })
+            break
+        default:
+            refresh(true)
+        }
     }
     
     // MARK: - Navigation

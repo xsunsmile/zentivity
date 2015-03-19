@@ -5,6 +5,7 @@
 #import "JGProgressHUD.h"
 #import "UIImageView+AFNetworking.h"
 #import "UserInitialsView.h"
+#import "HMSegmentedControl.h"
 #import <Parse/Parse.h>
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>

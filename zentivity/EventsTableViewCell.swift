@@ -167,6 +167,12 @@ class EventsTableViewCell: BaseTableViewCell {
         } else {
             locationLabel.text = "1019 Market Street, San Francisco, CA 94103"
         }
+        
+        if event.userJoined(User.currentUser()) {
+            joinLabel.text = "Cancel"
+        } else {
+            joinLabel.text = "Join"
+        }
     }
     
     func applyGradient() {
