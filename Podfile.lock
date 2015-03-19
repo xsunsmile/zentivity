@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Bolts (1.1.4)
+  - HMSegmentedControl (1.3.0)
   - JGProgressHUD (1.2.3)
   - Parse (1.6.4):
     - Bolts (~> 1.1)
@@ -28,6 +29,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - HMSegmentedControl (~> 1.3.0)
   - JGProgressHUD
   - Parse
   - pop (~> 1.0)
@@ -35,6 +37,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
   Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
+  HMSegmentedControl: 9b3a39b9efd3d370b5d3d7b7cd5430f01a889b0b
   JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
   Parse: c2610f7a12ad0defc974803b819c4efe7746e6db
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
