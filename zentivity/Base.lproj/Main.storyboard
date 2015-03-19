@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OV4-jZ-hgO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OV4-jZ-hgO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -67,12 +67,12 @@
                     </view>
                     <connections>
                         <outlet property="loginView" destination="FnX-x9-awn" id="Guu-p6-Le5"/>
-                        <segue destination="7Yf-Uc-nWO" kind="modal" identifier="eventsListSegue" id="dZ3-hS-8p2"/>
+                        <segue destination="5a4-0n-hgD" kind="push" identifier="eventsListSegue" id="yd8-rn-ECg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="581" y="1309"/>
+            <point key="canvasLocation" x="529" y="1208"/>
         </scene>
         <!--Event Details-->
         <scene sceneID="qUa-cS-Yeg">
@@ -456,7 +456,7 @@
                         <outlet property="tableView" destination="lzK-tb-k7n" id="oCr-eP-aYT"/>
                         <segue destination="TSa-KR-ocb" kind="modal" identifier="viewEventDetailSegue" id="Jnz-Sc-pRM"/>
                         <segue destination="vXZ-lx-hvc" kind="modal" identifier="userAuthSegue" id="sIC-k8-4tK"/>
-                        <segue destination="IUe-Fa-oYf" kind="push" identifier="createEvent" id="0lZ-BH-0ko"/>
+                        <segue destination="IUe-Fa-oYf" kind="modal" identifier="createEvent" id="0lZ-BH-0ko"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrS-tk-xnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1058,24 +1058,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1644" y="1219"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="KTO-2W-89L">
-            <objects>
-                <navigationController storyboardIdentifier="eventsViewNav" automaticallyAdjustsScrollViewInsets="NO" id="7Yf-Uc-nWO" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S8t-bf-c9q">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="5a4-0n-hgD" kind="relationship" relationship="rootViewController" id="eJD-oX-LYC"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IBo-8k-Ruf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="588" y="521"/>
         </scene>
         <!--Main-->
         <scene sceneID="u0G-CU-Wuz">

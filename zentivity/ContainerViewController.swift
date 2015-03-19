@@ -56,15 +56,15 @@ class ContainerViewController: UIViewController {
         var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
         eventsVC.navigationItem.leftBarButtonItem = menuButton
         
-        var mainNVC = UINavigationController(rootViewController: eventsVC)
-        mainNVC.navigationBar.topItem?.title = "Events"
-        mainNVC.edgesForExtendedLayout = UIRectEdge.None
-        self.addChildViewController(mainNVC)
-        self.mainView.addSubview(mainNVC.view)
-        mainNVC.view.frame = mainView.bounds
-        mainNVC.didMoveToParentViewController(self)
+//        var mainNVC = UINavigationController(rootViewController: eventsVC)
+//        mainNVC.navigationBar.topItem?.title = "Events"
+//        mainNVC.edgesForExtendedLayout = UIRectEdge.None
         
-
+        let mainVC = eventsVC
+        self.addChildViewController(mainVC)
+        self.mainView.addSubview(mainVC.view)
+        mainVC.view.frame = mainView.bounds
+        mainVC.didMoveToParentViewController(self)
     }
     
     @IBAction func onMainViewPan(sender: UIPanGestureRecognizer) {
