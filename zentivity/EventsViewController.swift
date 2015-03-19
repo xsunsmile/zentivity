@@ -8,14 +8,12 @@
 
 import UIKit
 
-<<<<<<< HEAD
 class EventsViewController: UIViewController,
-BaseTableViewDelegate, NewEventDelegate
+                            BaseTableViewDelegate,
+                            NewEventDelegate,
+                            UIScrollViewDelegate,
+                            UISearchBarDelegate
 {
-    
-=======
-class EventsViewController: UIViewController, BaseTableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate {
->>>>>>> Dynamic filters table
     @IBOutlet weak var tableView: UITableView!
     var baseTable: BaseTableView!
     var datasource: [AnyObject] = []
