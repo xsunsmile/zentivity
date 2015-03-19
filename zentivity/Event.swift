@@ -59,6 +59,10 @@ class Event : PFObject, PFSubclassing {
         }
     }
     
+    func ownedByUser(user: User?) -> Bool {
+        return admin.objectId == user?.objectId
+    }
+    
     func startTimeWithFormat(format: NSString?) -> NSString {
         if format == nil {
             dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle

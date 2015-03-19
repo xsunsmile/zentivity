@@ -134,7 +134,7 @@ class EventsTableViewCell: BaseTableViewCell {
         let event = data as Event
        
         eventNameLabel.text = event.getTitle()
-        eventDateLabel.text = dateFormatter.stringFromDate(event.startTime)
+        eventDateLabel.text = event.startTimeWithFormat("MMM d, HH:mm (EEE)")
         
         if event.photos?.count > 0 {
             let photo = event.photos![0] as Photo
@@ -168,7 +168,9 @@ class EventsTableViewCell: BaseTableViewCell {
             locationLabel.text = "1019 Market Street, San Francisco, CA 94103"
         }
         
-        if event.userJoined(User.currentUser()) {
+        if event.ownedByUser(User.currentUser()) {
+            joinLabel.text = "Edit"
+        } else if event.userJoined(User.currentUser()) {
             joinLabel.text = "Cancel"
         } else {
             joinLabel.text = "Join"

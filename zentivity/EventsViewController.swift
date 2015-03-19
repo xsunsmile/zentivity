@@ -47,14 +47,12 @@ class EventsViewController: UIViewController,
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        segmentedMenu?.frame = menuView.bounds
     }
     
     func initSubviews() {
         segmentedMenu = HMSegmentedControl(sectionTitles: menuTitles)
         
-        segmentedMenu?.frame = CGRectMake(0, 0, view.frame.width, menuView.frame.height)
+        segmentedMenu?.frame = CGRectMake(0, 0, view.frame.width, menuView.frame.height-2)
         segmentedMenu?.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         
         segmentedMenu?.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
@@ -102,13 +100,12 @@ class EventsViewController: UIViewController,
                 self.datasource = events!
                 self.baseTable.datasource = self.datasource
                 self.tableView.reloadData()
-                self.hud?.dismiss()
             } else {
-                println("failed to list events")
-                self.hud?.dismiss()
+                println("failed to list all events")
                 self.showEmptyListView()
             }
             
+            self.hud?.dismiss()
             self.refreshControl.endRefreshing()
         }
     }

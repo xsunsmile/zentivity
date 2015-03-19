@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OV4-jZ-hgO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OV4-jZ-hgO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -400,13 +400,25 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrZ-L5-9Ug" userLabel="Menu">
                                 <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCY-LZ-Jzf" userLabel="Line">
+                                        <rect key="frame" x="0.0" y="38" width="320" height="2"/>
+                                        <color key="backgroundColor" red="0.20392156859999999" green="0.70980392160000005" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2" id="wkp-dj-yB6"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="zCY-LZ-Jzf" secondAttribute="bottom" id="M7E-So-zus"/>
                                     <constraint firstAttribute="height" constant="40" id="d9T-cT-e7Q"/>
+                                    <constraint firstItem="zCY-LZ-Jzf" firstAttribute="leading" secondItem="yrZ-L5-9Ug" secondAttribute="leading" id="ngp-YT-zw5"/>
+                                    <constraint firstAttribute="trailing" secondItem="zCY-LZ-Jzf" secondAttribute="trailing" id="z4e-G1-8lb"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-tb-k7n">
-                                <rect key="frame" x="0.0" y="114" width="320" height="454"/>
+                                <rect key="frame" x="0.0" y="104" width="320" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giV-1o-78m">
@@ -443,7 +455,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="lzK-tb-k7n" secondAttribute="trailing" constant="-16" id="An6-ib-y1X"/>
                             <constraint firstItem="yrZ-L5-9Ug" firstAttribute="leading" secondItem="abs-n4-Kt4" secondAttribute="leading" id="KrQ-dc-2c0"/>
                             <constraint firstItem="yfa-JY-Q5f" firstAttribute="top" secondItem="giV-1o-78m" secondAttribute="bottom" constant="30" id="OHG-dH-gXT"/>
-                            <constraint firstItem="lzK-tb-k7n" firstAttribute="top" secondItem="yrZ-L5-9Ug" secondAttribute="bottom" constant="10" id="TV3-NN-fn9"/>
+                            <constraint firstItem="lzK-tb-k7n" firstAttribute="top" secondItem="yrZ-L5-9Ug" secondAttribute="bottom" id="TV3-NN-fn9"/>
                             <constraint firstAttribute="trailing" secondItem="giV-1o-78m" secondAttribute="trailing" constant="20" id="aeV-3c-b6o"/>
                             <constraint firstAttribute="trailing" secondItem="yrZ-L5-9Ug" secondAttribute="trailing" id="c9w-s1-KtH"/>
                             <constraint firstItem="yrZ-L5-9Ug" firstAttribute="top" secondItem="yob-i7-e4F" secondAttribute="bottom" id="fjh-OZ-Hue"/>
