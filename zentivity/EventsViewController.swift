@@ -9,27 +9,33 @@
 import UIKit
 
 class EventsViewController: UIViewController,
-BaseTableViewDelegate, NewEventDelegate
+                            BaseTableViewDelegate,
+                            NewEventDelegate,
+                            UIScrollViewDelegate,
+                            UISearchBarDelegate
 {
-    
     @IBOutlet weak var tableView: UITableView!
     var baseTable: BaseTableView!
-    
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(180)
     var hud: JGProgressHUD?
     var refreshControl: UIRefreshControl!
+    var searchBar: UISearchBar?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
         
-        var searchBar = UISearchBar()
-        navigationItem.titleView = searchBar
         createRefreshControl()
+
+        searchBar = UISearchBar()
+        navigationItem.title = "Events"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: "presentEventsFilterModal")
+        searchBar!.delegate = self
+        
         initSubviews()
         refresh(true)
     }
@@ -135,5 +141,10 @@ BaseTableViewDelegate, NewEventDelegate
             vc.delegate = self
         }
     }
+    
+    func presentEventsFilterModal() {
+        let filterNVC = storyboard?.instantiateViewControllerWithIdentifier("FilterNavViewController") as UINavigationController
+        self.presentViewController(filterNVC, animated: true, completion: nil)
 
+    }
 }

@@ -1,3 +1,4 @@
+
 //
 //  UserProfileViewController.swift
 //  zentivity
@@ -68,9 +69,9 @@ class UserProfileViewController: UIViewController,
                 if currentUser.imageUrl.length > 0 {
                     self.profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
                 }
-//                if User.currentUser().aboutMe.length > 0 {
-//                    self.profileOrganization.text = currentUser.aboutMe
-//                }
+                //                if User.currentUser().aboutMe.length > 0 {
+                //                    self.profileOrganization.text = currentUser.aboutMe
+                //                }
                 self.profileContactInfo.text = currentUser.username
                 
                 self.baseTable.datasource = events
@@ -84,7 +85,7 @@ class UserProfileViewController: UIViewController,
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
         performSegueWithIdentifier("viewEventDetailSegue", sender: self)
     }
-    
+        
     @IBAction func onSignOut(sender: UIBarButtonItem) {
         User.logoutWithCompletion { (completed) -> Void in
             println("User logout: \(completed)")
