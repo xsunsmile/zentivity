@@ -58,13 +58,27 @@ class UserProfileViewController: UIViewController,
     }
     
     func refresh() {
-        var currentUser = User.currentUser() as User
-        currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
-            println(events)
-            println(error)
-            if error == nil && events.count > 0 {
-                if currentUser.name != "" {
-                    self.profileName.text = currentUser.name
+        var currentUser: User? = User.currentUser()
+        if let currentUser = currentUser {
+            currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+                println(events)
+                println(error)
+                if error == nil && events.count > 0 {
+                    if currentUser.name != "" {
+                        self.profileName.text = currentUser.name
+                    }
+                    if currentUser.imageUrl != "" {
+                        self.profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
+                    }
+                    if User.currentUser().name != "" {
+                        self.profileOrganization.text = currentUser.aboutMe
+                    }
+                    self.profileContactInfo.text = currentUser.username
+                    
+                    self.baseTable.datasource = events
+                    self.tableView.reloadData()
+                } else {
+                    println("failed to list up events: \(error)")
                 }
                 if currentUser.imageUrl.length > 0 {
                     self.profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)

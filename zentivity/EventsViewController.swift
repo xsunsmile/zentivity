@@ -144,33 +144,9 @@ class EventsViewController: UIViewController, BaseTableViewDelegate, UIScrollVie
         }
     }
     
-    @IBAction func onTap(sender: UITapGestureRecognizer) {
-        resignSearchBarFirstResponder()
-    }
-
-    func resignSearchBarFirstResponder() {
-        if searchBar!.isFirstResponder() {
-            searchBar!.resignFirstResponder()
-        }
-    }
-    
     func presentEventsFilterModal() {
-        // Present
-//        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
-//        let navBarHeight = navigationController!.navigationBar.frame.size.height
-//        var yOrigin = statusBarHeight + navBarHeight + modalMargin
-//        
-//        var filterViewFrame = CGRectMake(modalMargin, yOrigin , self.view.frame.width - 2 * modalMargin, self.view.frame.height - statusBarHeight - navBarHeight - 2 * modalMargin)
-//        var filterView = UIView(frame: filterViewFrame)
-//        
-        let filterViewController = storyboard?.instantiateViewControllerWithIdentifier("FilterNavViewController") as UINavigationController
-        
-        self.presentViewController(filterViewController, animated: true, completion: nil)
-//
-//        self.addChildViewController(filterViewController)
-//        filterViewController.view.frame = filterView.bounds
-//        filterView.addSubview(filterViewController.view)
-//        filterViewController.didMoveToParentViewController(self)
-//        self.view.addSubview(filterView)
+        let filterNVC = storyboard?.instantiateViewControllerWithIdentifier("FilterNavViewController") as UINavigationController
+        self.presentViewController(filterNVC, animated: true, completion: nil)
+
     }
 }
