@@ -97,7 +97,9 @@ class ContainerViewController: UIViewController {
     func showMenu() {
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.mainView.center.x = self.mainViewRightPos
-        })
+        }) { (success) -> Void in
+            self.eventsVC.blurSearchBar()
+        }
     }
     
     func toggleMenu() {
