@@ -8,6 +8,7 @@
 
 class Event : PFObject, PFSubclassing {
     @NSManaged var title: String
+    @NSManaged var lowercaseTitle: String
     @NSManaged var descript: String
     @NSManaged var startTime: NSDate
     @NSManaged var endTime: NSDate
@@ -36,8 +37,16 @@ class Event : PFObject, PFSubclassing {
         return "Event"
     }
     
-    class func listWithCompletion(completion: (events: [Event]?, error: NSError!) -> ()) {
+    class func listWithOptionsAndCompletion(options: NSDictionary?, completion: (events: [Event]?, error: NSError!) -> ()) {
         var query = Event.query()
+        
+        // Build query
+        if let options = options {
+            if let title = options["title"] as? String {
+                query.whereKey("title", containsString: title)
+            }
+        }
+        
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
@@ -70,6 +79,7 @@ class Event : PFObject, PFSubclassing {
         self.admin = PFUser.currentUser()
         self.confirmedUsers = []
         self.declinedUsers = []
+        self.lowercaseTitle = title.lowercaseString
         if photos == nil { self.photos = [] }
         
         if let invitedUsernames = invitedUsernames {

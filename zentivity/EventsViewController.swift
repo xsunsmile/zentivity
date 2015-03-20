@@ -20,10 +20,16 @@ class EventsViewController: UIViewController,
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(180)
+    let menuTitles = ["New", "Owned", "Going"]
+    var rightBarButtonItem: UIBarButtonItem!
+    
     var hud: JGProgressHUD?
     var refreshControl: UIRefreshControl!
     var searchBar: UISearchBar?
-
+    // var segmentedMenu: HMSegmentedControl?
+    var filters = Dictionary<String, String>()
+    var searchBarJustResigned: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,9 +37,11 @@ class EventsViewController: UIViewController,
         
         createRefreshControl()
 
+        rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: "presentEventsFilterModal")
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+        
         searchBar = UISearchBar()
-        navigationItem.title = "Events"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: "presentEventsFilterModal")
+        navigationItem.titleView = searchBar
         searchBar!.delegate = self
         
         initSubviews()
@@ -72,7 +80,7 @@ class EventsViewController: UIViewController,
             hud?.showInView(self.view, animated: true)
         }
         
-        Event.listWithCompletion { (events, error) -> () in
+        Event.listWithOptionsAndCompletion(filters) { (events, error) -> () in
             if events != nil {
                 self.datasource = events!
                 self.baseTable.datasource = self.datasource
@@ -119,16 +127,47 @@ class EventsViewController: UIViewController,
     }
     
     @IBAction func onAddEventPress(sender: ShadowButton) {
-//        var addEventVC = storyboard?.instantiateViewControllerWithIdentifier("NewEventViewController") as NewEventViewController
-//        var navVC = UINavigationController(rootViewController: addEventVC)
-//        navVC.navigationBar.topItem?.title = "New Event"
-//        self.presentViewController(navVC, animated: true, completion: nil)
         performSegueWithIdentifier("createEvent", sender: self)
+    }
+    
+    func onMenuSwitch(control: HMSegmentedControl) {
+        blurSearchBar()
+        let title = menuTitles[control.selectedSegmentIndex]
+        println("selected \(title)")
+        let currentUser = User.currentUser() as User
+        
+        switch(control.selectedSegmentIndex) {
+        case 1:
+            hud?.showInView(self.view, animated: true)
+            currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+                if error == nil {
+                    self.hud?.dismiss()
+                    self.baseTable.datasource = events
+                    self.tableView.reloadData()
+                } else {
+                    println("failed to list up admin events: \(error)")
+                }
+            })
+            break
+        case 2:
+            hud?.showInView(self.view, animated: true)
+            currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
+                if error == nil {
+                    self.hud?.dismiss()
+                    self.baseTable.datasource = events
+                    self.tableView.reloadData()
+                } else {
+                    println("failed to list up confirmedUsers events: \(error)")
+                }
+            })
+            break
+        default:
+            refresh(true)
+        }
         
     }
     
     // MARK: - Navigation
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "viewEventDetailSegue" {
             var vc = segue.destinationViewController as EventDetailViewController
@@ -146,5 +185,53 @@ class EventsViewController: UIViewController,
         let filterNVC = storyboard?.instantiateViewControllerWithIdentifier("FilterNavViewController") as UINavigationController
         self.presentViewController(filterNVC, animated: true, completion: nil)
 
+    }
+    
+    // MARK: - Scroll View
+    func tableViewWillBeginDragging(scrollView: UIScrollView) {
+        blurSearchBar()
+    }
+    
+    // MARK: - Search Bar
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        focusSearchBar()
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        blurSearchBar()
+    }
+    
+    func focusSearchBar() {
+        navigationItem.rightBarButtonItem = nil
+    }
+    
+    func blurSearchBar() {
+        searchBar?.resignFirstResponder()
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        if countElements(searchBar.text) > 0 {
+            filters["title"] = searchBar.text
+        }
+        
+        searchBar.resignFirstResponder()
+        refresh(true)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchBar.isFirstResponder() && countElements(searchBar.text) == 0 {
+            if searchBarJustResigned == true {
+                searchBarJustResigned = false
+            } else {
+                filters = Dictionary<String, String>()
+                refresh(true)
+                searchBar.resignFirstResponder()
+            }
+            searchBar.resignFirstResponder()
+        } else if searchBar.isFirstResponder() && countElements(searchBar.text) == 0 {
+            searchBar.resignFirstResponder()
+            searchBarJustResigned = true
+        }
     }
 }

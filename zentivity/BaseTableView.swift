@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol BaseTableViewDelegate: class {
+@objc protocol BaseTableViewDelegate: class {
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath)
+    optional func tableViewWillBeginDragging(scrollView: UIScrollView)
 }
 
 class BaseTableView: NSObject,
@@ -63,6 +64,17 @@ class BaseTableView: NSObject,
         return titleSource.count
     }
     
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        if let delegate = delegate {
+//            delegate.tableViewDidScroll!(scrollView)
+//        }
+//    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        if let delegate = delegate {
+            delegate.tableViewWillBeginDragging!(scrollView)
+        }
+    }
 //    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        if titleIdentifier == nil {
 //            return BaseTableViewCell()
