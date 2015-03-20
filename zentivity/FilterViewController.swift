@@ -8,8 +8,9 @@
 
 import UIKit
 
-class FilterViewController: UITableViewController, UITextFieldDelegate {
+class FilterViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -22,6 +23,20 @@ class FilterViewController: UITableViewController, UITextFieldDelegate {
         categoryField.delegate = self
         
         datePicker.addTarget(self, action: "datePickerValueChanged", forControlEvents: UIControlEvents.ValueChanged)
+        
+        searchBar.barTintColor = UIColor.groupTableViewBackgroundColor() // UIColor(rgba: "#fafafa")
+        searchBar.placeholder = "Search activities..."
+        searchBar.searchBarStyle = UISearchBarStyle.Prominent
+        searchBar.showsCancelButton = true
+//        searchBar.showsScopeBar = true
+        
+        searchBar.delegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        tableView.frame.size.width = view.frame.width - 60
+        tableView.frame.origin.x = 60
+        tableView.frame.origin.y = 20
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,5 +101,13 @@ class FilterViewController: UITableViewController, UITextFieldDelegate {
     
     override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         isPickingDate = false
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        view.endEditing(true)
     }
 }

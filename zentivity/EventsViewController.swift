@@ -39,11 +39,8 @@ class EventsViewController: UIViewController,
         
         createRefreshControl()
 
-        rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: "presentEventsFilterModal")
-        navigationItem.rightBarButtonItem = rightBarButtonItem
-        
         searchBar = UISearchBar()
-        navigationItem.titleView = searchBar
+//        navigationItem.titleView = searchBar
         searchBar!.delegate = self
         
         initSubviews()
@@ -154,7 +151,7 @@ class EventsViewController: UIViewController,
         let title = menuTitles[control.selectedSegmentIndex]
         println("selected \(title)")
         let currentUser = User.currentUser() as User
-        
+
         switch(control.selectedSegmentIndex) {
         case 1:
             hud?.showInView(self.view, animated: true)
@@ -201,9 +198,8 @@ class EventsViewController: UIViewController,
     }
     
     func presentEventsFilterModal() {
-        let filterNVC = storyboard?.instantiateViewControllerWithIdentifier("FilterNavViewController") as UINavigationController
-        self.presentViewController(filterNVC, animated: true, completion: nil)
-
+//        let filterNVC = storyboard?.instantiateViewControllerWithIdentifier("FilterNavViewController") as UINavigationController
+//        self.presentViewController(filterNVC, animated: true, completion: nil)
     }
     
     // MARK: - Scroll View

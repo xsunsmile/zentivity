@@ -16,15 +16,16 @@ class ContainerViewController: UIViewController {
     var mainViewCurrentPos: CGFloat!
     var mainViewXTranslation: CGFloat!
     var eventsVC: EventsViewController!
-    var menuVC: UserProfileViewController!
+    var menuVC: FilterViewController! // UserProfileViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainViewLeftPos = view.center.x
-        mainViewRightPos = view.center.x + view.bounds.width - 60.0;
+        mainViewLeftPos = view.center.x - view.bounds.width + 60.0
+        mainViewRightPos = view.center.x // + view.bounds.width - 60.0;
         
-        menuVC = storyboard?.instantiateViewControllerWithIdentifier("UserProfileViewController") as UserProfileViewController
+        menuVC = storyboard?.instantiateViewControllerWithIdentifier("FilterViewController") as FilterViewController // UserProfileViewController
+        
         eventsVC = storyboard?.instantiateViewControllerWithIdentifier("EventsViewController") as EventsViewController
         
         initMenuView()
@@ -52,13 +53,22 @@ class ContainerViewController: UIViewController {
         mainView.layer.shadowOpacity = 0.7
         mainView.layer.shadowRadius = 0.5
         
-        var hamburgerImage = UIImage(named: "menu_icon")
-        var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
-        eventsVC.navigationItem.leftBarButtonItem = menuButton
+//        var hamburgerImage = UIImage(named: "menu_icon")
+//        var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
+//        eventsVC.navigationItem.leftBarButtonItem = menuButton
+        
+        let searchImage = UIImage(named: "search")
+        let frame = CGRectMake(0, 0, 22, 22)
+        let button = UIButton(frame: frame)
+        button.setBackgroundImage(searchImage, forState: UIControlState.Normal)
+        button.addTarget(self, action: "toggleMenu", forControlEvents: UIControlEvents.TouchDown)
+        
+        let searchButton = UIBarButtonItem(customView: button)
+        eventsVC.navigationItem.rightBarButtonItem = searchButton
         
         var mainNVC = UINavigationController(rootViewController: eventsVC)
-        mainNVC.navigationBar.topItem?.title = "Events"
-        mainNVC.edgesForExtendedLayout = UIRectEdge.None
+//        mainNVC.navigationBar.topItem?.title = "Zentivity"
+//        mainNVC.edgesForExtendedLayout = UIRectEdge.None
         self.addChildViewController(mainNVC)
         self.mainView.addSubview(mainNVC.view)
         mainNVC.view.frame = mainView.bounds
@@ -84,25 +94,27 @@ class ContainerViewController: UIViewController {
         } else if sender.state == .Ended {
 
         var velocity = sender.velocityInView(view)
-            velocity.x < 0 ? hideMenu() : showMenu()
+            velocity.x > 0 ? hideMenu() : showMenu()
         }
     }
     
     func hideMenu() {
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.mainView.center.x = self.mainViewLeftPos
+//            self.mainView.center.x = self.mainViewLeftPos
+            self.mainView.center.x = self.mainViewRightPos
         })
     }
     
     func showMenu() {
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.mainView.center.x = self.mainViewRightPos
+//            self.mainView.center.x = self.mainViewRightPos
+            self.mainView.center.x = self.mainViewLeftPos
         }) { (success) -> Void in
-            self.eventsVC.blurSearchBar()
+//            self.eventsVC.blurSearchBar()
         }
     }
     
     func toggleMenu() {
-        mainView.center.x > view.bounds.width / 2 ? hideMenu() : showMenu()
+        mainView.center.x < view.bounds.width / 2 ? hideMenu() : showMenu()
     }
 }

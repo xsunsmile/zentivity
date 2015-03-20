@@ -1146,12 +1146,17 @@
         <!--Filters-->
         <scene sceneID="55F-Fl-CDF">
             <objects>
-                <tableViewController id="gqA-FI-V80" customClass="FilterViewController" customModule="zentivity" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="2T3-Cw-EF0">
+                <tableViewController storyboardIdentifier="FilterViewController" id="gqA-FI-V80" customClass="FilterViewController" customModule="zentivity" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="2T3-Cw-EF0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="HJW-uk-R0e">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <sections>
                             <tableViewSection headerTitle="Category" id="rpm-u3-8u2">
                                 <cells>
@@ -1278,29 +1283,12 @@
                         <outlet property="datePicker" destination="Baf-cG-VJy" id="BpC-51-Vyk"/>
                         <outlet property="distanceLabel" destination="1gD-mN-XmF" id="ANQ-c9-rbS"/>
                         <outlet property="distanceSlider" destination="oOi-s4-SNy" id="kFf-Dn-Jbv"/>
+                        <outlet property="searchBar" destination="HJW-uk-R0e" id="qed-sd-SEb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ToF-Wk-goQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2763" y="680"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="VPr-j7-Mlh">
-            <objects>
-                <navigationController storyboardIdentifier="FilterNavViewController" automaticallyAdjustsScrollViewInsets="NO" id="DXC-0Q-cXk" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EI2-Dg-FCn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="gqA-FI-V80" kind="relationship" relationship="rootViewController" id="A5R-wF-p1L"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="85n-OX-Upa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2406" y="680"/>
+            <point key="canvasLocation" x="2490" y="642"/>
         </scene>
     </scenes>
     <resources>
