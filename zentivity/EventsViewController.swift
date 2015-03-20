@@ -31,6 +31,8 @@ class EventsViewController: UIViewController,
     var segmentedMenu: HMSegmentedControl?
     var filters = Dictionary<String, String>()
     var searchBarJustResigned: Bool = false
+    var searchButton: UIButton?
+    var searchIsOn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +40,6 @@ class EventsViewController: UIViewController,
         hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
         
         createRefreshControl()
-
-        searchBar = UISearchBar()
-//        navigationItem.titleView = searchBar
-        searchBar!.delegate = self
-        
         initSubviews()
         refresh(true)
     }
@@ -51,7 +48,38 @@ class EventsViewController: UIViewController,
         super.viewWillAppear(animated)
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.lt_reset()
+    }
+    
+    func initNavBar() {
+        searchBar = UISearchBar()
+        let delta = view.frame.size.width
+        searchBar?.frame = CGRectOffset(searchBar!.frame, delta, 0)
+//        searchBar?.hidden = true
+//        navigationController?.navigationBar.lt_setBackgroundColor(UIColor.blueColor())
+        
+        navigationItem.titleView = searchBar
+        
+        searchBar!.barTintColor = UIColor.groupTableViewBackgroundColor() // UIColor(rgba: "#fafafa")
+        searchBar!.placeholder = "Search activities..."
+//        searchBar!.searchBarStyle = UISearchBarStyle.Prominent
+        searchBar!.showsCancelButton = false
+        //        searchBar.showsScopeBar = true
+        searchBar!.delegate = self
+        
+        let searchBarPlaceImage = UIImage(named: "search")
+        let frame = CGRectMake(0, 0, 18, 18)
+        searchButton = UIButton(frame: frame)
+        searchButton!.setBackgroundImage(searchBarPlaceImage, forState: UIControlState.Normal)
+        searchButton!.addTarget(self, action: "toggleSearchBar", forControlEvents: UIControlEvents.TouchDown)
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchButton!)
+    }
+    
     func initSubviews() {
+        initNavBar()
+        
         segmentedMenu = HMSegmentedControl(sectionTitles: menuTitles)
         
         segmentedMenu?.frame = CGRectMake(0, 0, view.frame.width, menuView.frame.height-2)
@@ -204,7 +232,35 @@ class EventsViewController: UIViewController,
     
     // MARK: - Scroll View
     func tableViewWillBeginDragging(scrollView: UIScrollView) {
-        blurSearchBar()
+//        blurSearchBar()
+    }
+    
+    func tableViewDidScroll(scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y;
+        if (offsetY > 0) {
+            if (offsetY >= 44) {
+                setNavigationBarTransformProgress(1)
+            } else {
+                setNavigationBarTransformProgress(CGFloat(0-offsetY) / CGFloat(44))
+            }
+        } else {
+            setNavigationBarTransformProgress(0)
+            navigationController?.navigationBar.backIndicatorImage = nil // UIImage(named: "search")
+        }
+    }
+    
+    func setNavigationBarTransformProgress(progress: CGFloat) {
+        println("current progress: \(progress)")
+        navigationController?.navigationBar.lt_setTranslationY(44 * progress)
+        navigationController?.navigationBar.lt_setContentAlpha(1+progress)
+        
+        if progress == 0 {
+            navigationController?.navigationBar.hidden = false
+        }
+        
+        if progress == 1 {
+            navigationController?.navigationBar.hidden = true
+        }
     }
     
     // MARK: - Search Bar
@@ -222,7 +278,8 @@ class EventsViewController: UIViewController,
     
     func blurSearchBar() {
         searchBar?.resignFirstResponder()
-        navigationItem.rightBarButtonItem = rightBarButtonItem
+//        navigationItem.rightBarButtonItem = rightBarButtonItem
+        
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -248,5 +305,52 @@ class EventsViewController: UIViewController,
             searchBar.resignFirstResponder()
             searchBarJustResigned = true
         }
+    }
+    
+    func toggleSearchBar() {
+        var delta = view.frame.size.width
+        
+        if (!searchIsOn) {
+            delta *= -1;
+            searchIsOn = true
+//            searchBar?.hidden = false
+//            searchBar?.resignFirstResponder()
+        } else {
+            searchIsOn = false
+//            searchBar?.hidden = true
+        }
+
+        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseIn, animations: { () -> Void in
+            self.searchBar!.frame = CGRectOffset(self.searchBar!.frame, delta, 0)
+//            self.searchButton!.frame = CGRectOffset(self.searchButton!.frame, -delta, 0)
+        }) { (completed) -> Void in
+        }
+        
+//        let viewWidth = self.view.frame.width
+//        
+//        if searchIsOn {
+//            self.searchBar?.hidden = true
+//            UIView.animateWithDuration(0.4,
+//                delay: 0,
+//                options: nil, //(.CurveEaseOut | .AllowUserInteraction),
+//                animations: { () -> Void in
+//                self.searchBar?.transform = CGAffineTransformMakeScale(0.0001, 1)
+//                let orignPosX = viewWidth - 10 - self.searchButton!.frame.size.width
+//                self.searchButton!.frame.origin.x = orignPosX
+//                }) { (completed) -> Void in
+//                    self.searchIsOn = false
+//            }
+//        } else {
+//            UIView.animateWithDuration(0.4,
+//                delay: 0,
+//                options: nil, //(.CurveEaseIn | .AllowUserInteraction),
+//                animations: { () -> Void in
+//                self.searchButton!.frame.origin.x = 10
+//                self.searchBar?.transform = CGAffineTransformIdentity
+//                }) { (completed) -> Void in
+//                    self.searchIsOn = true
+//                    self.searchBar?.hidden = false
+//            }
+//        }
     }
 }

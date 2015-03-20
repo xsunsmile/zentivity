@@ -57,14 +57,14 @@ class ContainerViewController: UIViewController {
 //        var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
 //        eventsVC.navigationItem.leftBarButtonItem = menuButton
         
-        let searchImage = UIImage(named: "search")
-        let frame = CGRectMake(0, 0, 22, 22)
-        let button = UIButton(frame: frame)
-        button.setBackgroundImage(searchImage, forState: UIControlState.Normal)
-        button.addTarget(self, action: "toggleMenu", forControlEvents: UIControlEvents.TouchDown)
-        
-        let searchButton = UIBarButtonItem(customView: button)
-        eventsVC.navigationItem.rightBarButtonItem = searchButton
+//        let searchImage = UIImage(named: "search")
+//        let frame = CGRectMake(0, 0, 22, 22)
+//        let button = UIButton(frame: frame)
+//        button.setBackgroundImage(searchImage, forState: UIControlState.Normal)
+//        button.addTarget(self, action: "toggleMenu", forControlEvents: UIControlEvents.TouchDown)
+//        
+//        let searchButton = UIBarButtonItem(customView: button)
+//        eventsVC.navigationItem.rightBarButtonItem = searchButton
         
         var mainNVC = UINavigationController(rootViewController: eventsVC)
 //        mainNVC.navigationBar.topItem?.title = "Zentivity"

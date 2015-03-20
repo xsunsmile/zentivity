@@ -11,6 +11,7 @@ import UIKit
 @objc protocol BaseTableViewDelegate: class {
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath)
     optional func tableViewWillBeginDragging(scrollView: UIScrollView)
+    optional func tableViewDidScroll(scrollView: UIScrollView)
 }
 
 class BaseTableView: NSObject,
@@ -64,11 +65,11 @@ class BaseTableView: NSObject,
         return titleSource.count
     }
     
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        if let delegate = delegate {
-//            delegate.tableViewDidScroll!(scrollView)
-//        }
-//    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if let delegate = delegate {
+            delegate.tableViewDidScroll!(scrollView)
+        }
+    }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         if let delegate = delegate {

@@ -1152,11 +1152,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="HJW-uk-R0e">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
                         <sections>
                             <tableViewSection headerTitle="Category" id="rpm-u3-8u2">
                                 <cells>
@@ -1283,7 +1278,6 @@
                         <outlet property="datePicker" destination="Baf-cG-VJy" id="BpC-51-Vyk"/>
                         <outlet property="distanceLabel" destination="1gD-mN-XmF" id="ANQ-c9-rbS"/>
                         <outlet property="distanceSlider" destination="oOi-s4-SNy" id="kFf-Dn-Jbv"/>
-                        <outlet property="searchBar" destination="HJW-uk-R0e" id="qed-sd-SEb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ToF-Wk-goQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

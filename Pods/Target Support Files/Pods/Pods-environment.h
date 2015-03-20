@@ -66,6 +66,12 @@
 #define COCOAPODS_VERSION_MINOR_JGProgressHUD 2
 #define COCOAPODS_VERSION_PATCH_JGProgressHUD 3
 
+// LTNavigationBar
+#define COCOAPODS_POD_AVAILABLE_LTNavigationBar
+#define COCOAPODS_VERSION_MAJOR_LTNavigationBar 2
+#define COCOAPODS_VERSION_MINOR_LTNavigationBar 0
+#define COCOAPODS_VERSION_PATCH_LTNavigationBar 0
+
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
 #define COCOAPODS_VERSION_MAJOR_Parse 1
