@@ -41,6 +41,8 @@ class EventsViewController: UIViewController,
 
         searchBar = UISearchBar()
 //        navigationItem.titleView = searchBar
+//        navigationController?.navigationBar.barTintColor = UIColor.redColor() // UIColor(rgba: "#33373B")
+//        navigationController?.ti
         searchBar!.delegate = self
         
         initSubviews()
