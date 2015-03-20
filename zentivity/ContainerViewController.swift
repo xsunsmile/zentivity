@@ -49,7 +49,7 @@ class ContainerViewController: UIViewController {
     
     func initMainView() {
         mainView.layer.shadowColor = UIColor.blackColor().CGColor
-        mainView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
+        mainView.layer.shadowOffset = CGSizeMake(0.5, 0.5)
         mainView.layer.shadowOpacity = 0.7
         mainView.layer.shadowRadius = 0.5
         
