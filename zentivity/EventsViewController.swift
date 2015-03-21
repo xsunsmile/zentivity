@@ -21,7 +21,7 @@ class EventsViewController: UIViewController,
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(120)
-    let menuTitles = ["New", "Owned", "Going"]
+    let menuTitles = ["New", "Hosting", "Attending"]
     var rightBarButtonItem: UIBarButtonItem!
     
     var hud: JGProgressHUD?
@@ -180,10 +180,10 @@ class EventsViewController: UIViewController,
         blurSearchBar()
         let title = menuTitles[control.selectedSegmentIndex]
         println("selected \(title)")
-        
-        if let currentUser = User.currentUser() {
-            switch(control.selectedSegmentIndex) {
-            case 1:
+    
+        switch(control.selectedSegmentIndex) {
+        case 1:
+            if let currentUser = User.currentUser() {
                 hud?.showInView(self.view, animated: true)
                 currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
                     if error == nil {
@@ -194,8 +194,11 @@ class EventsViewController: UIViewController,
                         println("failed to list up admin events: \(error)")
                     }
                 })
-                break
-            case 2:
+            } else {
+                presentAuthModal()
+            }
+        case 2:
+            if let currentUser = User.currentUser() {
                 hud?.showInView(self.view, animated: true)
                 currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
                     if error == nil {
@@ -206,12 +209,11 @@ class EventsViewController: UIViewController,
                         println("failed to list up confirmedUsers events: \(error)")
                     }
                 })
-                break
-            default:
-                refresh(true)
+            } else {
+                presentAuthModal()
             }
-        } else {
-            presentAuthModal()
+        default:
+            refresh(true)
         }
     }
     
