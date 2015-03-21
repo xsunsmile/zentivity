@@ -33,6 +33,7 @@ class EventsViewController: UIViewController,
     var searchBarJustResigned: Bool = false
     var searchButton: UIButton?
     var searchIsOn = false
+    var originalTableYPos = CGFloat(0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,8 @@ class EventsViewController: UIViewController,
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        originalTableYPos = tableView.frame.origin.y
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -58,7 +61,7 @@ class EventsViewController: UIViewController,
         let delta = view.frame.size.width
         searchBar?.frame = CGRectOffset(searchBar!.frame, delta, 0)
 //        searchBar?.hidden = true
-//        navigationController?.navigationBar.lt_setBackgroundColor(UIColor.blueColor())
+//        navigationController?.navigationBar.lt_setBackgroundColor(UIColor(rgba: "#fafafa"))
         
         navigationItem.titleView = searchBar
         
@@ -233,6 +236,7 @@ class EventsViewController: UIViewController,
     // MARK: - Scroll View
     func tableViewWillBeginDragging(scrollView: UIScrollView) {
 //        blurSearchBar()
+//        originalTableHeight = tableView.frame.height
     }
     
     func tableViewDidScroll(scrollView: UIScrollView) {
@@ -241,26 +245,27 @@ class EventsViewController: UIViewController,
             if (offsetY >= 44) {
                 setNavigationBarTransformProgress(1)
             } else {
-                setNavigationBarTransformProgress(CGFloat(0-offsetY) / CGFloat(44))
+                setNavigationBarTransformProgress(CGFloat(offsetY) / CGFloat(44))
+//                println("add to table offset: \(offsetY)")
+//                tableView.frame.size.height = originalTableHeight + offsetY
             }
         } else {
+//            println("reset table height to \(originalTableHeight)")
+//            tableView.frame.size.height = originalTableHeight // + 44 + menuView.frame.height
             setNavigationBarTransformProgress(0)
-            navigationController?.navigationBar.backIndicatorImage = nil // UIImage(named: "search")
+            navigationController?.navigationBar.backIndicatorImage = UIImage()
+            navigationController?.navigationBar.lt_reset()
         }
     }
     
     func setNavigationBarTransformProgress(progress: CGFloat) {
-        println("current progress: \(progress)")
-        navigationController?.navigationBar.lt_setTranslationY(44 * progress)
-        navigationController?.navigationBar.lt_setContentAlpha(1+progress)
+        println("current progress: \(-44*progress)")
+        navigationController?.navigationBar.lt_setTranslationY(-44 * progress)
+        navigationController?.navigationBar.lt_setContentAlpha(1-progress)
         
-        if progress == 0 {
-            navigationController?.navigationBar.hidden = false
-        }
-        
-        if progress == 1 {
-            navigationController?.navigationBar.hidden = true
-        }
+        menuView.transform = CGAffineTransformMakeTranslation(0, -44 * progress)
+        tableView.transform = CGAffineTransformMakeTranslation(0, -44 * progress)
+        tableView.frame.size.height = view.frame.height - tableView.frame.origin.y
     }
     
     // MARK: - Search Bar
@@ -278,8 +283,7 @@ class EventsViewController: UIViewController,
     
     func blurSearchBar() {
         searchBar?.resignFirstResponder()
-//        navigationItem.rightBarButtonItem = rightBarButtonItem
-        
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
