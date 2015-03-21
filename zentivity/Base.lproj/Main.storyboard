@@ -8,7 +8,7 @@
         <!--App View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="AppViewController" customModule="zentivity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppViewController" id="vXZ-lx-hvc" customClass="AppViewController" customModule="zentivity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -72,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="581" y="1309"/>
+            <point key="canvasLocation" x="329" y="1401"/>
         </scene>
         <!--Event Details-->
         <scene sceneID="qUa-cS-Yeg">

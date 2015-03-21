@@ -34,6 +34,14 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func initSubviews() {
+        if let currentUser = User.currentUser() {
+            let tapGR = UITapGestureRecognizer(target: self, action: "onJoinTap:")
+            tapGR.numberOfTapsRequired = 1
+            joinView.addGestureRecognizer(tapGR)
+        } else {
+            joinLabel.hidden = true
+        }
+        
         var color = colors[Int(arc4random_uniform(UInt32(colors.count)))]
         
         let cornerRadius = CGFloat(3)
@@ -81,10 +89,6 @@ class EventsTableViewCell: BaseTableViewCell {
 //        dateView.layer.addSublayer(topBorder)
 //        
 //        dateView.layer.masksToBounds = true
-        
-        let tapGR = UITapGestureRecognizer(target: self, action: "onJoinTap:")
-        tapGR.numberOfTapsRequired = 1
-        joinView.addGestureRecognizer(tapGR)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -96,8 +100,9 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func onJoinTap(tapGR: UITapGestureRecognizer) {
-        println("Join is tapped")
-        toggleJoin()
+        if let currentUser = User.currentUser() {
+            toggleJoin()
+        }
     }
 
     func toggleJoin() {
@@ -106,19 +111,19 @@ class EventsTableViewCell: BaseTableViewCell {
             if state == kUserJoinEvent {
                 if success != nil {
                     self.joinLabel.text = "Cancel"
-                    UIAlertView(
-                        title: "Great!",
-                        message: "See you at the event :)",
-                        delegate: self,
-                        cancelButtonTitle: "OK"
-                        ).show()
+//                    UIAlertView(
+//                        title: "Great!",
+//                        message: "See you at the event :)",
+//                        delegate: self,
+//                        cancelButtonTitle: "OK"
+//                        ).show()
                 } else {
-                    UIAlertView(
-                        title: "Error",
-                        message: "Unable to join event.",
-                        delegate: self,
-                        cancelButtonTitle: "Well damn..."
-                        ).show()
+//                    UIAlertView(
+//                        title: "Error",
+//                        message: "Unable to join event.",
+//                        delegate: self,
+//                        cancelButtonTitle: "Well damn..."
+//                        ).show()
                 }
             } else {
                 self.joinLabel.text = "Join"
