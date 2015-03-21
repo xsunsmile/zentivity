@@ -113,7 +113,7 @@
                                         <rect key="frame" x="80" y="50" width="160" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LU-Lt-GOG">
-                                                <rect key="frame" x="60" y="15" width="39" height="21"/>
+                                                <rect key="frame" x="60" y="15" width="38.5" height="20.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Date">
                                                         <attributes>
@@ -148,10 +148,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqE-LX-z6F" userLabel="containerView">
-                                <rect key="frame" x="0.0" y="420" width="320" height="523"/>
+                                <rect key="frame" x="0.0" y="420" width="320" height="522.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWu-PZ-u61" userLabel="eventHeaderView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2A5-El-CNm">
                                                 <rect key="frame" x="240" y="-30" width="60" height="60"/>
@@ -180,42 +180,28 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="245" text="Event title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76D-to-mct">
-                                                <rect key="frame" x="10" y="8" width="83" height="22"/>
+                                                <rect key="frame" x="10" y="8" width="83" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                 <color key="textColor" red="0.21399542299999999" green="0.21399542299999999" blue="0.21399542299999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1P-z3-bEa">
-                                                <rect key="frame" x="10" y="34" width="92" height="17"/>
+                                                <rect key="frame" x="10" y="33" width="92" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event phone number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKV-5q-Smd">
-                                                <rect key="frame" x="10" y="51" width="134" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(415) 768-1823" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKV-5q-Smd">
+                                                <rect key="frame" x="10" y="50" width="98" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F25-Cr-mz7">
-                                                <rect key="frame" x="292" y="48" width="20" height="20"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="EAs-Rg-O88"/>
-                                                    <constraint firstAttribute="width" constant="20" id="fZK-7s-Dnd"/>
-                                                </constraints>
-                                                <state key="normal" title="PhoneButton" image="phone">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onCall:" destination="TSa-KR-ocb" eventType="touchUpInside" id="4FX-1A-yxh"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="2A5-El-CNm" secondAttribute="trailing" constant="20" id="Ibf-Xj-tfR"/>
-                                            <constraint firstItem="F25-Cr-mz7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qKV-5q-Smd" secondAttribute="trailing" constant="8" id="MCB-VF-Mvv"/>
                                             <constraint firstItem="2A5-El-CNm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="76D-to-mct" secondAttribute="trailing" constant="8" id="OER-Ti-U4J"/>
                                             <constraint firstItem="qKV-5q-Smd" firstAttribute="top" secondItem="z1P-z3-bEa" secondAttribute="bottom" id="Snk-8c-Dlq"/>
                                             <constraint firstItem="2A5-El-CNm" firstAttribute="top" secondItem="zWu-PZ-u61" secondAttribute="top" constant="-30" id="TDV-7C-QPO"/>
@@ -224,24 +210,21 @@
                                             <constraint firstItem="76D-to-mct" firstAttribute="top" secondItem="zWu-PZ-u61" secondAttribute="top" constant="8" id="Yyc-hY-WEn"/>
                                             <constraint firstItem="z1P-z3-bEa" firstAttribute="top" secondItem="76D-to-mct" secondAttribute="bottom" constant="4" id="cAe-QY-xr4"/>
                                             <constraint firstItem="76D-to-mct" firstAttribute="leading" secondItem="zWu-PZ-u61" secondAttribute="leading" constant="10" id="fTp-hU-Ju1"/>
-                                            <constraint firstItem="qKV-5q-Smd" firstAttribute="bottom" secondItem="F25-Cr-mz7" secondAttribute="bottom" id="ffr-mf-bQH"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z1P-z3-bEa" secondAttribute="trailing" constant="8" id="jlt-0f-ICY"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="F25-Cr-mz7" secondAttribute="bottom" constant="8" id="qnN-hU-nn7"/>
                                             <constraint firstAttribute="bottom" secondItem="qKV-5q-Smd" secondAttribute="bottom" constant="8" id="xTq-eO-Da5"/>
-                                            <constraint firstAttribute="trailing" secondItem="F25-Cr-mz7" secondAttribute="trailing" constant="8" id="zaX-iB-q9f"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="xri-bF-R6m" appends="YES" id="Fgs-GW-rLG"/>
                                         </connections>
                                     </view>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="248" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cwn-wB-VV9">
-                                        <rect key="frame" x="0.0" y="76" width="320" height="200"/>
+                                        <rect key="frame" x="0.0" y="75" width="320" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="g8S-Jr-iyz"/>
                                         </constraints>
                                     </mapView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wlg-BP-qdG">
-                                        <rect key="frame" x="0.0" y="276" width="320" height="247"/>
+                                        <rect key="frame" x="0.0" y="275" width="320" height="247"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="247" id="2Xv-pc-FbC"/>
@@ -1300,7 +1283,6 @@
         <image name="activity1" width="1024" height="576"/>
         <image name="hands" width="837" height="643"/>
         <image name="noPhoto" width="120" height="120"/>
-        <image name="phone" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
