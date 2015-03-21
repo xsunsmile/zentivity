@@ -199,6 +199,7 @@ class EventDetailViewController: UIViewController,
     
     @IBAction func onJoin(sender: AnyObject) {
         if User.currentUser() == nil {
+            println("HERE")
             performSegueWithIdentifier("userAuthSegue", sender: self)
         }
         

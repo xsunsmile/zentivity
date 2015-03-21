@@ -29,6 +29,8 @@ class EventsTableViewCell: BaseTableViewCell {
         super.awakeFromNib()
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         
+        println(self.frame.width)
+        println(self.frame.height)
         initSubviews()
         refresh()
     }
@@ -139,7 +141,7 @@ class EventsTableViewCell: BaseTableViewCell {
         let event = data as Event
        
         eventNameLabel.text = event.getTitle()
-        eventDateLabel.text = event.startTimeWithFormat("MMM d, HH:mm (EEE)")
+        eventDateLabel.text = event.startTimeWithFormat("EEEE MMM d, HH:mm")
         
         if event.photos?.count > 0 {
             let photo = event.photos![0] as Photo
@@ -180,6 +182,8 @@ class EventsTableViewCell: BaseTableViewCell {
         } else {
             joinLabel.text = "Join"
         }
+        
+        setNeedsDisplay()
     }
     
     func applyGradient() {
