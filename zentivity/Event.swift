@@ -39,11 +39,12 @@ class Event : PFObject, PFSubclassing {
     
     class func listWithOptionsAndCompletion(options: NSDictionary?, completion: (events: [Event]?, error: NSError!) -> ()) {
         var query = Event.query()
+        query.includeKey("admin")
         
         // Build query
         if let options = options {
             if let title = options["title"] as? String {
-                query.whereKey("title", containsString: title)
+                query.whereKey("lowcaseTitle", containsString: title.lowercaseString)
             }
         }
         

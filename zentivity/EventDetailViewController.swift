@@ -97,9 +97,8 @@ class EventDetailViewController: UIViewController,
             addressLabel.text = addressPlaceHolder
         }
         
-        if event.contactNumber != nil {
-            phoneLabel.text = event.contactNumber
-        }
+        let admin = event.admin as User
+        phoneLabel.text = "\(admin.name): \(admin.contactNumber)"
         
         var dateString = NSMutableAttributedString(
             string: event.startTimeWithFormat("EEEE"),
@@ -197,10 +196,15 @@ class EventDetailViewController: UIViewController,
         super.didReceiveMemoryWarning()
     }
     
+    func presentAuthModal() {
+        let appVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as AppViewController
+        self.presentViewController(appVC, animated: true, completion: nil)
+    }
+    
     @IBAction func onJoin(sender: AnyObject) {
         if User.currentUser() == nil {
-            println("HERE")
-            performSegueWithIdentifier("userAuthSegue", sender: self)
+            presentAuthModal()
+            return
         }
         
         User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
