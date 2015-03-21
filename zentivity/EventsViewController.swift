@@ -15,12 +15,12 @@ class EventsViewController: UIViewController,
                             UISearchBarDelegate
 {
     
-    @IBOutlet weak var menuView: UIView!
+//    @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var baseTable: BaseTableView!
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
-    let titleId = "EventHeaderTableViewCell"
+    let titleId = "EventsTableHeaderView"
     let cellHeight = CGFloat(180)
     let menuTitles = ["New", "Owned", "Going"]
     var rightBarButtonItem: UIBarButtonItem!
@@ -46,11 +46,17 @@ class EventsViewController: UIViewController,
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+//        let navBar = navigationController?.navigationBar as SherginScrollableNavigationBar
+//        navBar.scrollView = tableView
     }
     
     override func viewWillDisappear(animated: Bool) {
+//        navigationController?.navigationBar.lt_reset()
+//        let navBar = navigationController?.navigationBar as SherginScrollableNavigationBar
+//        navBar.scrollView = tableView
+        
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.lt_reset()
     }
     
     func initNavBar() {
@@ -78,32 +84,33 @@ class EventsViewController: UIViewController,
     }
     
     func initSubviews() {
-        initNavBar()
+//        initNavBar()
         
-        segmentedMenu = HMSegmentedControl(sectionTitles: menuTitles)
-        
-        segmentedMenu?.frame = CGRectMake(0, 0, view.frame.width, menuView.frame.height-2)
-        segmentedMenu?.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
-        
-        segmentedMenu?.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
-        segmentedMenu?.font = UIFont.boldSystemFontOfSize(14)
-        segmentedMenu?.backgroundColor = UIColor(rgba: "#fafafa")
-        segmentedMenu?.selectedTextColor = UIColor(rgba: "#34b5e5")
-        segmentedMenu?.textColor = UIColor(rgba: "#33373b")
-        
-        segmentedMenu?.addTarget(self, action: "onMenuSwitch:", forControlEvents: UIControlEvents.ValueChanged)
-        menuView.addSubview(segmentedMenu!)
+//        segmentedMenu = HMSegmentedControl(sectionTitles: menuTitles)
+//        
+////        segmentedMenu?.frame = CGRectMake(0, 0, view.frame.width, menuView.frame.height-2)
+//        segmentedMenu?.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+//        
+//        segmentedMenu?.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
+//        segmentedMenu?.font = UIFont.boldSystemFontOfSize(14)
+//        segmentedMenu?.backgroundColor = UIColor(rgba: "#fafafa")
+//        segmentedMenu?.selectedTextColor = UIColor(rgba: "#34b5e5")
+//        segmentedMenu?.textColor = UIColor(rgba: "#33373b")
+//        
+//        segmentedMenu?.addTarget(self, action: "onMenuSwitch:", forControlEvents: UIControlEvents.ValueChanged)
+////        menuView.addSubview(segmentedMenu!)
         
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
         baseTable.titleIdentifier = titleId
+//        baseTable.titleSource = ["Menu"]
         baseTable.delegate = self
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable
         
         tableView.registerNib(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
-        tableView.registerNib(UINib(nibName: titleId, bundle: nil), forHeaderFooterViewReuseIdentifier: titleId)
+//        tableView.registerNib(UINib(nibName: "EventHeaderTableViewCell", bundle: nil), forHeaderFooterViewReuseIdentifier: titleId)
         
         tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -236,23 +243,23 @@ class EventsViewController: UIViewController,
     }
     
     func tableViewDidScroll(scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y;
-        if (offsetY > 0) {
-            if (offsetY >= 44) {
-                setNavigationBarTransformProgress(1)
-            } else {
-                setNavigationBarTransformProgress(CGFloat(0-offsetY) / CGFloat(44))
-            }
-        } else {
-            setNavigationBarTransformProgress(0)
-            navigationController?.navigationBar.backIndicatorImage = nil // UIImage(named: "search")
-        }
+//        let offsetY = scrollView.contentOffset.y;
+//        if (offsetY > 0) {
+//            if (offsetY >= 44) {
+//                setNavigationBarTransformProgress(1)
+//            } else {
+//                setNavigationBarTransformProgress(CGFloat(0-offsetY) / CGFloat(44))
+//            }
+//        } else {
+//            setNavigationBarTransformProgress(0)
+//            navigationController?.navigationBar.backIndicatorImage = nil // UIImage(named: "search")
+//        }
     }
     
     func setNavigationBarTransformProgress(progress: CGFloat) {
         println("current progress: \(progress)")
-        navigationController?.navigationBar.lt_setTranslationY(44 * progress)
-        navigationController?.navigationBar.lt_setContentAlpha(1+progress)
+//        navigationController?.navigationBar.lt_setTranslationY(44 * progress)
+//        navigationController?.navigationBar.lt_setContentAlpha(1+progress)
         
         if progress == 0 {
             navigationController?.navigationBar.hidden = false

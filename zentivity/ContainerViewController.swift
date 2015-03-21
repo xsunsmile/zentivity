@@ -66,6 +66,8 @@ class ContainerViewController: UIViewController {
 //        let searchButton = UIBarButtonItem(customView: button)
 //        eventsVC.navigationItem.rightBarButtonItem = searchButton
         
+//        var mainNVC = UINavigationController(navigationBarClass: SherginScrollableNavigationBar.classForCoder(), toolbarClass: nil)
+//        mainNVC.setViewControllers([eventsVC], animated: false)
         var mainNVC = UINavigationController(rootViewController: eventsVC)
 //        mainNVC.navigationBar.topItem?.title = "Zentivity"
 //        mainNVC.edgesForExtendedLayout = UIRectEdge.None

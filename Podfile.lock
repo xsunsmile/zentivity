@@ -27,6 +27,7 @@ PODS:
   - Parse (1.6.4):
     - Bolts (~> 1.1)
   - pop (1.0.7)
+  - SherginScrollableNavigationBar (0.3.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - LTNavigationBar
   - Parse
   - pop (~> 1.0)
+  - SherginScrollableNavigationBar
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
@@ -44,5 +46,6 @@ SPEC CHECKSUMS:
   LTNavigationBar: 61dee3f3d78ce5e50d069498b73d39798b9bea70
   Parse: c2610f7a12ad0defc974803b819c4efe7746e6db
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  SherginScrollableNavigationBar: 67f5a3ff446761c3bafde03e4f2117d56fee398b
 
 COCOAPODS: 0.35.0

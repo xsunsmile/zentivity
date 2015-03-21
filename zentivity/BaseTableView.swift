@@ -76,9 +76,10 @@ class BaseTableView: NSObject,
             delegate.tableViewWillBeginDragging!(scrollView)
         }
     }
+    
 //    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        if titleIdentifier == nil {
-//            return BaseTableViewCell()
+//            return nil
 //        }
 //        
 //        var cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier(titleIdentifier!) as EventHeaderTableViewCell
