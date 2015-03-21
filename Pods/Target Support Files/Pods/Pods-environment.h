@@ -66,17 +66,17 @@
 #define COCOAPODS_VERSION_MINOR_JGProgressHUD 2
 #define COCOAPODS_VERSION_PATCH_JGProgressHUD 3
 
-// LTNavigationBar
-#define COCOAPODS_POD_AVAILABLE_LTNavigationBar
-#define COCOAPODS_VERSION_MAJOR_LTNavigationBar 2
-#define COCOAPODS_VERSION_MINOR_LTNavigationBar 0
-#define COCOAPODS_VERSION_PATCH_LTNavigationBar 0
-
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
 #define COCOAPODS_VERSION_MAJOR_Parse 1
 #define COCOAPODS_VERSION_MINOR_Parse 6
 #define COCOAPODS_VERSION_PATCH_Parse 4
+
+// SherginScrollableNavigationBar
+#define COCOAPODS_POD_AVAILABLE_SherginScrollableNavigationBar
+#define COCOAPODS_VERSION_MAJOR_SherginScrollableNavigationBar 0
+#define COCOAPODS_VERSION_MINOR_SherginScrollableNavigationBar 3
+#define COCOAPODS_VERSION_PATCH_SherginScrollableNavigationBar 1
 
 // pop
 #define COCOAPODS_POD_AVAILABLE_pop
