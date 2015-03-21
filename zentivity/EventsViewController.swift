@@ -14,14 +14,13 @@ class EventsViewController: UIViewController,
                             UIScrollViewDelegate,
                             UISearchBarDelegate
 {
-    
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var baseTable: BaseTableView!
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
-    let cellHeight = CGFloat(180)
+    let cellHeight = CGFloat(120)
     let menuTitles = ["New", "Owned", "Going"]
     var rightBarButtonItem: UIBarButtonItem!
     
@@ -181,37 +180,39 @@ class EventsViewController: UIViewController,
         blurSearchBar()
         let title = menuTitles[control.selectedSegmentIndex]
         println("selected \(title)")
-        let currentUser = User.currentUser() as User
-
-        switch(control.selectedSegmentIndex) {
-        case 1:
-            hud?.showInView(self.view, animated: true)
-            currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
-                if error == nil {
-                    self.hud?.dismiss()
-                    self.baseTable.datasource = events
-                    self.tableView.reloadData()
-                } else {
-                    println("failed to list up admin events: \(error)")
-                }
-            })
-            break
-        case 2:
-            hud?.showInView(self.view, animated: true)
-            currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
-                if error == nil {
-                    self.hud?.dismiss()
-                    self.baseTable.datasource = events
-                    self.tableView.reloadData()
-                } else {
-                    println("failed to list up confirmedUsers events: \(error)")
-                }
-            })
-            break
-        default:
-            refresh(true)
-        }
         
+        if let currentUser = User.currentUser() {
+            switch(control.selectedSegmentIndex) {
+            case 1:
+                hud?.showInView(self.view, animated: true)
+                currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+                    if error == nil {
+                        self.hud?.dismiss()
+                        self.baseTable.datasource = events
+                        self.tableView.reloadData()
+                    } else {
+                        println("failed to list up admin events: \(error)")
+                    }
+                })
+                break
+            case 2:
+                hud?.showInView(self.view, animated: true)
+                currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
+                    if error == nil {
+                        self.hud?.dismiss()
+                        self.baseTable.datasource = events
+                        self.tableView.reloadData()
+                    } else {
+                        println("failed to list up confirmedUsers events: \(error)")
+                    }
+                })
+                break
+            default:
+                refresh(true)
+            }
+        } else {
+            presentAuthModal()
+        }
     }
     
     // MARK: - Navigation
@@ -226,6 +227,11 @@ class EventsViewController: UIViewController,
             var vc = segue.destinationViewController as NewEventViewController
             vc.delegate = self
         }
+    }
+    
+    func presentAuthModal() {
+        let appVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as AppViewController
+        self.presentViewController(appVC, animated: true, completion: nil)
     }
     
     func presentEventsFilterModal() {
