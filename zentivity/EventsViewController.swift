@@ -130,42 +130,42 @@ class EventsViewController: UIViewController,
         performSegueWithIdentifier("createEvent", sender: self)
     }
     
-    func onMenuSwitch(control: HMSegmentedControl) {
-        blurSearchBar()
-        let title = menuTitles[control.selectedSegmentIndex]
-        println("selected \(title)")
-        let currentUser = User.currentUser() as User
-        
-        switch(control.selectedSegmentIndex) {
-        case 1:
-            hud?.showInView(self.view, animated: true)
-            currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
-                if error == nil {
-                    self.hud?.dismiss()
-                    self.baseTable.datasource = events
-                    self.tableView.reloadData()
-                } else {
-                    println("failed to list up admin events: \(error)")
-                }
-            })
-            break
-        case 2:
-            hud?.showInView(self.view, animated: true)
-            currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
-                if error == nil {
-                    self.hud?.dismiss()
-                    self.baseTable.datasource = events
-                    self.tableView.reloadData()
-                } else {
-                    println("failed to list up confirmedUsers events: \(error)")
-                }
-            })
-            break
-        default:
-            refresh(true)
-        }
-        
-    }
+//    func onMenuSwitch(control: HMSegmentedControl) {
+//        blurSearchBar()
+//        let title = menuTitles[control.selectedSegmentIndex]
+//        println("selected \(title)")
+//        let currentUser = User.currentUser() as User
+//        
+//        switch(control.selectedSegmentIndex) {
+//        case 1:
+//            hud?.showInView(self.view, animated: true)
+//            currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+//                if error == nil {
+//                    self.hud?.dismiss()
+//                    self.baseTable.datasource = events
+//                    self.tableView.reloadData()
+//                } else {
+//                    println("failed to list up admin events: \(error)")
+//                }
+//            })
+//            break
+//        case 2:
+//            hud?.showInView(self.view, animated: true)
+//            currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
+//                if error == nil {
+//                    self.hud?.dismiss()
+//                    self.baseTable.datasource = events
+//                    self.tableView.reloadData()
+//                } else {
+//                    println("failed to list up confirmedUsers events: \(error)")
+//                }
+//            })
+//            break
+//        default:
+//            refresh(true)
+//        }
+//        
+//    }
     
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
