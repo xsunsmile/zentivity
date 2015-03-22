@@ -18,8 +18,8 @@ class UserIconCollectionViewCell: UICollectionViewCell {
                 if error == nil {
                     self.userNameLabel.hidden = true
                     let user = user as User
-                    if user.imageUrl.length > 0 {
-                        let url = NSURL(string: user.imageUrl)
+                    if user.imageUrl?.length > 0 {
+                        let url = NSURL(string: user.imageUrl!)
                         self.userImageView.setImageWithURL(url)
                     } else {
                         let initialsImage = user.initialsImageView(self.userImageView.frame.size)

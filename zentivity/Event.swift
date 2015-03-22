@@ -40,6 +40,7 @@ class Event : PFObject, PFSubclassing {
     class func listWithOptionsAndCompletion(options: NSDictionary?, completion: (events: [Event]?, error: NSError!) -> ()) {
         var query = Event.query()
         query.includeKey("admin")
+        query.orderByDescending("startTime")
         
         // Build query
         if let options = options {
@@ -61,9 +62,12 @@ class Event : PFObject, PFSubclassing {
     
     func userJoined(user: User?) -> Bool {
         if let user = user {
-            println(confirmedUsers)
-            println(user)
-            return confirmedUsers.containsObject(user)
+            for confirmedUser in confirmedUsers {
+                if confirmedUser.objectId == user.objectId {
+                    return true
+                }
+            }
+            return false
         } else {
             return false
         }
@@ -84,7 +88,7 @@ class Event : PFObject, PFSubclassing {
     
     func createWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
         self.admin = PFUser.currentUser()
-        self.confirmedUsers = []
+        self.confirmedUsers = [self.admin]
         self.declinedUsers = []
         self.lowercaseTitle = title.lowercaseString
         if photos == nil { self.photos = [] }

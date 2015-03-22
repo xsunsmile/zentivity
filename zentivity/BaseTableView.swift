@@ -22,7 +22,7 @@ class BaseTableView: NSObject,
     var titleSource: [NSString]!
     var cellIdentifier: NSString!
     var titleIdentifier: NSString?
-    var cellHeight = CGFloat(120)
+    var cellHeight = CGFloat(130)
     weak var delegate: BaseTableViewDelegate?
     
     init(datasource: [AnyObject], cellIdentifier: NSString) {

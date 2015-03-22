@@ -23,6 +23,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleGoogleLogin:", name: "userDidLoginNotification", object: nil)
         
+// Add Photo for event...
+//        let eventId = "FQK1CbeMLd"
+//        let imageName = "zz"
+//        
+//        let image = UIImage(named: imageName)
+//        var query = Event.query()
+//        query.getObjectInBackgroundWithId(eventId, block: { (event, error) -> Void in
+//            let event = event as Event
+//            event.addPhotoWithCompletion(image!, completion: { (success, error) -> Void in
+//                if success == true {
+//                    println("SUCCESS")
+//                } else {
+//                    println("FAIL")
+//                }
+//            })
+//        })
+        
+        
+        
+        
         return true
     }
     
