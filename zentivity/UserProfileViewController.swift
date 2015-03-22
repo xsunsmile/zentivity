@@ -64,6 +64,7 @@ class UserProfileViewController: UIViewController,
     
     func refresh() {
         if let currentUser = User.currentUser() {
+            let currentUser = currentUser as User
             if currentUser.name?.length > 0 {
                 profileName.text = currentUser.name
             }

@@ -101,14 +101,15 @@ class EventDetailViewController: UIViewController,
         var number = "(408) 673-4419"
         if let admin = event.admin as? User {
 
-            if let adminName = admin.name as? String {
-                name = adminName
-            }
-            
-
-            if let phoneNumber = admin.contactNumber {
-                number = phoneNumber
-            }
+            admin.fetchIfNeededInBackgroundWithBlock({ (admin, error) -> Void in
+                let admin = admin as User
+                if let adminName = admin.name as? String {
+                    name = adminName
+                }
+                if let phoneNumber = admin.contactNumber {
+                    number = phoneNumber
+                }
+            })
         }
         
         phoneLabel.text = "\(name): \(number)"
