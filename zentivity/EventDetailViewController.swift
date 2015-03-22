@@ -192,9 +192,10 @@ class EventDetailViewController: UIViewController,
             if error == nil {
                 let places = places as [CLPlacemark]
                 let target = places.last
-                let span = MKCoordinateSpanMake(0.00725, 0.00725)
+                
+                let miles = 0.09;
                 let center = CLLocationCoordinate2D(latitude: target!.location.coordinate.latitude, longitude: target!.location.coordinate.longitude)
-                var region = MKCoordinateRegion(center: center, span: span)
+                var region = MKCoordinateRegionMakeWithDistance(center, 1609.344 * miles, 1609.344 * miles)
                 self.mapView.setRegion(region, animated: true)
                 
                 let annotation = MKPointAnnotation()
