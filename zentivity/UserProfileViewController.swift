@@ -27,11 +27,7 @@ class UserProfileViewController: UIViewController,
     
     let cellId = "MenuTableViewCell"
     let cellHeight = CGFloat(50)
-    let datasource = [
-        ["icon": "ListEvents", "title": "New events", "action": "listNewEvents"],
-        ["icon": "addEvent", "title": "Add an event", "action": "addEvent"],
-        ["icon": "logoutBlack", "title": "Log Out", "action": "logOut"]
-    ]
+    var datasource: [AnyObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,20 +66,39 @@ class UserProfileViewController: UIViewController,
     }
     
     func refresh() {
-        if let currentUser = User.currentUser() {
-            let currentUser = currentUser as User
-            if let name = currentUser.name as? String {
-                if countElements(name) > 0 {
-                    profileName.text = name
+        println("refresh user profile")
+        if GoogleClient.sharedInstance.alreadyLogin() {
+            if let currentUser = User.currentUser() {
+                let currentUser = currentUser as User
+                if let name = currentUser.name as? String {
+                    if countElements(name) > 0 {
+                        profileName.text = name
+                    }
                 }
+                
+                if currentUser.imageUrl?.length > 0 {
+                    profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl!)!)
+                }
+                
+                self.profileContactInfo.text = currentUser.username
+                
+                datasource = [
+                    ["icon": "ListEvents", "title": "New events", "action": "listNewEvents"],
+                    ["icon": "addEvent", "title": "Add an event", "action": "addEvent"],
+                    ["icon": "logoutBlack", "title": "Log Out", "action": "logOut"]
+                ]
             }
-            
-            if currentUser.imageUrl?.length > 0 {
-                profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl!)!)
-            }
-            
-            self.profileContactInfo.text = currentUser.username
+        } else {
+            println("Switch menu to login")
+            datasource = [
+                ["icon": "ListEvents", "title": "New events", "action": "listNewEvents"],
+                ["icon": "addEvent", "title": "Add an event", "action": "addEvent"],
+                ["icon": "login", "title": "Log In", "action": "logOut"]
+            ]
         }
+        
+        baseTable.datasource = datasource
+        tableView.reloadData()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -95,8 +110,8 @@ class UserProfileViewController: UIViewController,
     }
     
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
-       let action = datasource[indexPath.row]["action"]
-        delegate?.closeMenuAndDo(action!)
+       let action = datasource[indexPath.row]["action"] as NSString
+        delegate?.closeMenuAndDo(action)
     }
     
     @IBAction func onUserLogout(sender: UIButton) {

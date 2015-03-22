@@ -9,7 +9,8 @@
 import UIKit
 
 class ContainerViewController: UIViewController,
-                               UserProfileViewControllerDelegate
+                               UserProfileViewControllerDelegate,
+                               AppViewControllerDelegate
 {
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var mainView: UIView!
@@ -35,6 +36,8 @@ class ContainerViewController: UIViewController,
         eventsVC = storyboard?.instantiateViewControllerWithIdentifier("EventsViewController") as EventsViewController
         addEventVC = storyboard?.instantiateViewControllerWithIdentifier("NewEventViewController") as NewEventViewController
         loginVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as AppViewController
+        
+        loginVC.delegate = self
         
         mainView.layer.shadowColor = UIColor.blackColor().CGColor
         mainView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
@@ -122,6 +125,7 @@ class ContainerViewController: UIViewController,
         UIView.animateWithDuration(0.4, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
             self.mainView.center.x = self.mainViewLeftPos
         }) { (success) -> Void in
+            self.menuVC.refresh()
         }
     }
     
@@ -150,5 +154,9 @@ class ContainerViewController: UIViewController,
         default:
             println("Skip perform action \(action)")
         }
+    }
+    
+    func cancelLogin() {
+        showMenu()
     }
 }

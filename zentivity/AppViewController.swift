@@ -7,10 +7,14 @@
 //
 
 import UIKit
+protocol AppViewControllerDelegate : class {
+    func cancelLogin()
+}
 
 class AppViewController: UIViewController {
     
     @IBOutlet weak var loginView: LoginView!
+    weak var delegate: AppViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,7 @@ class AppViewController: UIViewController {
     
     @IBAction func onCancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+        delegate?.cancelLogin()
     }
     
     override func prefersStatusBarHidden() -> Bool {

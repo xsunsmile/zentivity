@@ -186,7 +186,6 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
                     ).show()
             }
         }
-
     }
     
     /*  PHOTO COLLECTION */
