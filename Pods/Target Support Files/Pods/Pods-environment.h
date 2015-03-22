@@ -84,6 +84,12 @@
 #define COCOAPODS_VERSION_MINOR_Parse 6
 #define COCOAPODS_VERSION_PATCH_Parse 4
 
+// TURecipientBar
+#define COCOAPODS_POD_AVAILABLE_TURecipientBar
+#define COCOAPODS_VERSION_MAJOR_TURecipientBar 1
+#define COCOAPODS_VERSION_MINOR_TURecipientBar 1
+#define COCOAPODS_VERSION_PATCH_TURecipientBar 2
+
 // pop
 #define COCOAPODS_POD_AVAILABLE_pop
 #define COCOAPODS_VERSION_MAJOR_pop 1

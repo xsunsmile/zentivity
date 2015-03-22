@@ -103,12 +103,12 @@ class EventDetailViewController: UIViewController,
         if let admin = event.admin as? User {
             admin.fetchIfNeededInBackgroundWithBlock({ (admin, error) -> Void in
                 let admin = admin as User
-                if let adminName = admin.name as? String {
-                    name = adminName
-                }
-                if let phoneNumber = admin.contactNumber {
-                    number = phoneNumber
-                }
+//                if let adminName = admin.name {
+                    name = admin.name
+//                }
+//                if let phoneNumber = admin.contactNumber {
+                    number = admin.contactNumber
+//                }
             })
         }
 

@@ -70,10 +70,10 @@ class UserProfileViewController: UIViewController,
         if GoogleClient.sharedInstance.alreadyLogin() {
             if let currentUser = User.currentUser() {
                 let currentUser = currentUser as User
-                if let name = currentUser.name as? String {
-                    if countElements(name) > 0 {
-                        profileName.text = name
-                    }
+                
+                let name = currentUser.objectForKey("name") as String
+                if countElements(name) > 0 {
+                    profileName.text = name
                 }
                 
                 if currentUser.imageUrl?.length > 0 {

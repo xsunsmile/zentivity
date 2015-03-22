@@ -23,9 +23,19 @@ class ContainerViewController: UIViewController,
     var currentViewController: UIViewController!
     var addEventVC: NewEventViewController!
     var loginVC: AppViewController!
+    var menuButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let hamburgerImage = UIImage(named: "menu_slim")
+        let frame = CGRectMake(-10, 0, 18, 18)
+        menuButton = UIButton(frame: frame)
+        menuButton.setBackgroundImage(hamburgerImage, forState: .Normal)
+        menuButton.addTarget(self, action: "toggleMenu", forControlEvents: .TouchDown)
+        
+        
         
         mainViewLeftPos = view.center.x + view.bounds.width - 60.0
         mainViewRightPos = view.center.x
@@ -35,14 +45,21 @@ class ContainerViewController: UIViewController,
         
         eventsVC = storyboard?.instantiateViewControllerWithIdentifier("EventsViewController") as EventsViewController
         addEventVC = storyboard?.instantiateViewControllerWithIdentifier("NewEventViewController") as NewEventViewController
-        loginVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as AppViewController
         
+        addEventVC.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
+        loginVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as AppViewController
+    
         loginVC.delegate = self
+        loginVC.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         
         mainView.layer.shadowColor = UIColor.blackColor().CGColor
         mainView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
         mainView.layer.shadowOpacity = 0.7
         mainView.layer.shadowRadius = 0.5
+        
+        
+        
+        
         
         initMenuView()
         initListNewEventsView()
@@ -60,11 +77,11 @@ class ContainerViewController: UIViewController,
     }
     
     func initListNewEventsView() {
-        let hamburgerImage = UIImage(named: "menu_slim")
-        let frame = CGRectMake(-10, 0, 18, 18)
-        let menuButton = UIButton(frame: frame)
-        menuButton.setBackgroundImage(hamburgerImage, forState: .Normal)
-        menuButton.addTarget(self, action: "toggleMenu", forControlEvents: .TouchDown)
+//        let hamburgerImage = UIImage(named: "menu_slim")
+//        let frame = CGRectMake(-10, 0, 18, 18)
+//        let menuButton = UIButton(frame: frame)
+//        menuButton.setBackgroundImage(hamburgerImage, forState: .Normal)
+//        menuButton.addTarget(self, action: "toggleMenu", forControlEvents: .TouchDown)
         eventsVC.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         
         switchMainViewTo(eventsVC, hasNav: true)

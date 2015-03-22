@@ -10,16 +10,28 @@ let kUserJoinEvent = "userJoinEvent"
 let kUserCancelEvent = "userCancelEvent"
 
 class User : PFUser, PFSubclassing {
-    
-    @NSManaged var name: NSString?
-    @NSManaged var aboutMe: NSString?
-    @NSManaged var imageUrl: NSString?
-    @NSManaged var contactNumber: NSString?
+    @NSManaged var name: String
+    @NSManaged var aboutMe: String
+    @NSManaged var imageUrl: String
+    @NSManaged var contactNumber: String
     
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;
         dispatch_once(&onceToken) {
             self.registerSubclass()
+            println("INITING _USER")
+        }
+    }
+    
+    class func allWithCompletion(completion: (users: [User]?, success: Bool) -> Void) {
+        var query = User.query()
+        query.findObjectsInBackgroundWithBlock { (users, error) -> Void in
+            if error == nil {
+                let users = users as [User]
+                completion(users: users, success: true)
+            } else {
+                completion(users: nil, success: false)
+            }
         }
     }
     
@@ -125,21 +137,21 @@ class User : PFUser, PFSubclassing {
         var firstName: NSString!
         var lastName: NSString!
         
-        if let names = name?.componentsSeparatedByString(" ") {
-            if names.count >= 2 {
-                firstName = names.first as? NSString
-                lastName = names.last as? NSString
-            } else {
-                firstName = name
-                lastName = name
-            }
-        } else {
+//        if let names = name.componentsSeparatedByString(" ") {
+//            if names.count >= 2 {
+//                firstName = names.first!
+//                lastName = names.last!
+//            } else {
+//                firstName = name
+//                lastName = name
+//            }
+//        } else {
             let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"]
             let randomInt1 = Int(arc4random_uniform(27))
             let randomInt2 = Int(arc4random_uniform(27))
             firstName = letters[randomInt1]
             lastName = letters[randomInt2]
-        }
+//        }
         
         let initials = UserInitialsView.initialsForFirstName(firstName, lastName: lastName)
         let frame = CGRectMake(0, 0, imageSize.width, imageSize.height)
