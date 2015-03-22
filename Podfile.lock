@@ -28,6 +28,7 @@ PODS:
   - Parse (1.6.4):
     - Bolts (~> 1.1)
   - pop (1.0.7)
+  - TURecipientBar (1.1.2)
 
 DEPENDENCIES:
   - AFNetworking
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - LTNavigationBar
   - Parse
   - pop (~> 1.0)
+  - TURecipientBar (~> 1.1.2)
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
@@ -47,5 +49,6 @@ SPEC CHECKSUMS:
   LTNavigationBar: 61dee3f3d78ce5e50d069498b73d39798b9bea70
   Parse: c2610f7a12ad0defc974803b819c4efe7746e6db
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  TURecipientBar: 9da38d0a69526b9c5f635d8c10b8905fa38c3f48
 
 COCOAPODS: 0.35.0

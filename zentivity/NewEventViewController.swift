@@ -12,7 +12,8 @@ protocol NewEventDelegate: class {
     func didCreateNewEvent(event: Event)
 }
 
-class NewEventViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class NewEventViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, FriendPickerVCDelegate {
+    
     var dateFormatter = NSDateFormatter()
     var isEditingStartDate = false
     var isEditingEndDate = false
@@ -32,10 +33,14 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionField: UITextView!
+    var invited: [User] = []
 
+    @IBOutlet weak var invitedCollection: UICollectionView!
     var photos: [UIImage] = []
     var imagePicker = UIImagePickerController()
     @IBOutlet weak var photosCollection: UICollectionView!
+    
+    var friendPickerVC: FriendPickerVC!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +51,10 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         setup()
+        friendPickerVC = storyboard?.instantiateViewControllerWithIdentifier("FriendPickerVC") as FriendPickerVC
+        friendPickerVC.delegate = self
+        invitedCollection.delegate = self
+        invitedCollection.dataSource = self
     }
     
     func setup() {
@@ -103,7 +112,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 3
+        return 4
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,6 +120,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         // Return the number of rows in the section.
         if section == 0 { return 6 }
         else if section == 1 || section == 2 { return 1 }
+        else if section == 3 { return 2 }
         else { return 0 }
     }
     
@@ -188,30 +198,44 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         }
     }
     
-    /*  PHOTO COLLECTION */
+    /* COLLECTION */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count + 1
+        if collectionView == photosCollection {
+            return photos.count + 1
+        } else {
+            println("invited numofitemsinsection")
+            return invited.count
+        }
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell: UICollectionViewCell
-        
-        if indexPath.row < photos.count {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as UICollectionViewCell
-            var imageView = UIImageView(image: photos[indexPath.row])
-            imageView.frame.size = CGSize(width: 45, height: 45)
-            cell.addSubview(imageView)
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+        if collectionView == photosCollection {
+            var cell: UICollectionViewCell
+            
+            if indexPath.row < photos.count {
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as UICollectionViewCell
+                var imageView = UIImageView(image: photos[indexPath.row])
+                imageView.frame.size = CGSize(width: 45, height: 45)
+                cell.addSubview(imageView)
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+            } else {
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier("addActionCell", forIndexPath: indexPath) as UICollectionViewCell
+            }
+            
+            cell.layer.cornerRadius = 3
+            cell.clipsToBounds = true
+            
+            return cell
         } else {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("addActionCell", forIndexPath: indexPath) as UICollectionViewCell
+            
+            println("cell for invited")
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserGridViewCell", forIndexPath: indexPath) as UserIconCollectionViewCell
+            cell.user = invited[indexPath.row]
+            return cell
         }
-        
-        cell.layer.cornerRadius = 3
-        cell.clipsToBounds = true
-        
-        return cell
+
     }
     
     @IBAction func onAddPhotoCellTapped(sender: UITapGestureRecognizer) {
@@ -279,4 +303,13 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     }
     */
 
+    @IBAction func handleAddFriendsButtonPressed(sender: UIButton) {
+        var friendPickerNVC = UINavigationController(rootViewController: friendPickerVC)
+        self.presentViewController(friendPickerNVC, animated: true, completion: nil)
+    }
+    
+    func friendPickerDidSelectUsers(friendPickerVC: FriendPickerVC, users: [User]) {
+        invited = users
+        invitedCollection.reloadData()
+    }
 }

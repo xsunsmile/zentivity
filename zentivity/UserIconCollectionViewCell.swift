@@ -18,13 +18,19 @@ class UserIconCollectionViewCell: UICollectionViewCell {
                 if error == nil {
                     self.userNameLabel.hidden = true
                     let user = user as User
-                    if user.imageUrl?.length > 0 {
-                        let url = NSURL(string: user.imageUrl!)
-                        self.userImageView.setImageWithURL(url)
-                    } else {
-                        let initialsImage = user.initialsImageView(self.userImageView.frame.size)
-                        self.userImageView.image = initialsImage
-                    }
+//                    if let imageUrl = user.imageUrl {
+                        if countElements(user.imageUrl) > 0 {
+                            let url = NSURL(string: user.imageUrl)
+                            self.userImageView.setImageWithURL(url)
+                        } else {
+                            let initialsImage = user.initialsImageView(self.userImageView.frame.size)
+                            self.userImageView.image = initialsImage
+                        }
+//                    } else {
+//                        let initialsImage = user.initialsImageView(self.userImageView.frame.size)
+//                        self.userImageView.image = initialsImage
+//                    }
+                    
                 }
             })
         }

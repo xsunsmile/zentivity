@@ -28,9 +28,9 @@ class ParseClient: NSObject {
     }
     
     class func setUpUserWithCompletion(user: User, completion: (user: User?, error: NSError?) -> ()) {
-        if user.contactNumber == nil {
+//        if user.contactNumber == nil {
             user.contactNumber = self.randomPhoneNumber()
-        }
+//        }
         user.signUpInBackgroundWithBlock {
             (succeeded: Bool!, error: NSError!) -> Void in
             if error == nil {

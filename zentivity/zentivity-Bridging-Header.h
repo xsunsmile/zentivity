@@ -11,3 +11,5 @@
 #import <Parse/Parse.h>
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
+#import "TURecipientsBar.h"
+#import "TURecipient.h"

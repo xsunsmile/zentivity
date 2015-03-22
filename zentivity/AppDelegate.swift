@@ -15,11 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Parse setup
-        Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
+        
+        User.registerSubclass()
         Photo.registerSubclass()
         Event.registerSubclass()
         Comment.registerSubclass()
-        User.registerSubclass()
+        
+        Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleGoogleLogin:", name: "userDidLoginNotification", object: nil)
         
@@ -47,10 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginToParseWithUserInfo(userInfo: NSDictionary) {
-        let email = userInfo["email"] as NSString
-        let name = userInfo["name"] as NSString
-        let image = userInfo["imageUrl"] as NSString
-        let aboutMe = userInfo["aboutMe"] as NSString
+        let email = userInfo["email"] as String
+        let name = userInfo["name"] as String
+        let image = userInfo["imageUrl"] as String
+        let aboutMe = userInfo["aboutMe"] as String
         
         PFCloud.callFunctionInBackground("getUserSessionToken", withParameters: ["username" : email]) { (sessionToken, error) -> Void in
             if let sessionToken = sessionToken as? String {
