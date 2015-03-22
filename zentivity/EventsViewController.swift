@@ -33,6 +33,9 @@ class EventsViewController: UIViewController,
     var searchButton: UIButton?
     var searchIsOn = false
     var originalTableYPos = CGFloat(0)
+    var titleView: UIView!
+    var titleLabel: UILabel!
+    var closeSearchButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,27 +59,43 @@ class EventsViewController: UIViewController,
     }
     
     func initNavBar() {
-        searchBar = UISearchBar()
-        let delta = view.frame.size.width
-        searchBar?.frame = CGRectOffset(searchBar!.frame, delta, 0)
-//        searchBar?.hidden = true
-//        navigationController?.navigationBar.lt_setBackgroundColor(UIColor(rgba: "#fafafa"))
-        
-        navigationItem.titleView = searchBar
-        
-        searchBar!.barTintColor = UIColor.groupTableViewBackgroundColor() // UIColor(rgba: "#fafafa")
-        searchBar!.placeholder = "Search activities..."
-//        searchBar!.searchBarStyle = UISearchBarStyle.Prominent
-        searchBar!.showsCancelButton = false
-        //        searchBar.showsScopeBar = true
-        searchBar!.delegate = self
-        
         let searchBarPlaceImage = UIImage(named: "search")
         let frame = CGRectMake(0, 0, 18, 18)
         searchButton = UIButton(frame: frame)
         searchButton!.setBackgroundImage(searchBarPlaceImage, forState: UIControlState.Normal)
         searchButton!.addTarget(self, action: "toggleSearchBar", forControlEvents: UIControlEvents.TouchDown)
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchButton!)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton!)
+        
+        let closeFrame = CGRectMake(0, 0, 14, 14)
+        closeSearchButton = UIButton(frame: closeFrame)
+        closeSearchButton.setBackgroundImage(searchBarPlaceImage, forState: .Normal)
+        closeSearchButton.addTarget(self, action: "toggleSearchBar", forControlEvents: .TouchDown)
+        
+        let titleWidth = view.frame.width - searchButton!.frame.width - 60
+        titleView = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 33))
+        titleView.backgroundColor = UIColor.clearColor()
+        
+        titleLabel = UILabel(frame: titleView!.frame)
+        titleLabel.text = "Zentivity"
+        
+        titleView!.addSubview(titleLabel)
+        
+        searchBar = UISearchBar(frame: titleView!.frame)
+        searchBar!.backgroundImage = UIImage()
+        searchBar!.barTintColor = UIColor.clearColor()
+        searchBar!.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        searchBar!.setTranslatesAutoresizingMaskIntoConstraints(true)
+        
+//        titleView!.addSubview(searchBar!)
+        
+        navigationItem.titleView = titleView
+        
+//        searchBar!.barTintColor = UIColor.groupTableViewBackgroundColor() // UIColor(rgba: "#fafafa")
+        searchBar!.placeholder = "Search activities..."
+//        searchBar!.searchBarStyle = UISearchBarStyle.Prominent
+        searchBar!.showsCancelButton = false
+        //        searchBar.showsScopeBar = true
+        searchBar!.delegate = self
     }
     
     func initSubviews() {
@@ -254,12 +273,8 @@ class EventsViewController: UIViewController,
                 setNavigationBarTransformProgress(1)
             } else {
                 setNavigationBarTransformProgress(CGFloat(offsetY) / CGFloat(44))
-//                println("add to table offset: \(offsetY)")
-//                tableView.frame.size.height = originalTableHeight + offsetY
             }
         } else {
-//            println("reset table height to \(originalTableHeight)")
-//            tableView.frame.size.height = originalTableHeight // + 44 + menuView.frame.height
             setNavigationBarTransformProgress(0)
             navigationController?.navigationBar.backIndicatorImage = UIImage()
             navigationController?.navigationBar.lt_reset()
@@ -267,7 +282,6 @@ class EventsViewController: UIViewController,
     }
     
     func setNavigationBarTransformProgress(progress: CGFloat) {
-        println("current progress: \(-44*progress)")
         navigationController?.navigationBar.lt_setTranslationY(-44 * progress)
         navigationController?.navigationBar.lt_setContentAlpha(1-progress)
         
@@ -278,11 +292,11 @@ class EventsViewController: UIViewController,
     
     // MARK: - Search Bar
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        focusSearchBar()
+//        focusSearchBar()
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        blurSearchBar()
+//        blurSearchBar()
     }
     
     func focusSearchBar() {
@@ -320,49 +334,25 @@ class EventsViewController: UIViewController,
     }
     
     func toggleSearchBar() {
-        var delta = view.frame.size.width
-        
-        if (!searchIsOn) {
-            delta *= -1;
-            searchIsOn = true
-//            searchBar?.hidden = false
-//            searchBar?.resignFirstResponder()
-        } else {
-            searchIsOn = false
-//            searchBar?.hidden = true
-        }
-
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseIn, animations: { () -> Void in
-            self.searchBar!.frame = CGRectOffset(self.searchBar!.frame, delta, 0)
-//            self.searchButton!.frame = CGRectOffset(self.searchButton!.frame, -delta, 0)
+        UIView.transitionWithView(titleView, duration: 0.7, options: .TransitionCrossDissolve, animations: { () -> Void in
+            if self.searchIsOn {
+                self.searchBar!.removeFromSuperview()
+                self.titleView.addSubview(self.titleLabel)
+                
+                self.searchButton?.setBackgroundImage(UIImage(named: "search"), forState: .Normal)
+                self.searchIsOn = false
+            } else {
+                self.titleLabel.removeFromSuperview()
+                self.titleView.addSubview(self.searchBar!)
+                
+                self.searchButton?.setBackgroundImage(UIImage(named: "cross"), forState: .Normal)
+                self.searchIsOn = true
+            }
         }) { (completed) -> Void in
         }
-        
-//        let viewWidth = self.view.frame.width
-//        
-//        if searchIsOn {
-//            self.searchBar?.hidden = true
-//            UIView.animateWithDuration(0.4,
-//                delay: 0,
-//                options: nil, //(.CurveEaseOut | .AllowUserInteraction),
-//                animations: { () -> Void in
-//                self.searchBar?.transform = CGAffineTransformMakeScale(0.0001, 1)
-//                let orignPosX = viewWidth - 10 - self.searchButton!.frame.size.width
-//                self.searchButton!.frame.origin.x = orignPosX
-//                }) { (completed) -> Void in
-//                    self.searchIsOn = false
-//            }
-//        } else {
-//            UIView.animateWithDuration(0.4,
-//                delay: 0,
-//                options: nil, //(.CurveEaseIn | .AllowUserInteraction),
-//                animations: { () -> Void in
-//                self.searchButton!.frame.origin.x = 10
-//                self.searchBar?.transform = CGAffineTransformIdentity
-//                }) { (completed) -> Void in
-//                    self.searchIsOn = true
-//                    self.searchBar?.hidden = false
-//            }
-//        }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent;
     }
 }

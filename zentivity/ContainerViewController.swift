@@ -16,15 +16,15 @@ class ContainerViewController: UIViewController {
     var mainViewCurrentPos: CGFloat!
     var mainViewXTranslation: CGFloat!
     var eventsVC: EventsViewController!
-    var menuVC: FilterViewController! // UserProfileViewController!
+    var menuVC: UserProfileViewController! // UserProfileViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainViewLeftPos = view.center.x - view.bounds.width + 60.0
-        mainViewRightPos = view.center.x // + view.bounds.width - 60.0;
+        mainViewLeftPos = view.center.x + view.bounds.width - 60.0
+        mainViewRightPos = view.center.x
         
-        menuVC = storyboard?.instantiateViewControllerWithIdentifier("FilterViewController") as FilterViewController // UserProfileViewController
+        menuVC = storyboard?.instantiateViewControllerWithIdentifier("UserProfileViewController") as UserProfileViewController // UserProfileViewController
         
         eventsVC = storyboard?.instantiateViewControllerWithIdentifier("EventsViewController") as EventsViewController
         
@@ -34,13 +34,9 @@ class ContainerViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func initMenuView() {
-//        var menuNVC = UINavigationController(rootViewController: menuVC)
-//        menuNVC.navigationBar.topItem?.title = "Menu"
-//        menuNVC.edgesForExtendedLayout = UIRectEdge.None
         self.addChildViewController(menuVC)
         menuVC.view.frame = menuView.bounds
         self.menuView.addSubview(menuVC.view)
@@ -49,32 +45,22 @@ class ContainerViewController: UIViewController {
     
     func initMainView() {
         mainView.layer.shadowColor = UIColor.blackColor().CGColor
-        mainView.layer.shadowOffset = CGSizeMake(0.5, 0.5)
+        mainView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
         mainView.layer.shadowOpacity = 0.7
         mainView.layer.shadowRadius = 0.5
         
-//        var hamburgerImage = UIImage(named: "menu_icon")
-//        var menuButton = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: hamburgerImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
-//        eventsVC.navigationItem.leftBarButtonItem = menuButton
-        
-//        let searchImage = UIImage(named: "search")
-//        let frame = CGRectMake(0, 0, 22, 22)
-//        let button = UIButton(frame: frame)
-//        button.setBackgroundImage(searchImage, forState: UIControlState.Normal)
-//        button.addTarget(self, action: "toggleMenu", forControlEvents: UIControlEvents.TouchDown)
-//        
-//        let searchButton = UIBarButtonItem(customView: button)
-//        eventsVC.navigationItem.rightBarButtonItem = searchButton
+        let hamburgerImage = UIImage(named: "menu_slim")
+        let frame = CGRectMake(-10, 0, 18, 18)
+        let menuButton = UIButton(frame: frame)
+        menuButton.setBackgroundImage(hamburgerImage, forState: .Normal)
+        menuButton.addTarget(self, action: "toggleMenu", forControlEvents: .TouchDown)
+        eventsVC.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         
         var mainNVC = UINavigationController(rootViewController: eventsVC)
-//        mainNVC.navigationBar.topItem?.title = "Zentivity"
-//        mainNVC.edgesForExtendedLayout = UIRectEdge.None
         self.addChildViewController(mainNVC)
         self.mainView.addSubview(mainNVC.view)
         mainNVC.view.frame = mainView.bounds
         mainNVC.didMoveToParentViewController(self)
-        
-
     }
     
     @IBAction func onMainViewPan(sender: UIPanGestureRecognizer) {
@@ -84,9 +70,9 @@ class ContainerViewController: UIViewController {
             var translation = sender.translationInView(view)
             var x = mainViewCurrentPos + translation.x
 
-            if x < mainViewLeftPos {
+            if x > mainViewLeftPos {
                 x = mainViewLeftPos
-            } else if x > mainViewRightPos {
+            } else if x < mainViewRightPos {
                 x = mainViewRightPos
             }
 
@@ -94,27 +80,24 @@ class ContainerViewController: UIViewController {
         } else if sender.state == .Ended {
 
         var velocity = sender.velocityInView(view)
-            velocity.x > 0 ? hideMenu() : showMenu()
+            velocity.x < 0 ? hideMenu() : showMenu()
         }
     }
     
     func hideMenu() {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//            self.mainView.center.x = self.mainViewLeftPos
+        UIView.animateWithDuration(0.4, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
             self.mainView.center.x = self.mainViewRightPos
-        })
+        }, completion: nil )
     }
     
     func showMenu() {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//            self.mainView.center.x = self.mainViewRightPos
+        UIView.animateWithDuration(0.4, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
             self.mainView.center.x = self.mainViewLeftPos
         }) { (success) -> Void in
-//            self.eventsVC.blurSearchBar()
         }
     }
     
     func toggleMenu() {
-        mainView.center.x < view.bounds.width / 2 ? hideMenu() : showMenu()
+        mainView.center.x > view.bounds.width / 2 ? hideMenu() : showMenu()
     }
 }

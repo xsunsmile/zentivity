@@ -384,14 +384,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrZ-L5-9Ug" userLabel="Menu">
                                 <rect key="frame" x="0.0" y="64" width="320" height="40"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ZX-ud-xPh" userLabel="UpLine">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="2"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="1hE-eG-VR6"/>
-                                            <constraint firstAttribute="height" constant="2" id="NeA-oP-63u"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCY-LZ-Jzf" userLabel="DownLine">
                                         <rect key="frame" x="0.0" y="38" width="320" height="2"/>
                                         <color key="backgroundColor" red="0.20392156859999999" green="0.70980392160000005" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
@@ -402,13 +394,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="2ZX-ud-xPh" firstAttribute="leading" secondItem="yrZ-L5-9Ug" secondAttribute="leading" id="Ju4-cB-Ioh"/>
                                     <constraint firstAttribute="bottom" secondItem="zCY-LZ-Jzf" secondAttribute="bottom" id="M7E-So-zus"/>
-                                    <constraint firstItem="2ZX-ud-xPh" firstAttribute="top" secondItem="yrZ-L5-9Ug" secondAttribute="top" id="bpJ-d3-UQQ"/>
                                     <constraint firstAttribute="height" constant="40" id="d9T-cT-e7Q"/>
                                     <constraint firstItem="zCY-LZ-Jzf" firstAttribute="leading" secondItem="yrZ-L5-9Ug" secondAttribute="leading" id="ngp-YT-zw5"/>
                                     <constraint firstAttribute="trailing" secondItem="zCY-LZ-Jzf" secondAttribute="trailing" id="z4e-G1-8lb"/>
-                                    <constraint firstAttribute="trailing" secondItem="2ZX-ud-xPh" secondAttribute="trailing" id="zdJ-GU-fIH"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-tb-k7n">
@@ -723,7 +712,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2008" y="987"/>
+            <point key="canvasLocation" x="2047" y="1219"/>
         </scene>
         <!--New Event-->
         <scene sceneID="TMn-r0-je2">
@@ -1276,7 +1265,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ToF-Wk-goQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2490" y="642"/>
+            <point key="canvasLocation" x="2047" y="487"/>
         </scene>
     </scenes>
     <resources>
@@ -1290,6 +1279,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Jnz-Sc-pRM"/>
+        <segue reference="lCA-e7-dBQ"/>
     </inferredMetricsTieBreakers>
 </document>

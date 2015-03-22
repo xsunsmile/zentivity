@@ -15,10 +15,7 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var joinView: UIView!
     @IBOutlet weak var joinLabel: UILabel!
-//    @IBOutlet weak var dateView: UIView!
-//    @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
-//    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
     let dateFormatter = NSDateFormatter()
@@ -29,8 +26,6 @@ class EventsTableViewCell: BaseTableViewCell {
         super.awakeFromNib()
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         
-        println(self.frame.width)
-        println(self.frame.height)
         initSubviews()
         refresh()
     }
@@ -49,21 +44,6 @@ class EventsTableViewCell: BaseTableViewCell {
         let cornerRadius = CGFloat(3)
         shadowView.layer.masksToBounds = true
         shadowView.layer.cornerRadius = cornerRadius
-        
-        contentView.backgroundColor = UIColor.clearColor()
-        contentView.layer.shadowColor = UIColor.blackColor().CGColor
-//        contentView.layer.shadowPath = UIBezierPath(roundedRect: shadowView.bounds, cornerRadius: 5).CGPath
-        contentView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
-        contentView.layer.shadowOpacity = 0.7
-        contentView.layer.shadowRadius = 0.5
-//        contentView.layer.sh
-//        contentView.layer.masksToBounds = true
-//        contentView.clipsToBounds = false
-        
-//        shadowView.layer.shadowColor = UIColor.blackColor().CGColor
-//        shadowView.layer.shadowOpacity = 0.7
-//        shadowView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
-//        shadowView.layer.shadowRadius = 0.5
         
         let borderWidth = CGFloat(1.0)
         let borderColor = UIColor(rgba: "#efefef").CGColor
@@ -183,7 +163,7 @@ class EventsTableViewCell: BaseTableViewCell {
             joinLabel.text = "Join"
         }
         
-        setNeedsDisplay()
+//        setNeedsDisplay()
     }
     
     func applyGradient() {
@@ -201,5 +181,14 @@ class EventsTableViewCell: BaseTableViewCell {
     
     override func prepareForReuse() {
         eventBackgroundImageView.image = nil
+    }
+    
+    override func layoutSubviews() {
+        contentView.backgroundColor = UIColor.clearColor()
+        contentView.layer.shadowColor = UIColor.blackColor().CGColor
+        //        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 3).CGPath
+        contentView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
+        contentView.layer.shadowOpacity = 0.7
+        contentView.layer.shadowRadius = 0.5
     }
 }

@@ -21,7 +21,7 @@ class UserProfileViewController: UIViewController,
     var baseTable: BaseTableView!
     let datasource: [AnyObject] = []
     let cellId = "EventTableViewCell"
-    let cellHeight = CGFloat(40)
+    let cellHeight = CGFloat(100)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,7 @@ class UserProfileViewController: UIViewController,
             return
         }
  
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
         initSubviews()
         refresh()
     }
@@ -42,7 +43,7 @@ class UserProfileViewController: UIViewController,
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
         baseTable.delegate = self
-        baseTable.titleSource = ["Your Projects"]
+//        baseTable.titleSource = ["Your Projects"]
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable
@@ -79,6 +80,14 @@ class UserProfileViewController: UIViewController,
                 println("failed to list up events: \(error)")
             }
         })
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
