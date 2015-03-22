@@ -96,9 +96,24 @@ class EventDetailViewController: UIViewController,
         } else {
             addressLabel.text = addressPlaceHolder
         }
+
+        var name = "Hao Sun"
+        var number = "(408) 673-4419"
+        if let admin = event.admin as? User {
+
+            if let adminName = admin.name as? String {
+                name = adminName
+            }
+            
+
+            if let phoneNumber = admin.contactNumber {
+                number = phoneNumber
+            }
+        }
         
-        let admin = event.admin as User
-        phoneLabel.text = "\(admin.name): \(admin.contactNumber)"
+        phoneLabel.text = "\(name): \(number)"
+
+        
         
         var dateString = NSMutableAttributedString(
             string: event.startTimeWithFormat("EEEE"),
@@ -217,19 +232,19 @@ class EventDetailViewController: UIViewController,
             
             if state == kUserJoinEvent {
                 if success != nil {
-                    UIAlertView(
-                        title: "Great!",
-                        message: "See you at the event :)",
-                        delegate: self,
-                        cancelButtonTitle: "OK"
-                        ).show()
+//                    UIAlertView(
+//                        title: "Great!",
+//                        message: "See you at the event :)",
+//                        delegate: self,
+//                        cancelButtonTitle: "OK"
+//                        ).show()
                 } else {
-                    UIAlertView(
-                        title: "Error",
-                        message: "Unable to join event.",
-                        delegate: self,
-                        cancelButtonTitle: "Well damn..."
-                        ).show()
+//                    UIAlertView(
+//                        title: "Error",
+//                        message: "Unable to join event.",
+//                        delegate: self,
+//                        cancelButtonTitle: "Well damn..."
+//                        ).show()
                 }
             } else {
             }

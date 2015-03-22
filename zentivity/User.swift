@@ -11,10 +11,10 @@ let kUserCancelEvent = "userCancelEvent"
 
 class User : PFUser, PFSubclassing {
     
-    @NSManaged var name: NSString
-    @NSManaged var aboutMe: NSString
-    @NSManaged var imageUrl: NSString
-    @NSManaged var contactNumber: NSString
+    @NSManaged var name: NSString?
+    @NSManaged var aboutMe: NSString?
+    @NSManaged var imageUrl: NSString?
+    @NSManaged var contactNumber: NSString?
     
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;
@@ -46,6 +46,8 @@ class User : PFUser, PFSubclassing {
     func eventsWithCompletion(type: String!, completion: (events: [Event], error: NSError!) -> ()) {
         let query = Event.query()
         query.whereKey(type, equalTo: self)
+        
+        query.orderByDescending("startTime")
         query.includeKey("photos")
         query.includeKey("comments")
         query.includeKey("invitedUsers")
@@ -92,6 +94,7 @@ class User : PFUser, PFSubclassing {
     
     func declineEvent(event: Event, completion: (success: Bool!, error: NSError!) -> ()) {
         var query = Event.query()
+        
         query.getObjectInBackgroundWithId(event.objectId) {
             (gameScore: PFObject!, error: NSError!) -> Void in
             if error == nil {
@@ -119,16 +122,23 @@ class User : PFUser, PFSubclassing {
     }
     
     func initialsImageView(imageSize: CGSize!) -> UIImage {
-        let names = name.componentsSeparatedByString(" ")
+        var firstName: NSString!
+        var lastName: NSString!
         
-        var firstName: NSString?
-        var lastName: NSString?
-        if names.count >= 2 {
-            firstName = names.first as? NSString
-            lastName = names.last as? NSString
+        if let names = name?.componentsSeparatedByString(" ") {
+            if names.count >= 2 {
+                firstName = names.first as? NSString
+                lastName = names.last as? NSString
+            } else {
+                firstName = name
+                lastName = name
+            }
         } else {
-            firstName = name
-            lastName = name
+            let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"]
+            let randomInt1 = Int(arc4random_uniform(27))
+            let randomInt2 = Int(arc4random_uniform(27))
+            firstName = letters[randomInt1]
+            lastName = letters[randomInt2]
         }
         
         let initials = UserInitialsView.initialsForFirstName(firstName, lastName: lastName)

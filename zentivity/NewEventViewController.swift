@@ -173,9 +173,6 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         event.endTime = endTimePicker.date
         event.photos = Photo.photosFromImages(photos)
         
-        // Set invitedUsernames to set invited relationship!
-//        event.invitedUsernames = ["awen", "ehuang", "hsun"]
-        
         event.createWithCompletion { (success, error) -> () in
             if success == true {
                 self.delegate?.didCreateNewEvent(event)

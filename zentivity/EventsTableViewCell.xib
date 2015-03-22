@@ -73,7 +73,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rq-8v-yVw" userLabel="Join">
-                                        <rect key="frame" x="0.0" y="109" width="267.5" height="15"/>
+                                        <rect key="frame" x="0.0" y="101.5" width="267.5" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqM-vb-MxR">
                                                 <rect key="frame" x="120" y="-1.5" width="28" height="17"/>
@@ -106,7 +106,7 @@
                                     <constraint firstAttribute="trailing" secondItem="2rq-8v-yVw" secondAttribute="trailing" id="1be-Bt-rDK"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Raq-48-zof" secondAttribute="trailing" constant="8" id="2qb-Zu-z8I"/>
                                     <constraint firstAttribute="width" constant="130" id="3vO-fu-aeY"/>
-                                    <constraint firstAttribute="bottom" secondItem="2rq-8v-yVw" secondAttribute="bottom" id="4p8-cx-qyz"/>
+                                    <constraint firstAttribute="bottom" secondItem="2rq-8v-yVw" secondAttribute="bottom" constant="8" id="4p8-cx-qyz"/>
                                     <constraint firstItem="WeP-NE-YC7" firstAttribute="top" secondItem="Raq-48-zof" secondAttribute="bottom" constant="8" id="4vU-Sx-Oh3"/>
                                     <constraint firstItem="WeP-NE-YC7" firstAttribute="leading" secondItem="PqU-FZ-OvX" secondAttribute="leading" constant="8" id="Bg5-Sr-T5b"/>
                                     <constraint firstItem="spD-7X-N54" firstAttribute="top" secondItem="by3-k6-MYs" secondAttribute="top" id="D49-Wa-LVH"/>

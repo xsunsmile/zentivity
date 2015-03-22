@@ -28,6 +28,9 @@ class ParseClient: NSObject {
     }
     
     class func setUpUserWithCompletion(user: User, completion: (user: User?, error: NSError?) -> ()) {
+        if user.contactNumber == nil {
+            user.contactNumber = self.randomPhoneNumber()
+        }
         user.signUpInBackgroundWithBlock {
             (succeeded: Bool!, error: NSError!) -> Void in
             if error == nil {
@@ -44,5 +47,19 @@ class ParseClient: NSObject {
                 })
             }
         }
+    }
+    
+    class func randomPhoneNumber() -> String {
+        var randomNumber = "(415) "
+        for i in 0...7 {
+            if i == 3 {
+                randomNumber += "-"
+            } else {
+                let randomDigit = arc4random_uniform(10)
+                randomNumber += String(randomDigit)
+            }
+        }
+        
+        return randomNumber
     }
 }
