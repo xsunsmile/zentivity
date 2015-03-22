@@ -34,6 +34,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionField: UITextView!
     var invited: [User] = []
+    var invitedUsernames = NSMutableArray()
 
     @IBOutlet weak var invitedCollection: UICollectionView!
     var photos: [UIImage] = []
@@ -182,6 +183,8 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         event.startTime = startTimePicker.date
         event.endTime = endTimePicker.date
         event.photos = Photo.photosFromImages(photos)
+        let invUsernames = invitedUsernames as [AnyObject] as [String]
+        event.invitedUsernames = invUsernames
         
         event.createWithCompletion { (success, error) -> () in
             if success == true {
@@ -310,6 +313,13 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     
     func friendPickerDidSelectUsers(friendPickerVC: FriendPickerVC, users: [User]) {
         invited = users
+        invitedUsernames = NSMutableArray()
+        
+        for user in invited {
+            let user = user as User
+            invitedUsernames.addObject(user.username)
+        }
+        
         invitedCollection.reloadData()
     }
 }
