@@ -37,14 +37,14 @@ class FilterViewController: UITableViewController, UITextFieldDelegate, UISearch
     }
 
     @IBAction func onCancel(sender: AnyObject) {
-        self.navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true) //.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 
 
     @IBAction func onSearch(sender: AnyObject) {
         println("Searching for category: \(categoryField.text)")
         
-        self.navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func handleDatePicker() {

@@ -227,7 +227,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="G9k-Ff-97b" firstAttribute="top" secondItem="mtS-HK-uFk" secondAttribute="top" constant="8" id="03Z-rk-kIr"/>
                                             <constraint firstAttribute="bottom" secondItem="G9k-Ff-97b" secondAttribute="bottom" constant="8" id="5Zc-hE-MGE"/>
@@ -389,7 +389,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1644" y="487"/>
+            <point key="canvasLocation" x="1556" y="487"/>
         </scene>
         <!--Events-->
         <scene sceneID="OAG-vB-g4h">
@@ -446,6 +446,7 @@
                         <segue destination="TSa-KR-ocb" kind="modal" identifier="viewEventDetailSegue" id="Jnz-Sc-pRM"/>
                         <segue destination="vXZ-lx-hvc" kind="modal" identifier="userAuthSegue" id="sIC-k8-4tK"/>
                         <segue destination="IUe-Fa-oYf" kind="push" identifier="createEvent" id="0lZ-BH-0ko"/>
+                        <segue destination="gqA-FI-V80" kind="push" identifier="showSearchFilter" id="61C-rT-r59"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrS-tk-xnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1359,7 +1360,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ToF-Wk-goQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2047" y="487"/>
+            <point key="canvasLocation" x="1114" y="-175"/>
         </scene>
         <!--ADD FRIENDS-->
         <scene sceneID="GAR-Jo-RUg">
@@ -1393,7 +1394,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Eric Huang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOR-BR-20P">
                                                     <rect key="frame" x="51" y="15" width="261" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1440,7 +1441,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epK-0h-dvC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2579" y="-238"/>
+            <point key="canvasLocation" x="1929" y="-197"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C1X-rc-IdJ">
@@ -1458,7 +1459,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SMj-b7-9PH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2047" y="-238"/>
+            <point key="canvasLocation" x="1544" y="-197"/>
         </scene>
     </scenes>
     <resources>

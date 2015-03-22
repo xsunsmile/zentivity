@@ -13,7 +13,8 @@ class EventsViewController: UIViewController,
                             NewEventDelegate,
                             UIScrollViewDelegate,
                             UISearchBarDelegate,
-                            EmptyTableViewDelegate
+                            EmptyTableViewDelegate,
+                            SearchFilterViewDelegate
 {
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -27,7 +28,7 @@ class EventsViewController: UIViewController,
     
     var hud: JGProgressHUD?
     var refreshControl: UIRefreshControl!
-    var searchBar: UISearchBar?
+    var searchBarView: SearchFilterView!
     var segmentedMenu: HMSegmentedControl?
     var filters = Dictionary<String, String>()
     var searchBarJustResigned: Bool = false
@@ -83,22 +84,14 @@ class EventsViewController: UIViewController,
         
         titleView!.addSubview(titleLabel)
         
-        searchBar = UISearchBar(frame: titleView!.frame)
-        searchBar!.backgroundImage = UIImage()
-        searchBar!.barTintColor = UIColor.clearColor()
-        searchBar!.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-        searchBar!.setTranslatesAutoresizingMaskIntoConstraints(true)
-        
-//        titleView!.addSubview(searchBar!)
+        searchBarView = SearchFilterView(frame: titleView!.frame)
+        searchBarView.delegate = self
+
+        searchBarView.searchBar!.placeholder = "Search activities..."
+        searchBarView.searchBar!.showsCancelButton = false
+        searchBarView.searchBar!.delegate = self
         
         navigationItem.titleView = titleView
-        
-//        searchBar!.barTintColor = UIColor.groupTableViewBackgroundColor() // UIColor(rgba: "#fafafa")
-        searchBar!.placeholder = "Search activities..."
-//        searchBar!.searchBarStyle = UISearchBarStyle.Prominent
-        searchBar!.showsCancelButton = false
-        //        searchBar.showsScopeBar = true
-        searchBar!.delegate = self
     }
     
     func initSubviews() {
@@ -362,7 +355,7 @@ class EventsViewController: UIViewController,
     }
     
     func blurSearchBar() {
-        searchBar?.resignFirstResponder()
+        searchBarView.searchBar.resignFirstResponder()
 //        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
@@ -394,14 +387,14 @@ class EventsViewController: UIViewController,
     func toggleSearchBar() {
         UIView.transitionWithView(titleView, duration: 0.7, options: .TransitionCrossDissolve, animations: { () -> Void in
             if self.searchIsOn {
-                self.searchBar!.removeFromSuperview()
+                self.searchBarView.removeFromSuperview()
                 self.titleView.addSubview(self.titleLabel)
                 
                 self.searchButton?.setBackgroundImage(UIImage(named: "search"), forState: .Normal)
                 self.searchIsOn = false
             } else {
                 self.titleLabel.removeFromSuperview()
-                self.titleView.addSubview(self.searchBar!)
+                self.titleView.addSubview(self.searchBarView)
                 
                 self.searchButton?.setBackgroundImage(UIImage(named: "cross"), forState: .Normal)
                 self.searchIsOn = true
@@ -416,5 +409,9 @@ class EventsViewController: UIViewController,
     
     func onCTA() {
         performSegueWithIdentifier("createEvent", sender: self)
+    }
+    
+    func onSearchFilterPress() {
+        performSegueWithIdentifier("showSearchFilter", sender: self)
     }
 }

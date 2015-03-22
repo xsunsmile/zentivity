@@ -46,6 +46,8 @@
 		935B4BFF1AAD1B3200D3425F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */; };
 		935B4C011AAD1EE600D3425F /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4C001AAD1EE600D3425F /* BaseTableView.swift */; };
 		935B4C031AAD206500D3425F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4C021AAD206500D3425F /* BaseTableViewCell.swift */; };
+		936FE7A71ABF7E820033B107 /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936FE7A61ABF7E820033B107 /* SearchFilterView.swift */; };
+		936FE7A91ABF7E970033B107 /* SearchFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936FE7A81ABF7E970033B107 /* SearchFilterView.xib */; };
 		937210D31AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937210D11AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift */; };
 		937210D41AB7F3EF009FCD9F /* EventHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 937210D21AB7F3EF009FCD9F /* EventHeaderTableViewCell.xib */; };
 		938B75E21AB166DB00D225EF /* UserIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B75E11AB166DB00D225EF /* UserIconCollectionViewCell.swift */; };
@@ -132,6 +134,8 @@
 		935B4BFE1AAD1B3200D3425F /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		935B4C001AAD1EE600D3425F /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
 		935B4C021AAD206500D3425F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		936FE7A61ABF7E820033B107 /* SearchFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
+		936FE7A81ABF7E970033B107 /* SearchFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchFilterView.xib; sourceTree = "<group>"; };
 		937210D11AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		937210D21AB7F3EF009FCD9F /* EventHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		938B75E11AB166DB00D225EF /* UserIconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserIconCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -304,6 +308,8 @@
 				545887F11AB6B5FD0027D31A /* PhotoCollectionViewCell.swift */,
 				93F6A72D1ABE80F900C6FDE8 /* EmptyTableView.swift */,
 				93F6A72F1ABE810B00C6FDE8 /* EmptyTableView.xib */,
+				936FE7A61ABF7E820033B107 /* SearchFilterView.swift */,
+				936FE7A81ABF7E970033B107 /* SearchFilterView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -484,6 +490,7 @@
 				937210D41AB7F3EF009FCD9F /* EventHeaderTableViewCell.xib in Resources */,
 				549113AE1AA98DD000000861 /* MenuTableViewCell.xib in Resources */,
 				93FF5A491AAC04990077C216 /* GooglePlus.bundle in Resources */,
+				936FE7A91ABF7E970033B107 /* SearchFilterView.xib in Resources */,
 				93EEA9341AABCD5800E04811 /* LoginView.xib in Resources */,
 				5425DEE01AA8C9E0001F5CD5 /* Images.xcassets in Resources */,
 			);
@@ -573,6 +580,7 @@
 				935B4BFD1AAD134D00D3425F /* UIColorExtension.swift in Sources */,
 				5425DED91AA8C9E0001F5CD5 /* AppDelegate.swift in Sources */,
 				687D787D1AACE92000E5605C /* Event.swift in Sources */,
+				936FE7A71ABF7E820033B107 /* SearchFilterView.swift in Sources */,
 				939540421AB2BD7700CF520A /* LabelCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
