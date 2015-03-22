@@ -60,14 +60,14 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loc" translatesAutoresizingMaskIntoConstraints="NO" id="by3-k6-MYs">
-                                        <rect key="frame" x="8" y="55" width="15" height="15"/>
+                                        <rect key="frame" x="8" y="50" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="0Gc-gk-6Gg"/>
                                             <constraint firstAttribute="height" constant="15" id="P0V-Q7-CWd"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="165 Eighth Street San Francisco, CA 94103" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spD-7X-N54" userLabel="location">
-                                        <rect key="frame" x="31" y="52" width="207" height="29"/>
+                                        <rect key="frame" x="31" y="49.5" width="207" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -113,7 +113,7 @@
                                     <constraint firstItem="WeP-NE-YC7" firstAttribute="top" secondItem="PqU-FZ-OvX" secondAttribute="top" constant="30" id="EiB-1z-ZlY"/>
                                     <constraint firstItem="spD-7X-N54" firstAttribute="leading" secondItem="by3-k6-MYs" secondAttribute="trailing" constant="8" id="FaH-mf-XU3"/>
                                     <constraint firstItem="Raq-48-zof" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PqU-FZ-OvX" secondAttribute="top" constant="5" id="FeC-1I-y39"/>
-                                    <constraint firstItem="by3-k6-MYs" firstAttribute="top" secondItem="WeP-NE-YC7" secondAttribute="bottom" constant="8" id="Hfm-Nr-xdN"/>
+                                    <constraint firstItem="by3-k6-MYs" firstAttribute="top" secondItem="WeP-NE-YC7" secondAttribute="bottom" constant="3" id="Hfm-Nr-xdN"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="2rq-8v-yVw" secondAttribute="trailing" id="LnY-Xc-Kp8"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gXh-Gj-TdO" secondAttribute="trailing" constant="8" id="OZD-sg-Fff"/>
                                     <constraint firstItem="WeP-NE-YC7" firstAttribute="leading" secondItem="Raq-48-zof" secondAttribute="leading" id="Qrb-Uu-ecv"/>
@@ -125,7 +125,7 @@
                                     <constraint firstItem="Raq-48-zof" firstAttribute="top" secondItem="PqU-FZ-OvX" secondAttribute="top" constant="8" id="knF-6U-tWZ"/>
                                     <constraint firstItem="2rq-8v-yVw" firstAttribute="leading" secondItem="PqU-FZ-OvX" secondAttribute="leading" id="oGZ-AK-l86"/>
                                     <constraint firstItem="gXh-Gj-TdO" firstAttribute="top" secondItem="Raq-48-zof" secondAttribute="bottom" constant="5" id="pdg-z9-QSU"/>
-                                    <constraint firstItem="spD-7X-N54" firstAttribute="top" secondItem="gXh-Gj-TdO" secondAttribute="bottom" constant="6" id="t7Y-UG-6Gm"/>
+                                    <constraint firstItem="spD-7X-N54" firstAttribute="top" secondItem="gXh-Gj-TdO" secondAttribute="bottom" constant="3" id="t7Y-UG-6Gm"/>
                                     <constraint firstItem="2rq-8v-yVw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="spD-7X-N54" secondAttribute="bottom" constant="3" id="tq1-eC-RNj"/>
                                     <constraint firstItem="gXh-Gj-TdO" firstAttribute="top" secondItem="WeP-NE-YC7" secondAttribute="top" id="uQg-nD-hWx"/>
                                     <constraint firstItem="gXh-Gj-TdO" firstAttribute="leading" secondItem="Raq-48-zof" secondAttribute="leading" id="vwV-ov-Ssk"/>

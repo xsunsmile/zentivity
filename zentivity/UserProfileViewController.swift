@@ -12,16 +12,19 @@ class UserProfileViewController: UIViewController,
                                  BaseTableViewDelegate
 {
 
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileName: UILabel!
-//    @IBOutlet weak var profileOrganization: UILabel!
     @IBOutlet weak var profileContactInfo: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var baseTable: BaseTableView!
-    let datasource: [AnyObject] = []
-    let cellId = "EventTableViewCell"
-    let cellHeight = CGFloat(100)
+    let cellId = "MenuTableViewCell"
+    let cellHeight = CGFloat(50)
+    let datasource = [
+        ["icon": "map", "title": "Test"],
+        ["icon": "map", "title": "Test"]
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +46,6 @@ class UserProfileViewController: UIViewController,
         baseTable = BaseTableView(datasource: datasource, cellIdentifier: cellId)
         baseTable.cellHeight = cellHeight
         baseTable.delegate = self
-//        baseTable.titleSource = ["Your Projects"]
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable
@@ -53,33 +55,25 @@ class UserProfileViewController: UIViewController,
         
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
         profileImageView.clipsToBounds = true
-        profileImageView.layer.borderWidth = 0.5;
-        profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        profileImageView.layer.borderWidth = 1;
+        profileImageView.layer.borderColor = UIColor.grayColor().CGColor
+        
+        backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
+        })
     }
     
     func refresh() {
-        var currentUser = User.currentUser() as User
-        currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
-            println(events)
-            println(error)
-            if error == nil && events.count > 0 {
-                if currentUser.name != "" {
-                    self.profileName.text = currentUser.name
-                }
-                if currentUser.imageUrl?.length > 0 {
-                    self.profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl!)!)
-                }
-                //                if User.currentUser().aboutMe.length > 0 {
-                //                    self.profileOrganization.text = currentUser.aboutMe
-                //                }
-                self.profileContactInfo.text = currentUser.username
-                
-                self.baseTable.datasource = events
-                self.tableView.reloadData()
-            } else {
-                println("failed to list up events: \(error)")
+        if let currentUser = User.currentUser() {
+            if currentUser.name?.length > 0 {
+                profileName.text = currentUser.name
             }
-        })
+            
+            if currentUser.imageUrl?.length > 0 {
+                profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl!)!)
+            }
+            
+            self.profileContactInfo.text = currentUser.username
+        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -91,10 +85,10 @@ class UserProfileViewController: UIViewController,
     }
     
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
-        performSegueWithIdentifier("viewEventDetailSegue", sender: self)
+//       performSegueWithIdentifier("viewEventDetailSegue", sender: self)
     }
-        
-    @IBAction func onSignOut(sender: UIBarButtonItem) {
+    
+    @IBAction func onUserLogout(sender: UIButton) {
         User.logoutWithCompletion { (completed) -> Void in
             println("User logout: \(completed)")
         }

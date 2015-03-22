@@ -66,6 +66,12 @@
 #define COCOAPODS_VERSION_MINOR_JGProgressHUD 2
 #define COCOAPODS_VERSION_PATCH_JGProgressHUD 3
 
+// LBBlurredImage
+#define COCOAPODS_POD_AVAILABLE_LBBlurredImage
+#define COCOAPODS_VERSION_MAJOR_LBBlurredImage 0
+#define COCOAPODS_VERSION_MINOR_LBBlurredImage 2
+#define COCOAPODS_VERSION_PATCH_LBBlurredImage 2
+
 // LTNavigationBar
 #define COCOAPODS_POD_AVAILABLE_LTNavigationBar
 #define COCOAPODS_VERSION_MAJOR_LTNavigationBar 2

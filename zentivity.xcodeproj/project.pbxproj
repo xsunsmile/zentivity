@@ -54,6 +54,8 @@
 		93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEA9311AABCD3000E04811 /* LoginView.swift */; };
 		93EEA9341AABCD5800E04811 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EEA9331AABCD5800E04811 /* LoginView.xib */; };
 		93EEA9361AABE58200E04811 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEA9351AABE58200E04811 /* AppViewController.swift */; };
+		93F6A72E1ABE80F900C6FDE8 /* EmptyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6A72D1ABE80F900C6FDE8 /* EmptyTableView.swift */; };
+		93F6A7301ABE810B00C6FDE8 /* EmptyTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93F6A72F1ABE810B00C6FDE8 /* EmptyTableView.xib */; };
 		93FF5A2E1AABFF680077C216 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A2D1AABFF680077C216 /* AddressBook.framework */; };
 		93FF5A301AABFF750077C216 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A2F1AABFF750077C216 /* AssetsLibrary.framework */; };
 		93FF5A321AABFF820077C216 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FF5A311AABFF820077C216 /* Foundation.framework */; };
@@ -136,6 +138,8 @@
 		93EEA9311AABCD3000E04811 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		93EEA9331AABCD5800E04811 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		93EEA9351AABE58200E04811 /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		93F6A72D1ABE80F900C6FDE8 /* EmptyTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyTableView.swift; sourceTree = "<group>"; };
+		93F6A72F1ABE810B00C6FDE8 /* EmptyTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTableView.xib; sourceTree = "<group>"; };
 		93FF5A2D1AABFF680077C216 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		93FF5A2F1AABFF750077C216 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		93FF5A311AABFF820077C216 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -293,6 +297,8 @@
 				937210D11AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift */,
 				937210D21AB7F3EF009FCD9F /* EventHeaderTableViewCell.xib */,
 				545887F11AB6B5FD0027D31A /* PhotoCollectionViewCell.swift */,
+				93F6A72D1ABE80F900C6FDE8 /* EmptyTableView.swift */,
+				93F6A72F1ABE810B00C6FDE8 /* EmptyTableView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -463,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				549113A81AA96CAF00000861 /* EventsTableViewCell.xib in Resources */,
+				93F6A7301ABE810B00C6FDE8 /* EmptyTableView.xib in Resources */,
 				549113BA1AA992AE00000861 /* MenuView.xib in Resources */,
 				939540431AB2BD7700CF520A /* LabelCollectionReusableView.xib in Resources */,
 				5425DEDE1AA8C9E0001F5CD5 /* Main.storyboard in Resources */,
@@ -524,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				681A54421AAD027700C635D5 /* Photo.swift in Sources */,
+				93F6A72E1ABE80F900C6FDE8 /* EmptyTableView.swift in Sources */,
 				6820E1741AB7E5670021E773 /* ContainerViewController.swift in Sources */,
 				6820A6CB1AB91A270053E240 /* TextFieldCell.swift in Sources */,
 				93EEA9361AABE58200E04811 /* AppViewController.swift in Sources */,

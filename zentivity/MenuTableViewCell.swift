@@ -8,19 +8,21 @@
 
 import UIKit
 
-class MenuTableViewCell: UITableViewCell {
+class MenuTableViewCell: BaseTableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var itemLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    override func onDataSet(data: AnyObject!) {
+        let dict = data as NSDictionary
+        iconImageView.image = UIImage(named: dict["icon"] as NSString)
+        itemLabel.text = dict["title"] as NSString
+    }
 }

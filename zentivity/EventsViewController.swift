@@ -12,7 +12,8 @@ class EventsViewController: UIViewController,
                             BaseTableViewDelegate,
                             NewEventDelegate,
                             UIScrollViewDelegate,
-                            UISearchBarDelegate
+                            UISearchBarDelegate,
+                            EmptyTableViewDelegate
 {
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -36,6 +37,7 @@ class EventsViewController: UIViewController,
     var titleView: UIView!
     var titleLabel: UILabel!
     var closeSearchButton: UIButton!
+    var emptyTableView: EmptyTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +72,7 @@ class EventsViewController: UIViewController,
         closeSearchButton = UIButton(frame: closeFrame)
         closeSearchButton.setBackgroundImage(searchBarPlaceImage, forState: .Normal)
         closeSearchButton.addTarget(self, action: "toggleSearchBar", forControlEvents: .TouchDown)
-        
+
         let titleWidth = view.frame.width - searchButton!.frame.width - 60
         titleView = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 33))
         titleView.backgroundColor = UIColor.clearColor()
@@ -100,6 +102,11 @@ class EventsViewController: UIViewController,
     
     func initSubviews() {
         initNavBar()
+        
+        emptyTableView = EmptyTableView(frame: CGRectMake(0, view.frame.height/2, view.frame.width, 70))
+        emptyTableView.message = "There are no data now"
+        emptyTableView.buttonLabel = "Create a new event"
+        emptyTableView.delegate = self
         
         segmentedMenu = HMSegmentedControl(sectionTitles: menuTitles)
         
@@ -148,12 +155,14 @@ class EventsViewController: UIViewController,
         
         Event.listWithOptionsAndCompletion(filters) { (events, error) -> () in
             if events != nil {
+                self.removeEmptyListView()
+                
                 self.datasource = events!
                 self.baseTable.datasource = self.datasource
                 self.tableView.reloadData()
             } else {
                 println("failed to list all events")
-                self.showEmptyListView()
+                self.showEmptyListView(nil)
             }
             
             self.hud?.dismiss()
@@ -161,12 +170,19 @@ class EventsViewController: UIViewController,
         }
     }
     
-    func showEmptyListView() {
+    func showEmptyListView(message: NSString?) {
         tableView.hidden = true
-        let errorView = UIView()
-        errorView.backgroundColor = UIColor.grayColor()
-        self.view.addSubview(errorView)
-        self.view.backgroundColor = UIColor.grayColor()
+        self.view.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        if let m = message {
+            emptyTableView.message = m
+        }
+        view.addSubview(emptyTableView)
+    }
+    
+    func removeEmptyListView() {
+        tableView.hidden = false
+        self.view.backgroundColor = UIColor.whiteColor()
+        emptyTableView.removeFromSuperview()
     }
     
     @IBAction func onMenuPress(sender: UIBarButtonItem) {
@@ -191,15 +207,10 @@ class EventsViewController: UIViewController,
         self.tableView.reloadData()
     }
     
-    @IBAction func onAddEventPress(sender: ShadowButton) {
-        performSegueWithIdentifier("createEvent", sender: self)
-    }
-    
     func onMenuSwitch(control: HMSegmentedControl) {
-        blurSearchBar()
         let title = menuTitles[control.selectedSegmentIndex]
-        println("selected \(title)")
-    
+
+        self.removeEmptyListView()
         switch(control.selectedSegmentIndex) {
         case 1:
             if let currentUser = User.currentUser() {
@@ -207,10 +218,15 @@ class EventsViewController: UIViewController,
                 currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
                     if error == nil {
                         self.hud?.dismiss()
-                        self.baseTable.datasource = events
-                        self.tableView.reloadData()
+                        if events.count > 0 {
+                            self.baseTable.datasource = events
+                            self.tableView.reloadData()
+                        } else {
+                            self.showEmptyListView("You do not host any event yet.")
+                        }
                     } else {
                         println("failed to list up admin events: \(error)")
+                        self.showEmptyListView(nil)
                     }
                 })
             } else {
@@ -222,10 +238,15 @@ class EventsViewController: UIViewController,
                 currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
                     if error == nil {
                         self.hud?.dismiss()
-                        self.baseTable.datasource = events
-                        self.tableView.reloadData()
+                        if events.count > 0 {
+                            self.baseTable.datasource = events
+                            self.tableView.reloadData()
+                        } else {
+                            self.showEmptyListView(nil)
+                        }
                     } else {
                         println("failed to list up confirmedUsers events: \(error)")
+                        self.showEmptyListView(nil)
                     }
                 })
             } else {
@@ -244,7 +265,7 @@ class EventsViewController: UIViewController,
             var index = tableView.indexPathForSelectedRow()?.row
             
             vc.event = data[index!]
-        } else if segue.identifier == "createEvent" {
+        } else if segue.identifier == "" {
             var vc = segue.destinationViewController as NewEventViewController
             vc.delegate = self
         }
@@ -300,12 +321,12 @@ class EventsViewController: UIViewController,
     }
     
     func focusSearchBar() {
-        navigationItem.rightBarButtonItem = nil
+//        navigationItem.rightBarButtonItem = nil
     }
     
     func blurSearchBar() {
         searchBar?.resignFirstResponder()
-        navigationItem.rightBarButtonItem = rightBarButtonItem
+//        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -354,5 +375,9 @@ class EventsViewController: UIViewController,
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent;
+    }
+    
+    func onCTA() {
+        performSegueWithIdentifier("createEvent", sender: self)
     }
 }
