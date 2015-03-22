@@ -76,8 +76,8 @@ class UserProfileViewController: UIViewController,
                     profileName.text = name
                 }
                 
-                if currentUser.imageUrl?.length > 0 {
-                    profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl!)!)
+                if countElements(currentUser.imageUrl) > 0 {
+                    profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
                 }
                 
                 self.profileContactInfo.text = currentUser.username
