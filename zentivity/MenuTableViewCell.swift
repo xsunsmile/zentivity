@@ -25,4 +25,7 @@ class MenuTableViewCell: BaseTableViewCell {
         iconImageView.image = UIImage(named: dict["icon"] as NSString)
         itemLabel.text = dict["title"] as NSString
     }
+    
+    override func refresh() {
+    }
 }

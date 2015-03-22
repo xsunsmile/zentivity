@@ -30,6 +30,7 @@ class EventDetailViewController: UIViewController,
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var imagePageControl: UIPageControl!
+    @IBOutlet weak var eventDescription: UILabel!
     
     @IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
     
@@ -100,7 +101,6 @@ class EventDetailViewController: UIViewController,
         var name = "Hao Sun"
         var number = "(408) 673-4419"
         if let admin = event.admin as? User {
-
             admin.fetchIfNeededInBackgroundWithBlock({ (admin, error) -> Void in
                 let admin = admin as User
                 if let adminName = admin.name as? String {
@@ -111,11 +111,9 @@ class EventDetailViewController: UIViewController,
                 }
             })
         }
-        
+
         phoneLabel.text = "\(name): \(number)"
 
-        
-        
         var dateString = NSMutableAttributedString(
             string: event.startTimeWithFormat("EEEE"),
             attributes: NSDictionary(
@@ -138,6 +136,12 @@ class EventDetailViewController: UIViewController,
             joinButton.setTitle("SignIn", forState: .Normal)
         }
         
+        if !event.descript.isEmpty {
+            eventDescription.text = event.descript
+            eventDescription.preferredMaxLayoutWidth = view.frame.width - 40
+//            eventDescription.frame = 
+            println("label frame \(eventDescription.frame)")
+        }
     }
     
     func setupBackgroundImageView() {
@@ -171,7 +175,7 @@ class EventDetailViewController: UIViewController,
     }
     
     func initMapView() {
-        let location = CLLocation(latitude: 37.782193, longitude: -122.410254)
+//        let location = CLLocation(latitude: 37.782193, longitude: -122.410254)
         // LocationUtils.sharedInstance.getPlacemarkFromLocationWithCompletion(location, completion: { (places, error) -> () in
         //     if error == nil {
         //         let pm = places as [CLPlacemark]
@@ -338,11 +342,14 @@ class EventDetailViewController: UIViewController,
             }
         } else if sender.state == .Changed {
             let dy = loc.y - dragStartingPoint.y
-            contentView.frame.origin.y = initialDragOffset + dy
-            if currentImageView != nil {
-                currentImageView?.frame.origin.y = initialImageDragOffset + dy/2
-            } else {
-                println("current image view is empty during dragging")
+            let newYPos = initialDragOffset + dy
+            if newYPos >= 200 {
+                contentView.frame.origin.y = newYPos
+                if currentImageView != nil {
+                    currentImageView?.frame.origin.y = initialImageDragOffset + dy/2
+                } else {
+                    println("current image view is empty during dragging")
+                }
             }
         } else if sender.state == .Ended {
             if direction == "up" {
@@ -375,7 +382,7 @@ class EventDetailViewController: UIViewController,
     func animateHeaderViewUp() {
         view.layoutIfNeeded()
         let dy = self.view.frame.height - self.contentView.frame.height
-        contentTopConstraint.constant = dy
+        contentTopConstraint.constant = 200
         eventHeaderView.setNeedsUpdateConstraints()
         
         UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in

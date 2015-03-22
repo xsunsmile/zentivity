@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol UserProfileViewControllerDelegate: class {
+    func closeMenuAndDo(action: NSString)
+}
+
 class UserProfileViewController: UIViewController,
                                  BaseTableViewDelegate
 {
@@ -19,11 +23,14 @@ class UserProfileViewController: UIViewController,
     @IBOutlet weak var tableView: UITableView!
     
     var baseTable: BaseTableView!
+    weak var delegate: UserProfileViewControllerDelegate?
+    
     let cellId = "MenuTableViewCell"
     let cellHeight = CGFloat(50)
     let datasource = [
-        ["icon": "map", "title": "Test"],
-        ["icon": "map", "title": "Test"]
+        ["icon": "ListEvents", "title": "New events", "action": "listNewEvents"],
+        ["icon": "addEvent", "title": "Add an event", "action": "addEvent"],
+        ["icon": "logoutBlack", "title": "Log Out", "action": "logOut"]
     ]
     
     override func viewDidLoad() {
@@ -88,7 +95,8 @@ class UserProfileViewController: UIViewController,
     }
     
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
-//       performSegueWithIdentifier("viewEventDetailSegue", sender: self)
+       let action = datasource[indexPath.row]["action"]
+        delegate?.closeMenuAndDo(action!)
     }
     
     @IBAction func onUserLogout(sender: UIButton) {

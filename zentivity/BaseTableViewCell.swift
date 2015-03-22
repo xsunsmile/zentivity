@@ -28,10 +28,10 @@ class BaseTableViewCell: UITableViewCell {
     }
 
     func onDataSet(data: AnyObject!) {
-        println("You should implement this in subclass")
+        println("You should implement onDataSet in subclass")
     }
     
     func refresh() {
-        println("You should implement this in subclass")
+        println("You should implement refresh in subclass")
     }
 }
