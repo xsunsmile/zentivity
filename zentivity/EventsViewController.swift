@@ -38,6 +38,7 @@ class EventsViewController: UIViewController,
     var titleLabel: UILabel!
     var closeSearchButton: UIButton!
     var emptyTableView: EmptyTableView!
+    var currentSearchString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,6 +154,67 @@ class EventsViewController: UIViewController,
             hud?.showInView(self.view, animated: true)
         }
         
+        if currentSearchString.isEmpty {
+            refreshLatestEventsList(useHud)
+        } else if currentSearchString == "admin" {
+            refreshAdminEventsList(useHud)
+        } else if currentSearchString == "join" {
+            refreshJoinEventsList(useHud)
+        }
+    }
+    
+    func refreshJoinEventsList(useHud: Bool) {
+        if let currentUser = User.currentUser() {
+            if useHud {
+                hud?.textLabel.text = "Loading events..."
+                hud?.showInView(self.view, animated: true)
+            }
+            currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
+                if error == nil {
+                    self.hud?.dismiss()
+                    self.refreshControl.endRefreshing()
+                    
+                    if events.count > 0 {
+                        self.baseTable.datasource = events
+                        self.tableView.reloadData()
+                    } else {
+                        self.showEmptyListView("You have not join any event yet")
+                    }
+                } else {
+                    println("failed to list up confirmedUsers events: \(error)")
+                    self.showEmptyListView(nil)
+                }
+            })
+        }
+    }
+    
+    func refreshAdminEventsList(useHud: Bool) {
+        if let currentUser = User.currentUser() {
+            if useHud {
+                hud?.textLabel.text = "Loading events..."
+                hud?.showInView(self.view, animated: true)
+            }
+
+            currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+                if error == nil {
+                    self.hud?.dismiss()
+                    self.refreshControl.endRefreshing()
+                    
+                    if events.count > 0 {
+                        self.baseTable.datasource = events
+                        self.tableView.reloadData()
+                    } else {
+                        self.showEmptyListView("You do not host any event yet.")
+                    }
+                } else {
+                    println("failed to list up admin events: \(error)")
+                    self.showEmptyListView(nil)
+                }
+            })
+        }
+    }
+    
+    func refreshLatestEventsList(useHud: Bool) {
         Event.listWithOptionsAndCompletion(filters) { (events, error) -> () in
             if events != nil {
                 self.removeEmptyListView()
@@ -213,47 +275,22 @@ class EventsViewController: UIViewController,
         self.removeEmptyListView()
         switch(control.selectedSegmentIndex) {
         case 1:
+            currentSearchString = "admin"
             if let currentUser = User.currentUser() {
-                hud?.showInView(self.view, animated: true)
-                currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
-                    if error == nil {
-                        self.hud?.dismiss()
-                        if events.count > 0 {
-                            self.baseTable.datasource = events
-                            self.tableView.reloadData()
-                        } else {
-                            self.showEmptyListView("You do not host any event yet.")
-                        }
-                    } else {
-                        println("failed to list up admin events: \(error)")
-                        self.showEmptyListView(nil)
-                    }
-                })
+                refreshAdminEventsList(true)
             } else {
                 presentAuthModal()
             }
         case 2:
+            currentSearchString = "join"
             if let currentUser = User.currentUser() {
-                hud?.showInView(self.view, animated: true)
-                currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
-                    if error == nil {
-                        self.hud?.dismiss()
-                        if events.count > 0 {
-                            self.baseTable.datasource = events
-                            self.tableView.reloadData()
-                        } else {
-                            self.showEmptyListView(nil)
-                        }
-                    } else {
-                        println("failed to list up confirmedUsers events: \(error)")
-                        self.showEmptyListView(nil)
-                    }
-                })
+                refreshJoinEventsList(true)
             } else {
                 presentAuthModal()
             }
         default:
-            refresh(true)
+            currentSearchString = ""
+            refreshLatestEventsList(true)
         }
     }
     
