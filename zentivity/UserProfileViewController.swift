@@ -76,7 +76,8 @@ class UserProfileViewController: UIViewController,
                     profileName.text = name
                 }
                 
-                if countElements(currentUser.imageUrl) > 0 {
+                let imageUrl = currentUser.objectForKey("imageUrl") as String
+                if countElements(imageUrl) > 0 {
                     profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
                 }
                 
