@@ -31,10 +31,12 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func initSubviews() {
-        if let currentUser = User.currentUser() {
-            let tapGR = UITapGestureRecognizer(target: self, action: "onJoinTap:")
-            tapGR.numberOfTapsRequired = 1
-            joinView.addGestureRecognizer(tapGR)
+        if GoogleClient.sharedInstance.alreadyLogin() {
+            if let currentUser = User.currentUser() {
+                let tapGR = UITapGestureRecognizer(target: self, action: "onJoinTap:")
+                tapGR.numberOfTapsRequired = 1
+                joinView.addGestureRecognizer(tapGR)
+            }
         } else {
             joinLabel.hidden = true
         }

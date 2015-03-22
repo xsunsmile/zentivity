@@ -128,10 +128,12 @@ class EventDetailViewController: UIViewController,
         
         eventDateLabel.attributedText = dateString
         
-        let currentUser = User.currentUser()
-        if currentUser != nil {
-            joinButton.backgroundColor = joinButtonColor()
-            joinButton.setTitle(joinButtonText(), forState: .Normal)
+        if GoogleClient.sharedInstance.alreadyLogin() {
+            let currentUser = User.currentUser()
+            if currentUser != nil {
+                joinButton.backgroundColor = joinButtonColor()
+                joinButton.setTitle(joinButtonText(), forState: .Normal)
+            }
         } else {
             joinButton.setTitle("SignIn", forState: .Normal)
         }
@@ -223,7 +225,7 @@ class EventDetailViewController: UIViewController,
     }
     
     @IBAction func onJoin(sender: AnyObject) {
-        if User.currentUser() == nil {
+        if !GoogleClient.sharedInstance.alreadyLogin() || User.currentUser() == nil {
             presentAuthModal()
             return
         }
