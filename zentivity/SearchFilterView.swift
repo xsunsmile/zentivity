@@ -15,6 +15,7 @@ protocol SearchFilterViewDelegate: class {
 class SearchFilterView: UIView {
 
     var contentView: UIView!
+    @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     var delegate: SearchFilterViewDelegate?
     
@@ -36,6 +37,8 @@ class SearchFilterView: UIView {
         
         searchBar.barTintColor = UIColor.clearColor()
         searchBar.backgroundImage = UIImage()
+        
+        filterView.hidden = true
         
         addSubview(contentView)
     }

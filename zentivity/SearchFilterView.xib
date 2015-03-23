@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchFilterView" customModule="zentivity" customModuleProvider="target">
             <connections>
+                <outlet property="filterView" destination="U4w-T6-je0" id="EB8-ZZ-wl7"/>
                 <outlet property="searchBar" destination="l8a-LF-7oG" id="mf9-hV-26G"/>
             </connections>
         </placeholder>
@@ -15,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="l8a-LF-7oG">
-                    <rect key="frame" x="0.0" y="1" width="414" height="44"/>
+                    <rect key="frame" x="0.0" y="1" width="453" height="44"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4w-T6-je0" userLabel="FilterView">
@@ -68,6 +69,7 @@
                 <constraint firstItem="U4w-T6-je0" firstAttribute="top" secondItem="BgW-SE-Has" secondAttribute="top" constant="2" id="HH8-wS-vBH"/>
                 <constraint firstItem="l8a-LF-7oG" firstAttribute="leading" secondItem="BgW-SE-Has" secondAttribute="leading" id="Hcd-bs-Yht"/>
                 <constraint firstAttribute="centerY" secondItem="l8a-LF-7oG" secondAttribute="centerY" id="L9B-93-Kv0"/>
+                <constraint firstAttribute="trailing" secondItem="l8a-LF-7oG" secondAttribute="trailing" constant="8" id="MJr-s5-wy0"/>
                 <constraint firstAttribute="trailing" secondItem="U4w-T6-je0" secondAttribute="trailing" constant="8" id="PVM-cp-bNx"/>
                 <constraint firstAttribute="bottom" secondItem="U4w-T6-je0" secondAttribute="bottom" constant="2" id="Y4V-ey-QZt"/>
                 <constraint firstAttribute="trailing" secondItem="l8a-LF-7oG" secondAttribute="trailing" constant="60" id="t8f-QC-lLU"/>
@@ -76,6 +78,7 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="t8f-QC-lLU"/>
+                    <exclude reference="3iN-z3-b1P"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="563.5" y="304.5"/>
