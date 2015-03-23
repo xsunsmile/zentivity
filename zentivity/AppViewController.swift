@@ -28,8 +28,8 @@ class AppViewController: UIViewController {
         loginView.buttonBackgroundColor = UIColor(rgba: "#dd4b39")
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-        backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
-        })
+//        backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
+//        })
     }
     
     override func didReceiveMemoryWarning() {

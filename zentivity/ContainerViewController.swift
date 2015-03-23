@@ -105,9 +105,14 @@ class ContainerViewController: UIViewController,
     
     func removeCurrentViewController() {
         if currentViewController != nil {
-            currentViewController.willMoveToParentViewController(nil)
-            currentViewController.view.removeFromSuperview()
-            currentViewController.removeFromParentViewController()
+            
+            var vc = currentViewController
+            if let nvc = currentViewController.navigationController {
+                vc = nvc
+            }
+            vc.willMoveToParentViewController(nil)
+            vc.view.removeFromSuperview()
+            vc.removeFromParentViewController()
         }
     }
     
