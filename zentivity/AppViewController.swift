@@ -13,6 +13,7 @@ protocol AppViewControllerDelegate : class {
 
 class AppViewController: UIViewController {
     
+    @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var loginView: LoginView!
     weak var delegate: AppViewControllerDelegate?
@@ -28,8 +29,8 @@ class AppViewController: UIViewController {
         loginView.buttonBackgroundColor = UIColor(rgba: "#dd4b39")
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-//        backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
-//        })
+        backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,6 +44,23 @@ class AppViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent;
+    }
+    
+    func applyGradient() {
+        let gradient = CAGradientLayer()
+        let arrayColors = [
+            UIColor.clearColor().CGColor,
+            UIColor(rgba: "#211F20").CGColor
+        ]
+        
+        gradientView.backgroundColor = UIColor.clearColor()
+        gradient.frame = gradientView.bounds
+        gradient.colors = arrayColors
+        gradientView.layer.insertSublayer(gradient, atIndex: 0)
     }
     
     /*
