@@ -24,18 +24,16 @@ class ContainerViewController: UIViewController,
     var addEventVC: NewEventViewController!
     var loginVC: AppViewController!
     var menuButton: UIButton!
+    var menuIsOpen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         let hamburgerImage = UIImage(named: "menu_slim")
         let frame = CGRectMake(-10, 0, 18, 18)
         menuButton = UIButton(frame: frame)
         menuButton.setBackgroundImage(hamburgerImage, forState: .Normal)
         menuButton.addTarget(self, action: "toggleMenu", forControlEvents: .TouchDown)
-        
-        
         
         mainViewLeftPos = view.center.x + view.bounds.width - 60.0
         mainViewRightPos = view.center.x
@@ -56,13 +54,13 @@ class ContainerViewController: UIViewController,
         mainView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
         mainView.layer.shadowOpacity = 0.7
         mainView.layer.shadowRadius = 0.5
-        
-        
-        
-        
-        
+
         initMenuView()
         initListNewEventsView()
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     override func didReceiveMemoryWarning() {
@@ -138,16 +136,18 @@ class ContainerViewController: UIViewController,
     }
     
     func hideMenu() {
+        menuIsOpen = false
         UIView.animateWithDuration(0.4, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
             self.mainView.center.x = self.mainViewRightPos
-        }, completion: nil )
+            }) { (success) -> Void in
+        }
     }
     
     func showMenu() {
+        menuIsOpen = true
         UIView.animateWithDuration(0.4, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
             self.mainView.center.x = self.mainViewLeftPos
         }) { (success) -> Void in
-            self.menuVC.refresh()
         }
     }
     

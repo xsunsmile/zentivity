@@ -315,15 +315,9 @@ class EventsViewController: UIViewController,
         self.presentViewController(appVC, animated: true, completion: nil)
     }
     
-    func presentEventsFilterModal() {
-//        let filterNVC = storyboard?.instantiateViewControllerWithIdentifier("FilterNavViewController") as UINavigationController
-//        self.presentViewController(filterNVC, animated: true, completion: nil)
-    }
-    
     // MARK: - Scroll View
     func tableViewWillBeginDragging(scrollView: UIScrollView) {
-//        blurSearchBar()
-//        originalTableHeight = tableView.frame.height
+        searchBarView.searchBar.resignFirstResponder()
     }
     
     func tableViewDidScroll(scrollView: UIScrollView) {
@@ -352,20 +346,10 @@ class EventsViewController: UIViewController,
     
     // MARK: - Search Bar
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-//        focusSearchBar()
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-//        blurSearchBar()
-    }
-    
-    func focusSearchBar() {
-//        navigationItem.rightBarButtonItem = nil
-    }
-    
-    func blurSearchBar() {
         searchBarView.searchBar.resignFirstResponder()
-//        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
