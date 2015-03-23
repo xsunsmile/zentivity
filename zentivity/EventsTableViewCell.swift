@@ -19,9 +19,9 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var joinView: UIView!
-    @IBOutlet weak var joinLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var joinButton: UIButton!
     
     let dateFormatter = NSDateFormatter()
     var colors = ["#31b639", "#ffcf00", "#c61800", "1851ce"]
@@ -39,48 +39,14 @@ class EventsTableViewCell: BaseTableViewCell {
     func initSubviews() {
         if GoogleClient.sharedInstance.alreadyLogin() {
             if let currentUser = User.currentUser() {
-                let tapGR = UITapGestureRecognizer(target: self, action: "onJoinTap:")
-                tapGR.numberOfTapsRequired = 1
-                joinView.addGestureRecognizer(tapGR)
+                let borderWidth = CGFloat(1.0)
+                let borderColor = UIColor(rgba: "#efefef").CGColor
+                joinView.layer.borderColor = borderColor
+                joinView.layer.borderWidth = borderWidth
             }
         } else {
-            joinLabel.hidden = true
+            joinButton.hidden = true
         }
-        
-        var color = colors[Int(arc4random_uniform(UInt32(colors.count)))]
-        
-        let cornerRadius = CGFloat(3)
-        shadowView.layer.masksToBounds = true
-        shadowView.layer.cornerRadius = cornerRadius
-        
-        let borderWidth = CGFloat(1.0)
-        let borderColor = UIColor(rgba: "#efefef").CGColor
-        joinView.layer.borderColor = borderColor
-        joinView.layer.borderWidth = borderWidth
-//
-//        var rightBorder = CALayer()
-//        rightBorder.borderColor = borderColor
-//        rightBorder.frame = CGRect(x: joinView.frame.size.width - borderWidth, y: 0, width: borderWidth, height: joinView.frame.size.height)
-//        rightBorder.borderWidth = borderWidth
-//        
-//        var topBorder = CALayer()
-//        topBorder.borderColor = borderColor
-//        topBorder.frame = CGRect(x: 0, y: borderWidth, width: joinView.frame.size.width, height: borderWidth)
-//        topBorder.borderWidth = borderWidth
-//        
-//        joinView.layer.addSublayer(topBorder)
-//        joinView.layer.addSublayer(rightBorder)
-//        
-//        joinView.layer.masksToBounds = true
-//
-//        topBorder = CALayer()
-//        topBorder.borderColor = borderColor
-//        topBorder.frame = CGRect(x: 0, y: borderWidth, width: dateView.frame.size.width, height: borderWidth)
-//        topBorder.borderWidth = borderWidth
-//        
-//        dateView.layer.addSublayer(topBorder)
-//        
-//        dateView.layer.masksToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -90,8 +56,8 @@ class EventsTableViewCell: BaseTableViewCell {
     override func onDataSet(data: AnyObject!) {
         refresh()
     }
-    
-    func onJoinTap(tapGR: UITapGestureRecognizer) {
+
+    @IBAction func onJoinTapped(sender: AnyObject) {
         let event = data as Event
         
         if let currentUser = User.currentUser() {
@@ -103,29 +69,16 @@ class EventsTableViewCell: BaseTableViewCell {
             }
         }
     }
-
+    
     func toggleJoin() {
         let event = data as Event
         User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
             if state == kUserJoinEvent {
                 if success != nil {
-                    self.joinLabel.text = "Cancel"
-//                    UIAlertView(
-//                        title: "Great!",
-//                        message: "See you at the event :)",
-//                        delegate: self,
-//                        cancelButtonTitle: "OK"
-//                        ).show()
-                } else {
-//                    UIAlertView(
-//                        title: "Error",
-//                        message: "Unable to join event.",
-//                        delegate: self,
-//                        cancelButtonTitle: "Well damn..."
-//                        ).show()
+                    self.joinButton.setTitle("Cancel", forState: .Normal)
                 }
             } else {
-                self.joinLabel.text = "Join"
+                self.joinButton.setTitle("Join", forState: .Normal)
             }
         })
     }
@@ -160,11 +113,6 @@ class EventsTableViewCell: BaseTableViewCell {
         for c in event.categories {
             cati += (c as NSString) + " "
         }
-//        if !cati.isEmpty { categoryLabel.text = cati }
-        
-        if !event.descript.isEmpty {
-//            descriptionLabel.text = event.descript
-        }
         
         if event.locationString != nil {
             locationLabel.text = event.locationString
@@ -173,14 +121,12 @@ class EventsTableViewCell: BaseTableViewCell {
         }
         
         if event.ownedByUser(User.currentUser()) {
-            joinLabel.text = "Edit"
+            joinButton.setTitle("Edit", forState: .Normal)
         } else if event.userJoined(User.currentUser()) {
-            joinLabel.text = "Cancel"
+            joinButton.setTitle("Cancel", forState: .Normal)
         } else {
-            joinLabel.text = "Join"
+            joinButton.setTitle("Join", forState: .Normal)
         }
-        
-//        setNeedsDisplay()
     }
     
     func applyGradient() {

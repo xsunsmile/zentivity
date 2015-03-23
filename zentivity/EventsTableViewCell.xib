@@ -14,10 +14,10 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BBo-ml-uhn" id="zun-IF-icw">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ist-Bc-bWv" userLabel="ContainerView">
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ist-Bc-bWv" userLabel="ContainerView">
                         <rect key="frame" x="5" y="5" width="428" height="125"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-0A-fRG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-0A-fRG">
                                 <rect key="frame" x="0.0" y="0.0" width="153" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="149" id="K1o-9X-Y9H"/>
@@ -29,7 +29,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-FZ-OvX" userLabel="EventView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-FZ-OvX" userLabel="EventView">
                                 <rect key="frame" x="153" y="0.0" width="275" height="125"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Event name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-48-zof">
@@ -72,32 +72,34 @@
                                         <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rq-8v-yVw" userLabel="Join">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2rq-8v-yVw" userLabel="Join">
                                         <rect key="frame" x="88" y="92" width="100" height="25"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqM-vb-MxR">
-                                                <rect key="frame" x="37" y="4" width="28" height="17"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWt-1y-zzc">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
+                                                <state key="normal" title="Join">
+                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onJoinTapped:" destination="BBo-ml-uhn" eventType="touchUpInside" id="8cx-M9-Apc"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstItem="pqM-vb-MxR" firstAttribute="leading" secondItem="2rq-8v-yVw" secondAttribute="leading" constant="8" id="5Hj-PY-YXP"/>
-                                            <constraint firstAttribute="bottom" secondItem="pqM-vb-MxR" secondAttribute="bottom" constant="8" id="8iY-Ai-80N"/>
                                             <constraint firstAttribute="height" constant="25" id="BQA-rr-R5B"/>
+                                            <constraint firstItem="pWt-1y-zzc" firstAttribute="top" secondItem="2rq-8v-yVw" secondAttribute="top" id="CGS-li-o76"/>
+                                            <constraint firstItem="pWt-1y-zzc" firstAttribute="leading" secondItem="2rq-8v-yVw" secondAttribute="leading" id="CTi-ka-Mf5"/>
+                                            <constraint firstAttribute="trailing" secondItem="pWt-1y-zzc" secondAttribute="trailing" id="FwZ-q8-qQN"/>
                                             <constraint firstAttribute="width" constant="100" id="Mm6-ae-qzs"/>
-                                            <constraint firstAttribute="centerY" secondItem="pqM-vb-MxR" secondAttribute="centerY" id="ZMJ-gE-SPm"/>
-                                            <constraint firstAttribute="centerX" secondItem="pqM-vb-MxR" secondAttribute="centerX" id="Zgr-PN-6VZ"/>
                                             <constraint firstAttribute="width" constant="70" id="kW8-aS-8OV"/>
+                                            <constraint firstAttribute="bottom" secondItem="pWt-1y-zzc" secondAttribute="bottom" id="p1b-n7-KaU"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="kW8-aS-8OV"/>
-                                                <exclude reference="5Hj-PY-YXP"/>
-                                                <exclude reference="8iY-Ai-80N"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -190,12 +192,12 @@
                 <outlet property="eventDateLabel" destination="gXh-Gj-TdO" id="RnN-t1-ioI"/>
                 <outlet property="eventNameLabel" destination="Raq-48-zof" id="u1v-Fs-aGe"/>
                 <outlet property="gradientView" destination="PqU-FZ-OvX" id="LVo-6e-XJu"/>
-                <outlet property="joinLabel" destination="pqM-vb-MxR" id="CGh-JM-feX"/>
+                <outlet property="joinButton" destination="pWt-1y-zzc" id="waY-bJ-vEV"/>
                 <outlet property="joinView" destination="2rq-8v-yVw" id="Zbh-z4-dBi"/>
                 <outlet property="locationLabel" destination="spD-7X-N54" id="648-jU-mpX"/>
                 <outlet property="shadowView" destination="ist-Bc-bWv" id="zp9-nq-BdM"/>
             </connections>
-            <point key="canvasLocation" x="509" y="170"/>
+            <point key="canvasLocation" x="56" y="-66"/>
         </tableViewCell>
     </objects>
     <resources>
