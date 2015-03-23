@@ -31,6 +31,7 @@ class AppViewController: UIViewController {
         
         backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
         })
+        applyGradient()
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +59,7 @@ class AppViewController: UIViewController {
         ]
         
         gradientView.backgroundColor = UIColor.clearColor()
-        gradient.frame = gradientView.bounds
+        gradient.frame = view.bounds
         gradient.colors = arrayColors
         gradientView.layer.insertSublayer(gradient, atIndex: 0)
     }
