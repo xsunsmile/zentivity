@@ -18,7 +18,6 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     var isEditingStartDate = false
     var isEditingEndDate = false
     var event: Event?
-    
     weak var delegate: NewEventDelegate?
     
     @IBOutlet var eventTable: UITableView!
@@ -82,6 +81,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
 
         if event != nil {
+            println("hydrateView is called on viewDidLoad")
             hydrateView()
             return
         }
@@ -95,6 +95,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         navigationItem.title = "Edit event"
         createButton.title = "Save"
         
+        println("hydrateView with event \(event)")
         titleField.text = event?.title
         addressField.text = event?.locationString
         
