@@ -170,7 +170,13 @@ class EventsViewController: UIViewController,
                     self.refreshControl.endRefreshing()
                     
                     if events.count > 0 {
-                        self.baseTable.datasource = events
+                        let filterdEvents = NSMutableArray()
+                        for e in events {
+                            if !e.ownedByUser(currentUser) {
+                                filterdEvents.addObject(e)
+                            }
+                        }
+                        self.baseTable.datasource = filterdEvents
                         self.tableView.reloadData()
                     } else {
                         self.showEmptyListView("You have not join any event yet")
@@ -214,7 +220,21 @@ class EventsViewController: UIViewController,
             if events != nil {
                 self.removeEmptyListView()
                 
-                self.datasource = events!
+                let filterdEvents = NSMutableArray()
+                
+                if let currentUser = User.currentUser() {
+                    for e in events! {
+                        if !e.ownedByUser(currentUser) && !e.userJoined(currentUser) {
+                            filterdEvents.addObject(e)
+                        }
+                    }
+                } else {
+                    for e in events! {
+                        filterdEvents.addObject(e)
+                    }
+                }
+                
+                self.datasource = filterdEvents
                 self.baseTable.datasource = self.datasource
                 self.tableView.reloadData()
             } else {
@@ -260,6 +280,7 @@ class EventsViewController: UIViewController,
     }
     
     func didCreateNewEvent(event: Event) {
+        println("added new event refresh...")
         self.baseTable.datasource.insert(event, atIndex: 0)
         self.tableView.reloadData()
     }
@@ -419,7 +440,6 @@ class EventsViewController: UIViewController,
             var vc = segue.destinationViewController as NewEventViewController
             vc.delegate = self
             if let event = sender as? Event {
-                println("send event for edit: \(event)")
                 vc.event = event
             }
         }
