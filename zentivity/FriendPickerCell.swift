@@ -9,7 +9,6 @@
 import UIKit
 
 class FriendPickerCell: UITableViewCell {
-    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     var user: User? { didSet { handleUserDidSet() } }
     var selectionStatus: Bool = false { didSet { setSelectionStyle() } }
@@ -26,7 +25,6 @@ class FriendPickerCell: UITableViewCell {
     }
     
     func handleUserDidSet() {
-        //        profileImage.image = user?.profilePic
         nameLabel.text = user?.name
         setNeedsDisplay()
     }

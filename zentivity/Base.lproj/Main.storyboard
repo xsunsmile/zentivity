@@ -1384,24 +1384,20 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sd3-Af-fXR" id="TkY-Ff-tJY">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="default-user" translatesAutoresizingMaskIntoConstraints="NO" id="TTx-vM-K2O">
-                                                    <rect key="frame" x="8" y="8" width="35" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="35" id="Q4Q-SM-fjP"/>
-                                                        <constraint firstAttribute="height" constant="35" id="SML-ms-EDc"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Eric Huang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOR-BR-20P">
-                                                    <rect key="frame" x="51" y="15" width="261" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eric Huang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOR-BR-20P">
+                                                    <rect key="frame" x="8" y="15" width="85" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tOR-BR-20P" firstAttribute="leading" secondItem="TkY-Ff-tJY" secondAttribute="leading" constant="8" id="SDA-n6-Evt"/>
+                                                <constraint firstAttribute="centerY" secondItem="tOR-BR-20P" secondAttribute="centerY" id="xll-Xe-sOP"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="tOR-BR-20P" id="lo6-Sf-2lh"/>
-                                            <outlet property="profileImage" destination="TTx-vM-K2O" id="nz6-f2-cjY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1463,7 +1459,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="default-user" width="50" height="50"/>
         <image name="fakeCover" width="1230" height="638"/>
         <image name="hands" width="837" height="643"/>
         <image name="noPhoto" width="120" height="120"/>
