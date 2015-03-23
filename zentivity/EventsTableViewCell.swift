@@ -7,6 +7,11 @@
 //
 
 import UIKit
+protocol EventsTableViewCellDelegate: class {
+    func editEvent(event: Event)
+}
+
+var kEditEventNotification = "kEditEventNotification"
 
 class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventNameLabel: UILabel!
@@ -21,6 +26,7 @@ class EventsTableViewCell: BaseTableViewCell {
     let dateFormatter = NSDateFormatter()
     var colors = ["#31b639", "#ffcf00", "#c61800", "1851ce"]
     var appliedGradient = false
+    weak var delegate: EventsTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -84,8 +90,15 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func onJoinTap(tapGR: UITapGestureRecognizer) {
+        let event = data as Event
+        
         if let currentUser = User.currentUser() {
-            toggleJoin()
+            if event.ownedByUser(currentUser) {
+                delegate?.editEvent(event)
+                NSNotificationCenter.defaultCenter().postNotificationName(kEditEventNotification, object: nil, userInfo: ["event": event])
+            } else {
+                toggleJoin()
+            }
         }
     }
 

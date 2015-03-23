@@ -36,9 +36,13 @@ class UserProfileViewController: UIViewController,
             return
         }
  
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
         initSubviews()
         refresh()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,11 +106,12 @@ class UserProfileViewController: UIViewController,
         tableView.reloadData()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
+//    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+//        return UIStatusBarStyle.LightContent
+//    }
     
     override func prefersStatusBarHidden() -> Bool {
+        println("Hide status bar on Profile")
         return true
     }
     

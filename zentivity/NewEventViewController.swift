@@ -17,6 +17,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     var dateFormatter = NSDateFormatter()
     var isEditingStartDate = false
     var isEditingEndDate = false
+    var event: Event?
     
     weak var delegate: NewEventDelegate?
     

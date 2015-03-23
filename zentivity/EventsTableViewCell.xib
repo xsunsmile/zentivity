@@ -101,7 +101,7 @@
                                         </variation>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="2rq-8v-yVw" secondAttribute="trailing" id="1be-Bt-rDK"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Raq-48-zof" secondAttribute="trailing" constant="8" id="2qb-Zu-z8I"/>

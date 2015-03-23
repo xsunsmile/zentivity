@@ -13,6 +13,7 @@ protocol AppViewControllerDelegate : class {
 
 class AppViewController: UIViewController {
     
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var loginView: LoginView!
     weak var delegate: AppViewControllerDelegate?
     
@@ -26,6 +27,9 @@ class AppViewController: UIViewController {
         loginView.backgroundColor = UIColor.clearColor()
         loginView.buttonBackgroundColor = UIColor(rgba: "#dd4b39")
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
+        backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
+        })
     }
     
     override func didReceiveMemoryWarning() {

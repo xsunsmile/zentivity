@@ -46,6 +46,8 @@ class EventsViewController: UIViewController,
         
         hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "editEvent:", name: kEditEventNotification, object: nil)
+        
         createRefreshControl()
         initSubviews()
         refresh(true)
@@ -201,7 +203,7 @@ class EventsViewController: UIViewController,
                     }
                 } else {
                     println("failed to list up admin events: \(error)")
-                    self.showEmptyListView(nil)
+                    self.showEmptyListView("refresh")
                 }
             })
         }
@@ -217,7 +219,7 @@ class EventsViewController: UIViewController,
                 self.tableView.reloadData()
             } else {
                 println("failed to list all events")
-                self.showEmptyListView(nil)
+                self.showEmptyListView("refresh")
             }
             
             self.hud?.dismiss()
@@ -284,20 +286,6 @@ class EventsViewController: UIViewController,
         default:
             currentSearchString = ""
             refreshLatestEventsList(true)
-        }
-    }
-    
-    // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "viewEventDetailSegue" {
-            var vc = segue.destinationViewController as EventDetailViewController
-            var data = baseTable.datasource as [Event]
-            var index = tableView.indexPathForSelectedRow()?.row
-            
-            vc.event = data[index!]
-        } else if segue.identifier == "" {
-            var vc = segue.destinationViewController as NewEventViewController
-            vc.delegate = self
         }
     }
     
@@ -413,5 +401,27 @@ class EventsViewController: UIViewController,
     
     func onSearchFilterPress() {
         performSegueWithIdentifier("showSearchFilter", sender: self)
+    }
+    
+    func editEvent(notification: NSNotification) {
+        performSegueWithIdentifier("createEvent", sender: notification.userInfo!["event"])
+    }
+    
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "viewEventDetailSegue" {
+            var vc = segue.destinationViewController as EventDetailViewController
+            var data = baseTable.datasource as [Event]
+            var index = tableView.indexPathForSelectedRow()?.row
+            
+            vc.event = data[index!]
+        } else if segue.identifier == "createEvent" {
+            var vc = segue.destinationViewController as NewEventViewController
+            vc.delegate = self
+            if let event = sender as? Event {
+                println("send event for edit: \(event)")
+                vc.event = event
+            }
+        }
     }
 }
