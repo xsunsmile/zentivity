@@ -44,6 +44,8 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     
     var friendPickerVC: FriendPickerVC!
     
+    @IBOutlet weak var createButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,6 +55,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         setup()
+
         friendPickerVC = storyboard?.instantiateViewControllerWithIdentifier("FriendPickerVC") as FriendPickerVC
         friendPickerVC.delegate = self
         invitedCollection.delegate = self
@@ -77,6 +80,35 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         photosCollection.dataSource = self
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+
+        if event != nil {
+            hydrateView()
+            return
+        }
+
+        updateDateLabelWithDate(startTimeLabel, date: startTimePicker.date)
+        endTimePicker.setDate(startTimePicker.date.dateByAddingTimeInterval(60*60*1), animated: false)
+        updateDateLabelWithDate(endTimeLabel, date: endTimePicker.date)
+    }
+
+    func hydrateView() {
+        navigationItem.title = "Edit event"
+        createButton.title = "Save"
+        
+        titleField.text = event?.title
+        addressField.text = event?.locationString
+        
+        let startTime = event?.startTime
+        let endTime = event?.endTime
+        startTimePicker.setDate(startTime!, animated: true)
+        endTimePicker.setDate(endTime!, animated: true)
+        startTimeLabel.text = dateFormatter.stringFromDate(startTime!)
+        endTimeLabel.text = dateFormatter.stringFromDate(endTime!)
+        descriptionField.text = event?.descript
+        descriptionLabel.hidden = true
+        
+//        photos = event?.photos as [UIImage]
+//        invitedUsernames = NSMutableArray(array: (event?.invitedUsernames)!)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -130,26 +162,42 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         var state = true
         
         if isEditingStartDate { state = false }
+        else if startTimeLabel.text == "--" {
+            updateDateLabelWithDate(startTimeLabel, date: startTimePicker.date)
+        }
         
         view.endEditing(true)
         isEditingStartDate = state
         isEditingEndDate = false
-        eventTable.beginUpdates()
-        eventTable.reloadData()
-        eventTable.endUpdates()
+
+        updateTable()
     }
     
     @IBAction func endDateCellTapped(sender: UITapGestureRecognizer) {
         var state = true
         
         if isEditingEndDate { state = false }
+        else if startTimeLabel.text == "--" {
+            updateDateLabelWithDate(endTimeLabel, date: endTimePicker.date)
+        }
         
         view.endEditing(true)
         isEditingStartDate = false
         isEditingEndDate = state
+
+        updateTable()
+    }
+
+    func updateTable() {
         eventTable.beginUpdates()
         eventTable.reloadData()
         eventTable.endUpdates()
+    }
+
+    func hideAllDatePickers() {
+        isEditingStartDate = false
+        isEditingEndDate = false
+        updateTable()
     }
     
     @IBAction func onStartDateChanged(sender: UIDatePicker) {
@@ -167,15 +215,21 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     
     @IBAction func onDescriptionFieldTapped(sender: UITapGestureRecognizer) {
         descriptionLabel.hidden = true
+        hideAllDatePickers()
         descriptionField.becomeFirstResponder()
     }
     
     @IBAction func onTableTapped(sender: AnyObject) {
         view.endEditing(true)
+        hideAllDatePickers()
     }
     
     @IBAction func onCreate(sender: UIBarButtonItem) {
-        var event = Event()
+        var event: Event!
+        
+        if self.event != nil { event = self.event }
+        else { event = Event() }
+        
         event.title = titleField.text
         event.locationString = addressField.text
 //        event.contactNumber = PFUser.currentUser().contactNumber
