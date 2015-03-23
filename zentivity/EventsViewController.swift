@@ -400,12 +400,14 @@ class EventsViewController: UIViewController,
                 self.titleView.addSubview(self.titleLabel)
                 
                 self.searchButton?.setBackgroundImage(UIImage(named: "search"), forState: .Normal)
+                self.searchBarView.searchBar.resignFirstResponder()
                 self.searchIsOn = false
             } else {
                 self.titleLabel.removeFromSuperview()
                 self.titleView.addSubview(self.searchBarView)
                 
                 self.searchButton?.setBackgroundImage(UIImage(named: "cross"), forState: .Normal)
+                self.searchBarView.searchBar.becomeFirstResponder()
                 self.searchIsOn = true
             }
         }) { (completed) -> Void in
