@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting item name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7e-1I-HSI">
-                        <rect key="frame" x="80" y="20.5" width="151.5" height="21.5"/>
+                        <rect key="frame" x="80" y="21" width="152" height="22"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -27,7 +27,7 @@
                         </constraints>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="JBn-Zh-B1b" firstAttribute="bottom" secondItem="b7e-1I-HSI" secondAttribute="bottom" id="Bts-JF-P7Z"/>
                     <constraint firstAttribute="centerY" secondItem="JBn-Zh-B1b" secondAttribute="centerY" id="FMo-we-3Nc"/>

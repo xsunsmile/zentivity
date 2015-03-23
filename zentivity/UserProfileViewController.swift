@@ -88,16 +88,16 @@ class UserProfileViewController: UIViewController,
                 self.profileContactInfo.text = currentUser.username
                 
                 datasource = [
-                    ["icon": "ListEvents", "title": "New events", "action": "listNewEvents"],
-                    ["icon": "addEvent", "title": "Add an event", "action": "addEvent"],
+                    ["icon": "ListEvents", "title": "Events", "action": "listNewEvents"],
+                    ["icon": "addEvent", "title": "Host an event", "action": "addEvent"],
                     ["icon": "logoutBlack", "title": "Log Out", "action": "logOut"]
                 ]
             }
         } else {
             println("Switch menu to login")
             datasource = [
-                ["icon": "ListEvents", "title": "New events", "action": "listNewEvents"],
-                ["icon": "addEvent", "title": "Add an event", "action": "addEvent"],
+                ["icon": "ListEvents", "title": "Events", "action": "listNewEvents"],
+                ["icon": "addEvent", "title": "Host an event", "action": "addEvent"],
                 ["icon": "login", "title": "Log In", "action": "logOut"]
             ]
         }

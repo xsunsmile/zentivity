@@ -22,8 +22,8 @@ class EventsViewController: UIViewController,
     var datasource: [AnyObject] = []
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
-    let cellHeight = CGFloat(120)
-    let menuTitles = ["New", "Hosting", "Attending"]
+    let cellHeight = CGFloat(150)
+    let menuTitles = ["New", "Attending", "Hosting"]
     var rightBarButtonItem: UIBarButtonItem!
     
     var hud: JGProgressHUD?
@@ -290,14 +290,14 @@ class EventsViewController: UIViewController,
 
         self.removeEmptyListView()
         switch(control.selectedSegmentIndex) {
-        case 1:
+        case 2:
             currentSearchString = "admin"
             if let currentUser = User.currentUser() {
                 refreshAdminEventsList(true)
             } else {
                 presentAuthModal()
             }
-        case 2:
+        case 1:
             currentSearchString = "join"
             if let currentUser = User.currentUser() {
                 refreshJoinEventsList(true)

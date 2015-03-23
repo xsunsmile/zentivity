@@ -55,21 +55,23 @@ class EventsTableViewCell: BaseTableViewCell {
         
         let borderWidth = CGFloat(1.0)
         let borderColor = UIColor(rgba: "#efefef").CGColor
+        joinView.layer.borderColor = borderColor
+        joinView.layer.borderWidth = borderWidth
 //
 //        var rightBorder = CALayer()
 //        rightBorder.borderColor = borderColor
 //        rightBorder.frame = CGRect(x: joinView.frame.size.width - borderWidth, y: 0, width: borderWidth, height: joinView.frame.size.height)
 //        rightBorder.borderWidth = borderWidth
 //        
-        var topBorder = CALayer()
-        topBorder.borderColor = borderColor
-        topBorder.frame = CGRect(x: 0, y: borderWidth, width: joinView.frame.size.width, height: borderWidth)
-        topBorder.borderWidth = borderWidth
-        
-        joinView.layer.addSublayer(topBorder)
+//        var topBorder = CALayer()
+//        topBorder.borderColor = borderColor
+//        topBorder.frame = CGRect(x: 0, y: borderWidth, width: joinView.frame.size.width, height: borderWidth)
+//        topBorder.borderWidth = borderWidth
+//        
+//        joinView.layer.addSublayer(topBorder)
 //        joinView.layer.addSublayer(rightBorder)
 //        
-        joinView.layer.masksToBounds = true
+//        joinView.layer.masksToBounds = true
 //
 //        topBorder = CALayer()
 //        topBorder.borderColor = borderColor

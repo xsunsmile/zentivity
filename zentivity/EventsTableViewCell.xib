@@ -15,10 +15,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ist-Bc-bWv" userLabel="ContainerView">
-                        <rect key="frame" x="5" y="5" width="428" height="124.5"/>
+                        <rect key="frame" x="5" y="5" width="428" height="125"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-0A-fRG">
-                                <rect key="frame" x="0.0" y="0.0" width="152.5" height="124.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="153" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="149" id="K1o-9X-Y9H"/>
                                     <constraint firstAttribute="width" secondItem="nfh-0A-fRG" secondAttribute="height" multiplier="182:149" id="M1U-ig-qS0"/>
@@ -30,7 +30,7 @@
                                 </variation>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-FZ-OvX" userLabel="EventView">
-                                <rect key="frame" x="152" y="0.0" width="275.5" height="124.5"/>
+                                <rect key="frame" x="153" y="0.0" width="275" height="125"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Event name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-48-zof">
                                         <rect key="frame" x="8" y="8" width="72" height="16"/>
@@ -47,7 +47,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXh-Gj-TdO">
-                                        <rect key="frame" x="31" y="32" width="25" height="14.5"/>
+                                        <rect key="frame" x="31" y="32" width="25" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -67,27 +67,28 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="165 Eighth Street San Francisco, CA 94103" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spD-7X-N54" userLabel="location">
-                                        <rect key="frame" x="31" y="49.5" width="207" height="29"/>
+                                        <rect key="frame" x="31" y="50" width="207" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rq-8v-yVw" userLabel="Join">
-                                        <rect key="frame" x="0.0" y="101.5" width="267.5" height="15"/>
+                                        <rect key="frame" x="88" y="92" width="100" height="25"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqM-vb-MxR">
-                                                <rect key="frame" x="120" y="-1.5" width="28" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqM-vb-MxR">
+                                                <rect key="frame" x="37" y="4" width="28" height="17"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="pqM-vb-MxR" firstAttribute="leading" secondItem="2rq-8v-yVw" secondAttribute="leading" constant="8" id="5Hj-PY-YXP"/>
                                             <constraint firstAttribute="bottom" secondItem="pqM-vb-MxR" secondAttribute="bottom" constant="8" id="8iY-Ai-80N"/>
-                                            <constraint firstAttribute="height" constant="15" id="BQA-rr-R5B"/>
+                                            <constraint firstAttribute="height" constant="25" id="BQA-rr-R5B"/>
+                                            <constraint firstAttribute="width" constant="100" id="Mm6-ae-qzs"/>
                                             <constraint firstAttribute="centerY" secondItem="pqM-vb-MxR" secondAttribute="centerY" id="ZMJ-gE-SPm"/>
                                             <constraint firstAttribute="centerX" secondItem="pqM-vb-MxR" secondAttribute="centerX" id="Zgr-PN-6VZ"/>
                                             <constraint firstAttribute="width" constant="70" id="kW8-aS-8OV"/>
@@ -101,7 +102,7 @@
                                         </variation>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="2rq-8v-yVw" secondAttribute="trailing" id="1be-Bt-rDK"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Raq-48-zof" secondAttribute="trailing" constant="8" id="2qb-Zu-z8I"/>
@@ -116,6 +117,7 @@
                                     <constraint firstItem="by3-k6-MYs" firstAttribute="top" secondItem="WeP-NE-YC7" secondAttribute="bottom" constant="3" id="Hfm-Nr-xdN"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="2rq-8v-yVw" secondAttribute="trailing" id="LnY-Xc-Kp8"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gXh-Gj-TdO" secondAttribute="trailing" constant="8" id="OZD-sg-Fff"/>
+                                    <constraint firstAttribute="centerX" secondItem="2rq-8v-yVw" secondAttribute="centerX" id="QKs-0c-wo3"/>
                                     <constraint firstItem="WeP-NE-YC7" firstAttribute="leading" secondItem="Raq-48-zof" secondAttribute="leading" id="Qrb-Uu-ecv"/>
                                     <constraint firstItem="gXh-Gj-TdO" firstAttribute="leading" secondItem="WeP-NE-YC7" secondAttribute="trailing" constant="8" id="R9a-FG-hjD"/>
                                     <constraint firstItem="Raq-48-zof" firstAttribute="leading" secondItem="PqU-FZ-OvX" secondAttribute="leading" constant="8" id="Tj0-Lu-v78"/>
@@ -139,6 +141,8 @@
                                         <exclude reference="vwV-ov-Ssk"/>
                                         <exclude reference="D49-Wa-LVH"/>
                                         <exclude reference="1be-Bt-rDK"/>
+                                        <exclude reference="LnY-Xc-Kp8"/>
+                                        <exclude reference="oGZ-AK-l86"/>
                                     </mask>
                                 </variation>
                             </view>
