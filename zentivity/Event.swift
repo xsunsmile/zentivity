@@ -138,4 +138,16 @@ class Event : PFObject, PFSubclassing {
     func getTitle() -> NSString {
         return title.stringByReplacingOccurrencesOfString("\n", withString: "", options: nil, range: nil)
     }
+    
+    func saveWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
+        self.saveInBackgroundWithBlock { (success, error) -> Void in
+            completion(success: success, error: error)
+        }
+    }
+    
+    func destroyWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
+        self.deleteInBackgroundWithBlock { (success, error) -> Void in
+            completion(success: success, error: error)
+        }
+    }
 }
