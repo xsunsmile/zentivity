@@ -18,13 +18,11 @@ class ContainerViewController: UIViewController,
     var mainViewRightPos: CGFloat!
     var mainViewCurrentPos: CGFloat!
     var mainViewXTranslation: CGFloat!
-    var eventsVC: EventsViewController!
     var menuVC: UserProfileViewController! // UserProfileViewController!
-    var currentViewController: UIViewController!
-    var addEventVC: NewEventViewController!
-    var loginVC: AppViewController!
+    var currentViewControllerName: NSString!
     var menuButton: UIButton!
     var menuIsOpen = false
+    var mainNVC: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,17 +36,8 @@ class ContainerViewController: UIViewController,
         mainViewLeftPos = view.center.x + view.bounds.width - 60.0
         mainViewRightPos = view.center.x
         
-        menuVC = storyboard?.instantiateViewControllerWithIdentifier("UserProfileViewController") as UserProfileViewController // UserProfileViewController
+        menuVC = storyboard?.instantiateViewControllerWithIdentifier("UserProfileViewController") as UserProfileViewController
         menuVC.delegate = self
-        
-        eventsVC = storyboard?.instantiateViewControllerWithIdentifier("EventsViewController") as EventsViewController
-        addEventVC = storyboard?.instantiateViewControllerWithIdentifier("NewEventViewController") as NewEventViewController
-        
-        addEventVC.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
-        loginVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as AppViewController
-    
-        loginVC.delegate = self
-        loginVC.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         
         mainView.layer.shadowColor = UIColor.blackColor().CGColor
         mainView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
@@ -75,37 +64,31 @@ class ContainerViewController: UIViewController,
     }
     
     func initListNewEventsView() {
-//        let hamburgerImage = UIImage(named: "menu_slim")
-//        let frame = CGRectMake(-10, 0, 18, 18)
-//        let menuButton = UIButton(frame: frame)
-//        menuButton.setBackgroundImage(hamburgerImage, forState: .Normal)
-//        menuButton.addTarget(self, action: "toggleMenu", forControlEvents: .TouchDown)
-        eventsVC.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
-        
-        switchMainViewTo(eventsVC, hasNav: true)
+        switchMainViewTo("EventsViewController", hasNav: true)
     }
     
-    func switchMainViewTo(controller: UIViewController, hasNav: Bool) {
+    func switchMainViewTo(controllerName: NSString, hasNav: Bool) {
         removeCurrentViewController()
         
-        var mainNVC = controller
+        mainNVC = storyboard?.instantiateViewControllerWithIdentifier(controllerName) as? UIViewController
+        println("add burger menu icon")
+        mainNVC!.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         if hasNav {
-            mainNVC = UINavigationController(rootViewController: controller)
+            mainNVC = UINavigationController(rootViewController: mainNVC!)
         }
         
-        self.addChildViewController(mainNVC)
-        self.mainView.addSubview(mainNVC.view)
-        mainNVC.view.frame = mainView.bounds
-        mainNVC.didMoveToParentViewController(self)
+        self.addChildViewController(mainNVC!)
+        self.mainView.addSubview(mainNVC!.view)
+        mainNVC!.view.frame = mainView.bounds
+        mainNVC!.didMoveToParentViewController(self)
         
-        currentViewController = controller
+        currentViewControllerName = controllerName
     }
     
     func removeCurrentViewController() {
-        if currentViewController != nil {
-            
-            var vc = currentViewController
-            if let nvc = currentViewController.navigationController {
+        if currentViewControllerName != nil {
+            var vc = mainNVC!
+            if let nvc = mainNVC!.navigationController {
                 vc = nvc
             }
             vc.willMoveToParentViewController(nil)
@@ -159,18 +142,22 @@ class ContainerViewController: UIViewController,
         hideMenu()
         switch(action) {
         case "listNewEvents":
-            if currentViewController != eventsVC {
-                switchMainViewTo(eventsVC, hasNav: true)
+            if currentViewControllerName != "EventsViewController" {
+                switchMainViewTo("EventsViewController", hasNav: true)
             }
             break
         case "addEvent":
-            if currentViewController != addEventVC {
-                switchMainViewTo(addEventVC, hasNav: true)
+            if currentViewControllerName != "NewEventViewController" {
+                switchMainViewTo("NewEventViewController", hasNav: true)
             }
             break
         case "logOut":
-            if currentViewController != loginVC {
-                switchMainViewTo(loginVC, hasNav: false)
+            if currentViewControllerName != "AppViewController" {
+                switchMainViewTo("AppViewController", hasNav: false)
+                if let loginVC = mainNVC as? AppViewController {
+                    println("assign delegate for loginVC")
+                    loginVC.delegate = self
+                }
             }
             break
         default:

@@ -423,9 +423,14 @@ class EventsViewController: UIViewController,
             
             vc.event = data[index!]
         } else if segue.identifier == "createEvent" {
+            if navigationController == nil {
+                println("navigation controller is missing")
+                return
+            }
             var vc = segue.destinationViewController as NewEventViewController
             vc.delegate = self
             if let event = sender as? Event {
+                println("send event for edit")
                 vc.event = event
             }
         }
