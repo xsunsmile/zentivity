@@ -335,6 +335,7 @@ class EventDetailViewController: UIViewController,
         }
         
         if sender.state == .Began {
+            println("staring dragging detail view")
             animateHeaderColorChanges(direction)
             dragStartingPoint = CGPoint(x: loc.x, y: loc.y)
             initialDragOffset = contentView.frame.origin.y
@@ -347,10 +348,15 @@ class EventDetailViewController: UIViewController,
             let newYPos = initialDragOffset + dy
             if newYPos >= 200 {
                 contentView.frame.origin.y = newYPos
+                let newImageYPos = initialImageDragOffset + dy/2
                 if currentImageView != nil {
-                    currentImageView?.frame.origin.y = initialImageDragOffset + dy/2
+                    if newImageYPos > 0 {
+                        println("Can not drag image down when y is 0")
+                    } else {
+                        currentImageView?.frame.origin.y = newImageYPos
+                    }
                 } else {
-                    println("current image view is empty during dragging")
+//                    println("current image view is empty during dragging")
                 }
             }
         } else if sender.state == .Ended {
@@ -368,7 +374,7 @@ class EventDetailViewController: UIViewController,
         contentTopConstraint.constant = dy
         eventHeaderView.setNeedsUpdateConstraints()
         
-        UIView.animateWithDuration(1.0, delay: delay, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
+        UIView.animateWithDuration(0.5, delay: delay, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
             self.view.layoutIfNeeded()
             
             if self.currentImageView != nil {
@@ -387,7 +393,7 @@ class EventDetailViewController: UIViewController,
         contentTopConstraint.constant = 200
         eventHeaderView.setNeedsUpdateConstraints()
         
-        UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
             self.view.layoutIfNeeded()
             
             if self.currentImageView != nil {
@@ -493,12 +499,15 @@ class EventDetailViewController: UIViewController,
     }
     
     @IBAction func onHeaderTap(sender: UITapGestureRecognizer) {
+        println("did tap detail view")
         let direction = detailsIsOpen ? "down" : "up"
         if detailsIsOpen {
+            println("Hide detail view")
             detailsIsOpen = false
             animateHeaderColorChanges(direction)
             animateHeaderViewDown(0)
         } else {
+            println("Show detail view")
             detailsIsOpen = true
             animateHeaderColorChanges(direction)
             animateHeaderViewUp()
