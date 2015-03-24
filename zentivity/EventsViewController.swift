@@ -172,8 +172,13 @@ class EventsViewController: UIViewController,
                                 filterdEvents.addObject(e)
                             }
                         }
-                        self.baseTable.datasource = filterdEvents
-                        self.tableView.reloadData()
+                        
+                        if filterdEvents.count > 0 {
+                            self.baseTable.datasource = filterdEvents
+                            self.tableView.reloadData()
+                        } else {
+                            self.showEmptyListView("You have not join any event yet", label: "Find an event")
+                        }
                     } else {
                         self.showEmptyListView("You have not join any event yet", label: "Find an event")
                     }
