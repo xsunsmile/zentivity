@@ -76,7 +76,7 @@ class TransitionDismissalAnimator: NSObject,
                 animationRatio = (location.y - self.panLocationStart) / (CGRectGetHeight(modalView!.view.bounds)/2)
                 updateInteractiveTransition(animationRatio)
             } else if pan.state == .Ended {
-                if animationRatio > 0.2 {
+                if animationRatio > 0.46 || velocity.y > 100 {
                     finishInteractiveTransition()
                 } else {
                     cancelInteractiveTransition()

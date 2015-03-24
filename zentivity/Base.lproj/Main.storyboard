@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OV4-jZ-hgO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="OV4-jZ-hgO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -356,6 +356,9 @@
                                     <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hidden" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onQuit:" destination="TSa-KR-ocb" eventType="touchUpInside" id="aOM-ru-Fdf"/>
                                 </connections>
@@ -380,6 +383,7 @@
                     <navigationItem key="navigationItem" title="Event Details" id="Fff-Uf-KZz"/>
                     <connections>
                         <outlet property="addressLabel" destination="z1P-z3-bEa" id="sKG-vz-Tox"/>
+                        <outlet property="closeButton" destination="9WG-FS-dAN" id="Wg1-qc-LY1"/>
                         <outlet property="contentTopConstraint" destination="EbM-hb-i1c" id="toH-BZ-W03"/>
                         <outlet property="contentView" destination="VqE-LX-z6F" id="eK2-Xa-rCG"/>
                         <outlet property="eventDateLabel" destination="2LU-Lt-GOG" id="vwp-FW-btD"/>

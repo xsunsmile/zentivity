@@ -31,6 +31,7 @@ class EventDetailViewController: UIViewController,
     @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var eventDescription: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
     
     @IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
     
@@ -47,6 +48,7 @@ class EventDetailViewController: UIViewController,
     var gestureWasHandled = false
     var pointCount = 0
     var startPoint: CGPoint!
+    var modalPanGuesture: UIPanGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +82,9 @@ class EventDetailViewController: UIViewController,
         imageShadowView.layer.insertSublayer(gradient, atIndex: 0)
         
         imageScrollView.delegate = self
+        if modalPanGuesture != nil {
+            imageScrollView.addGestureRecognizer(modalPanGuesture!)
+        }
         
         imagePageControl.hidden = true
         imagePageControl.currentPage = 0
@@ -513,7 +518,7 @@ class EventDetailViewController: UIViewController,
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent;
+        return UIStatusBarStyle.LightContent
     }
     
     @IBAction func onCall(sender: UIButton) {
