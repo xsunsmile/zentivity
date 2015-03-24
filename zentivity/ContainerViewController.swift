@@ -48,13 +48,13 @@ class ContainerViewController: UIViewController,
         initListNewEventsView()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return false
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
+//    override func prefersStatusBarHidden() -> Bool {
+//        return false
+//    }
+//    
+//    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+//        return UIStatusBarStyle.LightContent
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

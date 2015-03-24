@@ -48,6 +48,9 @@
 		935B4C031AAD206500D3425F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935B4C021AAD206500D3425F /* BaseTableViewCell.swift */; };
 		936FCC231AC12A4200A5F438 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936FCC221AC12A4200A5F438 /* NavigationControllerDelegate.swift */; };
 		936FCC251AC12B4900A5F438 /* CircleTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936FCC241AC12B4900A5F438 /* CircleTransitionAnimator.swift */; };
+		936FCC271AC1384F00A5F438 /* TransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936FCC261AC1384F00A5F438 /* TransitionDelegate.swift */; };
+		936FCC291AC1388800A5F438 /* TransitionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936FCC281AC1388800A5F438 /* TransitionPresentationAnimator.swift */; };
+		936FCC2B1AC1391A00A5F438 /* TransitionDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936FCC2A1AC1391A00A5F438 /* TransitionDismissalAnimator.swift */; };
 		936FE7A71ABF7E820033B107 /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936FE7A61ABF7E820033B107 /* SearchFilterView.swift */; };
 		936FE7A91ABF7E970033B107 /* SearchFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936FE7A81ABF7E970033B107 /* SearchFilterView.xib */; };
 		937210D31AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937210D11AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift */; };
@@ -138,6 +141,9 @@
 		935B4C021AAD206500D3425F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		936FCC221AC12A4200A5F438 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
 		936FCC241AC12B4900A5F438 /* CircleTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionAnimator.swift; sourceTree = "<group>"; };
+		936FCC261AC1384F00A5F438 /* TransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionDelegate.swift; sourceTree = "<group>"; };
+		936FCC281AC1388800A5F438 /* TransitionPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionPresentationAnimator.swift; sourceTree = "<group>"; };
+		936FCC2A1AC1391A00A5F438 /* TransitionDismissalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionDismissalAnimator.swift; sourceTree = "<group>"; };
 		936FE7A61ABF7E820033B107 /* SearchFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
 		936FE7A81ABF7E970033B107 /* SearchFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchFilterView.xib; sourceTree = "<group>"; };
 		937210D11AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -223,10 +229,10 @@
 		5425DED51AA8C9E0001F5CD5 /* zentivity */ = {
 			isa = PBXGroup;
 			children = (
-				936FCC211AC129FD00A5F438 /* Transitions */,
 				5425DEDC1AA8C9E0001F5CD5 /* Main.storyboard */,
 				5425DED81AA8C9E0001F5CD5 /* AppDelegate.swift */,
 				5425DEFB1AA8CB10001F5CD5 /* View Controllers */,
+				936FCC211AC129FD00A5F438 /* Transitions */,
 				5425DEFA1AA8CB0A001F5CD5 /* Views */,
 				935B4BFB1AAD132D00D3425F /* CoreExtensions */,
 				93A457791AB12F6F009F3A5C /* Utils */,
@@ -360,6 +366,9 @@
 			children = (
 				936FCC221AC12A4200A5F438 /* NavigationControllerDelegate.swift */,
 				936FCC241AC12B4900A5F438 /* CircleTransitionAnimator.swift */,
+				936FCC261AC1384F00A5F438 /* TransitionDelegate.swift */,
+				936FCC281AC1388800A5F438 /* TransitionPresentationAnimator.swift */,
+				936FCC2A1AC1391A00A5F438 /* TransitionDismissalAnimator.swift */,
 			);
 			name = Transitions;
 			sourceTree = "<group>";
@@ -577,6 +586,7 @@
 				938B75E21AB166DB00D225EF /* UserIconCollectionViewCell.swift in Sources */,
 				549113B81AA992A000000861 /* MenuView.swift in Sources */,
 				93A4577B1AB12F9E009F3A5C /* ImageUtils.swift in Sources */,
+				936FCC291AC1388800A5F438 /* TransitionPresentationAnimator.swift in Sources */,
 				545887F21AB6B5FD0027D31A /* PhotoCollectionViewCell.swift in Sources */,
 				936FCC231AC12A4200A5F438 /* NavigationControllerDelegate.swift in Sources */,
 				549113AA1AA98C9200000861 /* EventsTableViewCell.swift in Sources */,
@@ -589,6 +599,7 @@
 				549113AD1AA98DD000000861 /* MenuTableViewCell.swift in Sources */,
 				931567901AB6313100D279EF /* LocationUtils.swift in Sources */,
 				935B4BFF1AAD1B3200D3425F /* EventsViewController.swift in Sources */,
+				936FCC2B1AC1391A00A5F438 /* TransitionDismissalAnimator.swift in Sources */,
 				93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */,
 				686CE03F1ABF5C6700BA2BAD /* FriendPickerCell.swift in Sources */,
 				6820A6CD1AB930E40053E240 /* FilterViewController.swift in Sources */,
@@ -596,6 +607,7 @@
 				935B4BFD1AAD134D00D3425F /* UIColorExtension.swift in Sources */,
 				5425DED91AA8C9E0001F5CD5 /* AppDelegate.swift in Sources */,
 				687D787D1AACE92000E5605C /* Event.swift in Sources */,
+				936FCC271AC1384F00A5F438 /* TransitionDelegate.swift in Sources */,
 				936FE7A71ABF7E820033B107 /* SearchFilterView.swift in Sources */,
 				939540421AB2BD7700CF520A /* LabelCollectionReusableView.swift in Sources */,
 			);

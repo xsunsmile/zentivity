@@ -100,7 +100,6 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         navigationItem.title = "Edit event"
         createButton.title = "Save"
         
-        println("hydrateView with event \(event)")
         titleField.text = event?.title
         addressField.text = event?.locationString
         

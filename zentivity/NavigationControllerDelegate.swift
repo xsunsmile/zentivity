@@ -26,7 +26,8 @@ class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
             if self.navigationController?.viewControllers.count > 1 {
                 self.navigationController?.popViewControllerAnimated(true)
             } else {
-                self.navigationController?.topViewController.performSegueWithIdentifier("PushSegue", sender: nil)
+                // self.navigationController?.topViewController.performSegueWithIdentifier("PushSegue", sender: nil)
+                println("something should happen here")
             }
         case .Changed:
             var translation = gestureRecognizer.translationInView(self.navigationController!.view)

@@ -18,14 +18,16 @@ class EventsViewController: UIViewController,
 {
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    var baseTable: BaseTableView!
-    var datasource: [AnyObject] = []
+    
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(150)
     let menuTitles = ["New", "Attending", "Hosting"]
-    var rightBarButtonItem: UIBarButtonItem!
+    let viewTransitionDelegate = TransitionDelegate()
     
+    var baseTable: BaseTableView!
+    var datasource: [AnyObject] = []
+    var rightBarButtonItem: UIBarButtonItem!
     var hud: JGProgressHUD?
     var refreshControl: UIRefreshControl!
     var searchBarView: SearchFilterView!
@@ -61,7 +63,7 @@ class EventsViewController: UIViewController,
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.lt_reset()
+//        navigationController?.navigationBar.lt_reset()
     }
     
     func initNavBar() {
@@ -94,6 +96,7 @@ class EventsViewController: UIViewController,
         searchBarView.searchBar!.delegate = self
         
         navigationItem.titleView = titleView
+        navigationController?.navigationBar.backIndicatorImage = UIImage()
     }
     
     func initSubviews() {
@@ -334,28 +337,28 @@ class EventsViewController: UIViewController,
     }
     
     func tableViewDidScroll(scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y;
-        if (offsetY > 0) {
-            if (offsetY >= 44) {
-                setNavigationBarTransformProgress(1)
-                navigationController?.navigationBar.backIndicatorImage = UIImage()
-            } else {
-                setNavigationBarTransformProgress(CGFloat(offsetY) / CGFloat(44))
-            }
-        } else {
-            setNavigationBarTransformProgress(0)
-            navigationController?.navigationBar.backIndicatorImage = UIImage()
-            navigationController?.navigationBar.lt_reset()
-        }
+//        let offsetY = scrollView.contentOffset.y;
+//        
+//        if (offsetY > 0) {
+//            if (offsetY >= 44) {
+//                setNavigationBarTransformProgress(1)
+//            } else {
+//                setNavigationBarTransformProgress(CGFloat(offsetY) / CGFloat(44))
+//            }
+//        } else {
+//            setNavigationBarTransformProgress(0)
+//            navigationController?.navigationBar.backIndicatorImage = UIImage()
+//            navigationController?.navigationBar.lt_reset()
+//        }
     }
     
     func setNavigationBarTransformProgress(progress: CGFloat) {
-        navigationController?.navigationBar.lt_setTranslationY(-44 * progress)
-        navigationController?.navigationBar.lt_setContentAlpha(1-progress)
-        
-        menuView.transform = CGAffineTransformMakeTranslation(0, -44 * progress)
-        tableView.transform = CGAffineTransformMakeTranslation(0, -44 * progress)
-        tableView.frame.size.height = view.frame.height - tableView.frame.origin.y
+//        navigationController?.navigationBar.lt_setTranslationY(-44 * progress)
+//        navigationController?.navigationBar.lt_setContentAlpha(1-progress)
+//        
+//        menuView.transform = CGAffineTransformMakeTranslation(0, -44 * progress)
+//        tableView.transform = CGAffineTransformMakeTranslation(0, -44 * progress)
+//        tableView.frame.size.height = view.frame.height - tableView.frame.origin.y
     }
     
     // MARK: - Search Bar
@@ -441,6 +444,9 @@ class EventsViewController: UIViewController,
             var index = tableView.indexPathForSelectedRow()?.row
             
             vc.event = data[index!]
+            
+            vc.transitioningDelegate = viewTransitionDelegate
+            vc.modalPresentationStyle = .Custom
         } else if segue.identifier == "createEvent" {
             var vc = segue.destinationViewController as NewEventViewController
             vc.delegate = self
@@ -448,6 +454,8 @@ class EventsViewController: UIViewController,
                 println("send event for edit")
                 vc.event = event
             }
+//            let destinationViewController = segue.destinationViewController as DetailViewController
+//            destinationViewController.imageToDisplay = imageView.image
         }
     }
 }

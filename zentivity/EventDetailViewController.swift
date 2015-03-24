@@ -53,7 +53,7 @@ class EventDetailViewController: UIViewController,
     }
     
     override func viewWillAppear(animated: Bool) {
-        animateHeaderViewDown(0.2)
+        animateHeaderViewDown(1.0)
     }
     
     func initSubviews() {
