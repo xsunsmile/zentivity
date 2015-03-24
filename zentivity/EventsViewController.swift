@@ -118,7 +118,7 @@ class EventsViewController: UIViewController,
         
         segmentedMenu?.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
         segmentedMenu?.font = UIFont.boldSystemFontOfSize(14)
-        segmentedMenu?.backgroundColor = UIColor(rgba: "#fafafa").colorWithAlphaComponent(0.7)
+        segmentedMenu?.backgroundColor = UIColor(white: 1, alpha: 0.2)
         segmentedMenu?.selectedTextColor = UIColor(rgba: "#34b5e5")
         segmentedMenu?.textColor = UIColor(rgba: "#33373b")
         
