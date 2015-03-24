@@ -1,5 +1,5 @@
 #include "Pods-TURecipientBar.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/TURecipientBar" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/Bolts" "${PODS_ROOT}/Headers/Public/HMSegmentedControl" "${PODS_ROOT}/Headers/Public/JGProgressHUD" "${PODS_ROOT}/Headers/Public/LBBlurredImage" "${PODS_ROOT}/Headers/Public/LTNavigationBar" "${PODS_ROOT}/Headers/Public/Parse" "${PODS_ROOT}/Headers/Public/TURecipientBar" "${PODS_ROOT}/Headers/Public/pop"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/TURecipientBar" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AMScrollingNavbar" "${PODS_ROOT}/Headers/Public/Bolts" "${PODS_ROOT}/Headers/Public/HMSegmentedControl" "${PODS_ROOT}/Headers/Public/JGProgressHUD" "${PODS_ROOT}/Headers/Public/LBBlurredImage" "${PODS_ROOT}/Headers/Public/Parse" "${PODS_ROOT}/Headers/Public/TURecipientBar" "${PODS_ROOT}/Headers/Public/pop"
 OTHER_LDFLAGS = -ObjC
 PODS_ROOT = ${SRCROOT}

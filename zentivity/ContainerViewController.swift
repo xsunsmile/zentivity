@@ -43,7 +43,7 @@ class ContainerViewController: UIViewController,
         mainView.layer.shadowOffset = CGSizeMake(-0.5, 0.5)
         mainView.layer.shadowOpacity = 0.7
         mainView.layer.shadowRadius = 0.5
-
+        
         initMenuView()
         initListNewEventsView()
     }
@@ -73,12 +73,17 @@ class ContainerViewController: UIViewController,
     
     func switchMainViewTo(controllerName: NSString, hasNav: Bool) {
         removeCurrentViewController()
+        let nav = UINavigationController()
         
         mainNVC = storyboard?.instantiateViewControllerWithIdentifier(controllerName) as? UIViewController
         println("add burger menu icon")
         mainNVC!.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
+        
         if hasNav {
-            mainNVC = UINavigationController(rootViewController: mainNVC!)
+            nav.hidesBarsOnSwipe = true
+            nav.navigationBar.translucent = true
+            nav.pushViewController(mainNVC!, animated: false)
+            mainNVC = nav
         }
         
         self.addChildViewController(mainNVC!)

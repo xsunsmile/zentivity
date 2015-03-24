@@ -55,6 +55,10 @@ class EventsViewController: UIViewController,
         refresh(true)
     }
     
+    func swipeGesture(gesture: UIPanGestureRecognizer) {
+        println("hide bar pan detected")
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -114,7 +118,7 @@ class EventsViewController: UIViewController,
         
         segmentedMenu?.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
         segmentedMenu?.font = UIFont.boldSystemFontOfSize(14)
-        segmentedMenu?.backgroundColor = UIColor(rgba: "#fafafa")
+        segmentedMenu?.backgroundColor = UIColor(rgba: "#fafafa").colorWithAlphaComponent(0.7)
         segmentedMenu?.selectedTextColor = UIColor(rgba: "#34b5e5")
         segmentedMenu?.textColor = UIColor(rgba: "#33373b")
         

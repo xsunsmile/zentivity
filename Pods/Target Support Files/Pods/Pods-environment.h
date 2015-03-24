@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 1
 
+// AMScrollingNavbar
+#define COCOAPODS_POD_AVAILABLE_AMScrollingNavbar
+#define COCOAPODS_VERSION_MAJOR_AMScrollingNavbar 1
+#define COCOAPODS_VERSION_MINOR_AMScrollingNavbar 3
+#define COCOAPODS_VERSION_PATCH_AMScrollingNavbar 4
+
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1
@@ -71,12 +77,6 @@
 #define COCOAPODS_VERSION_MAJOR_LBBlurredImage 0
 #define COCOAPODS_VERSION_MINOR_LBBlurredImage 2
 #define COCOAPODS_VERSION_PATCH_LBBlurredImage 2
-
-// LTNavigationBar
-#define COCOAPODS_POD_AVAILABLE_LTNavigationBar
-#define COCOAPODS_VERSION_MAJOR_LTNavigationBar 2
-#define COCOAPODS_VERSION_MINOR_LTNavigationBar 0
-#define COCOAPODS_VERSION_PATCH_LTNavigationBar 0
 
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
