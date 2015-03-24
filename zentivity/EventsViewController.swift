@@ -434,6 +434,7 @@ class EventsViewController: UIViewController,
     
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        setNavigationBarTransformProgress(0)
         if segue.identifier == "viewEventDetailSegue" {
             var vc = segue.destinationViewController as EventDetailViewController
             var data = baseTable.datasource as [Event]
