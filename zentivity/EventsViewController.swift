@@ -338,6 +338,7 @@ class EventsViewController: UIViewController,
         if (offsetY > 0) {
             if (offsetY >= 44) {
                 setNavigationBarTransformProgress(1)
+                navigationController?.navigationBar.backIndicatorImage = UIImage()
             } else {
                 setNavigationBarTransformProgress(CGFloat(offsetY) / CGFloat(44))
             }
