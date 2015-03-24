@@ -42,7 +42,7 @@ class TransitionPresentationAnimator: NSObject,
                 CGRectGetWidth(toViewController.view.frame),
                 CGRectGetHeight(toViewController.view.frame))
         }) { (completed) -> Void in
-            fromViewController.view.transform = CGAffineTransformIdentity
+//            fromViewController.view.transform = CGAffineTransformIdentity
             transitionContext.completeTransition(completed)
         }
     }

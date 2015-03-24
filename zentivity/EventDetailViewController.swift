@@ -44,6 +44,9 @@ class EventDetailViewController: UIViewController,
     var didInitialAnimation = false
     var initialDragOffset = CGFloat(0)
     var initialImageDragOffset = CGFloat(0)
+    var gestureWasHandled = false
+    var pointCount = 0
+    var startPoint: CGPoint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -455,11 +458,7 @@ class EventDetailViewController: UIViewController,
         imageView.image = image
         imageView.clipsToBounds = true
         imageView.contentMode = UIViewContentMode.ScaleAspectFill
-        imageView.userInteractionEnabled = true
-        
-        let tapGR = UITapGestureRecognizer(target: self, action: "onImageTap:")
-        tapGR.numberOfTapsRequired = 1
-        imageView.addGestureRecognizer(tapGR)
+//        imageView.userInteractionEnabled = true
         
         imageScrollView.addSubview(imageView)
         imageScrollView.contentSize = CGSizeMake(imageWidth * CGFloat(numImages), imageHeight)
@@ -469,14 +468,12 @@ class EventDetailViewController: UIViewController,
         }
     }
     
-    func onImageTap(tap: UITapGestureRecognizer) {
-        if currentImageView != nil {
-            println("taped image")
-            let descriptionView = UIView(frame: currentImageView!.frame)
-            descriptionView.backgroundColor = UIColor.blackColor()
-        } else {
-            println("taped image current image is nil")
-        }
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        println("image view did end dragging")
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        println("image roll will begin dragging")
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -531,6 +528,10 @@ class EventDetailViewController: UIViewController,
         println("calling number \(number)")
         let phoneNumber = "tel://".stringByAppendingString(number!)
         UIApplication.sharedApplication().openURL(NSURL(string: phoneNumber)!)
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     /*

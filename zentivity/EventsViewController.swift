@@ -14,7 +14,8 @@ class EventsViewController: UIViewController,
                             UIScrollViewDelegate,
                             UISearchBarDelegate,
                             EmptyTableViewDelegate,
-                            SearchFilterViewDelegate
+                            SearchFilterViewDelegate,
+                            UIViewControllerTransitioningDelegate
 {
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -23,7 +24,7 @@ class EventsViewController: UIViewController,
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(150)
     let menuTitles = ["New", "Attending", "Hosting"]
-    let viewTransitionDelegate = TransitionDelegate()
+//    let viewTransitionDelegate = TransitionDelegate()
     
     var baseTable: BaseTableView!
     var datasource: [AnyObject] = []
@@ -42,6 +43,9 @@ class EventsViewController: UIViewController,
     var closeSearchButton: UIButton!
     var emptyTableView: EmptyTableView!
     var currentSearchString = ""
+    
+    let presentationAnimator = TransitionPresentationAnimator()
+    let dismissalAnimator = TransitionDismissalAnimator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -449,8 +453,23 @@ class EventsViewController: UIViewController,
             
             vc.event = data[index!]
             
-            vc.transitioningDelegate = viewTransitionDelegate
+            vc.transitioningDelegate = self
             vc.modalPresentationStyle = .Custom
+
+            let tapGR = UIPanGestureRecognizer(target: dismissalAnimator, action: "onModalPan:")
+            tapGR.delegate = vc
+            vc.view.addGestureRecognizer(tapGR)
+            dismissalAnimator.modalView = vc
+            
+//            dismissalAnimator.addPanGesture()
+            
+//            let animator = ZFModalTransitionAnimator(modalViewController: vc)
+//            animator.dragable = true
+//            animator.direction = ZFModalTransitonDirection.Bottom
+//            self.animator.setContentScrollView:detailViewController.scrollview
+
+//            vc.transitioningDelegate = animator
+//            vc.modalPresentationStyle = .Custom
         } else if segue.identifier == "createEvent" {
             var vc = segue.destinationViewController as NewEventViewController
             vc.delegate = self
@@ -461,5 +480,21 @@ class EventsViewController: UIViewController,
 //            let destinationViewController = segue.destinationViewController as DetailViewController
 //            destinationViewController.imageToDisplay = imageView.image
         }
+    }
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return presentationAnimator
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return dismissalAnimator
+    }
+    
+    func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return nil
+    }
+    
+    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return dismissalAnimator
     }
 }
