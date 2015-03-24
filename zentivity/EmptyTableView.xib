@@ -15,10 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="486" height="71"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVc-KR-ne2">
-                    <rect key="frame" x="0.0" y="0.0" width="486" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVc-KR-ne2">
+                    <rect key="frame" x="10" y="0.0" width="466" height="20.5"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.1998770382" green="0.21414750539999999" blue="0.23242094660000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86D-lM-fi1">
@@ -31,17 +31,28 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="86D-lM-fi1" secondAttribute="centerX" id="8MY-H2-MAn"/>
                 <constraint firstItem="dVc-KR-ne2" firstAttribute="top" secondItem="lem-qb-T8H" secondAttribute="top" id="Kpi-EF-C69"/>
                 <constraint firstItem="dVc-KR-ne2" firstAttribute="leading" secondItem="lem-qb-T8H" secondAttribute="leading" id="Rh7-Uf-IuY"/>
                 <constraint firstAttribute="trailing" secondItem="dVc-KR-ne2" secondAttribute="trailing" id="YGK-CO-5gc"/>
+                <constraint firstAttribute="trailing" secondItem="dVc-KR-ne2" secondAttribute="trailing" constant="10" id="Zza-i2-KNv"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="86D-lM-fi1" secondAttribute="bottom" constant="8" id="bm5-oq-m7Q"/>
                 <constraint firstAttribute="centerX" secondItem="dVc-KR-ne2" secondAttribute="centerX" id="dmB-4J-cap"/>
+                <constraint firstItem="86D-lM-fi1" firstAttribute="top" secondItem="dVc-KR-ne2" secondAttribute="bottom" constant="10" id="fvt-2A-4Px"/>
+                <constraint firstItem="dVc-KR-ne2" firstAttribute="leading" secondItem="lem-qb-T8H" secondAttribute="leading" constant="10" id="rRi-vk-55t"/>
                 <constraint firstItem="86D-lM-fi1" firstAttribute="top" secondItem="dVc-KR-ne2" secondAttribute="bottom" constant="10" id="ul2-Tw-jlI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Rh7-Uf-IuY"/>
+                    <exclude reference="YGK-CO-5gc"/>
+                    <exclude reference="dmB-4J-cap"/>
+                    <exclude reference="ul2-Tw-jlI"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="635" y="323.5"/>
         </view>
     </objects>

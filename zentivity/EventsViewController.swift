@@ -144,11 +144,6 @@ class EventsViewController: UIViewController,
     }
     
     func refresh(useHud: Bool) {
-        if useHud {
-            hud?.textLabel.text = "Loading events..."
-            hud?.showInView(self.view, animated: true)
-        }
-        
         if currentSearchString.isEmpty {
             refreshLatestEventsList(useHud)
         } else if currentSearchString == "admin" {
@@ -164,11 +159,12 @@ class EventsViewController: UIViewController,
                 hud?.textLabel.text = "Loading events..."
                 hud?.showInView(self.view, animated: true)
             }
+            
             currentUser.eventsWithCompletion("confirmedUsers", completion: { (events, error) -> () in
+                self.hud?.dismiss()
+                self.refreshControl.endRefreshing()
+                
                 if error == nil {
-                    self.hud?.dismiss()
-                    self.refreshControl.endRefreshing()
-                    
                     if events.count > 0 {
                         let filterdEvents = NSMutableArray()
                         for e in events {
@@ -179,11 +175,11 @@ class EventsViewController: UIViewController,
                         self.baseTable.datasource = filterdEvents
                         self.tableView.reloadData()
                     } else {
-                        self.showEmptyListView("You have not join any event yet")
+                        self.showEmptyListView("You have not join any event yet", label: "Find an event")
                     }
                 } else {
                     println("failed to list up confirmedUsers events: \(error)")
-                    self.showEmptyListView(nil)
+                    self.showEmptyListView("Seems like you do not have interenet connection.", label: "refresh")
                 }
             })
         }
@@ -197,61 +193,73 @@ class EventsViewController: UIViewController,
             }
 
             currentUser.eventsWithCompletion("admin", completion: { (events, error) -> () in
+                self.hud?.dismiss()
+                self.refreshControl.endRefreshing()
+                
                 if error == nil {
-                    self.hud?.dismiss()
-                    self.refreshControl.endRefreshing()
-                    
                     if events.count > 0 {
                         self.baseTable.datasource = events
                         self.tableView.reloadData()
                     } else {
-                        self.showEmptyListView("You do not host any event yet.")
+                        self.showEmptyListView("You do not host any event yet.", label: "Create a new event")
                     }
                 } else {
                     println("failed to list up admin events: \(error)")
-                    self.showEmptyListView("refresh")
+                    self.showEmptyListView("Seems like you do not have interenet connection.", label: "refresh")
                 }
             })
         }
     }
     
     func refreshLatestEventsList(useHud: Bool) {
+        if useHud {
+            hud?.textLabel.text = "Loading events..."
+            hud?.showInView(self.view, animated: true)
+        }
+        
         Event.listWithOptionsAndCompletion(filters) { (events, error) -> () in
-            if events != nil {
-                self.removeEmptyListView()
-                
-                let filterdEvents = NSMutableArray()
-                
-                if let currentUser = User.currentUser() {
-                    for e in events! {
-                        if !e.ownedByUser(currentUser) && !e.userJoined(currentUser) {
+            self.hud?.dismiss()
+            self.refreshControl.endRefreshing()
+            
+            if error == nil {
+                if events!.count > 0 {
+                    self.removeEmptyListView()
+                    
+                    let filterdEvents = NSMutableArray()
+                    
+                    if let currentUser = User.currentUser() {
+                        for e in events! {
+                            if !e.ownedByUser(currentUser) && !e.userJoined(currentUser) {
+                                filterdEvents.addObject(e)
+                            }
+                        }
+                    } else {
+                        for e in events! {
                             filterdEvents.addObject(e)
                         }
                     }
+                    
+                    self.datasource = filterdEvents
+                    self.baseTable.datasource = self.datasource
+                    self.tableView.reloadData()
                 } else {
-                    for e in events! {
-                        filterdEvents.addObject(e)
-                    }
+                    self.showEmptyListView("There is no new events yet.", label: "refresh")
                 }
-                
-                self.datasource = filterdEvents
-                self.baseTable.datasource = self.datasource
-                self.tableView.reloadData()
             } else {
                 println("failed to list all events")
-                self.showEmptyListView("refresh")
+                self.showEmptyListView("Seems like you do not have interenet connection.", label: "refresh")
             }
-            
-            self.hud?.dismiss()
-            self.refreshControl.endRefreshing()
         }
     }
     
-    func showEmptyListView(message: NSString?) {
+    func showEmptyListView(message: NSString?, label: NSString?) {
         tableView.hidden = true
         self.view.backgroundColor = UIColor.groupTableViewBackgroundColor()
         if let m = message {
             emptyTableView.message = m
+        }
+        if let m = label {
+            emptyTableView.buttonLabel = m
         }
         view.addSubview(emptyTableView)
     }
@@ -411,6 +419,10 @@ class EventsViewController: UIViewController,
     }
     
     func editEvent(notification: NSNotification) {
+        if navigationController == nil {
+            println("navigation controller is missing")
+            return
+        }
         performSegueWithIdentifier("createEvent", sender: notification.userInfo!["event"])
     }
     
@@ -423,10 +435,6 @@ class EventsViewController: UIViewController,
             
             vc.event = data[index!]
         } else if segue.identifier == "createEvent" {
-            if navigationController == nil {
-                println("navigation controller is missing")
-                return
-            }
             var vc = segue.destinationViewController as NewEventViewController
             vc.delegate = self
             if let event = sender as? Event {

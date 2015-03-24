@@ -47,6 +47,13 @@ class EventsTableViewCell: BaseTableViewCell {
         } else {
             joinButton.hidden = true
         }
+        
+        contentView.backgroundColor = UIColor.clearColor()
+        contentView.layer.shadowColor = UIColor.blackColor().CGColor
+        //        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 3).CGPath
+        contentView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
+        contentView.layer.shadowOpacity = 0.7
+        contentView.layer.shadowRadius = 0.5
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -143,15 +150,19 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         eventBackgroundImageView.image = nil
-    }
-    
-    override func layoutSubviews() {
+        
         contentView.backgroundColor = UIColor.clearColor()
         contentView.layer.shadowColor = UIColor.blackColor().CGColor
         //        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 3).CGPath
         contentView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
         contentView.layer.shadowOpacity = 0.7
         contentView.layer.shadowRadius = 0.5
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
     }
 }

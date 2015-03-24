@@ -13,6 +13,7 @@ protocol AppViewControllerDelegate : class {
 
 class AppViewController: UIViewController {
     
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var loginView: LoginView!
@@ -31,6 +32,9 @@ class AppViewController: UIViewController {
         
         backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
         })
+        
+        cancelButton.layer.borderWidth = CGFloat(2)
+        cancelButton.layer.borderColor = UIColor(rgba: "#34b5e5").CGColor
 //        applyGradient()
     }
     
@@ -56,7 +60,6 @@ class AppViewController: UIViewController {
         let arrayColors = [
             UIColor.clearColor().CGColor,
             UIColor.whiteColor().CGColor
-//            UIColor(rgba: "#211F20").CGColor
         ]
         
         gradientView.backgroundColor = UIColor.clearColor()
