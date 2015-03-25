@@ -444,7 +444,8 @@ class EventsViewController: UIViewController,
                 
                 self.searchButton?.setBackgroundImage(UIImage(named: "search"), forState: .Normal)
                 self.searchBarView.searchBar.resignFirstResponder()
-                self.refresh(true)
+                self.refresh(false)
+                self.searchBarView.searchBar.text = ""
                 self.searchIsOn = false
             } else {
                 self.bannerImage.removeFromSuperview()
