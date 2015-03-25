@@ -466,6 +466,7 @@ class EventsViewController: UIViewController,
         case "Find an event":
             currentSearchString = ""
             segmentedMenu?.selectedSegmentIndex = 0
+            refresh(true)
             break
         default:
             performSegueWithIdentifier("createEvent", sender: self)
