@@ -44,6 +44,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     var friendPickerVC: FriendPickerVC!
     
     @IBOutlet weak var createButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,8 +85,11 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         photosCollection.dataSource = self
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
+        deleteButton.layer.cornerRadius = 4
+        deleteButton.clipsToBounds = true
 
-        if event != nil {
+        if isEditingMode() {
             println("hydrateView is called on viewDidLoad")
             hydrateView()
             return
@@ -128,6 +132,10 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
 //        invitedUsernames = NSMutableArray(array: (event?.invitedUsernames)!)
     }
     
+    func isEditingMode() -> Bool {
+        return event != nil
+    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 //        var cell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
         
@@ -163,7 +171,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 4
+        return isEditingMode() ? 5 : 4
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -172,6 +180,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         if section == 0 { return 6 }
         else if section == 1 || section == 2 { return 1 }
         else if section == 3 { return 2 }
+        else if section == 4 { return 1 }
         else { return 0 }
     }
     
@@ -244,7 +253,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     @IBAction func onCreate(sender: UIBarButtonItem) {
         var event: Event!
 //
-        if self.event != nil { event = self.event }
+        if self.isEditingMode() { event = self.event }
         else { event = Event() }
         
         event.title = titleField.text
@@ -258,25 +267,57 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         let invUsernames = invitedUsernames as [AnyObject] as [String]
         event.invitedUsernames = invUsernames
         
+        if self.isEditingMode() { saveEvent(event) }
+        else { createEvent(event) }
+}
+    
+    @IBAction func onDelete(sender: UIButton) {
+        event?.destroyWithCompletion({ (success, error) -> () in
+            if success == true {
+                self.exitView()
+            } else {
+                self.popErrorMessage("Failed to delete event.")
+            }
+        })
+    }
+    
+    func createEvent(event: Event) {
         event.createWithCompletion { (success, error) -> () in
             if success == true {
-                self.delegate?.didCreateNewEvent(event)
-                self.navigationController?.popViewControllerAnimated(true)
-                self.dismissViewControllerAnimated(true, completion: nil)
-                self.event = nil
-                
-                let containerVC = self.navigationController?.parentViewController as ContainerViewController
-                
-                containerVC.closeMenuAndDo("listNewEvents")
+                self.exitView()
             } else {
-                UIAlertView(
-                    title: "Error",
-                    message: "Failed to create this event.",
-                    delegate: self,
-                    cancelButtonTitle: "Well damn..."
-                    ).show()
+                self.popErrorMessage("Failed to create event.")
             }
         }
+    }
+    
+    func saveEvent(event: Event) {
+        event.saveWithCompletion { (success, error) -> () in
+            if success == true {
+                self.exitView()
+            } else {
+                self.popErrorMessage("Failed to update event.")
+            }
+        }
+    }
+    
+    func popErrorMessage(message: String) {
+        UIAlertView(
+            title: "Error",
+            message: message,
+            delegate: self,
+            cancelButtonTitle: "Well damn..."
+            ).show()
+    }
+    
+    func exitView() {
+        self.navigationController?.popViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.event = nil
+        
+        let containerVC = self.navigationController?.parentViewController as ContainerViewController
+        
+        containerVC.closeMenuAndDo("listNewEvents")
     }
     
     /* COLLECTION */
