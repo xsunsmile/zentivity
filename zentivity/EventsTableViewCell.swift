@@ -78,6 +78,12 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func toggleJoin() {
+        if joinButton.titleLabel!.text == "Cancel" {
+            joinButton.setTitle("Join", forState: .Normal)
+        } else {
+            joinButton.setTitle("Cancel", forState: .Normal)
+        }
+        
         let event = data as Event
         User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
             if state == kUserJoinEvent {

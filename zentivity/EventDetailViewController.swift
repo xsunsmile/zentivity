@@ -51,6 +51,7 @@ class EventDetailViewController: UIViewController,
     var pointCount = 0
     var startPoint: CGPoint!
     var modalPanGuesture: UIPanGestureRecognizer?
+    var modalPanGuesture2: UIPanGestureRecognizer?
     var headerUpToPosition = CGFloat(200)
     
     override func viewDidLoad() {
@@ -93,6 +94,7 @@ class EventDetailViewController: UIViewController,
         imageScrollView.delegate = self
         if modalPanGuesture != nil {
             imageScrollView.addGestureRecognizer(modalPanGuesture!)
+            imageShadowView.addGestureRecognizer(modalPanGuesture2!)
         }
         
         imagePageControl.hidden = true
@@ -245,6 +247,12 @@ class EventDetailViewController: UIViewController,
         if !GoogleClient.sharedInstance.alreadyLogin() || User.currentUser() == nil {
             presentAuthModal()
             return
+        }
+        
+        if joinButton.titleLabel!.text == "Cancel" {
+            joinButton.setTitle("Join", forState: .Normal)
+        } else {
+            joinButton.setTitle("Cancel", forState: .Normal)
         }
         
         User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in

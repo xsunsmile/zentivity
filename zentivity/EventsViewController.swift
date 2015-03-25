@@ -465,8 +465,11 @@ class EventsViewController: UIViewController,
             vc.modalPresentationStyle = .Custom
 
             let tapGR = UIPanGestureRecognizer(target: dismissalAnimator, action: "onModalPan:")
+            let tapGR2 = UIPanGestureRecognizer(target: dismissalAnimator, action: "onModalPan:")
             tapGR.delegate = vc
+            tapGR2.delegate = vc
             vc.modalPanGuesture = tapGR
+            vc.modalPanGuesture2 = tapGR2
             dismissalAnimator.modalView = vc
             
 //            dismissalAnimator.addPanGesture()
