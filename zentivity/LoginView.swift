@@ -7,12 +7,18 @@
 //
 
 import UIKit
+protocol LoginViewDelegate: class {
+    func userFinishedLogin()
+    func userFinishedLogout()
+}
 
 class LoginView: UIView {
 
     @IBOutlet weak var loginIconImageView: UIImageView!
     @IBOutlet weak var loginTypeLabel: UILabel!
     @IBOutlet weak var loginButtonView: UIView!
+    
+    weak var delegate: LoginViewDelegate?
     
     var loginBannerView: UIView!
     var buttonBackgroundColor: UIColor? {
@@ -58,6 +64,8 @@ class LoginView: UIView {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     println("User did logout")
                     self.loginTypeLabel.text = "Signin from Google"
+                    self.delegate?.userFinishedLogout()
+                    NSNotificationCenter.defaultCenter().postNotificationName("userLogout", object: nil)
                 })
             })
         } else {
@@ -66,6 +74,8 @@ class LoginView: UIView {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         println("User did login")
                         self.loginTypeLabel.text = "Logout from Google"
+                        self.delegate?.userFinishedLogin()
+                        NSNotificationCenter.defaultCenter().postNotificationName("userLogin", object: nil)
                     })
                 }
             })

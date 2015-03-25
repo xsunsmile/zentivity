@@ -35,6 +35,9 @@ class UserProfileViewController: UIViewController,
         if User.currentUser() == nil {
             return
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: "userLogin", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: "userLogout", object: nil)
  
         initSubviews()
         refresh()
@@ -124,6 +127,8 @@ class UserProfileViewController: UIViewController,
         User.logoutWithCompletion { (completed) -> Void in
             println("User logout: \(completed)")
         }
+        
+        refresh()
     }
     
     // MARK: - Navigation
