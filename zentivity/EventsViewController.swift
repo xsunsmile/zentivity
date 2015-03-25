@@ -341,16 +341,22 @@ class EventsViewController: UIViewController,
         switch(control.selectedSegmentIndex) {
         case 2:
             currentSearchString = "admin"
-            if let currentUser = User.currentUser() {
-                refreshAdminEventsList(true)
+            if GoogleClient.sharedInstance.alreadyLogin() {
+                if let currentUser = User.currentUser() {
+                    refreshAdminEventsList(true)
+                }
             } else {
+                refreshAdminEventsList(false)
                 presentAuthModal()
             }
         case 1:
             currentSearchString = "join"
-            if let currentUser = User.currentUser() {
-                refreshJoinEventsList(true)
+            if GoogleClient.sharedInstance.alreadyLogin() {
+                if let currentUser = User.currentUser() {
+                    refreshJoinEventsList(true)
+                }
             } else {
+                refreshJoinEventsList(false)
                 presentAuthModal()
             }
         default:
@@ -452,8 +458,18 @@ class EventsViewController: UIViewController,
         return UIStatusBarStyle.LightContent;
     }
     
-    func onCTA() {
-        performSegueWithIdentifier("createEvent", sender: self)
+    func onCTA(action: NSString) {
+        switch(action) {
+        case "refresh":
+            refresh(true)
+            break
+        case "Find an event":
+            currentSearchString = ""
+            segmentedMenu?.selectedSegmentIndex = 0
+            break
+        default:
+            performSegueWithIdentifier("createEvent", sender: self)
+        }
     }
     
     func onSearchFilterPress() {

@@ -109,7 +109,11 @@ class EventsTableViewCell: BaseTableViewCell {
         if event.photos?.count > 0 {
             var thumbnail = event.thumbnail
             thumbnail.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                self.eventBackgroundImageView.image = UIImage(data: data)
+                if error == nil {
+                    self.eventBackgroundImageView.image = UIImage(data: data)
+                } else {
+                    self.eventBackgroundImageView.image = UIImage(named: "noActivity")
+                }
             })
         } else {
             eventBackgroundImageView.image = UIImage(named: "noActivity")

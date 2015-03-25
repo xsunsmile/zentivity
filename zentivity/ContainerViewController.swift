@@ -83,6 +83,7 @@ class ContainerViewController: UIViewController,
             nav.hidesBarsOnSwipe = true
             nav.navigationBar.translucent = true
             nav.navigationBar.tintColor = UIColor(rgba: "#4fadd9")
+            nav.navigationBar.barTintColor = UIColor(rgba: "#ebebf1")
 //            nav.navigationBar.barStyle = UIBarStyle.Default
 //            nav.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
             //setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:UIBarMetricsDefault];

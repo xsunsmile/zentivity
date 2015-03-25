@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EmptyTableViewDelegate : class {
-    func onCTA()
+    func onCTA(action: NSString)
 }
 
 class EmptyTableView: UIView {
@@ -52,6 +52,6 @@ class EmptyTableView: UIView {
     }
     
     @IBAction func onButtonPress(sender: UIButton) {
-        delegate?.onCTA()
+        delegate?.onCTA(sender.titleLabel!.text!)
     }
 }
