@@ -437,12 +437,14 @@ class EventsViewController: UIViewController,
     
     func toggleSearchBar() {
         UIView.transitionWithView(titleView, duration: 0.7, options: .TransitionCrossDissolve, animations: { () -> Void in
+            self.filters = Dictionary<String, String>()
             if self.searchIsOn {
                 self.searchBarView.removeFromSuperview()
                 self.titleView.addSubview(self.bannerImage)
                 
                 self.searchButton?.setBackgroundImage(UIImage(named: "search"), forState: .Normal)
                 self.searchBarView.searchBar.resignFirstResponder()
+                self.refresh(true)
                 self.searchIsOn = false
             } else {
                 self.bannerImage.removeFromSuperview()
