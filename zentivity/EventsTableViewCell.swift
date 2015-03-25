@@ -107,17 +107,10 @@ class EventsTableViewCell: BaseTableViewCell {
         eventDateLabel.text = event.startTimeWithFormat("EEEE MMM d, HH:mm")
         
         if event.photos?.count > 0 {
-            let photo = event.photos![0] as Photo
-            photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
-                let p = photo as Photo
-                p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
-                    if imageData != nil {
-                        self.eventBackgroundImageView.image = UIImage(data:imageData)
-                    } else {
-                        println("Failed to download image data")
-                    }
-                })
-            }
+            var thumbnail = event.thumbnail
+            thumbnail.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                self.eventBackgroundImageView.image = UIImage(data: data)
+            })
         } else {
             eventBackgroundImageView.image = UIImage(named: "noActivity")
         }

@@ -15,36 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Parse setup
-        
         User.registerSubclass()
         Photo.registerSubclass()
         Event.registerSubclass()
         Comment.registerSubclass()
-        
         Parse.setApplicationId("LEwfLcFvUwXtT8A7y2dJMlHL7FLiEybY8x5kOaZP", clientKey: "YRAwfZdssZrBJtNGqE0wIEyiAaBoARiCih5hrNau")
         
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleGoogleLogin:", name: "userDidLoginNotification", object: nil)
-        
-// Add Photo for event...
-//        let eventId = "FQK1CbeMLd"
-//        let imageName = "zz"
-//        
-//        let image = UIImage(named: imageName)
-//        var query = Event.query()
-//        query.getObjectInBackgroundWithId(eventId, block: { (event, error) -> Void in
-//            let event = event as Event
-//            event.addPhotoWithCompletion(image!, completion: { (success, error) -> Void in
-//                if success == true {
-//                    println("SUCCESS")
-//                } else {
-//                    println("FAIL")
-//                }
-//            })
-//        })
-        
-        
-        
         
         return true
     }
