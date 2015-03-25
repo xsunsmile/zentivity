@@ -171,7 +171,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWu-PZ-u61" userLabel="eventHeaderView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2A5-El-CNm">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2A5-El-CNm" userLabel="JoinButtonView">
                                                 <rect key="frame" x="240" y="-30" width="60" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O4-jb-yDc" customClass="ShadowButton" customModule="zentivity" customModuleProvider="target">
@@ -325,6 +325,7 @@
                                         </collectionReusableView>
                                     </collectionView>
                                 </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="zWu-PZ-u61" firstAttribute="top" secondItem="VqE-LX-z6F" secondAttribute="top" id="2LS-gT-tPA"/>
@@ -389,10 +390,12 @@
                         <outlet property="eventDateLabel" destination="2LU-Lt-GOG" id="vwp-FW-btD"/>
                         <outlet property="eventDescription" destination="G9k-Ff-97b" id="hR9-71-RNB"/>
                         <outlet property="eventHeaderView" destination="zWu-PZ-u61" id="Yxb-2R-ary"/>
+                        <outlet property="headerTitleTopConstraint" destination="Yyc-hY-WEn" id="bLP-2H-dKi"/>
                         <outlet property="imagePageControl" destination="aOx-fM-OIE" id="BeB-b6-bf8"/>
                         <outlet property="imageScrollView" destination="sHK-Sl-YCv" id="xb5-fb-k7Z"/>
                         <outlet property="imageShadowView" destination="bLf-EE-lRe" id="cdS-Ke-601"/>
                         <outlet property="joinButton" destination="1O4-jb-yDc" id="nsI-0I-NjV"/>
+                        <outlet property="joinButtonView" destination="2A5-El-CNm" id="vTn-TO-VV8"/>
                         <outlet property="mapView" destination="Cwn-wB-VV9" id="Lgj-qc-Ddd"/>
                         <outlet property="phoneLabel" destination="qKV-5q-Smd" id="3Uh-tQ-JaJ"/>
                         <outlet property="titleLabel" destination="76D-to-mct" id="Y2p-U5-smx"/>

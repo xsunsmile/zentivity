@@ -32,8 +32,10 @@ class EventDetailViewController: UIViewController,
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var eventDescription: UILabel!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var joinButtonView: UIView!
     
     @IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerTitleTopConstraint: NSLayoutConstraint!
     
     var contentViewOriginFrame: CGRect!
     var detailHeaderViewOriginFrame: CGRect!
@@ -49,6 +51,7 @@ class EventDetailViewController: UIViewController,
     var pointCount = 0
     var startPoint: CGPoint!
     var modalPanGuesture: UIPanGestureRecognizer?
+    var headerUpToPosition = CGFloat(200)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +62,12 @@ class EventDetailViewController: UIViewController,
     
     override func viewWillAppear(animated: Bool) {
         animateHeaderViewDown(1.0)
+        
+        if contentView.frame.height < view.frame.height {
+            contentView.frame.size.height = view.frame.height
+        }
+        
+        view.setNeedsDisplay()
     }
     
     func initSubviews() {
@@ -355,6 +364,7 @@ class EventDetailViewController: UIViewController,
             let dy = loc.y - dragStartingPoint.y
             let newYPos = initialDragOffset + dy
             if newYPos >= 200 {
+                headerUpToPosition = CGFloat(200)
                 contentView.frame.origin.y = newYPos
                 let newImageYPos = initialImageDragOffset + dy/2
                 if currentImageView != nil {
@@ -365,6 +375,21 @@ class EventDetailViewController: UIViewController,
                     }
                 } else {
 //                    println("current image view is empty during dragging")
+                }
+            } else {
+                headerUpToPosition = CGFloat(0)
+                if contentView.frame.height <= view.frame.height {
+                    contentView.frame.size.height = view.frame.height
+                    
+                    if newYPos > 0 {
+                        contentView.frame.origin.y = newYPos
+                        joinButtonView.transform = CGAffineTransformMakeScale(newYPos/200, newYPos/200)
+                    }
+                } else {
+                    contentView.frame.origin.y = newYPos
+                    if newYPos > 0 {
+                        joinButtonView.transform = CGAffineTransformMakeScale(newYPos/200, newYPos/200)
+                    }
                 }
             }
         } else if sender.state == .Ended {
@@ -380,6 +405,7 @@ class EventDetailViewController: UIViewController,
         view.layoutIfNeeded()
         let dy = self.view.frame.height - self.eventHeaderView.frame.height
         contentTopConstraint.constant = dy
+        headerTitleTopConstraint.constant = 8
         eventHeaderView.setNeedsUpdateConstraints()
         
         UIView.animateWithDuration(0.5, delay: delay, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
@@ -388,6 +414,8 @@ class EventDetailViewController: UIViewController,
             if self.currentImageView != nil {
                 self.currentImageView?.frame.origin.y = 0
             }
+            
+            self.joinButtonView.transform = CGAffineTransformIdentity
             }) { (completed) -> Void in
                 if completed {
                     self.detailsIsOpen = false
@@ -398,11 +426,19 @@ class EventDetailViewController: UIViewController,
     func animateHeaderViewUp() {
         view.layoutIfNeeded()
         let dy = self.view.frame.height - self.contentView.frame.height
-        contentTopConstraint.constant = 200
+        contentTopConstraint.constant = headerUpToPosition
+        if headerUpToPosition == 0 {
+            headerTitleTopConstraint.constant = 16
+        }
         eventHeaderView.setNeedsUpdateConstraints()
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
             self.view.layoutIfNeeded()
+            
+            if self.headerUpToPosition == 0 {
+                self.contentView.frame.size.height = self.view.frame.height
+                self.joinButtonView.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
+            }
             
             if self.currentImageView != nil {
                 self.currentImageView?.transform = CGAffineTransformMakeTranslation(0, -self.view.frame.height/3)
@@ -413,6 +449,7 @@ class EventDetailViewController: UIViewController,
                 if completed {
                     self.detailsIsOpen = true
                 }
+                self.headerUpToPosition = CGFloat(200)
         }
     }
     
