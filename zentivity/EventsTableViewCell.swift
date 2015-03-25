@@ -40,7 +40,7 @@ class EventsTableViewCell: BaseTableViewCell {
         if GoogleClient.sharedInstance.alreadyLogin() {
             if let currentUser = User.currentUser() {
                 let borderWidth = CGFloat(1.0)
-                let borderColor = UIColor(rgba: "#efefef").CGColor
+                let borderColor = UIColor(rgba: "#A2D6E6").CGColor
                 joinView.layer.borderColor = borderColor
                 joinView.layer.borderWidth = borderWidth
             }

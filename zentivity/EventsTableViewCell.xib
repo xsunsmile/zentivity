@@ -15,10 +15,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ist-Bc-bWv" userLabel="ContainerView">
-                        <rect key="frame" x="5" y="5" width="428" height="125"/>
+                        <rect key="frame" x="5" y="5" width="428" height="124"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-0A-fRG">
-                                <rect key="frame" x="0.0" y="0.0" width="153" height="125"/>
+                                <rect key="frame" x="0.0" y="0.0" width="152" height="124"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="149" id="K1o-9X-Y9H"/>
                                     <constraint firstAttribute="width" secondItem="nfh-0A-fRG" secondAttribute="height" multiplier="182:149" id="M1U-ig-qS0"/>
@@ -30,7 +30,7 @@
                                 </variation>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-FZ-OvX" userLabel="EventView">
-                                <rect key="frame" x="153" y="0.0" width="275" height="125"/>
+                                <rect key="frame" x="152" y="0.0" width="276" height="124"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Event name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-48-zof">
                                         <rect key="frame" x="8" y="8" width="72" height="16"/>
@@ -73,10 +73,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rq-8v-yVw" userLabel="Join">
-                                        <rect key="frame" x="88" y="92" width="100" height="25"/>
+                                        <rect key="frame" x="8" y="91" width="260" height="25"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWt-1y-zzc">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="25"/>
                                                 <size key="titleShadowOffset" width="1" height="1"/>
                                                 <state key="normal" title="Join">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -112,6 +112,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="Mm6-ae-qzs"/>
                                                 <exclude reference="kW8-aS-8OV"/>
                                             </mask>
                                         </variation>
@@ -124,6 +125,7 @@
                                     <constraint firstAttribute="width" constant="130" id="3vO-fu-aeY"/>
                                     <constraint firstAttribute="bottom" secondItem="2rq-8v-yVw" secondAttribute="bottom" constant="8" id="4p8-cx-qyz"/>
                                     <constraint firstItem="WeP-NE-YC7" firstAttribute="top" secondItem="Raq-48-zof" secondAttribute="bottom" constant="8" id="4vU-Sx-Oh3"/>
+                                    <constraint firstAttribute="trailing" secondItem="2rq-8v-yVw" secondAttribute="trailing" constant="8" id="B6F-ny-SVj"/>
                                     <constraint firstItem="WeP-NE-YC7" firstAttribute="leading" secondItem="PqU-FZ-OvX" secondAttribute="leading" constant="8" id="Bg5-Sr-T5b"/>
                                     <constraint firstItem="spD-7X-N54" firstAttribute="top" secondItem="by3-k6-MYs" secondAttribute="top" id="D49-Wa-LVH"/>
                                     <constraint firstItem="WeP-NE-YC7" firstAttribute="top" secondItem="PqU-FZ-OvX" secondAttribute="top" constant="30" id="EiB-1z-ZlY"/>
@@ -138,6 +140,7 @@
                                     <constraint firstItem="Raq-48-zof" firstAttribute="leading" secondItem="PqU-FZ-OvX" secondAttribute="leading" constant="8" id="Tj0-Lu-v78"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="spD-7X-N54" secondAttribute="trailing" constant="8" id="cPu-Qx-NZ5"/>
                                     <constraint firstAttribute="width" secondItem="PqU-FZ-OvX" secondAttribute="height" multiplier="15:16" id="cbt-zL-wwJ"/>
+                                    <constraint firstItem="2rq-8v-yVw" firstAttribute="leading" secondItem="PqU-FZ-OvX" secondAttribute="leading" constant="8" id="juf-b3-kTL"/>
                                     <constraint firstItem="by3-k6-MYs" firstAttribute="leading" secondItem="WeP-NE-YC7" secondAttribute="leading" id="kVn-MR-M1X"/>
                                     <constraint firstItem="Raq-48-zof" firstAttribute="top" secondItem="PqU-FZ-OvX" secondAttribute="top" constant="8" id="knF-6U-tWZ"/>
                                     <constraint firstItem="2rq-8v-yVw" firstAttribute="leading" secondItem="PqU-FZ-OvX" secondAttribute="leading" id="oGZ-AK-l86"/>
@@ -157,6 +160,7 @@
                                         <exclude reference="D49-Wa-LVH"/>
                                         <exclude reference="1be-Bt-rDK"/>
                                         <exclude reference="LnY-Xc-Kp8"/>
+                                        <exclude reference="QKs-0c-wo3"/>
                                         <exclude reference="oGZ-AK-l86"/>
                                     </mask>
                                 </variation>
