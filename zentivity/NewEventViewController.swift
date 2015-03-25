@@ -10,6 +10,7 @@ import UIKit
 
 protocol NewEventDelegate: class {
     func didCreateNewEvent(event: Event)
+    func didDeleteEvent(event: Event)
 }
 
 class NewEventViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, FriendPickerVCDelegate {
@@ -274,6 +275,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     @IBAction func onDelete(sender: UIButton) {
         event?.destroyWithCompletion({ (success, error) -> () in
             if success == true {
+                self.delegate?.didDeleteEvent(self.event!)
                 self.exitView()
             } else {
                 self.popErrorMessage("Failed to delete event.")
@@ -284,6 +286,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     func createEvent(event: Event) {
         event.createWithCompletion { (success, error) -> () in
             if success == true {
+                self.delegate?.didCreateNewEvent(event)
                 self.exitView()
             } else {
                 self.popErrorMessage("Failed to create event.")

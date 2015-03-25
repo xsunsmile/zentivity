@@ -163,6 +163,7 @@ class EventsViewController: UIViewController,
     }
     
     func refresh(useHud: Bool) {
+        println("refresh tab: \(currentSearchString)")
         if currentSearchString.isEmpty {
             refreshLatestEventsList(useHud)
         } else if currentSearchString == "admin" {
@@ -210,6 +211,7 @@ class EventsViewController: UIViewController,
     }
     
     func refreshAdminEventsList(useHud: Bool) {
+        println("refresh admin...")
         if let currentUser = User.currentUser() {
             if useHud {
                 hud?.textLabel.text = "Loading events..."
@@ -232,6 +234,8 @@ class EventsViewController: UIViewController,
                     self.showEmptyListView("Seems like you do not have interenet connection.", label: "refresh")
                 }
             })
+        } else {
+            println("did not refresh admin, current user not good")
         }
     }
     
@@ -314,7 +318,20 @@ class EventsViewController: UIViewController,
     func didCreateNewEvent(event: Event) {
         println("added new event refresh...")
         self.baseTable.datasource.insert(event, atIndex: 0)
-        self.tableView.reloadData()
+        refresh(true)
+    }
+    
+    func didDeleteEvent(event: Event) {
+        println("deleted event refresh...")
+        var i = 0
+        for e in self.baseTable.datasource {
+            let e = e as Event
+            if e.objectId == event.objectId {
+                self.baseTable.datasource.removeAtIndex(i)
+            }
+            i += 1
+        }
+        refresh(true)
     }
     
     func onMenuSwitch(control: HMSegmentedControl) {
