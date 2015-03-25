@@ -16,7 +16,7 @@
                     <color key="textColor" red="0.76075205180000005" green="0.76075205180000005" blue="0.76075205180000005" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zentivity-logo-launch" translatesAutoresizingMaskIntoConstraints="NO" id="XME-px-J4g">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="zentivity-logo-launch" translatesAutoresizingMaskIntoConstraints="NO" id="XME-px-J4g">
                     <rect key="frame" x="188" y="175" width="104" height="105"/>
                 </imageView>
             </subviews>

@@ -117,6 +117,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         descriptionField.text = event?.descript
         descriptionLabel.hidden = true
         
+//        self.photos = NSMutableArray()
         
         if let tempPhotos = event?.photos {
             for photo in tempPhotos {
@@ -125,12 +126,19 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
                     if error == nil {
                         let image = UIImage(data: imageData)
                         self.photos.addObject(image!)
+                        
+                        println(self.photos)
+                        self.photosCollection.reloadData()
+                    } else {
+                        println("ERROR")
                     }
                 })
             }
-            photosCollection.reloadData()
         }
-//        invitedUsernames = NSMutableArray(array: (event?.invitedUsernames)!)
+
+        let invitedUsers = event!.invitedUsers as Array as [User]
+        invited = invitedUsers
+        invitedCollection.reloadData()
     }
     
     func isEditingMode() -> Bool {
