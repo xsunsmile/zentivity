@@ -33,8 +33,8 @@ class AppViewController: UIViewController {
         backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
         })
         
-        cancelButton.layer.borderWidth = CGFloat(2)
-        cancelButton.layer.borderColor = UIColor(rgba: "#34b5e5").CGColor
+//        cancelButton.layer.borderWidth = CGFloat(2)
+//        cancelButton.layer.borderColor = UIColor(rgba: "#34b5e5").CGColor
 //        applyGradient()
     }
     
