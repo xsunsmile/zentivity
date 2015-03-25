@@ -39,7 +39,8 @@ class EventsViewController: UIViewController,
     var searchIsOn = false
     var originalTableYPos = CGFloat(0)
     var titleView: UIView!
-    var titleLabel: UILabel!
+//    var titleLabel: UILabel!
+    var bannerImage: UIImageView!
     var closeSearchButton: UIButton!
     var emptyTableView: EmptyTableView!
     var currentSearchString = ""
@@ -91,10 +92,17 @@ class EventsViewController: UIViewController,
         titleView = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 33))
         titleView.backgroundColor = UIColor.clearColor()
         
-        titleLabel = UILabel(frame: titleView!.frame)
-        titleLabel.text = "Zentivity"
+//        titleLabel = UILabel(frame: titleView!.frame)
+//        titleLabel.text = "Zentivity"
+//        
+//        titleView!.addSubview(titleLabel)
         
-        titleView!.addSubview(titleLabel)
+        bannerImage = UIImageView(image: UIImage(named: "zentivity-logo-banner"))
+        bannerImage.contentMode = UIViewContentMode.Bottom
+//        bannerImage.bounds = bannerImage.frame
+//        bannerImage.clipsToBounds = true
+        bannerImage.frame = titleView.frame
+        titleView.addSubview(bannerImage)
         
         searchBarView = SearchFilterView(frame: titleView!.frame)
         searchBarView.delegate = self
@@ -406,13 +414,13 @@ class EventsViewController: UIViewController,
         UIView.transitionWithView(titleView, duration: 0.7, options: .TransitionCrossDissolve, animations: { () -> Void in
             if self.searchIsOn {
                 self.searchBarView.removeFromSuperview()
-                self.titleView.addSubview(self.titleLabel)
+                self.titleView.addSubview(self.bannerImage)
                 
                 self.searchButton?.setBackgroundImage(UIImage(named: "search"), forState: .Normal)
                 self.searchBarView.searchBar.resignFirstResponder()
                 self.searchIsOn = false
             } else {
-                self.titleLabel.removeFromSuperview()
+                self.bannerImage.removeFromSuperview()
                 self.titleView.addSubview(self.searchBarView)
                 
                 self.searchButton?.setBackgroundImage(UIImage(named: "cross"), forState: .Normal)
