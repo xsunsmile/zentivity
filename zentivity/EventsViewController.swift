@@ -97,8 +97,8 @@ class EventsViewController: UIViewController,
 //        
 //        titleView!.addSubview(titleLabel)
         
-        bannerImage = UIImageView(image: UIImage(named: "zentivity-logo-banner"))
-        bannerImage.contentMode = UIViewContentMode.Bottom
+        bannerImage = UIImageView(image: UIImage(named: "zentivity-banner-logo"))
+        bannerImage.contentMode = UIViewContentMode.Center
 //        bannerImage.bounds = bannerImage.frame
 //        bannerImage.clipsToBounds = true
         bannerImage.frame = titleView.frame

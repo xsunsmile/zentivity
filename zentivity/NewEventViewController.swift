@@ -319,7 +319,6 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         self.event = nil
         
         let containerVC = self.navigationController?.parentViewController as ContainerViewController
-        
         containerVC.closeMenuAndDo("listNewEvents")
     }
     

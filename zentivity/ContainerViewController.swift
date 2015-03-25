@@ -27,7 +27,7 @@ class ContainerViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let hamburgerImage = UIImage(named: "menu_slim")
+        var hamburgerImage = UIImage(named: "menu_slim")
         let frame = CGRectMake(-10, 0, 18, 18)
         menuButton = UIButton(frame: frame)
         menuButton.setBackgroundImage(hamburgerImage, forState: .Normal)
