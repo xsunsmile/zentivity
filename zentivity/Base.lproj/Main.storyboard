@@ -1291,7 +1291,7 @@
             </objects>
             <point key="canvasLocation" x="1114" y="-175"/>
         </scene>
-        <!--ADD FRIENDS-->
+        <!--Add friends-->
         <scene sceneID="GAR-Jo-RUg">
             <objects>
                 <viewController storyboardIdentifier="FriendPickerVC" id="LWw-7o-A6X" customClass="FriendPickerVC" customModule="zentivity" customModuleProvider="target" sceneMemberID="viewController">
@@ -1347,13 +1347,15 @@
                             <constraint firstAttribute="trailing" secondItem="bg0-Ag-rUs" secondAttribute="trailing" id="hj2-XJ-TaA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ADD FRIENDS" id="63h-XJ-tHt">
+                    <navigationItem key="navigationItem" title="Add friends" id="63h-XJ-tHt">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XLC-19-bkG">
+                            <color key="tintColor" red="0.30980392159999998" green="0.67843137249999996" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onCancelButtonPressed:" destination="LWw-7o-A6X" id="WJD-kD-xDz"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="h3B-94-OpY">
+                            <color key="tintColor" red="0.30980392159999998" green="0.67843137249999996" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onAddButtonPressed:" destination="LWw-7o-A6X" id="JQE-KK-M38"/>
                             </connections>
