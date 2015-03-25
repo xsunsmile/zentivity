@@ -30,8 +30,8 @@ class AppViewController: UIViewController {
         loginView.buttonBackgroundColor = UIColor(rgba: "#dd4b39")
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-        backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
-        })
+//        backgroundImageView.setImageToBlur(backgroundImageView.image, completionBlock: { () -> Void in
+//        })
         
 //        cancelButton.layer.borderWidth = CGFloat(2)
 //        cancelButton.layer.borderColor = UIColor(rgba: "#34b5e5").CGColor
