@@ -31,8 +31,6 @@ class EventsTableViewCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        println("HEIGHT")
-        println(self.frame.height)
         initSubviews()
     }
     

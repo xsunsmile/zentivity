@@ -22,7 +22,7 @@ class BaseTableView: NSObject,
     var titleSource: [NSString]!
     var cellIdentifier: NSString!
     var titleIdentifier: NSString?
-    var cellHeight = CGFloat(130)
+    var cellHeight = CGFloat(150)
     weak var delegate: BaseTableViewDelegate?
     
     init(datasource: [AnyObject], cellIdentifier: NSString) {
@@ -41,9 +41,9 @@ class BaseTableView: NSObject,
         return datasource.count
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        (cell as BaseTableViewCell).refresh()
-    }
+//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        (cell as BaseTableViewCell).refresh()
+//    }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return cellHeight
