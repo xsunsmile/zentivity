@@ -92,15 +92,8 @@ class EventsViewController: UIViewController,
         titleView = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 33))
         titleView.backgroundColor = UIColor.clearColor()
         
-//        titleLabel = UILabel(frame: titleView!.frame)
-//        titleLabel.text = "Zentivity"
-//        
-//        titleView!.addSubview(titleLabel)
-        
         bannerImage = UIImageView(image: UIImage(named: "zentivity-banner-logo"))
         bannerImage.contentMode = UIViewContentMode.Center
-//        bannerImage.bounds = bannerImage.frame
-//        bannerImage.clipsToBounds = true
         bannerImage.frame = titleView.frame
         titleView.addSubview(bannerImage)
         
@@ -510,16 +503,6 @@ class EventsViewController: UIViewController,
             vc.modalPanGuesture = tapGR
             vc.modalPanGuesture2 = tapGR2
             dismissalAnimator.modalView = vc
-            
-//            dismissalAnimator.addPanGesture()
-            
-//            let animator = ZFModalTransitionAnimator(modalViewController: vc)
-//            animator.dragable = true
-//            animator.direction = ZFModalTransitonDirection.Bottom
-//            self.animator.setContentScrollView:detailViewController.scrollview
-
-//            vc.transitioningDelegate = animator
-//            vc.modalPresentationStyle = .Custom
         } else if segue.identifier == "createEvent" {
             var vc = segue.destinationViewController as NewEventViewController
             vc.delegate = self

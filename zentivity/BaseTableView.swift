@@ -76,21 +76,4 @@ class BaseTableView: NSObject,
             delegate.tableViewWillBeginDragging!(scrollView)
         }
     }
-//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if titleIdentifier == nil {
-//            return BaseTableViewCell()
-//        }
-//        
-//        var cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier(titleIdentifier!) as EventHeaderTableViewCell
-//        cell.frame.size.width = tableView.frame.width
-//        return cell
-//    }
-//    
-//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return 1
-//    }
-//    
-//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 34
-//    }
 }

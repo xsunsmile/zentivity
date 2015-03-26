@@ -31,14 +31,15 @@ class EventsTableViewCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        
+        println("HEIGHT")
+        println(self.frame.height)
         initSubviews()
-        refresh()
     }
     
     func initSubviews() {
         if GoogleClient.sharedInstance.alreadyLogin() {
             if let currentUser = User.currentUser() {
+                // Blue border for button
                 let borderWidth = CGFloat(1.0)
                 let borderColor = UIColor(rgba: "#A2D6E6").CGColor
                 joinView.layer.borderColor = borderColor
@@ -48,9 +49,11 @@ class EventsTableViewCell: BaseTableViewCell {
             joinButton.hidden = true
         }
         
-        contentView.backgroundColor = UIColor.clearColor()
+        addBottomShadow()
+    }
+    
+    func addBottomShadow() {
         contentView.layer.shadowColor = UIColor.blackColor().CGColor
-        //        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 3).CGPath
         contentView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
         contentView.layer.shadowOpacity = 0.7
         contentView.layer.shadowRadius = 0.5
@@ -119,11 +122,6 @@ class EventsTableViewCell: BaseTableViewCell {
             eventBackgroundImageView.image = UIImage(named: "noActivity")
         }
         
-        var cati = ""
-        for c in event.categories {
-            cati += (c as NSString) + " "
-        }
-        
         if event.locationString != nil {
             locationLabel.text = event.locationString
         } else {
@@ -139,33 +137,8 @@ class EventsTableViewCell: BaseTableViewCell {
         }
     }
     
-    func applyGradient() {
-        let gradient = CAGradientLayer()
-        let arrayColors = [
-            UIColor.clearColor().CGColor,
-            UIColor(rgba: "#211F20").CGColor
-        ]
-        
-        gradientView.backgroundColor = UIColor.clearColor()
-        gradient.frame = gradientView.bounds
-        gradient.colors = arrayColors
-        gradientView.layer.insertSublayer(gradient, atIndex: 0)
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         eventBackgroundImageView.image = nil
-        
-        contentView.backgroundColor = UIColor.clearColor()
-        contentView.layer.shadowColor = UIColor.blackColor().CGColor
-        //        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 3).CGPath
-        contentView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
-        contentView.layer.shadowOpacity = 0.7
-        contentView.layer.shadowRadius = 0.5
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
     }
 }
