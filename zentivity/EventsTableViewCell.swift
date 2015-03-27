@@ -19,10 +19,14 @@ class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventBackgroundImageView: UIImageView!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var shadowView: UIView!
-    @IBOutlet weak var joinView: UIView!
+//    @IBOutlet weak var joinView: UIView!
     @IBOutlet weak var eventDateLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var joinButton: UIButton!
+//    @IBOutlet weak var locationLabel: UILabel!
+//    @IBOutlet weak var joinButton: UIButton!
+    
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var NumAttendeeLabel: UILabel!
     
     let dateFormatter = NSDateFormatter()
     var colors = ["#31b639", "#ffcf00", "#c61800", "1851ce"]
@@ -41,11 +45,11 @@ class EventsTableViewCell: BaseTableViewCell {
                 // Blue border for button
                 let borderWidth = CGFloat(1.0)
                 let borderColor = UIColor(rgba: "#A2D6E6").CGColor
-                self.joinView.layer.borderColor = borderColor
-                self.joinView.layer.borderWidth = borderWidth
+//                self.joinView.layer.borderColor = borderColor
+//                self.joinView.layer.borderWidth = borderWidth
             }
         } else {
-            joinButton.hidden = true
+//            joinButton.hidden = true
         }
         
         addBottomShadow()
@@ -80,20 +84,20 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func toggleJoin() {
-        if joinButton.titleLabel!.text == "Cancel" {
-            joinButton.setTitle("Join", forState: .Normal)
-        } else {
-            joinButton.setTitle("Cancel", forState: .Normal)
-        }
+//        if joinButton.titleLabel!.text == "Cancel" {
+//            joinButton.setTitle("Join", forState: .Normal)
+//        } else {
+//            joinButton.setTitle("Cancel", forState: .Normal)
+//        }
         
         let event = data as Event
         User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
             if state == kUserJoinEvent {
                 if success != nil {
-                    self.joinButton.setTitle("Cancel", forState: .Normal)
+//                    self.joinButton.setTitle("Cancel", forState: .Normal)
                 }
             } else {
-                self.joinButton.setTitle("Join", forState: .Normal)
+//                self.joinButton.setTitle("Join", forState: .Normal)
             }
         })
     }
@@ -104,9 +108,22 @@ class EventsTableViewCell: BaseTableViewCell {
         }
         
         let event = data as Event
+        
+        refreshDistance()
        
         eventNameLabel.text = event.getTitle()
         eventDateLabel.text = event.startTimeWithFormat("EEEE MMM d, HH:mm")
+        
+        NumAttendeeLabel.text = "\(event.confirmedUsers.count)"
+        let duration = event.endTime.timeIntervalSinceDate(event.startTime)
+        let hours = Int(round(duration/3600))
+        if hours == 1 {
+            durationLabel.text = "\(hours) hour"
+        } else {
+            durationLabel.text = "\(hours) hours"
+        }
+        
+//        distanceLabel.text = "2mi"
         
         if event.photos?.count > 0 {
             var thumbnail = event.thumbnail
@@ -122,12 +139,12 @@ class EventsTableViewCell: BaseTableViewCell {
         }
         
         if event.locationString != nil {
-            locationLabel.text = event.locationString
+//            locationLabel.text = event.locationString
         } else {
-            locationLabel.text = "1019 Market Street, San Francisco, CA 94103"
+//            locationLabel.text = "1019 Market Street, San Francisco, CA 94103"
         }
         
-        joinButton.setTitle(joinButtonTitle(), forState: .Normal)
+//        joinButton.setTitle(joinButtonTitle(), forState: .Normal)
         
         leftExpansion.fillOnTrigger = true
         leftExpansion.threshold = 2
@@ -142,7 +159,8 @@ class EventsTableViewCell: BaseTableViewCell {
                 println("should edit event")
                 self.leftExpansion.fillOnTrigger = false
                 me!.performSegueWithIdentifier("createEvent", sender: event)
-                cell.hideSwipeAnimated(false)
+                me!.refresh(false)
+//                cell.hideSwipeAnimated(false)
             } else {
                 cell.toggleJoin()
                 me!.baseTable.datasource.removeAtIndex(indexPath!.row)
@@ -154,6 +172,35 @@ class EventsTableViewCell: BaseTableViewCell {
         // MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), padding: 10)
         leftButtons = [ joinView ]
         leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
+    }
+    
+    func refreshDistance() {
+        let event = data as Event
+        let zendeskLoc = CLLocation(latitude: 37.782193, longitude: -122.410254)
+        
+        var address = "1019 Market Street, San Francisco, CA"
+        if event.locationString != nil {
+            address = event.locationString!
+        }
+        
+        println("event location is \(address)")
+        LocationUtils.sharedInstance.getGeocodeFromAddress(address, completion: { (places, error) -> () in
+            if error == nil {
+                let places = places as [CLPlacemark]
+                let target = places.last
+                let currentLocation = CLLocation(latitude: target!.location.coordinate.latitude, longitude: target!.location.coordinate.longitude)
+                let rawDistance = 1000*zendeskLoc.distanceFromLocation(currentLocation)/(1609.344*1000)
+                println("raw dist: \(rawDistance)")
+                
+                if rawDistance < 1 {
+                    self.distanceLabel.text = NSString(format: "%.1f mi", rawDistance)
+                } else {
+                    self.distanceLabel.text = NSString(format: "%d mi", Int(rawDistance))
+                }
+            } else {
+                println("Failed to get places for address \(error)")
+            }
+        })
     }
     
     func joinButtonTitle() -> NSString {
