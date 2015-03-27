@@ -251,8 +251,9 @@ class EventDetailViewController: UIViewController,
         driveButton.frame.size.width = 45
         driveButton.frame.size.height = 45
         driveButton.backgroundColor = UIColor.whiteColor()
-        let buttonImage = UIImage(named: "compass")
+        let buttonImage = UIImage(named: "zentivity-logo-icon")
         driveButton.setImage(buttonImage, forState: .Normal)
+        driveButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
         
         pinAnnotationView.leftCalloutAccessoryView = driveButton
         pinAnnotationView.leftCalloutAccessoryView.frame = CGRectMake(10, 10, 20, 20)
