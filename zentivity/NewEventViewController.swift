@@ -305,6 +305,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
     func saveEvent(event: Event) {
         event.saveWithCompletion { (success, error) -> () in
             if success == true {
+                self.delegate?.didCreateNewEvent(event)
                 self.exitView()
             } else {
                 self.popErrorMessage("Failed to update event.")

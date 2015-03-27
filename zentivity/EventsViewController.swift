@@ -22,7 +22,7 @@ class EventsViewController: UIViewController,
     
     let cellId = "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
-    let cellHeight = CGFloat(150)
+    let cellHeight = CGFloat(120)
     let menuTitles = ["New", "Attending", "Hosting"]
 //    let viewTransitionDelegate = TransitionDelegate()
     

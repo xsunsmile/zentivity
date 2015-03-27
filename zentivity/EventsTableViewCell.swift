@@ -24,7 +24,7 @@ class EventsTableViewCell: BaseTableViewCell {
 //    @IBOutlet weak var locationLabel: UILabel!
 //    @IBOutlet weak var joinButton: UIButton!
     
-    @IBOutlet weak var distanceLabel: UILabel!
+//    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var NumAttendeeLabel: UILabel!
     
@@ -53,6 +53,7 @@ class EventsTableViewCell: BaseTableViewCell {
         }
         
         addBottomShadow()
+        refresh()
     }
     
     func addBottomShadow() {
@@ -109,10 +110,10 @@ class EventsTableViewCell: BaseTableViewCell {
         
         let event = data as Event
         
-        refreshDistance()
+//        refreshDistance()
        
         eventNameLabel.text = event.getTitle()
-        eventDateLabel.text = event.startTimeWithFormat("EEEE MMM d, HH:mm")
+        eventDateLabel.text = event.startTimeWithFormat("EEEE MMM d, hh:mm a")
         
         NumAttendeeLabel.text = "\(event.confirmedUsers.count)"
         let duration = event.endTime.timeIntervalSinceDate(event.startTime)
@@ -146,32 +147,47 @@ class EventsTableViewCell: BaseTableViewCell {
         
 //        joinButton.setTitle(joinButtonTitle(), forState: .Normal)
         
-        leftExpansion.fillOnTrigger = true
-        leftExpansion.threshold = 2
-        leftExpansion.buttonIndex = 0
-        
-        //configure left buttons
-        let joinView = MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
-            let cell = cell as EventsTableViewCell
-            let me = cell.controller as? EventsViewController
-            let indexPath = me!.tableView.indexPathForCell(cell)
-            if event.ownedByUser(User.currentUser()) {
-                println("should edit event")
-                self.leftExpansion.fillOnTrigger = false
-                me!.performSegueWithIdentifier("createEvent", sender: event)
-                me!.refresh(false)
-//                cell.hideSwipeAnimated(false)
-            } else {
+        if event.ownedByUser(User.currentUser()) || !event.userJoined(User.currentUser()) {
+            leftExpansion.fillOnTrigger = true
+            leftExpansion.threshold = 2.5
+            leftExpansion.buttonIndex = 0
+            
+            let joinView = MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
+                let cell = cell as EventsTableViewCell
+                let me = cell.controller as? EventsViewController
+                let indexPath = me!.tableView.indexPathForCell(cell)
+                if event.ownedByUser(User.currentUser()) {
+                    println("should edit event")
+                    me!.performSegueWithIdentifier("createEvent", sender: event)
+                    //                me!.refresh(false)
+                    cell.hideSwipeAnimated(false)
+                } else {
+                    cell.toggleJoin()
+                    me!.baseTable.datasource.removeAtIndex(indexPath!.row)
+                    me!.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Right)
+                }
+                return false
+            }
+            
+            rightButtons = []
+            leftButtons = [ joinView ]
+            leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
+        } else {
+            
+            let cancelView = MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
+                let cell = cell as EventsTableViewCell
+                let me = cell.controller as? EventsViewController
+                let indexPath = me!.tableView.indexPathForCell(cell)
                 cell.toggleJoin()
                 me!.baseTable.datasource.removeAtIndex(indexPath!.row)
-                me!.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Right)
+                me!.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Left)
+                return false
             }
-            return false
+            
+            leftButtons = []
+            rightButtons = [ cancelView ]
+            rightSwipeSettings.transition = MGSwipeTransition.TransitionBorder
         }
-        
-        // MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), padding: 10)
-        leftButtons = [ joinView ]
-        leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
     }
     
     func refreshDistance() {
@@ -193,9 +209,9 @@ class EventsTableViewCell: BaseTableViewCell {
                 println("raw dist: \(rawDistance)")
                 
                 if rawDistance < 1 {
-                    self.distanceLabel.text = NSString(format: "%.1f mi", rawDistance)
+//                    self.distanceLabel.text = NSString(format: "%.1f mi", rawDistance)
                 } else {
-                    self.distanceLabel.text = NSString(format: "%d mi", Int(rawDistance))
+//                    self.distanceLabel.text = NSString(format: "%d mi", Int(rawDistance))
                 }
             } else {
                 println("Failed to get places for address \(error)")
