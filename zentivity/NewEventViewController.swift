@@ -351,8 +351,11 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
             
             if indexPath.row < photos.count {
                 cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as UICollectionViewCell
-                var imageView = UIImageView(image: photos[indexPath.row] as UIImage)
-                imageView.frame.size = CGSize(width: 45, height: 45)
+                let user = invited[indexPath.row] as User
+                let image = user.initialsImageView(CGSize(width: 45, height: 45))
+                var imageView = UIImageView(image: image)
+                // UIImageView(image: photos[indexPath.row] as UIImage)
+                // imageView.frame.size =
                 cell.addSubview(imageView)
                 cell.layer.borderWidth = 1
                 cell.layer.borderColor = UIColor.lightGrayColor().CGColor

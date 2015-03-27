@@ -147,7 +147,42 @@ class EventsTableViewCell: BaseTableViewCell {
         
 //        joinButton.setTitle(joinButtonTitle(), forState: .Normal)
         
-        if event.ownedByUser(User.currentUser()) || !event.userJoined(User.currentUser()) {
+        if event.ownedByUser(User.currentUser()) {
+            leftExpansion.fillOnTrigger = true
+            leftExpansion.threshold = 2.5
+            leftExpansion.buttonIndex = 0
+            
+            let editView = MGSwipeButton(title: "Edit", backgroundColor: UIColor.grayColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
+                let cell = cell as EventsTableViewCell
+                let me = cell.controller as? EventsViewController
+                let indexPath = me!.tableView.indexPathForCell(cell)
+                me!.performSegueWithIdentifier("createEvent", sender: event)
+                cell.hideSwipeAnimated(false)
+                return false
+            }
+            
+            leftButtons = [ editView ]
+            leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
+            
+            let deleteView = MGSwipeButton(title: "Delete", backgroundColor: UIColor(rgba: "#3366cc"), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
+                let cell = cell as EventsTableViewCell
+                let me = cell.controller as? EventsViewController
+                let indexPath = me!.tableView.indexPathForCell(cell)
+                
+                event.destroyWithCompletion({ (success, error) -> () in
+                    if error != nil {
+                        println("Failed to delete event")
+                    }
+                })
+                
+                me!.baseTable.datasource.removeAtIndex(indexPath!.row)
+                me!.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Left)
+                return false
+            }
+            
+            rightButtons = [ deleteView ]
+            rightSwipeSettings.transition = MGSwipeTransition.TransitionBorder
+        } else if !event.userJoined(User.currentUser()) {
             leftExpansion.fillOnTrigger = true
             leftExpansion.threshold = 2.5
             leftExpansion.buttonIndex = 0
@@ -173,7 +208,6 @@ class EventsTableViewCell: BaseTableViewCell {
             leftButtons = [ joinView ]
             leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
         } else {
-            
             let cancelView = MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
                 let cell = cell as EventsTableViewCell
                 let me = cell.controller as? EventsViewController

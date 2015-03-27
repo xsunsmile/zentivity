@@ -13,7 +13,8 @@ class EventDetailViewController: UIViewController,
                                  UICollectionViewDataSource,
                                  UICollectionViewDelegate,
                                  UIScrollViewDelegate,
-                                 UIGestureRecognizerDelegate
+                                 UIGestureRecognizerDelegate,
+                                 MKMapViewDelegate
 {
     
     var event: Event!
@@ -53,6 +54,7 @@ class EventDetailViewController: UIViewController,
     var modalPanGuesture: UIPanGestureRecognizer?
     var modalPanGuesture2: UIPanGestureRecognizer?
     var headerUpToPosition = CGFloat(200)
+    var eventPlaceMark: CLPlacemark?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,7 @@ class EventDetailViewController: UIViewController,
     }
     
     override func viewWillAppear(animated: Bool) {
-        animateHeaderViewDown(1.0)
+        animateHeaderViewDown(0.5)
         
         if contentView.frame.height < view.frame.height {
             contentView.frame.size.height = view.frame.height
@@ -99,6 +101,8 @@ class EventDetailViewController: UIViewController,
         
         imagePageControl.hidden = true
         imagePageControl.currentPage = 0
+        
+        mapView.delegate = self
         
         initMapView()
     }
@@ -216,15 +220,15 @@ class EventDetailViewController: UIViewController,
         LocationUtils.sharedInstance.getGeocodeFromAddress(address, completion: { (places, error) -> () in
             if error == nil {
                 let places = places as [CLPlacemark]
-                let target = places.last
+                self.eventPlaceMark = places.last
                 
                 let miles = 0.09;
-                let center = CLLocationCoordinate2D(latitude: target!.location.coordinate.latitude, longitude: target!.location.coordinate.longitude)
+                let center = CLLocationCoordinate2D(latitude: self.eventPlaceMark!.location.coordinate.latitude, longitude: self.eventPlaceMark!.location.coordinate.longitude)
                 var region = MKCoordinateRegionMakeWithDistance(center, 1609.344 * miles, 1609.344 * miles)
                 self.mapView.setRegion(region, animated: true)
                 
                 let annotation = MKPointAnnotation()
-                annotation.coordinate = center
+                annotation.setCoordinate(center)
                 annotation.title = self.event.getTitle()
                 self.mapView.addAnnotation(annotation)
                 self.mapView.selectAnnotation(annotation, animated: true)
@@ -232,6 +236,44 @@ class EventDetailViewController: UIViewController,
                 println("Failed to get places for address \(error)")
             }
         })
+    }
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        println("get annotaion: \(annotation)")
+        let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myPin")
+        
+        pinAnnotationView.pinColor = .Purple
+        pinAnnotationView.draggable = true
+        pinAnnotationView.canShowCallout = true
+        pinAnnotationView.animatesDrop = true
+        
+        let driveButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        driveButton.frame.size.width = 45
+        driveButton.frame.size.height = 45
+        driveButton.backgroundColor = UIColor.whiteColor()
+        let buttonImage = UIImage(named: "compass")
+        driveButton.setImage(buttonImage, forState: .Normal)
+        
+        pinAnnotationView.leftCalloutAccessoryView = driveButton
+        pinAnnotationView.leftCalloutAccessoryView.frame = CGRectMake(10, 10, 20, 20)
+        
+        return pinAnnotationView
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        println("clicked on \(view.annotation)")
+        if let annotation = view.annotation as? MKPointAnnotation {
+            // self.mapView.removeAnnotation(annotation)
+            
+            let currentLocation = MKMapItem.mapItemForCurrentLocation()
+            let place = MKPlacemark(placemark: self.eventPlaceMark)
+            let destination = MKMapItem(placemark: place)
+            destination.name = self.event.getTitle()
+            let items = NSArray(objects: currentLocation, destination)
+            let options = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
+            println("Clicked on \(items)")
+            MKMapItem.openMapsWithItems(items, launchOptions: options)
+        }
     }
     
     override func didReceiveMemoryWarning() {

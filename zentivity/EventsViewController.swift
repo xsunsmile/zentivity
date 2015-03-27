@@ -194,10 +194,11 @@ class EventsViewController: UIViewController,
                             self.baseTable.datasource = filterdEvents
                             self.tableView.reloadData()
                         } else {
-                            self.showEmptyListView("You have not join any event yet", label: "Find an event")
+                            // You have not joined any events yet.
+                            self.showEmptyListView("You have not joined any events yet.", label: "Find an event")
                         }
                     } else {
-                        self.showEmptyListView("You have not join any event yet", label: "Find an event")
+                        self.showEmptyListView("You have not joined any events yet.", label: "Find an event")
                     }
                 } else {
                     println("failed to list up confirmedUsers events: \(error)")
@@ -227,7 +228,7 @@ class EventsViewController: UIViewController,
                         self.tableView.reloadData()
                     } else {
                         println("You do not host any events now, count is 0")
-                        self.showEmptyListView("You do not host any event yet.", label: "Create a new event")
+                        self.showEmptyListView("You are not organizing any events yet.", label: "Create a new event")
                     }
                 } else {
                     println("failed to list up admin events: \(error)")
@@ -259,6 +260,11 @@ class EventsViewController: UIViewController,
                         for e in events! {
                             if !e.ownedByUser(currentUser) && !e.userJoined(currentUser) {
                                 filterdEvents.addObject(e)
+                            }
+                            
+                            if e.getTitle() == "Title" || e.getTitle() == "" {
+                                println("Should delete these events")
+                                e.deleteInBackgroundWithBlock(nil)
                             }
                         }
                     } else {

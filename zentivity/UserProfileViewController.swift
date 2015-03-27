@@ -92,7 +92,7 @@ class UserProfileViewController: UIViewController,
                 
                 datasource = [
                     ["icon": "ListEvents", "title": "Events", "action": "listNewEvents"],
-                    ["icon": "addEvent", "title": "Host an event", "action": "addEvent"],
+                    ["icon": "addEvent", "title": "Organize an event", "action": "addEvent"],
                     ["icon": "logoutBlack", "title": "Log Out", "action": "logOut"]
                 ]
             }
@@ -100,7 +100,7 @@ class UserProfileViewController: UIViewController,
             println("Switch menu to login")
             datasource = [
                 ["icon": "ListEvents", "title": "Events", "action": "listNewEvents"],
-                ["icon": "addEvent", "title": "Host an event", "action": "addEvent"],
+                ["icon": "addEvent", "title": "Organize an event", "action": "addEvent"],
                 ["icon": "login", "title": "Log In", "action": "logOut"]
             ]
         }

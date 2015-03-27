@@ -132,21 +132,21 @@ class User : PFUser, PFSubclassing {
     func initialsImageView(imageSize: CGSize!) -> UIImage {
         var firstName: NSString!
         var lastName: NSString!
+        let names = name.componentsSeparatedByString(" ")
         
-//        if let names = name.componentsSeparatedByString(" ") {
-//            if names.count >= 2 {
-//                firstName = names.first!
-//                lastName = names.last!
-//            } else {
-//                firstName = name
-//                lastName = name
-//            }
+            if names.count >= 2 {
+                firstName = names.first!
+                lastName = names.last!
+            } else {
+                firstName = name
+                lastName = name
+            }
 //        } else {
-            let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"]
-            let randomInt1 = Int(arc4random_uniform(27))
-            let randomInt2 = Int(arc4random_uniform(27))
-            firstName = letters[randomInt1]
-            lastName = letters[randomInt2]
+//            let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"]
+//            let randomInt1 = Int(arc4random_uniform(27))
+//            let randomInt2 = Int(arc4random_uniform(27))
+//            firstName = letters[randomInt1]
+//            lastName = letters[randomInt2]
 //        }
         
         let initials = UserInitialsView.initialsForFirstName(firstName, lastName: lastName)

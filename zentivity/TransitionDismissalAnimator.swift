@@ -23,7 +23,7 @@ class TransitionDismissalAnimator: NSObject,
     var animationRatio = CGFloat(0)
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return 1.1
+        return 0.7
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -150,6 +150,10 @@ class TransitionDismissalAnimator: NSObject,
     }
     
     func finishInteractiveTransition() {
+        if (!interactive) {
+            return
+        }
+        
         if transitionContext == nil {
             println("transition Context missing, return from finishe transition")
             return

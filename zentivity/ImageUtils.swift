@@ -46,4 +46,12 @@ class ImageUtils: NSObject {
         view.layer.position = position
         view.layer.anchorPoint = anchorPoint
     }
+    
+    class func initialsImageView(imageSize: CGSize!, firstName: NSString, lastName: NSString) -> UIImage {
+        let initials = UserInitialsView.initialsForFirstName(firstName, lastName: lastName)
+        let frame = CGRectMake(0, 0, imageSize.width, imageSize.height)
+        let initView = UserInitialsView(frame: frame, initials: initials, fontSize: 12, drawOffsetFromCenter: CGPointZero)
+        return initView.convertToImage()
+    }
+
 }
