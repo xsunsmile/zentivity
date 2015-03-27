@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "zentivity-banner-logo.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "zentivity-banner-logo@2x.png"
+      "filename" : "zentivity-banner-logo-v2@2x.png"
     },
     {
       "idiom" : "universal",
