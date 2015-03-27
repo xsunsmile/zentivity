@@ -25,6 +25,7 @@ PODS:
   - HMSegmentedControl (1.3.0)
   - JGProgressHUD (1.2.3)
   - LBBlurredImage (0.2.2)
+  - MGSwipeTableCell (1.4.0)
   - Parse (1.6.4):
     - Bolts (~> 1.1)
   - pop (1.0.7)
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - HMSegmentedControl (~> 1.3.0)
   - JGProgressHUD
   - LBBlurredImage
+  - MGSwipeTableCell
   - Parse
   - pop (~> 1.0)
   - TURecipientBar (~> 1.1.2)
@@ -47,6 +49,7 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 9b3a39b9efd3d370b5d3d7b7cd5430f01a889b0b
   JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
   LBBlurredImage: a25144dd2f8305a391b1a8cefceef189a2bb9ade
+  MGSwipeTableCell: 59643a884736a0a2fb0f07258b7a97b4f4f9000f
   Parse: c2610f7a12ad0defc974803b819c4efe7746e6db
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
   TURecipientBar: 9da38d0a69526b9c5f635d8c10b8905fa38c3f48

@@ -136,6 +136,7 @@ class EventsViewController: UIViewController,
         baseTable.cellHeight = cellHeight
         baseTable.titleIdentifier = titleId
         baseTable.delegate = self
+        baseTable.controller = self
         
         tableView.dataSource = baseTable
         tableView.delegate = baseTable

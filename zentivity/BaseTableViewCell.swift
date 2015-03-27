@@ -8,13 +8,15 @@
 
 import UIKit
 
-class BaseTableViewCell: UITableViewCell {
+class BaseTableViewCell: MGSwipeTableCell {
     
     var data: AnyObject? {
         didSet {
             onDataSet(data!)
         }
     }
+    
+    weak var controller: UIViewController?
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -24,6 +24,7 @@ class BaseTableView: NSObject,
     var titleIdentifier: NSString?
     var cellHeight = CGFloat(150)
     weak var delegate: BaseTableViewDelegate?
+    weak var controller: UIViewController?
     
     init(datasource: [AnyObject], cellIdentifier: NSString) {
         self.datasource = datasource
@@ -34,6 +35,7 @@ class BaseTableView: NSObject,
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as BaseTableViewCell
         cell.data = datasource[indexPath.row]
+        cell.controller = controller
         return cell
     }
     
@@ -64,6 +66,31 @@ class BaseTableView: NSObject,
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return titleSource.count
     }
+//    
+//    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return true
+//    }
+//    
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+//            datasource.removeAtIndex(indexPath.row)
+//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+//            tableView.reloadData()
+//        }
+//    }
+    
+//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+//        var joinAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Join" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+//            let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
+//            
+//            let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
+//            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+//            
+//            shareMenu.addAction(twitterAction)
+//            shareMenu.addAction(cancelAction)
+//        })
+//        return [joinAction]
+//    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if let delegate = delegate {

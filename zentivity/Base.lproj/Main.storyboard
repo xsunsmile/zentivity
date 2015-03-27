@@ -327,7 +327,7 @@
                                         </collectionReusableView>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="zWu-PZ-u61" firstAttribute="top" secondItem="VqE-LX-z6F" secondAttribute="top" id="2LS-gT-tPA"/>
@@ -1140,9 +1140,6 @@
                             <constraint firstItem="Fgo-pU-Lb1" firstAttribute="top" secondItem="ftt-N0-B1L" secondAttribute="top" id="v2b-N3-WIl"/>
                             <constraint firstAttribute="bottom" secondItem="Fgo-pU-Lb1" secondAttribute="bottom" id="yHq-W6-Xgf"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="y5N-9q-xPe" appends="YES" id="pdC-c4-cnl"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Main" id="J7b-4e-r7h"/>
                     <connections>
@@ -1151,11 +1148,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LtO-hT-a63" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="y5N-9q-xPe">
-                    <connections>
-                        <action selector="onMainViewPan:" destination="OV4-jZ-hgO" id="9L1-VP-LV6"/>
-                    </connections>
-                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="y5N-9q-xPe"/>
             </objects>
             <point key="canvasLocation" x="1191" y="1219"/>
         </scene>

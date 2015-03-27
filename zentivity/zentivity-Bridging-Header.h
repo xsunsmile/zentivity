@@ -12,4 +12,6 @@
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import "TURecipientsBar.h"
 #import "TURecipient.h"
+#import "MGSwipeTableCell.h"
+#import "MGSwipeButton.h"
 //#import "ZFModalTransitionAnimator.h"

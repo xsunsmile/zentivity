@@ -180,6 +180,10 @@ class TransitionDismissalAnimator: NSObject,
     }
     
     func cancelInteractiveTransition() {
+        if (!interactive) {
+            return
+        }
+        
         if transitionContext == nil {
             println("transition Context missing, return from cancel transition")
             return

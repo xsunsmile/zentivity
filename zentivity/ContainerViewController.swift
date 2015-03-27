@@ -80,7 +80,7 @@ class ContainerViewController: UIViewController,
         mainNVC!.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         
         if hasNav {
-            nav.hidesBarsOnSwipe = true
+//            nav.hidesBarsOnSwipe = true
             nav.navigationBar.translucent = true
             nav.navigationBar.tintColor = UIColor(rgba: "#4fadd9")
             nav.navigationBar.barTintColor = UIColor(rgba: "#ebebf1")

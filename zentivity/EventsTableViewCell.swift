@@ -12,6 +12,7 @@ protocol EventsTableViewCellDelegate: class {
 }
 
 var kEditEventNotification = "kEditEventNotification"
+var kJoinEventNotification = "kJoinEventNotification"
 
 class EventsTableViewCell: BaseTableViewCell {
     @IBOutlet weak var eventNameLabel: UILabel!
@@ -26,7 +27,7 @@ class EventsTableViewCell: BaseTableViewCell {
     let dateFormatter = NSDateFormatter()
     var colors = ["#31b639", "#ffcf00", "#c61800", "1851ce"]
     var appliedGradient = false
-    weak var delegate: EventsTableViewCellDelegate?
+//    weak var delegate: EventsTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,8 +41,8 @@ class EventsTableViewCell: BaseTableViewCell {
                 // Blue border for button
                 let borderWidth = CGFloat(1.0)
                 let borderColor = UIColor(rgba: "#A2D6E6").CGColor
-                joinView.layer.borderColor = borderColor
-                joinView.layer.borderWidth = borderWidth
+                self.joinView.layer.borderColor = borderColor
+                self.joinView.layer.borderWidth = borderWidth
             }
         } else {
             joinButton.hidden = true
@@ -70,7 +71,7 @@ class EventsTableViewCell: BaseTableViewCell {
         
         if let currentUser = User.currentUser() {
             if event.ownedByUser(currentUser) {
-                delegate?.editEvent(event)
+//                delegate?.editEvent(event)
                 NSNotificationCenter.defaultCenter().postNotificationName(kEditEventNotification, object: nil, userInfo: ["event": event])
             } else {
                 toggleJoin()
@@ -126,12 +127,56 @@ class EventsTableViewCell: BaseTableViewCell {
             locationLabel.text = "1019 Market Street, San Francisco, CA 94103"
         }
         
+        joinButton.setTitle(joinButtonTitle(), forState: .Normal)
+        
+        leftExpansion.fillOnTrigger = true
+        leftExpansion.threshold = 2
+        leftExpansion.buttonIndex = 0
+        
+        //configure left buttons
+        let joinView = MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
+            let cell = cell as EventsTableViewCell
+            let me = cell.controller as? EventsViewController
+            let indexPath = me!.tableView.indexPathForCell(cell)
+            if event.ownedByUser(User.currentUser()) {
+                println("should edit event")
+                self.leftExpansion.fillOnTrigger = false
+                me!.performSegueWithIdentifier("createEvent", sender: event)
+                cell.hideSwipeAnimated(false)
+            } else {
+                cell.toggleJoin()
+                me!.baseTable.datasource.removeAtIndex(indexPath!.row)
+                me!.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Right)
+            }
+            return false
+        }
+        
+        // MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), padding: 10)
+        leftButtons = [ joinView ]
+        leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
+    }
+    
+    func joinButtonTitle() -> NSString {
+        let event = data as Event
         if event.ownedByUser(User.currentUser()) {
-            joinButton.setTitle("Edit", forState: .Normal)
+            return "Edit"
         } else if event.userJoined(User.currentUser()) {
-            joinButton.setTitle("Cancel", forState: .Normal)
+            return "Cancel"
         } else {
-            joinButton.setTitle("Join", forState: .Normal)
+            return "Join"
+        }
+    }
+    
+    func joinButtonColor() -> UIColor {
+        let event = data as Event
+        if event.ownedByUser(User.currentUser()) {
+            return UIColor.grayColor()
+        } else {
+            if event.userJoined(User.currentUser()) {
+                return UIColor(rgba: "#3366cc")
+            } else {
+                return UIColor(rgba: "#dd4b39")
+            }
         }
     }
     
