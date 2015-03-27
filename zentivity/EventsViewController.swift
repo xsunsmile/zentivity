@@ -408,6 +408,7 @@ class EventsViewController: UIViewController,
     
     // MARK: - Search Bar
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        datasource = baseTable.datasource
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -426,16 +427,18 @@ class EventsViewController: UIViewController,
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if countElements(searchBar.text) == 0 {
             filters = Dictionary<String, String>()
+            baseTable.datasource = self.datasource
+            tableView.reloadData()
         } else {
-            datasource = []
-            for e in baseTable.datasource {
+            let filterdDatasource = NSMutableArray()
+            for e in self.datasource {
                 let e = e as Event
                 if e.getTitle().lowercaseString.rangeOfString(searchText.lowercaseString) != nil {
-                    datasource.append(e)
+                    filterdDatasource.addObject(e)
                 }
             }
             
-            baseTable.datasource = self.datasource
+            baseTable.datasource = filterdDatasource
             tableView.reloadData()
         }
     }
