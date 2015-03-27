@@ -122,16 +122,19 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         if let tempPhotos = event?.photos {
             for photo in tempPhotos {
                 let photo = photo as Photo
-                photo.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
-                    if error == nil {
-                        let image = UIImage(data: imageData)
-                        self.photos.addObject(image!)
-                        
-                        println(self.photos)
-                        self.photosCollection.reloadData()
-                    } else {
-                        println("ERROR")
-                    }
+                photo.fetchIfNeededInBackgroundWithBlock({ (photo, error) -> Void in
+                    let photo = photo as Photo
+                    photo.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                        if error == nil {
+                            let image = UIImage(data: imageData)
+                            self.photos.addObject(image!)
+                            
+                            println(self.photos)
+                            self.photosCollection.reloadData()
+                        } else {
+                            println("ERROR")
+                        }
+                    })
                 })
             }
         }

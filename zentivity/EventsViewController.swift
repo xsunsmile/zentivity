@@ -190,6 +190,7 @@ class EventsViewController: UIViewController,
                         }
                         
                         if filterdEvents.count > 0 {
+                            self.removeEmptyListView()
                             self.baseTable.datasource = filterdEvents
                             self.tableView.reloadData()
                         } else {
@@ -220,9 +221,12 @@ class EventsViewController: UIViewController,
                 
                 if error == nil {
                     if events.count > 0 {
+                        self.removeEmptyListView()
+                        println("You host events now, count is \(events.count)")
                         self.baseTable.datasource = events
                         self.tableView.reloadData()
                     } else {
+                        println("You do not host any events now, count is 0")
                         self.showEmptyListView("You do not host any event yet.", label: "Create a new event")
                     }
                 } else {
