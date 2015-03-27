@@ -229,7 +229,8 @@ class EventDetailViewController: UIViewController,
                 
                 let annotation = MKPointAnnotation()
                 annotation.setCoordinate(center)
-                annotation.title = self.event.getTitle()
+                let title = self.event.getTitle() as String
+                annotation.title = title.truncate(25, trailing: "...")
                 self.mapView.addAnnotation(annotation)
                 self.mapView.selectAnnotation(annotation, animated: true)
             } else {
@@ -256,23 +257,18 @@ class EventDetailViewController: UIViewController,
         driveButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
         
         pinAnnotationView.leftCalloutAccessoryView = driveButton
-        pinAnnotationView.leftCalloutAccessoryView.frame = CGRectMake(10, 10, 20, 20)
         
         return pinAnnotationView
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        println("clicked on \(view.annotation)")
         if let annotation = view.annotation as? MKPointAnnotation {
-            // self.mapView.removeAnnotation(annotation)
-            
             let currentLocation = MKMapItem.mapItemForCurrentLocation()
             let place = MKPlacemark(placemark: self.eventPlaceMark)
             let destination = MKMapItem(placemark: place)
             destination.name = self.event.getTitle()
             let items = NSArray(objects: currentLocation, destination)
             let options = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
-            println("Clicked on \(items)")
             MKMapItem.openMapsWithItems(items, launchOptions: options)
         }
     }

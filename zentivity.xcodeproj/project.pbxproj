@@ -36,6 +36,7 @@
 		687D78801AACE96100E5605C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5425DEE11AA8C9E0001F5CD5 /* LaunchScreen.xib */; };
 		6894AA7D1AAA87F400401171 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6894AA7C1AAA87F400401171 /* ParseClient.swift */; };
 		93058C7F1AC6073200C70C56 /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93058C7E1AC6073200C70C56 /* PinAnnotation.swift */; };
+		93058C811AC619A300C70C56 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93058C801AC619A300C70C56 /* StringExtension.swift */; };
 		931567861AB4CA5000D279EF /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931567851AB4CA5000D279EF /* ShadowButton.swift */; };
 		9315678A1AB5E90500D279EF /* UserInitialsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 931567891AB5E90500D279EF /* UserInitialsView.m */; };
 		9315678E1AB5F5A400D279EF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9315678D1AB5F5A400D279EF /* UIViewExtension.swift */; };
@@ -129,6 +130,7 @@
 		6CB1175D1CF9C92D24F4E80E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9CA5CE0D0774940F2AB24C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		93058C7E1AC6073200C70C56 /* PinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
+		93058C801AC619A300C70C56 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		931567851AB4CA5000D279EF /* ShadowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowButton.swift; sourceTree = "<group>"; };
 		931567881AB5E90500D279EF /* UserInitialsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInitialsView.h; sourceTree = "<group>"; };
 		931567891AB5E90500D279EF /* UserInitialsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInitialsView.m; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			children = (
 				935B4BFC1AAD134D00D3425F /* UIColorExtension.swift */,
 				9315678D1AB5F5A400D279EF /* UIViewExtension.swift */,
+				93058C801AC619A300C70C56 /* StringExtension.swift */,
 			);
 			name = CoreExtensions;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				687D787D1AACE92000E5605C /* Event.swift in Sources */,
 				936FCC271AC1384F00A5F438 /* TransitionDelegate.swift in Sources */,
 				936FE7A71ABF7E820033B107 /* SearchFilterView.swift in Sources */,
+				93058C811AC619A300C70C56 /* StringExtension.swift in Sources */,
 				939540421AB2BD7700CF520A /* LabelCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

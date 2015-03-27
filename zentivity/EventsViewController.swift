@@ -424,23 +424,24 @@ class EventsViewController: UIViewController,
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if !searchBar.isFirstResponder() && countElements(searchBar.text) == 0 {
-            if searchBarJustResigned == true {
-                searchBarJustResigned = false
-            } else {
-                filters = Dictionary<String, String>()
-                refresh(true)
-                searchBar.resignFirstResponder()
+        if countElements(searchBar.text) == 0 {
+            filters = Dictionary<String, String>()
+        } else {
+            datasource = []
+            for e in baseTable.datasource {
+                let e = e as Event
+                if e.getTitle().lowercaseString.rangeOfString(searchText.lowercaseString) != nil {
+                    datasource.append(e)
+                }
             }
-            searchBar.resignFirstResponder()
-        } else if searchBar.isFirstResponder() && countElements(searchBar.text) == 0 {
-            searchBar.resignFirstResponder()
-            searchBarJustResigned = true
+            
+            baseTable.datasource = self.datasource
+            tableView.reloadData()
         }
     }
     
     func toggleSearchBar() {
-        UIView.transitionWithView(titleView, duration: 0.7, options: .TransitionCrossDissolve, animations: { () -> Void in
+        UIView.transitionWithView(titleView, duration: 0.4, options: .TransitionCrossDissolve, animations: { () -> Void in
             self.filters = Dictionary<String, String>()
             if self.searchIsOn {
                 self.searchBarView.removeFromSuperview()
