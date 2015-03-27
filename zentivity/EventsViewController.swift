@@ -20,7 +20,7 @@ class EventsViewController: UIViewController,
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
-    let cellId = "EventsTableViewCell"
+    let cellId = "FlatEeventTableViewCell" // "EventsTableViewCell"
     let titleId = "EventHeaderTableViewCell"
     let cellHeight = CGFloat(150)
     let menuTitles = ["New", "Attending", "Hosting"]

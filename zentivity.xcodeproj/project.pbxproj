@@ -62,6 +62,8 @@
 		93BF2AF81AC38F2C00CAE47C /* FlatEeventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BF2AF61AC38F2C00CAE47C /* FlatEeventTableViewCell.swift */; };
 		93BF2AF91AC38F2C00CAE47C /* FlatEeventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BF2AF71AC38F2C00CAE47C /* FlatEeventTableViewCell.xib */; };
 		93D311261AABA607009259E8 /* GoogleClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D311251AABA607009259E8 /* GoogleClient.swift */; };
+		93D977201AC5146F00AF3F8D /* EventImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9771E1AC5146F00AF3F8D /* EventImageCollectionViewCell.swift */; };
+		93D977211AC5146F00AF3F8D /* EventImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9771F1AC5146F00AF3F8D /* EventImageCollectionViewCell.xib */; };
 		93EEA9321AABCD3000E04811 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEA9311AABCD3000E04811 /* LoginView.swift */; };
 		93EEA9341AABCD5800E04811 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EEA9331AABCD5800E04811 /* LoginView.xib */; };
 		93EEA9361AABE58200E04811 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEA9351AABE58200E04811 /* AppViewController.swift */; };
@@ -157,6 +159,8 @@
 		93BF2AF61AC38F2C00CAE47C /* FlatEeventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatEeventTableViewCell.swift; sourceTree = "<group>"; };
 		93BF2AF71AC38F2C00CAE47C /* FlatEeventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlatEeventTableViewCell.xib; sourceTree = "<group>"; };
 		93D311251AABA607009259E8 /* GoogleClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleClient.swift; sourceTree = "<group>"; };
+		93D9771E1AC5146F00AF3F8D /* EventImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		93D9771F1AC5146F00AF3F8D /* EventImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		93EEA9311AABCD3000E04811 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		93EEA9331AABCD5800E04811 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		93EEA9351AABE58200E04811 /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 				93F6A72F1ABE810B00C6FDE8 /* EmptyTableView.xib */,
 				936FE7A61ABF7E820033B107 /* SearchFilterView.swift */,
 				936FE7A81ABF7E970033B107 /* SearchFilterView.xib */,
+				93D9771E1AC5146F00AF3F8D /* EventImageCollectionViewCell.swift */,
+				93D9771F1AC5146F00AF3F8D /* EventImageCollectionViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -512,6 +518,7 @@
 				549113A81AA96CAF00000861 /* EventsTableViewCell.xib in Resources */,
 				93BF2AF91AC38F2C00CAE47C /* FlatEeventTableViewCell.xib in Resources */,
 				93F6A7301ABE810B00C6FDE8 /* EmptyTableView.xib in Resources */,
+				93D977211AC5146F00AF3F8D /* EventImageCollectionViewCell.xib in Resources */,
 				549113BA1AA992AE00000861 /* MenuView.xib in Resources */,
 				939540431AB2BD7700CF520A /* LabelCollectionReusableView.xib in Resources */,
 				5425DEDE1AA8C9E0001F5CD5 /* Main.storyboard in Resources */,
@@ -586,6 +593,7 @@
 				937210D31AB7F3EF009FCD9F /* EventHeaderTableViewCell.swift in Sources */,
 				5425DEDB1AA8C9E0001F5CD5 /* ViewController.swift in Sources */,
 				681A54441AAD0E1200C635D5 /* Comment.swift in Sources */,
+				93D977201AC5146F00AF3F8D /* EventImageCollectionViewCell.swift in Sources */,
 				936FCC251AC12B4900A5F438 /* CircleTransitionAnimator.swift in Sources */,
 				935B4C011AAD1EE600D3425F /* BaseTableView.swift in Sources */,
 				545763C01AB51D910027F56E /* NewEventViewController.swift in Sources */,
