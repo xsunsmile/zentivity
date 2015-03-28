@@ -177,6 +177,10 @@ class EventsTableViewCell: BaseTableViewCell {
                 
                 me!.baseTable.datasource.removeAtIndex(indexPath!.row)
                 me!.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Left)
+                
+                if me!.baseTable.datasource.count == 0 {
+                    me!.showEmptyListView("You are not organizing any events yet.", label: "Create a new event")
+                }
                 return false
             }
             
@@ -215,6 +219,10 @@ class EventsTableViewCell: BaseTableViewCell {
                 cell.toggleJoin()
                 me!.baseTable.datasource.removeAtIndex(indexPath!.row)
                 me!.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Left)
+                
+                if me!.baseTable.datasource.count == 0 {
+                    me!.showEmptyListView("You have not joined any events yet.", label: "Find an event")
+                }
                 return false
             }
             
