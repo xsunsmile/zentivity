@@ -35,26 +35,26 @@ class Event : PFObject, PFSubclassing {
         }
     }
     
-    class func parseClassName() -> String! {
+    class func parseClassName() -> String {
         return "Event"
     }
     
     class func listWithOptionsAndCompletion(options: NSDictionary?, completion: (events: [Event]?, error: NSError!) -> ()) {
         var query = Event.query()
-        query.includeKey("admin")
-        query.orderByDescending("startTime")
+        query!.includeKey("admin")
+        query!.orderByDescending("startTime")
         
         // Build query
         if let options = options {
             if let title = options["title"] as? String {
-                query.whereKey("lowcaseTitle", containsString: title.lowercaseString)
+                query!.whereKey("lowcaseTitle", containsString: title.lowercaseString)
             }
         }
         
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+        query!.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                let events = objects as [Event]
+                let events = objects as! [Event]
                 completion(events: events, error: nil)
             } else {
                 completion(events: nil, error: error)
@@ -80,16 +80,16 @@ class Event : PFObject, PFSubclassing {
     }
     
     func startTimeWithFormat(format: NSString?) -> NSString {
-        if format == nil {
-            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        if let format = format {
+            dateFormatter.dateFormat = "\(format)"
         } else {
-            dateFormatter.dateFormat = format
+            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         }
         return dateFormatter.stringFromDate(startTime)
     }
     
     func createWithCompletion(completion: (success: Bool!, error: NSError!) -> ()) {
-        self.admin = PFUser.currentUser()
+        self.admin = PFUser.currentUser()!
         self.confirmedUsers = [self.admin]
         self.declinedUsers = []
         self.lowercaseTitle = title.lowercaseString
@@ -112,7 +112,7 @@ class Event : PFObject, PFSubclassing {
     
     func addPhotoWithCompletion(image: UIImage, completion: (success: Bool!, error: NSError!) -> ()) {
         var photo = Photo()
-        photo.user = PFUser.currentUser()
+        photo.user = PFUser.currentUser()!
         photo.file = PFFile(name:"image.png", data: UIImagePNGRepresentation(image))
 
         if self.photos == nil { self.photos = NSMutableArray() }
@@ -125,7 +125,7 @@ class Event : PFObject, PFSubclassing {
     
     func addCommentWithCompletion(text: String, completion: (success: Bool!, error: NSError!) -> ()) {
         var comment = Comment()
-        comment.user = PFUser.currentUser()
+        comment.user = PFUser.currentUser()!
         comment.text = text
         
         if self.comments == nil { self.comments = NSMutableArray() }

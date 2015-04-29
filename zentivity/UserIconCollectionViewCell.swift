@@ -17,9 +17,9 @@ class UserIconCollectionViewCell: UICollectionViewCell {
             user?.fetchIfNeededInBackgroundWithBlock({ (user, error) -> Void in
                 if error == nil {
                     self.userNameLabel.hidden = true
-                    let user = user as User
+                    let user = user as! User
 //                    if let imageUrl = user.imageUrl {
-                        if countElements(user.imageUrl) > 0 && user.imageUrl.rangeOfString("techrepublic") == nil {
+                        if count(user.imageUrl) > 0 && user.imageUrl.rangeOfString("techrepublic") == nil {
                             let url = NSURL(string: user.imageUrl)
                             println("user image url: \(url)")
                             self.userImageView.setImageWithURL(url)

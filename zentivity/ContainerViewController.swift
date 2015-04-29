@@ -36,7 +36,7 @@ class ContainerViewController: UIViewController,
         mainViewLeftPos = view.center.x + view.bounds.width - 60.0
         mainViewRightPos = view.center.x
         
-        menuVC = storyboard?.instantiateViewControllerWithIdentifier("UserProfileViewController") as UserProfileViewController
+        menuVC = storyboard?.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
         menuVC.delegate = self
         
         mainView.layer.shadowColor = UIColor.blackColor().CGColor
@@ -75,7 +75,7 @@ class ContainerViewController: UIViewController,
         removeCurrentViewController()
         let nav = UINavigationController()
         
-        mainNVC = storyboard?.instantiateViewControllerWithIdentifier(controllerName) as? UIViewController
+        mainNVC = storyboard?.instantiateViewControllerWithIdentifier(controllerName as String) as? UIViewController
         println("add burger menu icon")
         mainNVC!.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         

@@ -72,7 +72,7 @@ class EventsTableViewCell: BaseTableViewCell {
     }
 
     @IBAction func onJoinTapped(sender: AnyObject) {
-        let event = data as Event
+        let event = data as! Event
         
         if let currentUser = User.currentUser() {
             if event.ownedByUser(currentUser) {
@@ -91,8 +91,8 @@ class EventsTableViewCell: BaseTableViewCell {
 //            joinButton.setTitle("Cancel", forState: .Normal)
 //        }
         
-        let event = data as Event
-        User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+        let event = data as! Event
+        User.currentUser()!.toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
             if state == kUserJoinEvent {
                 if success != nil {
 //                    self.joinButton.setTitle("Cancel", forState: .Normal)
@@ -108,12 +108,12 @@ class EventsTableViewCell: BaseTableViewCell {
             return
         }
         
-        let event = data as Event
+        let event = data as! Event
         
 //        refreshDistance()
        
-        eventNameLabel.text = event.getTitle()
-        eventDateLabel.text = event.startTimeWithFormat("EEEE MMM d, hh:mm a")
+        eventNameLabel.text = event.getTitle() as String
+        eventDateLabel.text = event.startTimeWithFormat("EEEE MMM d, hh:mm a") as String
         
         NumAttendeeLabel.text = "\(event.confirmedUsers.count)"
         let duration = event.endTime.timeIntervalSinceDate(event.startTime)
@@ -130,7 +130,7 @@ class EventsTableViewCell: BaseTableViewCell {
             var thumbnail = event.thumbnail
             thumbnail.getDataInBackgroundWithBlock({ (data, error) -> Void in
                 if error == nil {
-                    self.eventBackgroundImageView.image = UIImage(data: data)
+                    self.eventBackgroundImageView.image = UIImage(data: data!)
                 } else {
                     self.eventBackgroundImageView.image = UIImage(named: "noActivity")
                 }
@@ -153,7 +153,7 @@ class EventsTableViewCell: BaseTableViewCell {
             leftExpansion.buttonIndex = 0
             
             let editView = MGSwipeButton(title: "Edit", backgroundColor: UIColor.grayColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
-                let cell = cell as EventsTableViewCell
+                let cell = cell as! EventsTableViewCell
                 let me = cell.controller as? EventsViewController
                 let indexPath = me!.tableView.indexPathForCell(cell)
                 me!.performSegueWithIdentifier("createEvent", sender: event)
@@ -165,7 +165,7 @@ class EventsTableViewCell: BaseTableViewCell {
             leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
             
             let deleteView = MGSwipeButton(title: "Delete", backgroundColor: UIColor(rgba: "#3366cc"), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
-                let cell = cell as EventsTableViewCell
+                let cell = cell as! EventsTableViewCell
                 let me = cell.controller as? EventsViewController
                 let indexPath = me!.tableView.indexPathForCell(cell)
                 
@@ -191,8 +191,8 @@ class EventsTableViewCell: BaseTableViewCell {
             leftExpansion.threshold = 2.5
             leftExpansion.buttonIndex = 0
             
-            let joinView = MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
-                let cell = cell as EventsTableViewCell
+            let joinView = MGSwipeButton(title: joinButtonTitle() as String, backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
+                let cell = cell as! EventsTableViewCell
                 let me = cell.controller as? EventsViewController
                 let indexPath = me!.tableView.indexPathForCell(cell)
                 if event.ownedByUser(User.currentUser()) {
@@ -212,8 +212,8 @@ class EventsTableViewCell: BaseTableViewCell {
             leftButtons = [ joinView ]
             leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
         } else {
-            let cancelView = MGSwipeButton(title: joinButtonTitle(), backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
-                let cell = cell as EventsTableViewCell
+            let cancelView = MGSwipeButton(title: joinButtonTitle() as String, backgroundColor: joinButtonColor(), insets: UIEdgeInsetsMake(30, 15, 30, 15)) { (cell) -> Bool in
+                let cell = cell as! EventsTableViewCell
                 let me = cell.controller as? EventsViewController
                 let indexPath = me!.tableView.indexPathForCell(cell)
                 cell.toggleJoin()
@@ -233,7 +233,7 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func refreshDistance() {
-        let event = data as Event
+        let event = data as! Event
         let zendeskLoc = CLLocation(latitude: 37.782193, longitude: -122.410254)
         
         var address = "1019 Market Street, San Francisco, CA"
@@ -244,7 +244,7 @@ class EventsTableViewCell: BaseTableViewCell {
         println("event location is \(address)")
         LocationUtils.sharedInstance.getGeocodeFromAddress(address, completion: { (places, error) -> () in
             if error == nil {
-                let places = places as [CLPlacemark]
+                let places = places as! [CLPlacemark]
                 let target = places.last
                 let currentLocation = CLLocation(latitude: target!.location.coordinate.latitude, longitude: target!.location.coordinate.longitude)
                 let rawDistance = 1000*zendeskLoc.distanceFromLocation(currentLocation)/(1609.344*1000)
@@ -262,7 +262,7 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func joinButtonTitle() -> NSString {
-        let event = data as Event
+        let event = data as! Event
         if event.ownedByUser(User.currentUser()) {
             return "Edit"
         } else if event.userJoined(User.currentUser()) {
@@ -273,7 +273,7 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func joinButtonColor() -> UIColor {
-        let event = data as Event
+        let event = data as! Event
         if event.ownedByUser(User.currentUser()) {
             return UIColor.grayColor()
         } else {

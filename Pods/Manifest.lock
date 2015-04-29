@@ -21,12 +21,17 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AMScrollingNavbar (1.3.4)
-  - Bolts (1.1.4)
+  - Bolts (1.1.5):
+    - Bolts/AppLinks (= 1.1.5)
+    - Bolts/Tasks (= 1.1.5)
+  - Bolts/AppLinks (1.1.5):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.1.5)
   - HMSegmentedControl (1.3.0)
   - JGProgressHUD (1.2.3)
   - LBBlurredImage (0.2.2)
   - MGSwipeTableCell (1.4.0)
-  - Parse (1.6.4):
+  - Parse (1.7.2):
     - Bolts (~> 1.1)
   - pop (1.0.7)
   - TURecipientBar (1.1.2)
@@ -43,15 +48,15 @@ DEPENDENCIES:
   - TURecipientBar (~> 1.1.2)
 
 SPEC CHECKSUMS:
-  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  AMScrollingNavbar: 8181b57cc5f3b44ce53f9c0a957eb078c950d6d9
-  Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
-  HMSegmentedControl: 9b3a39b9efd3d370b5d3d7b7cd5430f01a889b0b
-  JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
-  LBBlurredImage: a25144dd2f8305a391b1a8cefceef189a2bb9ade
-  MGSwipeTableCell: 59643a884736a0a2fb0f07258b7a97b4f4f9000f
-  Parse: c2610f7a12ad0defc974803b819c4efe7746e6db
-  pop: 2f14a1ea61339767af9e66741b418c831b3844df
-  TURecipientBar: 9da38d0a69526b9c5f635d8c10b8905fa38c3f48
+  AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
+  AMScrollingNavbar: 3318f0cc0fd24c972d5e8c84112edcfe61529506
+  Bolts: aac24961496d504aa56fc267cde95162a71bac39
+  HMSegmentedControl: ea2d0c15ad9812b000874c3a4a51e302d0d082f2
+  JGProgressHUD: 02eb5fc5f1069dc3a6aaf74a0da06f05c2546f32
+  LBBlurredImage: 700634c17922bc2d22343118e7deb6a3ca12db43
+  MGSwipeTableCell: 5983289f522859cb03a888dc321cc54720350515
+  Parse: e1959adb9fe2fcd4736dac20b3ac691d47a4f06c
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  TURecipientBar: 004a43a62f7547c588019909302cb05c288a7fa5
 
 COCOAPODS: 0.35.0

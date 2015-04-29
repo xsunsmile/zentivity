@@ -27,10 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginToParseWithUserInfo(userInfo: NSDictionary) {
-        let email = userInfo["email"] as String
-        let name = userInfo["name"] as String
-        let image = userInfo["imageUrl"] as String
-        let aboutMe = userInfo["aboutMe"] as String
+        let email = userInfo["email"] as! String
+        let name = userInfo["name"] as! String
+        let image = userInfo["imageUrl"] as! String
+        let aboutMe = userInfo["aboutMe"] as! String
         
         PFCloud.callFunctionInBackground("getUserSessionToken", withParameters: ["username" : email]) { (sessionToken, error) -> Void in
             if let sessionToken = sessionToken as? String {
@@ -38,10 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if error == nil {
                         // Found user with sessionToken
                         println("Logged in user with session token")
-                        User.currentUser().name = name
-                        User.currentUser().imageUrl = image
-                        User.currentUser().aboutMe = aboutMe
-                        User.currentUser().saveInBackgroundWithBlock({ (success, error) -> Void in
+                        User.currentUser()!.name = name
+                        User.currentUser()!.imageUrl = image
+                        User.currentUser()!.aboutMe = aboutMe
+                        User.currentUser()!.saveInBackgroundWithBlock({ (success, error) -> Void in
                             // Nothing now
                         })
                         self.showEventsVC()
@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func showEventsVC() {
         let scence = "MenuViewController"
-        let vc = storyboard.instantiateViewControllerWithIdentifier(scence) as UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier(scence) as! UIViewController
         window?.rootViewController = vc
     }
 

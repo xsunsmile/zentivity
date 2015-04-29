@@ -57,7 +57,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         setup()
 
-        friendPickerVC = storyboard?.instantiateViewControllerWithIdentifier("FriendPickerVC") as FriendPickerVC
+        friendPickerVC = storyboard?.instantiateViewControllerWithIdentifier("FriendPickerVC") as! FriendPickerVC
         friendPickerVC.delegate = self
         invitedCollection.delegate = self
         invitedCollection.dataSource = self
@@ -121,12 +121,12 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         
         if let tempPhotos = event?.photos {
             for photo in tempPhotos {
-                let photo = photo as Photo
+                let photo = photo as! Photo
                 photo.fetchIfNeededInBackgroundWithBlock({ (photo, error) -> Void in
-                    let photo = photo as Photo
+                    let photo = photo as! Photo
                     photo.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                         if error == nil {
-                            let image = UIImage(data: imageData)
+                            let image = UIImage(data: imageData!)
                             self.photos.addObject(image!)
                             
                             println(self.photos)
@@ -139,7 +139,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
             }
         }
 
-        let invitedUsers = event!.invitedUsers as Array as [User]
+        let invitedUsers = event!.invitedUsers as Array as! [User]
         invited = invitedUsers
         invitedCollection.reloadData()
     }
@@ -272,11 +272,11 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         event.locationString = addressField.text
 //        event.contactNumber = PFUser.currentUser().contactNumber
         event.descript = descriptionField.text
-        event.admin = PFUser.currentUser()
+        event.admin = PFUser.currentUser()!
         event.startTime = startTimePicker.date
         event.endTime = endTimePicker.date
-        event.photos = Photo.photosFromImages(photos as NSArray as [UIImage])
-        let invUsernames = invitedUsernames as [AnyObject] as [String]
+        event.photos = Photo.photosFromImages(photos as NSArray as! [UIImage])
+        let invUsernames = invitedUsernames as [AnyObject] as! [String]
         event.invitedUsernames = invUsernames
         
         if self.isEditingMode() { saveEvent(event) }
@@ -330,7 +330,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         self.dismissViewControllerAnimated(true, completion: nil)
         self.event = nil
         
-        let containerVC = self.navigationController?.parentViewController as ContainerViewController
+        let containerVC = self.navigationController?.parentViewController as! ContainerViewController
         containerVC.closeMenuAndDo("listNewEvents")
     }
     
@@ -350,14 +350,14 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
             var cell: UICollectionViewCell
             
             if indexPath.row < photos.count {
-                cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as UICollectionViewCell
-                var imageView = UIImageView(image: photos[indexPath.row] as UIImage)
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! UICollectionViewCell
+                var imageView = UIImageView(image: photos[indexPath.row] as! UIImage)
                 imageView.frame.size = CGSize(width: 45, height: 45)
                 cell.addSubview(imageView)
                 cell.layer.borderWidth = 1
                 cell.layer.borderColor = UIColor.lightGrayColor().CGColor
             } else {
-                cell = collectionView.dequeueReusableCellWithReuseIdentifier("addActionCell", forIndexPath: indexPath) as UICollectionViewCell
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier("addActionCell", forIndexPath: indexPath) as! UICollectionViewCell
             }
             
             cell.layer.cornerRadius = 3
@@ -367,7 +367,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         } else {
             
             println("cell for invited")
-            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserGridViewCell", forIndexPath: indexPath) as UserIconCollectionViewCell
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserGridViewCell", forIndexPath: indexPath) as! UserIconCollectionViewCell
             cell.user = invited[indexPath.row]
             return cell
         }
@@ -378,7 +378,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.photos.addObject(image)
         self.photosCollection.reloadData()
         self.imagePicker.dismissViewControllerAnimated(true, completion: nil)
@@ -450,7 +450,7 @@ class NewEventViewController: UITableViewController, UICollectionViewDataSource,
         
         for user in invited {
             let user = user as User
-            invitedUsernames.addObject(user.username)
+            invitedUsernames.addObject(user.username!)
         }
         
         invitedCollection.reloadData()

@@ -25,7 +25,7 @@ class EventTableViewCell: BaseTableViewCell {
     }
     
     override func refresh() {
-        let d = data as Event
+        let d = data as! Event
         eventNameLabel.text = d.title
     }
 

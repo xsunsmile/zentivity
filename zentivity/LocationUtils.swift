@@ -21,11 +21,11 @@ class LocationUtils: NSObject {
     }
     
     func getPlacemarkFromLocationWithCompletion(location: CLLocation, completion: (places: [AnyObject]?, error: NSError?) -> ()){
-        geoCoder.reverseGeocodeLocation(location, completion)
+        geoCoder.reverseGeocodeLocation(location, completionHandler: completion)
     }
     
     func getGeocodeFromAddress(address: NSString, completion: (places: [AnyObject]!, error: NSError!) -> ()) {
-        geoCoder.geocodeAddressString(address, completion)
+        geoCoder.geocodeAddressString(address as String, completionHandler: completion)
     }
 
 }

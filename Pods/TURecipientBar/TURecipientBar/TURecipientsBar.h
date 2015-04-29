@@ -138,7 +138,7 @@
  
  This will both add the recipient to the array of recipients and will also update the view, whether it is in searching mode or not.
  
- @param recipient A recipient to add.
+@param recipient A recipient to add.
  */
 - (void)addRecipient:(id<TURecipient>)recipient;
 
@@ -326,9 +326,6 @@
  @param recipient The recipient that was selected.
  */
 - (void)recipientsBar:(TURecipientsBar *)recipientsBar didSelectRecipient:(id<TURecipient>)recipient;
-
-
-- (void)recipientsBar:(TURecipientsBar *)recipientsBar didRemoveRecipient:(NSString *)objectId;
 
 /**---------------------------------------------------------------------------------------
  * @name Clicking Buttons

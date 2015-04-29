@@ -18,9 +18,9 @@ class ParseClient: NSObject {
         query.whereKey("username", containedIn: usernames)
         
         query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                completion(users: objects as [PFUser], error: nil)
+                completion(users: objects as! [PFUser], error: nil)
             } else {
                 completion(users: [], error: error)
             }
@@ -32,12 +32,12 @@ class ParseClient: NSObject {
             user.contactNumber = self.randomPhoneNumber()
 //        }
         user.signUpInBackgroundWithBlock {
-            (succeeded: Bool!, error: NSError!) -> Void in
+            (succeeded: Bool, error: NSError?) -> Void in
             if error == nil {
                 println("Signed up user with username")
                 completion(user: user as User, error: nil)
             } else {
-                User.logInWithUsernameInBackground(user.username, password: user.password, block: { (user, error) -> Void in
+                User.logInWithUsernameInBackground(user.username!, password: user.password!, block: { (user, error) -> Void in
                     if error == nil {
                         println("Logged in user with username")
                         completion(user: user as? User, error: nil)

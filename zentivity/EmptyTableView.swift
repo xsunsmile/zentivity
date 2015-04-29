@@ -22,13 +22,13 @@ class EmptyTableView: UIView {
     
     var message : NSString = "" {
         didSet {
-            messageLabel.text = message
+            messageLabel.text = message as String
         }
     }
     
     var buttonLabel : NSString = "" {
         didSet {
-            ctaButton.setTitle(buttonLabel, forState: .Normal)
+            ctaButton.setTitle(buttonLabel as String, forState: .Normal)
         }
     }
 
@@ -45,7 +45,7 @@ class EmptyTableView: UIView {
     func initSubViews() {
         let nib = UINib(nibName: "EmptyTableView", bundle: nil)
         let objects = nib.instantiateWithOwner(self, options: nil)
-        contentView = objects[0] as UIView
+        contentView = objects[0] as! UIView
         contentView.frame = bounds
         
         addSubview(contentView)

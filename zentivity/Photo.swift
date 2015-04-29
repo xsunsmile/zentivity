@@ -18,7 +18,7 @@ class Photo : PFObject, PFSubclassing {
         }
     }
     
-    class func parseClassName() -> String! {
+    class func parseClassName() -> String {
         return "Photo"
     }
     
@@ -30,7 +30,7 @@ class Photo : PFObject, PFSubclassing {
         for image in images {
             var photo = Photo()
             photo.file = PFFile(name:"image.png", data: UIImagePNGRepresentation(image))
-            photo.user = User.currentUser()
+            photo.user = User.currentUser()!
             photos.addObject(photo as Photo)
         }
         

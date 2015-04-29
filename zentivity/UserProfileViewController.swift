@@ -78,13 +78,13 @@ class UserProfileViewController: UIViewController,
             if let currentUser = User.currentUser() {
                 let currentUser = currentUser as User
                 
-                let name = currentUser.objectForKey("name") as String
-                if countElements(name) > 0 {
+                let name = currentUser.objectForKey("name") as! String
+                if count(name) > 0 {
                     profileName.text = name
                 }
                 
-                let imageUrl = currentUser.objectForKey("imageUrl") as String
-                if countElements(imageUrl) > 0 {
+                let imageUrl = currentUser.objectForKey("imageUrl") as! String
+                if count(imageUrl) > 0 {
                     profileImageView.setImageWithURL(NSURL(string: currentUser.imageUrl)!)
                 }
                 
@@ -119,7 +119,7 @@ class UserProfileViewController: UIViewController,
     }
     
     func cellDidSelected(tableView: UITableView, indexPath: NSIndexPath) {
-       let action = datasource[indexPath.row]["action"] as NSString
+       let action = datasource[indexPath.row]["action"] as! NSString
         delegate?.closeMenuAndDo(action)
     }
     
@@ -135,8 +135,8 @@ class UserProfileViewController: UIViewController,
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "viewEventDetailSegue" {
-            var vc = segue.destinationViewController as EventDetailViewController
-            var data = baseTable.datasource as [Event]
+            var vc = segue.destinationViewController as! EventDetailViewController
+            var data = baseTable.datasource as! [Event]
             var index = tableView.indexPathForSelectedRow()?.row
             
             vc.event = data[index!]

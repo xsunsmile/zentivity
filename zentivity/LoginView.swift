@@ -40,7 +40,7 @@ class LoginView: UIView {
     func initSubViews() {
         let nib = UINib(nibName: "LoginView", bundle: nil)
         let objects = nib.instantiateWithOwner(self, options: nil)
-        loginBannerView = objects[0] as UIView
+        loginBannerView = objects[0] as! UIView
         
         if GoogleClient.sharedInstance.alreadyLogin() {
             loginTypeLabel.text = "Logout from Google"

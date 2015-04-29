@@ -48,7 +48,7 @@ class ImageUtils: NSObject {
     }
     
     class func initialsImageView(imageSize: CGSize!, firstName: NSString, lastName: NSString) -> UIImage {
-        let initials = UserInitialsView.initialsForFirstName(firstName, lastName: lastName)
+        let initials = UserInitialsView.initialsForFirstName(firstName as String, lastName: lastName as String)
         let frame = CGRectMake(0, 0, imageSize.width, imageSize.height)
         let initView = UserInitialsView(frame: frame, initials: initials, fontSize: 12, drawOffsetFromCenter: CGPointZero)
         return initView.convertToImage()

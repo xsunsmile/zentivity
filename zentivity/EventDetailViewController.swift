@@ -113,7 +113,7 @@ class EventDetailViewController: UIViewController,
         }
         
         setupBackgroundImageView()
-        titleLabel.text = event.getTitle()
+        titleLabel.text = event.getTitle() as String
         
         if event.locationString != nil {
             addressLabel.text = event.locationString
@@ -125,12 +125,11 @@ class EventDetailViewController: UIViewController,
         var number = "(408) 673-4419"
         if let admin = event.admin as? User {
             admin.fetchIfNeededInBackgroundWithBlock({ (admin, error) -> Void in
-                let admin = admin as User
 //                if let adminName = admin.name {
-                    name = admin.name
+//                    name = admin.name
 //                }
 //                if let phoneNumber = admin.contactNumber {
-                    number = admin.contactNumber
+//                    number = admin.contactNumber
 //                }
             })
         }
@@ -138,16 +137,16 @@ class EventDetailViewController: UIViewController,
         phoneLabel.text = "\(name): \(number)"
 
         var dateString = NSMutableAttributedString(
-            string: event.startTimeWithFormat("EEEE"),
+            string: event.startTimeWithFormat("EEEE") as String,
             attributes: NSDictionary(
                 object: UIFont.boldSystemFontOfSize(17.0),
-                forKey: NSFontAttributeName))
+                forKey: NSFontAttributeName) as [NSObject : AnyObject])
         
        dateString.appendAttributedString(NSAttributedString(
-            string: "\n" + event.startTimeWithFormat("MMM d, yyyy"),
+            string: "\n" + (event.startTimeWithFormat("MMM d, yyyy") as String),
             attributes: NSDictionary(
                 object: UIFont(name: "Arial", size: 17.0)!,
-                forKey: NSFontAttributeName)))
+                forKey: NSFontAttributeName) as [NSObject : AnyObject]))
         
         eventDateLabel.attributedText = dateString
         
@@ -155,7 +154,7 @@ class EventDetailViewController: UIViewController,
             let currentUser = User.currentUser()
             if currentUser != nil {
                 joinButton.backgroundColor = joinButtonColor()
-                joinButton.setTitle(joinButtonText(), forState: .Normal)
+                joinButton.setTitle(joinButtonText() as String, forState: .Normal)
             }
         } else {
             joinButton.setTitle("SignIn", forState: .Normal)
@@ -181,13 +180,13 @@ class EventDetailViewController: UIViewController,
             }
  
             for photo in event.photos! {
-                let photo = photo as Photo
+                let photo = photo as! Photo
                 photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
-                    let p = photo as Photo
+                    let p = photo as! Photo
                     p.file.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                         if imageData != nil {
                             println("Got a new photo")
-                            let image = UIImage(data:imageData)
+                            let image = UIImage(data:imageData!)
                             self.eventImages?.append(image!)
                             self.addBackgroundImage(image!)
                         } else {
@@ -219,7 +218,7 @@ class EventDetailViewController: UIViewController,
         println("event location is \(address)")
         LocationUtils.sharedInstance.getGeocodeFromAddress(address, completion: { (places, error) -> () in
             if error == nil {
-                let places = places as [CLPlacemark]
+                let places = places as! [CLPlacemark]
                 self.eventPlaceMark = places.last
                 
                 let miles = 0.09;
@@ -228,7 +227,7 @@ class EventDetailViewController: UIViewController,
                 self.mapView.setRegion(region, animated: true)
                 
                 let annotation = MKPointAnnotation()
-                annotation.setCoordinate(center)
+//                annotation.setCoordinate(center)
                 let title = self.event.getTitle() as String
                 annotation.title = title.truncate(25, trailing: "...")
                 self.mapView.addAnnotation(annotation)
@@ -248,7 +247,7 @@ class EventDetailViewController: UIViewController,
         pinAnnotationView.canShowCallout = true
         pinAnnotationView.animatesDrop = true
         
-        let driveButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        let driveButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         driveButton.frame.size.width = 45
         driveButton.frame.size.height = 45
         driveButton.backgroundColor = UIColor.whiteColor()
@@ -266,10 +265,10 @@ class EventDetailViewController: UIViewController,
             let currentLocation = MKMapItem.mapItemForCurrentLocation()
             let place = MKPlacemark(placemark: self.eventPlaceMark)
             let destination = MKMapItem(placemark: place)
-            destination.name = self.event.getTitle()
+            destination.name = self.event.getTitle() as String
             let items = NSArray(objects: currentLocation, destination)
             let options = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
-            MKMapItem.openMapsWithItems(items, launchOptions: options)
+            MKMapItem.openMapsWithItems(items as [AnyObject], launchOptions: options as [NSObject : AnyObject])
         }
     }
     
@@ -278,7 +277,7 @@ class EventDetailViewController: UIViewController,
     }
     
     func presentAuthModal() {
-        let appVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as AppViewController
+        let appVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
         self.presentViewController(appVC, animated: true, completion: nil)
     }
     
@@ -294,9 +293,9 @@ class EventDetailViewController: UIViewController,
             joinButton.setTitle("Cancel", forState: .Normal)
         }
         
-        User.currentUser().toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+        User.currentUser()!.toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
             self.joinButton.backgroundColor = self.joinButtonColor()
-            self.joinButton.setTitle(self.joinButtonText(), forState: .Normal)
+            self.joinButton.setTitle(self.joinButtonText() as String, forState: .Normal)
             self.joinButton.setTitleColor(self.joinButtonTextColor(), forState: .Normal)
             if self.detailsIsOpen {
                 self.setHeaderNewColor(self.joinButtonTextColor())
@@ -368,14 +367,14 @@ class EventDetailViewController: UIViewController,
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserGridViewCell", forIndexPath: indexPath) as UserIconCollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserGridViewCell", forIndexPath: indexPath) as! UserIconCollectionViewCell
         cell.user = event.confirmedUsers[indexPath.row] as? User
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         if(kind == UICollectionElementKindSectionHeader) {
-            let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "eventUserTypes", forIndexPath: indexPath) as LabelCollectionReusableView
+            let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "eventUserTypes", forIndexPath: indexPath) as! LabelCollectionReusableView
             return cell
         } else {
             return UICollectionReusableView()
@@ -613,7 +612,7 @@ class EventDetailViewController: UIViewController,
         }
         
         let regex = NSRegularExpression(pattern: "\\(|\\)|-", options: nil, error: nil)
-        let number = regex?.stringByReplacingMatchesInString(contactNumber!, options: nil, range: NSMakeRange(0, countElements(contactNumber!)), withTemplate: "$1")
+        let number = regex?.stringByReplacingMatchesInString(contactNumber!, options: nil, range: NSMakeRange(0, count(contactNumber!)), withTemplate: "$1")
         println("calling number \(number)")
         let phoneNumber = "tel://".stringByAppendingString(number!)
         UIApplication.sharedApplication().openURL(NSURL(string: phoneNumber)!)

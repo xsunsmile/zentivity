@@ -21,10 +21,10 @@ class MenuTableViewCell: BaseTableViewCell {
     }
     
     override func onDataSet(data: AnyObject!) {
-        let dict = data as NSDictionary
-        iconImageView.image = UIImage(named: dict["icon"] as NSString)
+        let dict = data as! NSDictionary
+        iconImageView.image = UIImage(named: dict["icon"] as! NSString as String)
         iconImageView.layer.opacity = 0.3
-        itemLabel.text = dict["title"] as NSString
+        itemLabel.text = dict["title"] as! NSString as String
     }
     
     override func refresh() {

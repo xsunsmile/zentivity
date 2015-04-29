@@ -61,7 +61,7 @@ class FriendPickerVC: UIViewController, UITableViewDataSource, UITableViewDelega
             if searchTerm != "" {
                 filteredData = []
                 for user in data {
-                    let user = user as User
+                    let user = user as! User
 //                    if let userName = user.name {
                         if (user.name.lowercaseString.rangeOfString(searchTerm.lowercaseString) != nil) {
                             self.filteredData.addObject(user)
@@ -87,7 +87,7 @@ class FriendPickerVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func recipientsBar(recipientsBar: TURecipientsBar!, didRemoveRecipient objectId: String!) {
         for user in selected {
-            let user = user as User
+            let user = user as! User
             if user.objectId == objectId {
                 selected.removeObject(user)
             }
@@ -99,7 +99,7 @@ class FriendPickerVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("FriendPickerCell") as FriendPickerCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("FriendPickerCell") as! FriendPickerCell
         cell.user = filteredData[indexPath.row] as? User
         cell.selectionStatus = selected.containsObject(cell.user!)
         
@@ -107,12 +107,12 @@ class FriendPickerVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var cell = tableView.cellForRowAtIndexPath(indexPath) as FriendPickerCell
+        var cell = tableView.cellForRowAtIndexPath(indexPath) as! FriendPickerCell
         let user = cell.user! as User
         if selected.containsObject(user) {
             selected.removeObject(user)
             for recipient in turBar.recipients {
-                let recipient = recipient as TURecipient
+                let recipient = recipient as! TURecipient
                 if recipient.address as? String == user.objectId {
                     turBar.removeRecipient(recipient)
                 }
@@ -120,7 +120,7 @@ class FriendPickerVC: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.selectionStatus = false
         } else {
             selected.addObject(user)
-            turBar.addRecipient(TURecipient.recipientWithTitle(user.name, address: user.objectId) as TURecipient)
+            turBar.addRecipient(TURecipient.recipientWithTitle(user.name, address: user.objectId) as! TURecipient)
             cell.selectionStatus = true
         }
         clearSearchTerm()
@@ -135,7 +135,7 @@ class FriendPickerVC: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func onAddButtonPressed(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
         if let delegate = delegate {
-            delegate.friendPickerDidSelectUsers(self, users: selected as NSArray as [User])
+            delegate.friendPickerDidSelectUsers(self, users: selected as NSArray as! [User])
         }
 //        delegate?.friendPickerDidSelectEmails(self, users: selected)
 //        var emails = NSMutableArray()

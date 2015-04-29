@@ -33,7 +33,7 @@ class BaseTableView: NSObject,
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as BaseTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("\(cellIdentifier)") as! BaseTableViewCell
         cell.data = datasource[indexPath.row]
         cell.controller = controller
         return cell
@@ -60,7 +60,7 @@ class BaseTableView: NSObject,
         if titleSource.count == 0 {
             return nil
         }
-        return titleSource[section]
+        return titleSource[section] as String
     }
     
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {

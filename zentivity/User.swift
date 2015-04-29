@@ -25,9 +25,9 @@ class User : PFUser, PFSubclassing {
     
     class func allWithCompletion(completion: (users: [User]?, success: Bool) -> Void) {
         var query = User.query()
-        query.findObjectsInBackgroundWithBlock { (users, error) -> Void in
+        query!.findObjectsInBackgroundWithBlock { (users, error) -> Void in
             if error == nil {
-                let users = users as [User]
+                let users = users as! [User]
                 completion(users: users, success: true)
             } else {
                 completion(users: nil, success: false)
@@ -37,9 +37,9 @@ class User : PFUser, PFSubclassing {
     
     func toggleJoinEventWithCompletion(event: Event, completion: (success: Bool!, error: NSError!, state: NSString) -> ()) {
         if event.userJoined(self) {
-            quitEventWithCompletion(event, completion)
+            quitEventWithCompletion(event, completion: completion)
         } else {
-            joinEventWithCompletion(event, completion)
+            joinEventWithCompletion(event, completion: completion)
         }
     }
     
@@ -57,14 +57,14 @@ class User : PFUser, PFSubclassing {
     
     func eventsWithCompletion(type: String!, completion: (events: [Event], error: NSError!) -> ()) {
         let query = Event.query()
-        query.whereKey(type, equalTo: self)
-        query.orderByDescending("startTime")
+        query!.whereKey(type, equalTo: self)
+        query!.orderByDescending("startTime")
 //        query.includeKey("photos")
-        query.includeKey("confirmedUsers")
+        query!.includeKey("confirmedUsers")
         
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+        query!.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                completion(events: objects as [Event], error: nil)
+                completion(events: objects as! [Event], error: nil)
             } else {
                 completion(events: [], error: error)
             }
@@ -73,8 +73,8 @@ class User : PFUser, PFSubclassing {
     
     func confirmEvent(event: Event, completion: (success: Bool!, error: NSError!) -> ()) {
         var query = Event.query()
-        query.getObjectInBackgroundWithId(event.objectId) {
-            (gameScore: PFObject!, error: NSError!) -> Void in
+        query!.getObjectInBackgroundWithId("\(event.objectId)") {
+            (gameScore: PFObject?, error: NSError?) -> Void in
             if error == nil {
                 // Remove self from confirmed users
                 for confirmedUser in event.confirmedUsers {
@@ -103,8 +103,8 @@ class User : PFUser, PFSubclassing {
     func declineEvent(event: Event, completion: (success: Bool!, error: NSError!) -> ()) {
         var query = Event.query()
         
-        query.getObjectInBackgroundWithId(event.objectId) {
-            (gameScore: PFObject!, error: NSError!) -> Void in
+        query!.getObjectInBackgroundWithId("\(event.objectId)") {
+            (gameScore: PFObject?, error: NSError?) -> Void in
             if error == nil {
                 // Remove self from confirmed users
                 for confirmedUser in event.confirmedUsers {
@@ -130,8 +130,8 @@ class User : PFUser, PFSubclassing {
     }
     
     func initialsImageView(imageSize: CGSize!) -> UIImage {
-        var firstName: NSString!
-        var lastName: NSString!
+        var firstName: NSString
+        var lastName: NSString
         let names = name.componentsSeparatedByString(" ")
         
             if names.count >= 2 {
@@ -149,7 +149,7 @@ class User : PFUser, PFSubclassing {
 //            lastName = letters[randomInt2]
 //        }
         
-        let initials = UserInitialsView.initialsForFirstName(firstName, lastName: lastName)
+        let initials = UserInitialsView.initialsForFirstName(firstName as String, lastName: lastName as String)
         let frame = CGRectMake(0, 0, imageSize.width, imageSize.height)
         let initView = UserInitialsView(frame: frame, initials: initials, fontSize: 12, drawOffsetFromCenter: CGPointZero)
         return initView.convertToImage()

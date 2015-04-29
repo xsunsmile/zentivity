@@ -32,7 +32,7 @@ class SearchFilterView: UIView {
     func initSubViews() {
         let nib = UINib(nibName: "SearchFilterView", bundle: nil)
         let objects = nib.instantiateWithOwner(self, options: nil)
-        contentView = objects[0] as UIView
+        contentView = objects[0] as! UIView
         contentView.frame = bounds
         
         searchBar.barTintColor = UIColor.clearColor()

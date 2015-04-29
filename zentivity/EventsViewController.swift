@@ -191,7 +191,7 @@ class EventsViewController: UIViewController,
                         
                         if filterdEvents.count > 0 {
                             self.removeEmptyListView()
-                            self.baseTable.datasource = filterdEvents
+                            self.baseTable.datasource = filterdEvents as [AnyObject]
                             self.tableView.reloadData()
                         } else {
                             // You have not joined any events yet.
@@ -273,7 +273,7 @@ class EventsViewController: UIViewController,
                         }
                     }
                     
-                    self.datasource = filterdEvents
+                    self.datasource = filterdEvents as [AnyObject]
                     self.baseTable.datasource = self.datasource
                     self.tableView.reloadData()
                 } else {
@@ -331,7 +331,7 @@ class EventsViewController: UIViewController,
         println("deleted event refresh...")
         var i = 0
         for e in self.baseTable.datasource {
-            let e = e as Event
+            let e = e as! Event
             if e.objectId == event.objectId {
                 self.baseTable.datasource.removeAtIndex(i)
             }
@@ -372,7 +372,7 @@ class EventsViewController: UIViewController,
     }
     
     func presentAuthModal() {
-        let appVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as AppViewController
+        let appVC = storyboard?.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
         self.presentViewController(appVC, animated: true, completion: nil)
     }
     
@@ -416,7 +416,7 @@ class EventsViewController: UIViewController,
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        if countElements(searchBar.text) > 0 {
+        if count(searchBar.text) > 0 {
             filters["title"] = searchBar.text
         }
         
@@ -425,20 +425,20 @@ class EventsViewController: UIViewController,
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if countElements(searchBar.text) == 0 {
+        if count(searchBar.text) == 0 {
             filters = Dictionary<String, String>()
             baseTable.datasource = self.datasource
             tableView.reloadData()
         } else {
             let filterdDatasource = NSMutableArray()
             for e in self.datasource {
-                let e = e as Event
+                let e = e as! Event
                 if e.getTitle().lowercaseString.rangeOfString(searchText.lowercaseString) != nil {
                     filterdDatasource.addObject(e)
                 }
             }
             
-            baseTable.datasource = filterdDatasource
+            baseTable.datasource = filterdDatasource as [AnyObject]
             tableView.reloadData()
         }
     }
@@ -502,8 +502,8 @@ class EventsViewController: UIViewController,
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         setNavigationBarTransformProgress(0)
         if segue.identifier == "viewEventDetailSegue" {
-            var vc = segue.destinationViewController as EventDetailViewController
-            var data = baseTable.datasource as [Event]
+            var vc = segue.destinationViewController as! EventDetailViewController
+            var data = baseTable.datasource as! [Event]
             var index = tableView.indexPathForSelectedRow()?.row
             
             vc.event = data[index!]
@@ -519,7 +519,7 @@ class EventsViewController: UIViewController,
             vc.modalPanGuesture2 = tapGR2
             dismissalAnimator.modalView = vc
         } else if segue.identifier == "createEvent" {
-            var vc = segue.destinationViewController as NewEventViewController
+            var vc = segue.destinationViewController as! NewEventViewController
             vc.delegate = self
             if let event = sender as? Event {
                 println("send event for edit")

@@ -24,22 +24,22 @@
 
 + (id)recipientWithTitle:(NSString *)title address:(id)address
 {
-    TURecipient *recipient = [[TURecipient alloc] init];
-    
-    recipient.recipientTitle = title;
-    recipient.address = address;
-    
-    return recipient;
+	TURecipient *recipient = [[TURecipient alloc] init];
+	
+	recipient.recipientTitle = title;
+	recipient.address = address;
+	
+	return recipient;
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return self;
+	return self;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: title=%@, address=%@>", NSStringFromClass([self class]), self.recipientTitle, self.address];
+	return [NSString stringWithFormat:@"<%@: title=%@, address=%@>", NSStringFromClass([self class]), self.recipientTitle, self.address];
 }
 
 @end

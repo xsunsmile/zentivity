@@ -72,7 +72,7 @@ class GoogleClient: NSObject,
             initGooglePlusService()
             getCurrentUserProfileWithCompletion({ (userInfo, error) -> () in
                 if error == nil {
-                    NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil, userInfo: userInfo)
+                    NSNotificationCenter.defaultCenter().postNotificationName(userDidLoginNotification, object: nil, userInfo: userInfo! as [NSObject : AnyObject])
                 }
             })
         } else {
@@ -86,18 +86,18 @@ class GoogleClient: NSObject,
     
     func getCurrentUserProfileWithCompletion(completion: (userInfo: NSMutableDictionary?, error: NSError?) -> ()) {
         let userInfo = NSMutableDictionary()
-        let query = GTLQueryPlus.queryForPeopleGetWithUserId("me") as GTLQueryPlus
+        let query = GTLQueryPlus.queryForPeopleGetWithUserId("me") as! GTLQueryPlus
         
         plusService.executeQuery(query, completionHandler: { (ticket, person, error) -> Void in
             if error != nil {
                 NSLog("Can not get current user profile: %@", error)
                 completion(userInfo: nil, error: error)
             } else {
-                let user = person as GTLPlusPerson
+                let user = person as! GTLPlusPerson
                 NSLog("user %@", user)
                 NSLog("user name: %@, about: %@", user.displayName, user.name)
                 
-                let email = user.emails[0] as GTLPlusPersonEmailsItem
+                let email = user.emails[0] as! GTLPlusPersonEmailsItem
                 userInfo["email"] = email.value
 
                 userInfo["email"] = email.value

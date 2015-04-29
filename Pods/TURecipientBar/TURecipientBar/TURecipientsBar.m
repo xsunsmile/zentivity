@@ -19,17 +19,17 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 @implementation TURecipientsBar
 {
-    UILabel *_toLabel;
-    UIButton *_addButton;
-    UILabel *_summaryLabel;
-    UIView *_lineView;
-    NSArray *_updatingConstraints; // NSLayoutConstraint
+	UILabel *_toLabel;
+	UIButton *_addButton;
+	UILabel *_summaryLabel;
+	UIView *_lineView;
+	NSArray *_updatingConstraints; // NSLayoutConstraint
     NSArray *_addButtonHiddenConstraints; // NSLayoutConstraint
-    
-    NSMutableArray *_recipients; // <TURecipient>
-    NSMutableArray *_recipientViews; // UIButton
-    CGSize _lastKnownSize;
-    id<TURecipient>_selectedRecipient;
+	
+	NSMutableArray *_recipients; // <TURecipient>
+	NSMutableArray *_recipientViews; // UIButton
+	CGSize _lastKnownSize;
+	id<TURecipient>_selectedRecipient;
     BOOL _needsRecipientLayout;
     
     // UIAppearance
@@ -52,42 +52,44 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (NSArray *)recipients
 {
-    return [_recipients copy];
+	return [_recipients copy];
 }
 
 - (void)addRecipient:(id<TURecipient>)recipient
 {
-    NSIndexSet *changedIndex = [NSIndexSet indexSetWithIndex:_recipients.count];
+	NSIndexSet *changedIndex = [NSIndexSet indexSetWithIndex:_recipients.count];
+	
+	[self willChange:NSKeyValueChangeInsertion valuesAtIndexes:changedIndex forKey:@"recipients"];
+	[_recipients addObject:[(id)recipient copy]];
+	[self didChange:NSKeyValueChangeInsertion valuesAtIndexes:changedIndex forKey:@"recipients"];
+	
+	
+	UIButton *recipientView = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:changedIndex forKey:@"recipients"];
-    [_recipients addObject:[(id)recipient copy]];
-    [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:changedIndex forKey:@"recipients"];
+	recipientView.adjustsImageWhenHighlighted = NO;
+	recipientView.contentEdgeInsets = _recipientContentEdgeInsets;
     
     
-    UIButton *recipientView = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    recipientView.adjustsImageWhenHighlighted = NO;
-    recipientView.contentEdgeInsets = _recipientContentEdgeInsets;
-    
-    recipientView.layer.borderWidth = 1.6f;
-    recipientView.layer.borderColor= [[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha: 1.0] CGColor];
-    recipientView.layer.cornerRadius = 5;
-    recipientView.clipsToBounds;
-    
+	[recipientView setBackgroundImage:[self recipientBackgroundImageForState:UIControlStateNormal]
+                             forState:UIControlStateNormal];
     [recipientView setAttributedTitle:[[NSAttributedString alloc] initWithString:recipient.recipientTitle attributes:[self recipientTitleTextAttributesForState:UIControlStateNormal]]
                              forState:UIControlStateNormal];
     
+	[recipientView setBackgroundImage:[self recipientBackgroundImageForState:UIControlStateHighlighted]
+							 forState:UIControlStateHighlighted];
     [recipientView setAttributedTitle:[[NSAttributedString alloc] initWithString:recipient.recipientTitle attributes:[self recipientTitleTextAttributesForState:UIControlStateHighlighted]]
                              forState:UIControlStateHighlighted];
     
+	[recipientView setBackgroundImage:[self recipientBackgroundImageForState:UIControlStateSelected]
+							 forState:UIControlStateSelected];
     [recipientView setAttributedTitle:[[NSAttributedString alloc] initWithString:recipient.recipientTitle attributes:[self recipientTitleTextAttributesForState:UIControlStateSelected]]
                              forState:UIControlStateSelected];
     
     
-    [recipientView addTarget:self action:@selector(selectRecipientButton:) forControlEvents:UIControlEventTouchUpInside];
+	[recipientView addTarget:self action:@selector(selectRecipientButton:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self addSubview:recipientView];
+	[self addSubview:recipientView];
     
     [self _setNeedsRecipientLayout];
     if (self.animatedRecipientsInAndOut) {
@@ -115,31 +117,27 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
         [self layoutIfNeeded];
     }
     
+    
     if (_textField.editing) {
         [self _scrollToBottomAnimated:YES];
     } else {
         recipientView.alpha = 0.0;
     }
-    
-    [self _updateSummary];
+	
+	[self _updateSummary];
 }
 
 - (void)removeRecipient:(id<TURecipient>)recipient
 {
-    NSIndexSet *changedIndex = [NSIndexSet indexSetWithIndex:[_recipients indexOfObject:recipient]];
-    [self willChange:NSKeyValueChangeRemoval valuesAtIndexes:changedIndex forKey:@"recipients"];
-    [_recipients removeObjectsAtIndexes:changedIndex];
-    [self didChange:NSKeyValueChangeRemoval valuesAtIndexes:changedIndex forKey:@"recipients"];
-    
+	NSIndexSet *changedIndex = [NSIndexSet indexSetWithIndex:[_recipients indexOfObject:recipient]];
+	
+	[self willChange:NSKeyValueChangeRemoval valuesAtIndexes:changedIndex forKey:@"recipients"];
+	[_recipients removeObjectsAtIndexes:changedIndex];
+	[self didChange:NSKeyValueChangeRemoval valuesAtIndexes:changedIndex forKey:@"recipients"];
+	
     UIView *recipientView = [_recipientViews objectAtIndex:changedIndex.firstIndex];
     [_recipientViews removeObject:recipientView];
     [self _setNeedsRecipientLayout];
-    
-    TURecipient *rec = (TURecipient *) recipient;
-    
-    if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:didRemoveRecipient:)]) {
-        [self.recipientsBarDelegate recipientsBar:self didRemoveRecipient: rec.address];
-    }
     
     if (self.animatedRecipientsInAndOut) {
         void(^animations)() = ^{
@@ -161,9 +159,9 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
     } else {
         [recipientView removeFromSuperview];
     }
-    
-    
-    [self _updateSummary];
+	
+	
+	[self _updateSummary];
 }
 
 - (void)_updateSummary
@@ -197,42 +195,42 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (void)setAutocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType
 {
-    [_textField setAutocapitalizationType:autocapitalizationType];
+	[_textField setAutocapitalizationType:autocapitalizationType];
 }
 
 - (UITextAutocapitalizationType)autocapitalizationType
 {
-    return [_textField autocapitalizationType];
+	return [_textField autocapitalizationType];
 }
 
 - (void)setAutocorrectionType:(UITextAutocorrectionType)autocorrectionType
 {
-    [_textField setAutocorrectionType:autocorrectionType];
+	[_textField setAutocorrectionType:autocorrectionType];
 }
 
 - (UITextAutocorrectionType)autocorrectionType
 {
-    return [_textField autocorrectionType];
+	return [_textField autocorrectionType];
 }
 
 - (void)setKeyboardType:(UIKeyboardType)keyboardType
 {
-    [_textField setKeyboardType:keyboardType];
+	[_textField setKeyboardType:keyboardType];
 }
 
 - (UIKeyboardType)keyboardType
 {
-    return [_textField keyboardType];
+	return [_textField keyboardType];
 }
 
 - (void)setSpellCheckingType:(UITextSpellCheckingType)spellCheckingType
 {
-    [_textField setSpellCheckingType:spellCheckingType];
+	[_textField setSpellCheckingType:spellCheckingType];
 }
 
 - (UITextSpellCheckingType)spellCheckingType
 {
-    return [_textField spellCheckingType];
+	return [_textField spellCheckingType];
 }
 
 - (void)setShowsAddButton:(BOOL)showsAddButton
@@ -250,27 +248,27 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (void)setShowsShadows:(BOOL)showsShadows
 {
-    _showsShadows = showsShadows;
+	_showsShadows = showsShadows;
     
-    [self updateShadows];
+	[self updateShadows];
 }
 
 - (void)setText:(NSString *)text
 {
-    if (text != nil) {
-        [_textField setText:[TURecipientsPlaceholder stringByAppendingString:text]];
-    } else {
-        [_textField setText:TURecipientsPlaceholder];
-    }
-    
-    if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:textDidChange:)]) {
-        [self.recipientsBarDelegate recipientsBar:self textDidChange:self.text];
-    }
+	if (text != nil) {
+		[_textField setText:[TURecipientsPlaceholder stringByAppendingString:text]];
+	} else {
+		[_textField setText:TURecipientsPlaceholder];
+	}
+	
+	if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:textDidChange:)]) {
+		[self.recipientsBarDelegate recipientsBar:self textDidChange:self.text];
+	}
 }
 
 - (NSString *)text
 {
-    return [[_textField text] stringByReplacingOccurrencesOfString:TURecipientsPlaceholder withString:@""];
+	return [[_textField text] stringByReplacingOccurrencesOfString:TURecipientsPlaceholder withString:@""];
 }
 
 - (void)setLabel:(NSString *)label
@@ -280,152 +278,152 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (NSString *)label
 {
-    return [_toLabel text];
+	return [_toLabel text];
 }
 
 - (void)setHeightConstraint:(NSLayoutConstraint *)heightConstraint
 {
-    if (_heightConstraint != heightConstraint) {
-        [self removeConstraint:_heightConstraint];
-        
-        _heightConstraint = heightConstraint;
-    }
+	if (_heightConstraint != heightConstraint) {
+		[self removeConstraint:_heightConstraint];
+		
+		_heightConstraint = heightConstraint;
+	}
 }
 
 - (void)setSearching:(BOOL)searching
 {
-    if (_searching != searching) {
-        _searching = searching;
-        
-        [self setNeedsLayout];
-        [self.superview layoutIfNeeded];
-        
-        [self _scrollToBottomAnimated:YES];
-        
-        if (_searching) {
-            self.scrollEnabled = NO;
-            _lineView.hidden = NO;
-            _lineView.backgroundColor = [UIColor colorWithWhite:0.557 alpha:1.000];
-        } else {
-            _lineView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.000];
-        }
-        
-        [self updateShadows];
-    }
+	if (_searching != searching) {
+		_searching = searching;
+		
+		[self setNeedsLayout];
+		[self.superview layoutIfNeeded];
+		
+		[self _scrollToBottomAnimated:YES];
+		
+		if (_searching) {
+			self.scrollEnabled = NO;
+			_lineView.hidden = NO;
+			_lineView.backgroundColor = [UIColor colorWithWhite:0.557 alpha:1.000];
+		} else {
+			_lineView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.000];
+		}
+		
+		[self updateShadows];
+	}
 }
 
 - (void)setSearching:(BOOL)searching animated:(BOOL)animated
 {
-    if (animated) {
-        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut animations:^{
-            [self setSearching:searching];
-        } completion:nil];
-    } else {
-        [self setSearching:searching];
-    }
+	if (animated) {
+		[UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut animations:^{
+			[self setSearching:searching];
+		} completion:nil];
+	} else {
+		[self setSearching:searching];
+	}
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"selectedTextRange"] && object == _textField) {
-        //we use a special character at the start of the field that we don't want the user to select or move the insertion point in front of
-        //see shouldChangeCharactersInRange for details
-        NSInteger offset = [_textField offsetFromPosition:_textField.beginningOfDocument toPosition:_textField.selectedTextRange.start];
-        
-        if (offset < 1) {
-            UITextPosition *newStart = [_textField positionFromPosition:_textField.beginningOfDocument offset:1];
-            _textField.selectedTextRange = [_textField textRangeFromPosition:newStart toPosition:_textField.selectedTextRange.end];
-        }
-    } else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
+	if ([keyPath isEqualToString:@"selectedTextRange"] && object == _textField) {
+		//we use a special character at the start of the field that we don't want the user to select or move the insertion point in front of
+		//see shouldChangeCharactersInRange for details
+		NSInteger offset = [_textField offsetFromPosition:_textField.beginningOfDocument toPosition:_textField.selectedTextRange.start];
+		
+		if (offset < 1) {
+			UITextPosition *newStart = [_textField positionFromPosition:_textField.beginningOfDocument offset:1];
+			_textField.selectedTextRange = [_textField textRangeFromPosition:newStart toPosition:_textField.selectedTextRange.end];
+		}
+	} else {
+		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+	}
 }
 
 #pragma mark - Visual Updates
 
 - (void)updateShadows
 {
-    if (_searching) {
-        if (_showsShadows) {
-            self.layer.shadowColor = [UIColor blackColor].CGColor;
-            self.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-            self.layer.shadowOpacity = 0.5;
-            self.layer.shadowRadius = 5.0;
-            self.clipsToBounds = NO;
-        }
-    } else {
-        if (_showsShadows) {
-            self.layer.shadowOpacity = 0.0;
-            self.layer.shadowRadius = 0.0;
-            self.clipsToBounds = YES;
-        }
-    }
+	if (_searching) {
+		if (_showsShadows) {
+			self.layer.shadowColor = [UIColor blackColor].CGColor;
+			self.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+			self.layer.shadowOpacity = 0.5;
+			self.layer.shadowRadius = 5.0;
+			self.clipsToBounds = NO;
+		}
+	} else {
+		if (_showsShadows) {
+			self.layer.shadowOpacity = 0.0;
+			self.layer.shadowRadius = 0.0;
+			self.clipsToBounds = YES;
+		}
+	}
 }
 
 #pragma mark - Initialization
 
 - (void)dealloc
 {
-    [_textField removeObserver:self forKeyPath:@"selectedTextRange" context:TURecipientsSelectionContext];
+	[_textField removeObserver:self forKeyPath:@"selectedTextRange" context:TURecipientsSelectionContext];
 }
 
 - (void)_init
 {
     _showsAddButton = YES;
-    _showsShadows = YES;
+	_showsShadows = YES;
     _animatedRecipientsInAndOut = YES;
     _recipientBackgroundImages = [NSMutableDictionary new];
     _recipientTitleTextAttributes = [NSMutableDictionary new];
     
-    _recipientContentEdgeInsets = UIEdgeInsetsMake(6.0, 9.0, 6.0, 9.0);
+    _recipientContentEdgeInsets = UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0);
     
     self.contentSize = self.bounds.size;
     
-    _recipients = [NSMutableArray array];
-    _recipientViews = [NSMutableArray array];
-    
-    
-    self.backgroundColor = [UIColor whiteColor];
-    if (self.heightConstraint == nil) {
-        _heightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1.0 constant:TURecipientsLineHeight + 1.0];
+	_recipients = [NSMutableArray array];
+	_recipientViews = [NSMutableArray array];
+	
+	
+	self.backgroundColor = [UIColor whiteColor];
+	if (self.heightConstraint == nil) {
+		_heightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1.0 constant:TURecipientsLineHeight + 1.0];
         _heightConstraint.priority = UILayoutPriorityDefaultHigh;
-        [self addConstraint:_heightConstraint];
-    }
-    self.clipsToBounds = YES;
-    
-    _lineView = [[UIView alloc] init];
-    _lineView.backgroundColor = [UIColor colorWithWhite:0.800 alpha:1.000];
-    [self addSubview:_lineView];
-    
-    _toLabel = [[UILabel alloc] init];
-    self.label = NSLocalizedString(@" To: ", nil);
-    [self addSubview:_toLabel];
-    
-    _addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+		[self addConstraint:_heightConstraint];
+	}
+	self.clipsToBounds = YES;
+	
+	_lineView = [[UIView alloc] init];
+	_lineView.backgroundColor = [UIColor colorWithWhite:0.800 alpha:1.000];
+	[self addSubview:_lineView];
+	
+	_toLabel = [[UILabel alloc] init];
+    self.label = NSLocalizedString(@"To: ", nil);
+	[self addSubview:_toLabel];
+	
+	_addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
     _addButton.alpha = 0.0;
-    [_addButton addTarget:self action:@selector(addContact:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_addButton];
-    
-    _textField = [[UITextField alloc] init];
-    _textField.text = TURecipientsPlaceholder;
-    _textField.font = [UIFont systemFontOfSize:16.0];
+	[_addButton addTarget:self action:@selector(addContact:) forControlEvents:UIControlEventTouchUpInside];
+	[self addSubview:_addButton];
+	
+	_textField = [[UITextField alloc] init];
+	_textField.text = TURecipientsPlaceholder;
+    _textField.font = [UIFont systemFontOfSize:15.0];
     _textField.textColor = [UIColor blackColor];
-    _textField.delegate = self;
-    _textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    _textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    _textField.spellCheckingType = UITextSpellCheckingTypeNo;
-    _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    [self addSubview:_textField];
-    [_textField addObserver:self forKeyPath:@"selectedTextRange" options:0 context:TURecipientsSelectionContext];
-    
-    
-    _summaryLabel = [[UILabel alloc] init];
+	_textField.delegate = self;
+	_textField.autocorrectionType = UITextAutocorrectionTypeNo;
+	_textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+	_textField.spellCheckingType = UITextSpellCheckingTypeNo;
+	_textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+	[self addSubview:_textField];
+	[_textField addObserver:self forKeyPath:@"selectedTextRange" options:0 context:TURecipientsSelectionContext];
+	
+	
+	_summaryLabel = [[UILabel alloc] init];
     _summaryLabel.backgroundColor = [UIColor clearColor];
-    _summaryLabel.font = [UIFont systemFontOfSize:16.0];
-    [self addSubview:_summaryLabel];
-    
-    
-    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(select:)]];
+	_summaryLabel.font = [UIFont systemFontOfSize:15.0];
+	[self addSubview:_summaryLabel];
+	
+	
+	[self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(select:)]];
     
     
     
@@ -457,9 +455,9 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
     
     self = [super initWithFrame:frame];
     if (self != nil) {
-        [self _init];
+		[self _init];
     }
-    
+	
     return self;
 }
 
@@ -499,7 +497,7 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
+	[super layoutSubviews];
     
     
     if (_needsRecipientLayout) {
@@ -557,56 +555,56 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
     }
     
     if (_textField.isFirstResponder && !self.searching) {
-        self.heightConstraint.constant = (self.contentSize.height > 110) ? 110 : self.contentSize.height;
-    } else {
-        self.heightConstraint.constant = TURecipientsLineHeight + 1.0;
-    }
+		self.heightConstraint.constant = self.contentSize.height;
+	} else {
+		self.heightConstraint.constant = TURecipientsLineHeight + 1.0;
+	}
     
     if (_searching) {
-        [self _scrollToBottomAnimated:NO];
-    }
+		[self _scrollToBottomAnimated:NO];
+	}
     
     
-    if (_textField.isFirstResponder && self.contentSize.height > self.frame.size.height && !_searching) {
-        self.scrollEnabled = YES;
-    } else {
-        self.scrollEnabled = NO;
-    }
+	if (_textField.isFirstResponder && self.contentSize.height > self.frame.size.height && !_searching) {
+		self.scrollEnabled = YES;
+	} else {
+		self.scrollEnabled = NO;
+	}
 }
 
 - (void)_frameChanged
 {
-    if (_recipients != nil && self.bounds.size.width != _lastKnownSize.width) {
-        [self _setNeedsRecipientLayout];
-    }
+	if (_recipients != nil && self.bounds.size.width != _lastKnownSize.width) {
+		[self _setNeedsRecipientLayout];
+	}
     
     if (_textField.isFirstResponder && self.contentSize.height > self.frame.size.height && !_searching) {
-        self.scrollEnabled = YES;
-    } else {
-        self.scrollEnabled = NO;
-    }
-    
-    if (_textField.isFirstResponder
+		self.scrollEnabled = YES;
+	} else {
+		self.scrollEnabled = NO;
+	}
+	
+	if (_textField.isFirstResponder
         && _selectedRecipient == nil
-        && (self.bounds.size.width != _lastKnownSize.width || self.bounds.size.height != _lastKnownSize.height)) {
-        [self _scrollToBottomAnimated:NO];
-    }
-    
-    _lastKnownSize = self.bounds.size;
+		&& (self.bounds.size.width != _lastKnownSize.width || self.bounds.size.height != _lastKnownSize.height)) {
+		[self _scrollToBottomAnimated:NO];
+	}
+	
+	_lastKnownSize = self.bounds.size;
 }
 
 - (void)setBounds:(CGRect)bounds
 {
-    [super setBounds:bounds];
-    
-    [self _frameChanged];
+	[super setBounds:bounds];
+	
+	[self _frameChanged];
 }
 
 - (void)setFrame:(CGRect)frame
 {
-    [super setFrame:frame];
-    
-    [self _frameChanged];
+	[super setFrame:frame];
+	
+	[self _frameChanged];
 }
 
 
@@ -614,29 +612,25 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (IBAction)addContact:(id)sender
 {
-    if (self.recipientsBarDelegate != nil) {
-        printf("HELLO");
-    }
-    
-    if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarAddButtonClicked:)]) {
-        [self.recipientsBarDelegate recipientsBarAddButtonClicked:self];
-    }
+	if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarAddButtonClicked:)]) {
+		[self.recipientsBarDelegate recipientsBarAddButtonClicked:self];
+	}
 }
 
 - (IBAction)select:(id)sender
 {
-    [self becomeFirstResponder];
-    
+	[self becomeFirstResponder];
+	
     self.selectedRecipient = nil;
 }
 
 - (IBAction)selectRecipientButton:(UIButton *)sender
 {
-    NSUInteger recipientIndex = [_recipientViews indexOfObject:sender];
-    
-    if (recipientIndex != NSNotFound && [_recipients count] > recipientIndex) {
+	NSUInteger recipientIndex = [_recipientViews indexOfObject:sender];
+	
+	if (recipientIndex != NSNotFound && [_recipients count] > recipientIndex) {
         self.selectedRecipient = [_recipients objectAtIndex:recipientIndex];
-    }
+	}
 }
 
 - (void)selectRecipient:(id<TURecipient>)recipient
@@ -646,43 +640,43 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (void)setSelectedRecipient:(id<TURecipient>)recipient
 {
-    BOOL should = YES;
-    if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:shouldSelectRecipient:)]) {
-        should = [self.recipientsBarDelegate recipientsBar:self shouldSelectRecipient:recipient];
-    }
-    
-    if (should) {
-        if (_selectedRecipient != recipient) {
-            _selectedRecipient = recipient;
-            
-            [self _updateRecipientTextField];
-            
-            if (_selectedRecipient != nil) {
-                [_textField becomeFirstResponder];
-            }
-        }
-        
-        for (UIButton *recipientView in _recipientViews) {
-            recipientView.selected = NO;
-        }
-        
-        NSUInteger recipientIndex = [_recipients indexOfObject:recipient];
-        
-        if (recipientIndex != NSNotFound && [_recipientViews count] > recipientIndex) {
-            UIButton *recipientView = [_recipientViews objectAtIndex:recipientIndex];
-            recipientView.selected = YES;
-        }
-        
-        
-        if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:didSelectRecipient:)]) {
-            [self.recipientsBarDelegate recipientsBar:self didSelectRecipient:recipient];
-        }
-    }
+	BOOL should = YES;
+	if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:shouldSelectRecipient:)]) {
+		should = [self.recipientsBarDelegate recipientsBar:self shouldSelectRecipient:recipient];
+	}
+	
+	if (should) {
+		if (_selectedRecipient != recipient) {
+			_selectedRecipient = recipient;
+			
+			[self _updateRecipientTextField];
+			
+			if (_selectedRecipient != nil) {
+				[_textField becomeFirstResponder];
+			}
+		}
+		
+		for (UIButton *recipientView in _recipientViews) {
+			recipientView.selected = NO;
+		}
+		
+		NSUInteger recipientIndex = [_recipients indexOfObject:recipient];
+		
+		if (recipientIndex != NSNotFound && [_recipientViews count] > recipientIndex) {
+			UIButton *recipientView = [_recipientViews objectAtIndex:recipientIndex];
+			recipientView.selected = YES;
+		}
+		
+		
+		if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:didSelectRecipient:)]) {
+			[self.recipientsBarDelegate recipientsBar:self didSelectRecipient:recipient];
+		}
+	}
 }
 
 - (void)_updateRecipientTextField
 {
-    _textField.hidden = _selectedRecipient != nil || ![_textField isFirstResponder];
+	_textField.hidden = _selectedRecipient != nil || ![_textField isFirstResponder];
 }
 
 - (void)_scrollToBottomAnimated:(BOOL)animated
@@ -695,17 +689,17 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (BOOL)canBecomeFirstResponder
 {
-    return [_textField canBecomeFirstResponder];
+	return [_textField canBecomeFirstResponder];
 }
 
 - (BOOL)becomeFirstResponder
 {
-    return [_textField becomeFirstResponder];
+	return [_textField becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder
 {
-    return [_textField resignFirstResponder];
+	return [_textField resignFirstResponder];
 }
 
 
@@ -713,84 +707,84 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 {
-    //we use a zero width space to detect the backspace
-    if ([[_textField.text substringWithRange:range] isEqual:TURecipientsPlaceholder]) {
-        //select the last recipient
-        if (_selectedRecipient == nil) {
-            if (self.text.length == 0) {
+	//we use a zero width space to detect the backspace
+	if ([[_textField.text substringWithRange:range] isEqual:TURecipientsPlaceholder]) {
+		//select the last recipient
+		if (_selectedRecipient == nil) {
+			if (self.text.length == 0) {
                 self.selectedRecipient = _recipients.lastObject;
-            }
-        } else {
-            [self removeRecipient:_selectedRecipient];
+			}
+		} else {
+			[self removeRecipient:_selectedRecipient];
             self.selectedRecipient = nil;
-        }
-        
-        return NO;
-    } else if (_selectedRecipient != nil) {
-        //replace the selected recipient
-        [self removeRecipient:_selectedRecipient];
+		}
+		
+		return NO;
+	} else if (_selectedRecipient != nil) {
+		//replace the selected recipient
+		[self removeRecipient:_selectedRecipient];
         self.selectedRecipient = nil;
-    }
-    
-    
-    
-    //adjust to protect our placeholder character
-    if (range.location < 1) {
-        range.location++;
-        
-        if (range.length > 0) {
-            range.length--;
-        }
-    }
-    
-    
-    BOOL delegateResponse = YES;
-    if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:shouldChangeTextInRange:replacementText:)]) {
-        delegateResponse = [self.recipientsBarDelegate recipientsBar:self shouldChangeTextInRange:range replacementText:string];
-    }
-    
-    
-    if (delegateResponse) {
-        [self _manuallyChangeTextField:textField inRange:range replacementString:string];
-        
-        
-        if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:textDidChange:)]) {
-            [self.recipientsBarDelegate recipientsBar:self textDidChange:self.text];
-        }
-    }
-    
-    
-    return NO;
+	}
+	
+	
+	
+	//adjust to protect our placeholder character
+	if (range.location < 1) {
+		range.location++;
+		
+		if (range.length > 0) {
+			range.length--;
+		}
+	}
+	
+	
+	BOOL delegateResponse = YES;
+	if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:shouldChangeTextInRange:replacementText:)]) {
+		delegateResponse = [self.recipientsBarDelegate recipientsBar:self shouldChangeTextInRange:range replacementText:string];
+	}
+	
+	
+	if (delegateResponse) {
+		[self _manuallyChangeTextField:textField inRange:range replacementString:string];
+		
+		
+		if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBar:textDidChange:)]) {
+			[self.recipientsBarDelegate recipientsBar:self textDidChange:self.text];
+		}
+	}
+	
+	
+	return NO;
 }
 
 - (void)_manuallyChangeTextField:(UITextField *)textField inRange:(NSRange)range replacementString:(NSString *)string
 {
-    //we save the offset from the end of the document and reset the selection to be a caret there
-    NSInteger offset = [_textField offsetFromPosition:_textField.selectedTextRange.end toPosition:_textField.endOfDocument];
-    
-    textField.text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
-    UITextPosition *newEnd = [_textField positionFromPosition:_textField.endOfDocument inDirection:UITextLayoutDirectionLeft offset:offset];
-    _textField.selectedTextRange = [_textField textRangeFromPosition:newEnd toPosition:newEnd];
+	//we save the offset from the end of the document and reset the selection to be a caret there
+	NSInteger offset = [_textField offsetFromPosition:_textField.selectedTextRange.end toPosition:_textField.endOfDocument];
+	
+	textField.text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+	
+	UITextPosition *newEnd = [_textField positionFromPosition:_textField.endOfDocument inDirection:UITextLayoutDirectionLeft offset:offset];
+	_textField.selectedTextRange = [_textField textRangeFromPosition:newEnd toPosition:newEnd];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarReturnButtonClicked:)]) {
-        [self.recipientsBarDelegate recipientsBarReturnButtonClicked:self];
-    }
-    
-    return NO;
+	if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarReturnButtonClicked:)]) {
+		[self.recipientsBarDelegate recipientsBarReturnButtonClicked:self];
+	}
+	
+	return NO;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    BOOL should = YES;
-    if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarShouldBeginEditing:)]) {
-        should = [self.recipientsBarDelegate recipientsBarShouldBeginEditing:self];
-    }
-    
-    return should;
+	BOOL should = YES;
+	if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarShouldBeginEditing:)]) {
+		should = [self.recipientsBarDelegate recipientsBarShouldBeginEditing:self];
+	}
+	
+	return should;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
@@ -818,39 +812,39 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    BOOL should = YES;
-    if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarShouldEndEditing:)]) {
-        should = [self.recipientsBarDelegate recipientsBarShouldEndEditing:self];
-    }
-    
-    if (should) {
+	BOOL should = YES;
+	if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarShouldEndEditing:)]) {
+		should = [self.recipientsBarDelegate recipientsBarShouldEndEditing:self];
+	}
+	
+	if (should) {
         // we want the animation to execute after the text field has resigned first responder
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.scrollEnabled = NO;
-                
-                for (UIView *recipientView in _recipientViews) {
-                    recipientView.alpha = 0.0;
-                }
-                _textField.alpha = 0.0;
-                _addButton.alpha = 0.0;
-                
-                _summaryLabel.alpha = 1.0;
-                
-                [self setNeedsLayout];
-                [self.superview layoutIfNeeded];
-                
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut animations:^{
+				self.scrollEnabled = NO;
+				
+				for (UIView *recipientView in _recipientViews) {
+					recipientView.alpha = 0.0;
+				}
+				_textField.alpha = 0.0;
+				_addButton.alpha = 0.0;
+				
+				_summaryLabel.alpha = 1.0;
+				
+				[self setNeedsLayout];
+				[self.superview layoutIfNeeded];
+				
                 [self setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
-            } completion:^(BOOL finished) {
-                if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarTextDidEndEditing:)]) {
-                    [self.recipientsBarDelegate recipientsBarTextDidEndEditing:self];
-                }
-            }];
-        });
-    }
-    
-    return should;
+			} completion:^(BOOL finished) {
+				if ([self.recipientsBarDelegate respondsToSelector:@selector(recipientsBarTextDidEndEditing:)]) {
+					[self.recipientsBarDelegate recipientsBarTextDidEndEditing:self];
+				}
+			}];
+		});
+	}
+	
+	return should;
 }
 
 - (void)setContentOffset:(CGPoint)contentOffset
@@ -893,7 +887,6 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
         } else if (state == UIControlStateSelected) {
             backgroundImage = [[UIImage imageNamed:@"recipient-selected.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:0];
         }
-        
     }
     
     return backgroundImage;
@@ -932,18 +925,18 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
     if (attributes == nil) {
         if (state == UIControlStateNormal) {
             attributes = @{
-                           NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+                           NSFontAttributeName: [UIFont systemFontOfSize:15.0],
                            NSForegroundColorAttributeName: [UIColor blackColor],
                            };
         } else if (state == UIControlStateHighlighted) {
             attributes = @{
-                           NSFontAttributeName: [UIFont systemFontOfSize:16.0],
-                           NSForegroundColorAttributeName: [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha: 1.0],
+                           NSFontAttributeName: [UIFont systemFontOfSize:15.0],
+                           NSForegroundColorAttributeName: [UIColor whiteColor],
                            };
         } else if (state == UIControlStateSelected) {
             attributes = @{
-                           NSFontAttributeName: [UIFont systemFontOfSize:16.0],
-                           NSForegroundColorAttributeName: [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha: 1.0],
+                           NSFontAttributeName: [UIFont systemFontOfSize:15.0],
+                           NSForegroundColorAttributeName: [UIColor whiteColor],
                            };
         }
     }
@@ -998,7 +991,7 @@ void *TURecipientsSelectionContext = &TURecipientsSelectionContext;
     if (labelTextAttributes == nil) {
         labelTextAttributes = @{
                                 NSForegroundColorAttributeName: [UIColor colorWithWhite:0.498 alpha:1.000],
-                                NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+                                NSFontAttributeName: [UIFont systemFontOfSize:17.0],
                                 };
     }
     

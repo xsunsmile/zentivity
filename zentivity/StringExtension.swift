@@ -12,7 +12,7 @@ extension String {
     /// Truncates the string to length number of characters and
     /// appends optional trailing string if longer
     func truncate(length: Int, trailing: String? = nil) -> String {
-        if countElements(self) > length {
+        if count(self) > length {
             return self.substringToIndex(advance(self.startIndex, length)) + (trailing ?? "")
         } else {
             return self
