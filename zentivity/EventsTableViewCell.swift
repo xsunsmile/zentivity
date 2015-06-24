@@ -108,7 +108,7 @@ class EventsTableViewCell: BaseTableViewCell {
             return
         }
         
-        let event = data as! Event
+        let event = data as! ZenEvent
         
 //        refreshDistance()
        
@@ -126,20 +126,20 @@ class EventsTableViewCell: BaseTableViewCell {
         
 //        distanceLabel.text = "2mi"
         
-        if event.photos?.count > 0 {
-            var thumbnail = event.thumbnail
-            thumbnail.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                if error == nil {
-                    self.eventBackgroundImageView.image = UIImage(data: data!)
-                } else {
-                    self.eventBackgroundImageView.image = UIImage(named: "noActivity")
-                }
-            })
+        if event.photos.count > 0 {
+//            var thumbnail = event.thumbnail
+//            thumbnail.getDataInBackgroundWithBlock({ (data, error) -> Void in
+//                if error == nil {
+//                    self.eventBackgroundImageView.image = UIImage(data: data!)
+//                } else {
+//                    self.eventBackgroundImageView.image = UIImage(named: "noActivity")
+//                }
+//            })
         } else {
             eventBackgroundImageView.image = UIImage(named: "noActivity")
         }
         
-        if event.locationString != nil {
+        if !event.locationString.isEmpty {
 //            locationLabel.text = event.locationString
         } else {
 //            locationLabel.text = "1019 Market Street, San Francisco, CA 94103"
@@ -233,12 +233,12 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func refreshDistance() {
-        let event = data as! Event
+        let event = data as! ZenEvent
         let zendeskLoc = CLLocation(latitude: 37.782193, longitude: -122.410254)
         
         var address = "1019 Market Street, San Francisco, CA"
-        if event.locationString != nil {
-            address = event.locationString!
+        if !event.locationString.isEmpty {
+            address = event.locationString
         }
         
         println("event location is \(address)")
@@ -262,7 +262,7 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func joinButtonTitle() -> NSString {
-        let event = data as! Event
+        let event = data as! ZenEvent
         if event.ownedByUser(User.currentUser()) {
             return "Edit"
         } else if event.userJoined(User.currentUser()) {
@@ -273,7 +273,7 @@ class EventsTableViewCell: BaseTableViewCell {
     }
     
     func joinButtonColor() -> UIColor {
-        let event = data as! Event
+        let event = data as! ZenEvent
         if event.ownedByUser(User.currentUser()) {
             return UIColor.grayColor()
         } else {

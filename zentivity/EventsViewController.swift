@@ -242,11 +242,16 @@ class EventsViewController: UIViewController,
     
     func refreshLatestEventsList(useHud: Bool) {
         if useHud {
-            hud?.textLabel.text = "Loading events..."
-            hud?.showInView(self.view, animated: true)
+            // hud?.textLabel.text = "Loading events..."
+            // hud?.showInView(self.view, animated: true)
         }
         
-        Event.listWithOptionsAndCompletion(filters) { (events, error) -> () in
+        NSLog("%@", "test test")
+        println("fetch list of events")
+        
+        //        Event.listWithOptionsAndCompletion(filters) { (events, error) -> () in
+        ZenEvent.listWithOptionsAndCompletion(nil) { (events, error) -> () in
+            println("Got list of events: \(events)")
             self.hud?.dismiss()
             self.refreshControl.endRefreshing()
             
@@ -264,7 +269,7 @@ class EventsViewController: UIViewController,
                             
                             if e.getTitle() == "Title" || e.getTitle() == "" {
                                 println("Should delete these events")
-                                e.deleteInBackgroundWithBlock(nil)
+//                                e.deleteInBackgroundWithBlock(nil)
                             }
                         }
                     } else {
@@ -503,7 +508,7 @@ class EventsViewController: UIViewController,
         setNavigationBarTransformProgress(0)
         if segue.identifier == "viewEventDetailSegue" {
             var vc = segue.destinationViewController as! EventDetailViewController
-            var data = baseTable.datasource as! [Event]
+            var data = baseTable.datasource as! [ZenEvent]
             var index = tableView.indexPathForSelectedRow()?.row
             
             vc.event = data[index!]

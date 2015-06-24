@@ -17,7 +17,7 @@ class EventDetailViewController: UIViewController,
                                  MKMapViewDelegate
 {
     
-    var event: Event!
+    var event: ZenEvent!
 
     @IBOutlet weak var imageShadowView: UIView!
     @IBOutlet weak var contentView: UIView!
@@ -115,7 +115,7 @@ class EventDetailViewController: UIViewController,
         setupBackgroundImageView()
         titleLabel.text = event.getTitle() as String
         
-        if event.locationString != nil {
+        if !event.locationString.isEmpty {
             addressLabel.text = event.locationString
         } else {
             addressLabel.text = addressPlaceHolder
@@ -123,16 +123,6 @@ class EventDetailViewController: UIViewController,
 
         var name = "Hao Sun"
         var number = "(408) 673-4419"
-        if let admin = event.admin as? User {
-            admin.fetchIfNeededInBackgroundWithBlock({ (admin, error) -> Void in
-//                if let adminName = admin.name {
-//                    name = admin.name
-//                }
-//                if let phoneNumber = admin.contactNumber {
-//                    number = admin.contactNumber
-//                }
-            })
-        }
 
         phoneLabel.text = "\(name): \(number)"
 
@@ -169,17 +159,17 @@ class EventDetailViewController: UIViewController,
     }
     
     func setupBackgroundImageView() {
-        if eventImages?.count == event.photos?.count {
+        if eventImages?.count == event.photos.count {
             return
         }
        
         eventImages?.removeAll(keepCapacity: true)
-        if event.photos?.count > 0 {
+        if event.photos.count > 0 {
             for subview in imageScrollView.subviews {
                 subview.removeFromSuperview()
             }
  
-            for photo in event.photos! {
+            for photo in event.photos {
                 let photo = photo as! Photo
                 photo.fetchIfNeededInBackgroundWithBlock { (photo, error) -> Void in
                     let p = photo as! Photo
@@ -211,8 +201,8 @@ class EventDetailViewController: UIViewController,
         //     }
         // })
         var address = addressPlaceHolder
-        if event.locationString != nil {
-            address = event.locationString!
+        if !event.locationString.isEmpty {
+            address = event.locationString
         }
         
         println("event location is \(address)")
@@ -293,34 +283,34 @@ class EventDetailViewController: UIViewController,
             joinButton.setTitle("Cancel", forState: .Normal)
         }
         
-        User.currentUser()!.toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
-            self.joinButton.backgroundColor = self.joinButtonColor()
-            self.joinButton.setTitle(self.joinButtonText() as String, forState: .Normal)
-            self.joinButton.setTitleColor(self.joinButtonTextColor(), forState: .Normal)
-            if self.detailsIsOpen {
-                self.setHeaderNewColor(self.joinButtonTextColor())
-            }
-            
-            if state == kUserJoinEvent {
-                if success != nil {
-//                    UIAlertView(
-//                        title: "Great!",
-//                        message: "See you at the event :)",
-//                        delegate: self,
-//                        cancelButtonTitle: "OK"
-//                        ).show()
-                } else {
-//                    UIAlertView(
-//                        title: "Error",
-//                        message: "Unable to join event.",
-//                        delegate: self,
-//                        cancelButtonTitle: "Well damn..."
-//                        ).show()
-                }
-            } else {
-            }
-            self.reloadData()
-        })
+//        User.currentUser()!.toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+//            self.joinButton.backgroundColor = self.joinButtonColor()
+//            self.joinButton.setTitle(self.joinButtonText() as String, forState: .Normal)
+//            self.joinButton.setTitleColor(self.joinButtonTextColor(), forState: .Normal)
+//            if self.detailsIsOpen {
+//                self.setHeaderNewColor(self.joinButtonTextColor())
+//            }
+//            
+//            if state == kUserJoinEvent {
+//                if success != nil {
+////                    UIAlertView(
+////                        title: "Great!",
+////                        message: "See you at the event :)",
+////                        delegate: self,
+////                        cancelButtonTitle: "OK"
+////                        ).show()
+//                } else {
+////                    UIAlertView(
+////                        title: "Error",
+////                        message: "Unable to join event.",
+////                        delegate: self,
+////                        cancelButtonTitle: "Well damn..."
+////                        ).show()
+//                }
+//            } else {
+//            }
+//            self.reloadData()
+//        })
     }
     
     func joinButtonText() -> NSString {
@@ -605,17 +595,20 @@ class EventDetailViewController: UIViewController,
     }
     
     @IBAction func onCall(sender: UIButton) {
-        let contactNumber = event.contactNumber
-        if contactNumber == nil {
-            println("There is no number to call")
-            return
-        }
+        println("There is no number to call")
+        return
         
-        let regex = NSRegularExpression(pattern: "\\(|\\)|-", options: nil, error: nil)
-        let number = regex?.stringByReplacingMatchesInString(contactNumber!, options: nil, range: NSMakeRange(0, count(contactNumber!)), withTemplate: "$1")
-        println("calling number \(number)")
-        let phoneNumber = "tel://".stringByAppendingString(number!)
-        UIApplication.sharedApplication().openURL(NSURL(string: phoneNumber)!)
+//        let contactNumber = event.contactNumber
+//        if contactNumber == nil {
+//            println("There is no number to call")
+//            return
+//        }
+//        
+//        let regex = NSRegularExpression(pattern: "\\(|\\)|-", options: nil, error: nil)
+//        let number = regex?.stringByReplacingMatchesInString(contactNumber!, options: nil, range: NSMakeRange(0, count(contactNumber!)), withTemplate: "$1")
+//        println("calling number \(number)")
+//        let phoneNumber = "tel://".stringByAppendingString(number!)
+//        UIApplication.sharedApplication().openURL(NSURL(string: phoneNumber)!)
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {

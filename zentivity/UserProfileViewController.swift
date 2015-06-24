@@ -136,7 +136,7 @@ class UserProfileViewController: UIViewController,
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "viewEventDetailSegue" {
             var vc = segue.destinationViewController as! EventDetailViewController
-            var data = baseTable.datasource as! [Event]
+            var data = baseTable.datasource as! [ZenEvent]
             var index = tableView.indexPathForSelectedRow()?.row
             
             vc.event = data[index!]
