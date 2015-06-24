@@ -58,6 +58,7 @@ class ZenEvent {
     var capacity: NSInteger = 0
     var photos: NSMutableArray = []
     var locationString: String = ""
+    var eventId: NSInteger?
     
     class func listWithOptionsAndCompletion(options: NSDictionary?, completion: (events: [ZenEvent]?, error: NSError?) -> ()) {
         ZendeskClient.sharedInstance.getWithCompletion("events", params: options) { (result, error) -> Void in
@@ -74,6 +75,7 @@ class ZenEvent {
     }
     
     init(dictionary: NSDictionary) {
+        eventId = dictionary["id"] as? NSInteger
         title = dictionary["title"] as! String
         descript = dictionary["description"] as! String
         capacity = dictionary["capacity"] as! NSInteger
@@ -162,5 +164,12 @@ class ZenEvent {
 //        self.deleteInBackgroundWithBlock { (success, error) -> Void in
 //            completion(success: success, error: error)
 //        }
+    }
+    
+    func joinWithCompletion(userName: NSString, userEmail: NSString, completion: () -> ()) {
+        let params = [ "name": userName, "email": userEmail ]
+        ZendeskClient.sharedInstance.postWithCompletion("events/\(eventId!)/sign_up", params: params) { (result, error) -> () in
+            println("join is called. \(result), \(error)")
+        }
     }
 }

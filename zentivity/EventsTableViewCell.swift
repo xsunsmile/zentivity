@@ -72,7 +72,7 @@ class EventsTableViewCell: BaseTableViewCell {
     }
 
     @IBAction func onJoinTapped(sender: AnyObject) {
-        let event = data as! Event
+        let event = data as! ZenEvent
         
         if let currentUser = User.currentUser() {
             if event.ownedByUser(currentUser) {
@@ -91,16 +91,20 @@ class EventsTableViewCell: BaseTableViewCell {
 //            joinButton.setTitle("Cancel", forState: .Normal)
 //        }
         
-        let event = data as! Event
-        User.currentUser()!.toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
-            if state == kUserJoinEvent {
-                if success != nil {
-//                    self.joinButton.setTitle("Cancel", forState: .Normal)
-                }
-            } else {
-//                self.joinButton.setTitle("Join", forState: .Normal)
-            }
-        })
+        let event = data as! ZenEvent
+        event.joinWithCompletion("Hao Sun", userEmail: "hasun@zendesk.com") { () -> () in
+            println("Join is called")
+        }
+        
+//        User.currentUser()!.toggleJoinEventWithCompletion(event, completion: { (success, error, state) -> () in
+//            if state == kUserJoinEvent {
+//                if success != nil {
+////                    self.joinButton.setTitle("Cancel", forState: .Normal)
+//                }
+//            } else {
+////                self.joinButton.setTitle("Join", forState: .Normal)
+//            }
+//        })
     }
 
     override func refresh() {

@@ -31,4 +31,16 @@ class ZendeskClient: NSObject {
             completion(result: nil, error: error)
         }
     }
+    
+    func postWithCompletion(resource: String, params: AnyObject!, completion: (result: AnyObject?, error: NSError?) -> Void) {
+        var urlString = String(format: "%@/%@/%@", baseUrlString, apiString, resource)
+        println("post to url \(urlString)")
+        manager.POST(urlString, parameters: params, success: { (operation, response) -> Void in
+            println("Got response \(response)")
+            completion(result: response, error: nil)
+            }) { (operation, error) -> Void in
+                println("Got error: \(error)")
+                completion(result: nil, error: error)
+        }
+    }
 }
